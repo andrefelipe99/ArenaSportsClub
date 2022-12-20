@@ -3,28 +3,22 @@ const app = express()
 
 const partidas = [
     {
-        name: "Leonardo",
-        nickName: "Leo",
-        weapon: "Katana",
-        imgUrl: "https://upload.wikimedia.org/wikipedia/en/e/ed/Leonardo_%28Teenage_Mutant_Ninja_Turtles%29.jpg"
+        equipeCasa: "Real Madrid",
+        equipeFora: "Barcelona",
+        data: "24/12",
+        placarCasa: "2",
+        placarFora: "0",
+        imgUrlCasa: "https://logodownload.org/wp-content/uploads/2016/03/Real-Madrid-logo-1.png",
+        imgUrlFora: "https://logodownload.org/wp-content/uploads/2015/05/Barcelona-logo-escudo.png"
     },
     {
-        name: "Donatello",
-        nickName: "Don",
-        weapon: "Bo staff",
-        imgUrl: "https://upload.wikimedia.org/wikipedia/en/5/5a/Donatello_%28Teenage_Mutant_Ninja_Turtles%29.jpg"
-    },
-    {
-        name: "Michelangelo",
-        nickName: "Mikey",
-        weapon: "Nunchucks",
-        imgUrl: "https://upload.wikimedia.org/wikipedia/en/f/f3/Michelangelo_%28Teenage_Mutant_Ninja_Turtles%29.jpg"
-    },
-    {
-        name: "Raphael",
-        nickName: "Raph",
-        weapon: "Sai",
-        imgUrl: "https://upload.wikimedia.org/wikipedia/en/7/72/Raphael_%28Teenage_Mutant_Ninja_Tutles%29.jpg"
+        equipeCasa: "Liverpool",
+        equipeFora: "Manchester United",
+        data: "25/12",
+        placarCasa: "4",
+        placarFora: "3",
+        imgUrlCasa: "https://seeklogo.com/images/L/liverpool-fc-logo-3B886CFE17-seeklogo.com.png",
+        imgUrlFora: "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png"
     }
 ]
 

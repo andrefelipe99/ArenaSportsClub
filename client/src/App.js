@@ -16,20 +16,23 @@ function App() {
   }, []) 
   
   return (
-    <div class="back">
+    <div className="back">
+      <div className="back">
+        
 
     {(typeof backendData.partidas === 'undefined') ? (
       <p>Loading...</p>
     ): (
-      backendData.partidas.map((turtle, i) => (
-        <div class="turtle" key={i}>
-          <h1>{turtle.name} ({turtle.nickName})</h1>
-          <p>Weapon of choice: {turtle.weapon}</p>
-          <img src={turtle.imgUrl} alt={`${turtle.name}`} max-width="180"/>
+      backendData.partidas.map((partida, i) => (
+        <div className="partida" key={i}>
+          <img className="pad" src={partida.imgUrlCasa} alt={`${partida.equipeCasa}`} width="80"/>
+          <h1>{partida.equipeCasa} {partida.placarCasa} X {partida.placarFora} {partida.equipeFora} </h1>
+          <img className="pad" src={partida.imgUrlFora} alt={`${partida.equipeFora}`} width="80"/>
+          <p className="datas">{partida.data}</p>
         </div>
       ))
     )}
-
+      </div>
     </div>
   )
 }

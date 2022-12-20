@@ -1,0 +1,11 @@
+.turtle {
+    font-size: large;
+    text-align: center;
+    width: 25%;
+    display: inline-block;
+    padding: 5vw 0vw 5vw 0vw;
+}
+
+.back {
+    background-color: gray;
+}

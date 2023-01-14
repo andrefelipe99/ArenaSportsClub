@@ -1,0 +1,15 @@
+.bg-teal {
+  background-color: #aecdbc;
+  font-family: Barrio;
+  font-weight: bold;
+  font-size: large;
+}
+
+@font-face {
+  font-family: Barrio;
+  src: url("../../public/Stadio-Now-Novarese-trial.ttf");
+}
+
+.nav-img {
+  margin-bottom: 5px;
+}

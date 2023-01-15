@@ -1,68 +1,25 @@
-const express = require("express");
-const app = express();
+import app from "./index.js";
+import mongodb from "mongodb";
+import dotenv from "dotenv";
+import cinemaDAO from "./dao/cinemaDAO.js";
 
-const partidas = [
-  {
-    equipeCasa: "Real Madrid",
-    equipeFora: "Barcelona",
-    data: "24/12",
-    placarCasa: "2",
-    placarFora: "0",
-    imgUrlCasa:
-      "https://logodownload.org/wp-content/uploads/2016/03/Real-Madrid-logo-1.png",
-    imgUrlFora:
-      "https://logodownload.org/wp-content/uploads/2015/05/Barcelona-logo-escudo.png",
-  },
-  {
-    equipeCasa: "Liverpool",
-    equipeFora: "Manchester United",
-    data: "25/12",
-    placarCasa: "4",
-    placarFora: "3",
-    imgUrlCasa:
-      "https://seeklogo.com/images/L/liverpool-fc-logo-3B886CFE17-seeklogo.com.png",
-    imgUrlFora:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png",
-  },
-  {
-    equipeCasa: "Liverpool",
-    equipeFora: "Manchester United",
-    data: "25/12",
-    placarCasa: "4",
-    placarFora: "3",
-    imgUrlCasa:
-      "https://seeklogo.com/images/L/liverpool-fc-logo-3B886CFE17-seeklogo.com.png",
-    imgUrlFora:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png",
-  },
-  {
-    equipeCasa: "Liverpool",
-    equipeFora: "Manchester United",
-    data: "25/12",
-    placarCasa: "4",
-    placarFora: "3",
-    imgUrlCasa:
-      "https://seeklogo.com/images/L/liverpool-fc-logo-3B886CFE17-seeklogo.com.png",
-    imgUrlFora:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png",
-  },
-  {
-    equipeCasa: "Liverpool",
-    equipeFora: "Manchester United",
-    data: "25/12",
-    placarCasa: "4",
-    placarFora: "3",
-    imgUrlCasa:
-      "https://seeklogo.com/images/L/liverpool-fc-logo-3B886CFE17-seeklogo.com.png",
-    imgUrlFora:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png",
-  },
-];
+dotenv.config();
+const MongoClient = mongodb.MongoClient;
+const port = process.env.PORT || 5000;
 
-app.get("/api", (req, res) => {
-  res.json({ partidas });
-});
-
-app.listen(5000, () => {
-  console.log("Server started on port 5000");
-});
+MongoClient.connect(process.env.RESTREVIEWS_DB_URI, {
+  //poolSize: 50,
+  wtimeoutMS: 2500,
+  //useNewUrlParse: true,
+})
+  .catch((err) => {
+    console.error(err.stack);
+    process.exit(1);
+  })
+  .then(async (client) => {
+    await cinemaDAO.injectDB(client);
+    //await ReviewsDAO.injectDB(client);
+    app.listen(port, () => {
+      console.log(`listening on port ${port}`);
+    });
+  });

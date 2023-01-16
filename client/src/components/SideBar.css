@@ -1,11 +1,3 @@
-.ListItem {
-  font-family: Barrio;
-  background-color: #4a8464;
-  color: #4a8464;
-  color-scheme: #4a8464;
-  font-size: medium;
-}
-
 .pad {
   margin: 0.5ch;
 }
@@ -13,8 +5,4 @@
 @font-face {
   font-family: Barrio;
   src: url("../../public/Stadio-Now-Novarese-trial.ttf");
-}
-
-.list-group-item {
-  background-color: #4a8464;
 }

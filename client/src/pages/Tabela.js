@@ -66,21 +66,6 @@ export function Tabela() {
           </div>
         </Col>
       </Row>
-
-      {/* <div>
-        {typeof backendData.data === "undefined" ? (
-          <p>Loading...</p>
-        ) : (
-          backendData.data[0].standings.data.map((tabela, i) => (
-            <div key={i}>
-              <h1>
-                {tabela.position} {tabela.team_name} {tabela.points}{" "}
-                {tabela.recent_form} {tabela.overall.games_played}
-              </h1>
-            </div>
-          ))
-        )}
-      </div> */}
     </Container>
   );
 }

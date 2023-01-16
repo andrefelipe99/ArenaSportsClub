@@ -1,0 +1,20 @@
+.nameCamp {
+  text-align: center;
+  color: antiquewhite;
+  margin-bottom: 1ch;
+}
+
+.top-nameCamp {
+  background-color: #00897b;
+}
+
+.content-match {
+  background-color: #e8faf0;
+  border: 0;
+  color: black;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

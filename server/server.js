@@ -103,6 +103,7 @@ const partida = [
     equipeCasa: "Liverpool",
     equipeFora: "Manchester United",
     data: "25/12",
+    nomeCampeonato: "Premier League",
     placarCasa: "4",
     placarFora: "3",
     imgUrlCasa:

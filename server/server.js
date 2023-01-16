@@ -98,4 +98,114 @@ app.get("/campeonatos", (req, res) => {
   res.json({ campeonatos });
 });
 
+const partida = [
+  {
+    equipeCasa: "Liverpool",
+    equipeFora: "Manchester United",
+    data: "25/12",
+    placarCasa: "4",
+    placarFora: "3",
+    imgUrlCasa:
+      "https://seeklogo.com/images/L/liverpool-fc-logo-3B886CFE17-seeklogo.com.png",
+    imgUrlFora:
+      "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png",
+    escalacaoCasa: [
+      {
+        numero: 22,
+        nome: "Josep Martinez",
+      },
+      {
+        numero: 4,
+        nome: "Domenico Criscito",
+      },
+      {
+        numero: 5,
+        nome: "Radu Drăgușin",
+      },
+      {
+        numero: 13,
+        nome: "Mattia Bani (C)",
+      },
+      {
+        numero: 36,
+        nome: "Silvan Hefti",
+      },
+      {
+        numero: 8,
+        nome: "Kevin Strootman",
+      },
+      {
+        numero: 24,
+        nome: "Filip Jagiełło",
+      },
+      {
+        numero: 32,
+        nome: "Morten Wetche Frendrup",
+      },
+      {
+        numero: 10,
+        nome: "Mattia Aramu",
+      },
+      {
+        numero: 11,
+        nome: "Albert Guðmundsson",
+      },
+      {
+        numero: 57,
+        nome: "George Pușcaș",
+      },
+    ],
+    escalacaoFora: [
+      {
+        numero: 99,
+        nome: "Joao Cunha",
+      },
+      {
+        numero: 4,
+        nome: "Domenico Criscito",
+      },
+      {
+        numero: 5,
+        nome: "Radu Drăgușin",
+      },
+      {
+        numero: 13,
+        nome: "Mattia Bani (C)",
+      },
+      {
+        numero: 36,
+        nome: "Silvan Hefti",
+      },
+      {
+        numero: 8,
+        nome: "Kevin Strootman",
+      },
+      {
+        numero: 24,
+        nome: "Filip Jagiełło",
+      },
+      {
+        numero: 32,
+        nome: "Morten Wetche Frendrup",
+      },
+      {
+        numero: 10,
+        nome: "Mattia Aramu",
+      },
+      {
+        numero: 11,
+        nome: "Albert Guðmundsson",
+      },
+      {
+        numero: 57,
+        nome: "George Pușcaș",
+      },
+    ],
+  },
+];
+
+app.get("/partida", (req, res) => {
+  res.json({ partida });
+});
+
 export default app;

@@ -23,7 +23,6 @@ export default class cinemaDAO {
   } = {}) {
     let query;
     if (filters) {
-      console.log(filters);
       if ("title" in filters) {
         query = { $text: { $search: filters["title"] } };
       } else if ("year" in filters) {

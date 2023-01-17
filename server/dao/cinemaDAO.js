@@ -1,5 +1,5 @@
-//import mongodb from "mongodb"
-//const ObjectId = mongodb.ObjectId
+import mongodb from "mongodb";
+const ObjectId = mongodb.ObjectId;
 let cinema;
 
 export default class cinemaDAO {

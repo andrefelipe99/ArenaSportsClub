@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
-import "./Tabela.css";
 import SideBar from "../components/SideBar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -23,10 +22,10 @@ export function Tabela() {
   return (
     <Container>
       <Row md={12}>
-        <Col md={3}>
+        <Col md={3} style={{ margin: 0 }}>
           <SideBar />
         </Col>
-        <Col md="auto">
+        <Col md={9}>
           <div className="back">
             <div className="back">
               {typeof backendData.partidas === "undefined" ? (

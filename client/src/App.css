@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Barrio;
+  src: url("../public/Stadio-Now-Novarese-trial.ttf");
+}
+
 .datas {
   flex-basis: 100%;
   font-family: "Courier New", Courier, monospace;
@@ -12,10 +17,6 @@
   justify-content: center;
   align-items: center;
   padding: 2vw 0vw 2vw 0vw;
-}
-
-.pad {
-  margin: 1.5ch;
 }
 
 .back {
@@ -34,4 +35,59 @@ p {
 
 body {
   margin: 0px;
+}
+
+/* SideBar */
+
+.pad {
+  margin: 0.5ch;
+}
+
+#list-group-sidebar {
+  border-radius: 0ch;
+  background-color: #4a8464;
+  font-family: Barrio;
+  font-size: medium;
+  border: none;
+}
+
+#list-group-sidebar:hover {
+  background-color: #88c67e;
+  transition: 0.7s;
+}
+
+/* Match*/
+
+.nameCamp {
+  text-align: center;
+  color: antiquewhite;
+  margin-bottom: 1ch;
+}
+
+.top-nameCamp {
+  background-color: #00897b;
+}
+
+.content-match {
+  background-color: #e8faf0;
+  border: 0;
+  color: black;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Header */
+
+.bg-teal {
+  background-color: #aecdbc;
+  font-family: Barrio;
+  font-weight: bold;
+  font-size: large;
+}
+
+.nav-img {
+  margin-bottom: 5px;
 }

@@ -3,7 +3,6 @@ import { Container } from "react-bootstrap";
 //import { Link } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import "./Match.css";
 
 export function Match() {
   const [listMatch, setListMatch] = useState([{}]);
@@ -27,7 +26,7 @@ export function Match() {
               <div className="nameCamp">
                 <h1>{listMatch.partida[0].nomeCampeonato}</h1>
               </div>
-              <Row md={12} style={{ margin: 0}}>
+              <Row md={12} style={{ margin: 0 }}>
                 <div className="content-match">
                   <Col md={3} style={{ textAlign: "center" }}>
                     <img

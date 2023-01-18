@@ -23,7 +23,7 @@ function HeaderApp() {
                 alt="Search"
                 className="nav-img"
               />{" "}
-              <span className="nav-font">RESULTADOS</span>
+              <span className="nav-font" title="Resultados">RESULTADOS</span>
             </Nav.Link>
             <Nav.Link href="/">
               <img
@@ -33,7 +33,7 @@ function HeaderApp() {
                 alt="Search"
                 className="nav-img"
               />{" "}
-              <span className="nav-font">NOTÍCIAS</span>
+              <span className="nav-font" title="Notícias">NOTÍCIAS</span>
             </Nav.Link>
           </Nav>
           <Form className="d-flex">

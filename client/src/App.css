@@ -51,9 +51,27 @@ body {
   border: none;
 }
 
+.justify-content-md-center {
+  align-items: center;
+  color: antiquewhite;
+}
+
+#name-camp-sidebar{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 #list-group-sidebar:hover {
   background-color: #88c67e;
   transition: 0.7s;
+}
+
+#button-favorite {
+  background-color: #4a8464;
+  padding: 0.1ch;
+  border: none;
+  margin-left: 1ch;
 }
 
 /* Match*/

@@ -4,18 +4,32 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 //import { ListGroupItem } from "react-bootstrap";
-import { AiOutlineStar } from "react-icons/ai";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export function SideBar() {
   const [listaCampeonatos, setListaCampeonatos] = useState([{}]);
-  const [favorite, setFavorite] = useState(false);
+  const [favorites, setFavorites] = useState([{}]);
 
-  const addFavorite = () => {
-    console.log(favorite);
-    setFavorite(!favorite);
+  const addFavorite = (campeonato) => {
+    if (campeonato !== "undefined") {
+      let { id, favorito, nome, paisUrl } = campeonato;
+      setFavorites((favorite) => [
+        ...favorite,
+        { id, favorito, nome, paisUrl },
+      ]);
+    }
   };
+
+  const removeFavorite = (campeonato) => {
+    if (listaCampeonatos !== "undefined")
+      setFavorites(favorites.filter((camp) => camp.id !== campeonato.id));
+  };
+
+  const isFavorite = (campeonato) =>
+    favorites?.some((camp) => camp.id === campeonato.id);
+
   useEffect(() => {
     fetch("/campeonatos")
       .then((response) => response.json())
@@ -39,20 +53,35 @@ export function SideBar() {
                       <Container>
                         <Row className="justify-content-md-center">
                           <Col md={2}>
-                          <img
-                            className="pad"
-                            src={campeonato.paisUrl}
-                            alt={`${campeonato.paisUrl}`}
-                            width="25"
-                          />
+                            <img
+                              className="pad"
+                              src={campeonato.paisUrl}
+                              alt={`${campeonato.paisUrl}`}
+                              width="25"
+                            />
                           </Col>
-                          <Col md={7} id="name-camp-sidebar" title={campeonato.nome}>
-                          <span>{campeonato.nome}</span>
+                          <Col
+                            md={7}
+                            id="name-camp-sidebar"
+                            title={campeonato.nome}
+                          >
+                            <span>{campeonato.nome}</span>
                           </Col>
                           <Col md={3}>
-                          <Button id="button-favorite">
-                            <AiOutlineStar onClick={addFavorite} />
-                          </Button>
+                            <Button
+                              id="button-favorite"
+                              onClick={() =>
+                                isFavorite(campeonato)
+                                  ? removeFavorite(campeonato)
+                                  : addFavorite(campeonato)
+                              }
+                            >
+                              {isFavorite(campeonato) ? (
+                                <AiFillStar />
+                              ) : (
+                                <AiOutlineStar />
+                              )}
+                            </Button>
                           </Col>
                         </Row>
                       </Container>

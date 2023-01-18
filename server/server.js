@@ -75,6 +75,8 @@ app.get("/api", (req, res) => {
 
 const campeonatos = [
   {
+    id: "2324",
+    favorito: "false",
     nome: "Brasileirão Série A",
     temporada: "2023",
     categoria: "futebol",
@@ -84,6 +86,8 @@ const campeonatos = [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/275px-Flag_of_Brazil.svg.png",
   },
   {
+    id: "2325",
+    favorito: "false",
     nome: "Brasileirão Série B",
     temporada: "2023",
     categoria: "futebol",

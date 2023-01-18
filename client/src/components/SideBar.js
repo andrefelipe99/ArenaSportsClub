@@ -3,7 +3,6 @@ import ListGroup from "react-bootstrap/ListGroup";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-//import { ListGroupItem } from "react-bootstrap";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";

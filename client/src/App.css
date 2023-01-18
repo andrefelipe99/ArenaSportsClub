@@ -68,7 +68,7 @@ body {
 }
 
 #button-favorite {
-  background-color: #4a8464;
+  background: rgba(76, 175, 80, 0);
   padding: 0.1ch;
   border: none;
   margin-left: 1ch;
@@ -79,7 +79,8 @@ body {
 .nameCamp {
   text-align: center;
   color: antiquewhite;
-  margin-bottom: 1ch;
+  font-family: monospace;
+  padding: 1ch;
 }
 
 .top-nameCamp {
@@ -95,6 +96,48 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.button-group-match {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 16px;
+  margin-right: 15px;
+  gap: 1rem;
+}
+
+#button-match {
+  color: aliceblue;
+  background-color: rgb(131, 125, 125);
+  border-color: rgb(131, 125, 125);
+  border-radius: 10px;
+  align-items: center;
+}
+
+#button-match:hover {
+  background-color: rgb(175, 173, 173);
+  border-color: rgb(131, 125, 125);
+}
+
+#button-match-selected {
+  color: aliceblue;
+  background-color: rgba(20, 77, 44, 0.733);
+  border-color: rgba(20, 77, 44, 0.733);
+  border-radius: 10px;
+  align-items: center;
+}
+
+#col-content-match {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 1ch;
+}
+
+.teams-name {
+  padding-top: 0.5ch;
 }
 
 /* Header */

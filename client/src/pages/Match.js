@@ -1,11 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
-//import { Link } from "react-router-dom";
+import { Container, Button } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export function Match() {
   const [listMatch, setListMatch] = useState([{}]);
+  const [buttonChange, setButtonChange] = useState({
+    sumario: true,
+    estatistica: false,
+    formacao: false,
+  });
+
+  const changeSelected = (buttonName) => {
+    console.log(buttonChange);
+    if (buttonName === "buttonSum") {
+      setButtonChange({ sumario: true, estatistica: false, formacao: false });
+    } else if (buttonName === "buttonFor") {
+      setButtonChange({ sumario: false, estatistica: false, formacao: true });
+    } else {
+      setButtonChange({ sumario: false, estatistica: true, formacao: false });
+    }
+    console.log(buttonChange);
+  };
 
   useEffect(() => {
     fetch("/partida")
@@ -28,13 +44,20 @@ export function Match() {
               </div>
               <Row md={12} style={{ margin: 0 }}>
                 <div className="content-match">
-                  <Col md={3} style={{ textAlign: "center" }}>
+                  <Col
+                    md={3}
+                    id="col-content-match"
+                    style={{ textAlign: "center" }}
+                  >
                     <img
                       src={listMatch.partida[0].imgUrlCasa}
                       alt={`${listMatch.partida[0].equipeCasa}`}
-                      width="80"
+                      width="128px"
                     />
-                    <h3> {listMatch.partida[0].equipeCasa} </h3>
+                    <h3 className="teams-name">
+                      {" "}
+                      {listMatch.partida[0].equipeCasa}{" "}
+                    </h3>
                   </Col>
                   <Col md={6} style={{ textAlign: "center" }}>
                     <h1>
@@ -42,16 +65,59 @@ export function Match() {
                       {listMatch.partida[0].placarFora}{" "}
                     </h1>
                   </Col>
-                  <Col md={3} style={{ textAlign: "center" }}>
+                  <Col
+                    md={3}
+                    id="col-content-match"
+                    style={{ textAlign: "center" }}
+                  >
                     <img
                       src={listMatch.partida[0].imgUrlFora}
                       alt={`${listMatch.partida[0].equipeFora}`}
-                      width="80"
+                      width="128px"
                     />
-                    <h2> {listMatch.partida[0].equipeFora}</h2>
+                    <h3 className="teams-name">
+                      {" "}
+                      {listMatch.partida[0].equipeFora}
+                    </h3>
                   </Col>
 
                   <p className="datas">{listMatch.partida[0].data}</p>
+
+                  <div className="button-group-match">
+                    <Button
+                      id={
+                        buttonChange.sumario
+                          ? "button-match-selected"
+                          : "button-match"
+                      }
+                      title="Sumário"
+                      onClick={() => changeSelected("buttonSum")}
+                    >
+                      SUMÁRIO
+                    </Button>
+                    <Button
+                      id={
+                        buttonChange.estatistica
+                          ? "button-match-selected"
+                          : "button-match"
+                      }
+                      title="Estatísticas"
+                      onClick={() => changeSelected("buttonEst")}
+                    >
+                      ESTATÍSTICAS
+                    </Button>
+                    <Button
+                      id={
+                        buttonChange.formacao
+                          ? "button-match-selected"
+                          : "button-match"
+                      }
+                      title="Formação"
+                      onClick={() => changeSelected("buttonFor")}
+                    >
+                      FORMAÇÃO
+                    </Button>
+                  </div>
                 </div>
               </Row>
             </>

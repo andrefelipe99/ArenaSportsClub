@@ -110,10 +110,8 @@ const partida = [
     nomeCampeonato: "Premier League",
     placarCasa: "4",
     placarFora: "3",
-    imgUrlCasa:
-      "https://seeklogo.com/images/L/liverpool-fc-logo-3B886CFE17-seeklogo.com.png",
-    imgUrlFora:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png",
+    imgUrlCasa: "https://cdn.sportmonks.com/images/soccer/teams/8/8.png",
+    imgUrlFora: "https://cdn.sportmonks.com/images/soccer/teams/14/14.png",
     escalacaoCasa: [
       {
         numero: 22,

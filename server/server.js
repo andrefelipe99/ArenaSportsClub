@@ -88,7 +88,7 @@ const campeonatos = [
   {
     id: "2325",
     favorito: "false",
-    nome: "Brasileirão Série B",
+    nome: "Brasileirão Série Bdadadsadsdasdsadasdsadas",
     temporada: "2023",
     categoria: "futebol",
     campeonatoLogo:

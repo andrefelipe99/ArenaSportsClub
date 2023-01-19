@@ -42,13 +42,9 @@ export function Match() {
               <div className="nameCamp">
                 <h1>{listMatch.partida[0].nomeCampeonato}</h1>
               </div>
-              <Row md={12} style={{ margin: 0 }}>
+              <Row md={12} id="row-content-match">
                 <div className="content-match">
-                  <Col
-                    md={3}
-                    id="col-content-match"
-                    style={{ textAlign: "center" }}
-                  >
+                  <Col md={3} id="col-content-match">
                     <img
                       src={listMatch.partida[0].imgUrlCasa}
                       alt={`${listMatch.partida[0].equipeCasa}`}
@@ -59,17 +55,13 @@ export function Match() {
                       {listMatch.partida[0].equipeCasa}{" "}
                     </h3>
                   </Col>
-                  <Col md={6} style={{ textAlign: "center" }}>
+                  <Col md={6} id="col-results-match">
                     <h1>
                       {listMatch.partida[0].placarCasa} X{" "}
                       {listMatch.partida[0].placarFora}{" "}
                     </h1>
                   </Col>
-                  <Col
-                    md={3}
-                    id="col-content-match"
-                    style={{ textAlign: "center" }}
-                  >
+                  <Col md={3} id="col-content-match">
                     <img
                       src={listMatch.partida[0].imgUrlFora}
                       alt={`${listMatch.partida[0].equipeFora}`}

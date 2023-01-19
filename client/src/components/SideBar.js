@@ -38,35 +38,39 @@ export function SideBar() {
   }, []);
 
   return (
-    <Container style={{ padding: 0 }}>
+    <Container id="container-side-bar">
       <div>
+        <div className="titleSideBar">
+          <AiFillStar />
+          <span id="title-text-side-bar">Minhas ligas</span>
+        </div>
         {typeof listaCampeonatos.campeonatos === "undefined" ? (
           <p>Loading...</p>
         ) : (
           listaCampeonatos.campeonatos.map((campeonato, i) => (
             <div key={i}>
               <>
-                <Link to="/" style={{ textDecoration: "none" }}>
+                <Link to="/" id="side-bar-link">
                   <ListGroup>
                     <ListGroup.Item id="list-group-sidebar">
                       <Container>
                         <Row className="justify-content-md-center">
                           <Col md={2}>
                             <img
-                              className="pad"
+                              className="pais-margin"
                               src={campeonato.paisUrl}
                               alt={`${campeonato.paisUrl}`}
                               width="25"
                             />
                           </Col>
                           <Col
-                            md={7}
+                            md={8}
                             id="name-camp-sidebar"
                             title={campeonato.nome}
                           >
                             <span>{campeonato.nome}</span>
                           </Col>
-                          <Col md={3}>
+                          <Col md={2}>
                             <Button
                               id="button-favorite"
                               onClick={() =>

@@ -3,6 +3,10 @@
   src: url("../public/Stadio-Now-Novarese-trial.ttf");
 }
 
+#root {
+  background-color: #284937;
+}
+
 .datas {
   flex-basis: 100%;
   font-family: "Courier New", Courier, monospace;
@@ -37,10 +41,50 @@ body {
   margin: 0px;
 }
 
+/* Tabela */
+
+.container-home {
+}
+
 /* SideBar */
+
+#container-side-bar {
+  background-color: #4a8464;
+  padding: 0;
+  margin-top: 10px;
+}
 
 .pad {
   margin: 0.5ch;
+}
+
+.titleSideBar {
+  border-radius: 0ch;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #4a8464;
+  font-family: Barrio;
+  font-size: larger;
+  color: antiquewhite;
+  border: none;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgb(250, 235, 215, 0.4);
+}
+
+#title-text-side-bar {
+  padding-left: 10px;
+}
+
+.pais-margin {
+  margin-top: 0.3ch;
+  margin-bottom: 0.3ch;
+}
+
+#side-bar-link {
+  text-decoration: none;
 }
 
 #list-group-sidebar {
@@ -71,7 +115,7 @@ body {
   background: rgba(76, 175, 80, 0);
   padding: 0.1ch;
   border: none;
-  margin-left: 1ch;
+  margin-left: 0.5ch;
 }
 
 /* Match*/
@@ -128,12 +172,21 @@ body {
   align-items: center;
 }
 
+#row-content-match {
+  margin: 0;
+}
+
 #col-content-match {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   padding-top: 1ch;
+  text-align: center;
+}
+
+#col-results-match {
+  text-align: center;
 }
 
 .teams-name {

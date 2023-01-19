@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import ButtonSumMatch from "../components/ButtonSum";
+import ButtonEstMatch from "../components/ButtonEst";
+import ButtonForMatch from "../components/ButtonFor";
 
 export function Match() {
   const [listMatch, setListMatch] = useState([{}]);
@@ -110,6 +113,11 @@ export function Match() {
                       FORMAÇÃO
                     </Button>
                   </div>
+                </div>
+                <div>
+                  <ButtonSumMatch actived={buttonChange.sumario} />
+                  <ButtonEstMatch actived={buttonChange.estatistica} />
+                  <ButtonForMatch actived={buttonChange.formacao} listMatch={listMatch}/>
                 </div>
               </Row>
             </>

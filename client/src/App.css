@@ -3,10 +3,6 @@
   src: url("../public/Stadio-Now-Novarese-trial.ttf");
 }
 
-#root {
-  background-color: #284937;
-}
-
 .datas {
   flex-basis: 100%;
   font-family: "Courier New", Courier, monospace;
@@ -42,9 +38,6 @@ body {
 }
 
 /* Tabela */
-
-.container-home {
-}
 
 /* SideBar */
 
@@ -191,6 +184,18 @@ body {
 
 .teams-name {
   padding-top: 0.5ch;
+}
+
+/* ButtonFor*/
+
+#header-for {  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 18px;
+  font-weight: 900;
+  padding: 1.1ch;
 }
 
 /* Header */

@@ -112,6 +112,8 @@ const partida = [
     placarFora: "3",
     imgUrlCasa: "https://cdn.sportmonks.com/images/soccer/teams/8/8.png",
     imgUrlFora: "https://cdn.sportmonks.com/images/soccer/teams/14/14.png",
+    formacaoCasa: "4-3-3",
+    formacaoFora: "4-3-3",
     escalacaoCasa: [
       {
         numero: 22,

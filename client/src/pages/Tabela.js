@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import SideBar from "../components/SideBar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import "../styles/pages/Tabela.css";
 
 export function Tabela() {
   const [backendData, setBackendData] = useState([{}]);
@@ -23,35 +24,27 @@ export function Tabela() {
     <Container className="container-home">
       <div></div>
       <Row md={12}>
-        <Col md={3} style={{ margin: 0 }}>
+        <Col md={3} id="content-side-bar-home">
           <SideBar />
         </Col>
-        <Col md={9}>
+        <Col md={9} id="content-matchs-home">
           <div className="back">
             <div className="back">
               {typeof backendData.partidas === "undefined" ? (
                 <p>Loading...</p>
               ) : (
                 backendData.partidas.map((partida, i) => (
-                  <div
-                    style={{
-                      backgroundColor: "blue",
-                      border: 0,
-                      color: "white",
-                    }}
-                    className="partida"
-                    key={i}
-                  >
+                  <div className="partida" key={i}>
                     <img
-                      className="pad"
+                      id="matchs-logo-left-home"
                       src={partida.imgUrlCasa}
                       alt={`${partida.equipeCasa}`}
                       width="80"
                     />
-                    <h1>
+                    <span className="matchs-text-home">
                       {partida.equipeCasa} {partida.placarCasa} X{" "}
                       {partida.placarFora} {partida.equipeFora}{" "}
-                    </h1>
+                    </span>
                     <img
                       className="pad"
                       src={partida.imgUrlFora}

@@ -1,6 +1,7 @@
 import Container from "react-bootstrap/Container";
+import "../styles/components/ButtonEst.css";
 
-function ButtonEstMatch({ actived}) {
+function ButtonEstMatch({ actived }) {
   return (
     actived && (
       <Container>

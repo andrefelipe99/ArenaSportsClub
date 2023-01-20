@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import "../styles/components/Header.css";
 
 function HeaderApp() {
   return (
@@ -27,7 +28,7 @@ function HeaderApp() {
                 RESULTADOS
               </span>
             </Nav.Link>
-            <Nav.Link href="/">
+            <Nav.Link href="/partida">
               <img
                 src="https://cdn-icons-png.flaticon.com/512/81/81460.png"
                 height="22"

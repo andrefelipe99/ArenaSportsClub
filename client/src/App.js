@@ -1,5 +1,4 @@
-// import React, { useEffect, useState } from "react";
-import "./App.css";
+import "../src/styles/fonts.css";
 import HeaderApp from "./components/Header";
 import { AppRoutes } from "./Routes";
 

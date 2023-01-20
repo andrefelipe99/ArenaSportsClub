@@ -1,9 +1,10 @@
 import Container from "react-bootstrap/Container";
+import "../styles/components/ButtonFor.css";
 
 function ButtonForMatch({ actived, listMatch }) {
   return (
     actived && (
-      <Container>
+      <Container id="chuva">
         <div>
           {typeof listMatch.partida === "undefined" ? (
             <p>Loading...</p>
@@ -17,13 +18,14 @@ function ButtonForMatch({ actived, listMatch }) {
 
               <div className="content-fieldWrap">
                 <div className="content-field">
-                    <div className="field-line">
-                        <div className="field-player"> {listMatch.partida[0].escalacaoCasa[0].numero} {" "}
-                            <span>{listMatch.partida[0].escalacaoCasa[0].nome}</span>
-                        </div>
+                  <div className="field-line">
+                    <div className="field-player">
+                      {" "}
+                      {listMatch.partida[0].escalacaoCasa[0].numero}{" "}
+                      <span>{listMatch.partida[0].escalacaoCasa[0].nome}</span>
                     </div>
+                  </div>
                 </div>
-
               </div>
             </>
           )}

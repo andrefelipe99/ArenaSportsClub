@@ -2,6 +2,7 @@ import { Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ButtonTest } from "../components/ButtonTest";
 import React, { useState } from "react";
+import "../styles/pages/Equipe.css";
 
 export function Equipe() {
   const [butao, setButao] = useState({ disabou: false, valor: 2 });

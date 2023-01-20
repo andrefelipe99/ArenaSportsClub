@@ -1,6 +1,7 @@
 import Container from "react-bootstrap/Container";
+import "../styles/components/ButtonSum.css";
 
-function ButtonSumMatch({ actived}) {
+function ButtonSumMatch({ actived }) {
   return (
     actived && (
       <Container>

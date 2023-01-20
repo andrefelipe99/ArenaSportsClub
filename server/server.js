@@ -18,10 +18,8 @@ const partidas = [
     data: "24/12",
     placarCasa: "2",
     placarFora: "0",
-    imgUrlCasa:
-      "https://logodownload.org/wp-content/uploads/2016/03/Real-Madrid-logo-1.png",
-    imgUrlFora:
-      "https://logodownload.org/wp-content/uploads/2015/05/Barcelona-logo-escudo.png",
+    imgUrlCasa: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+    imgUrlFora: "https://cdn.sportmonks.com/images/soccer/teams/19/83.png",
   },
   {
     equipeCasa: "Liverpool",
@@ -29,10 +27,17 @@ const partidas = [
     data: "25/12",
     placarCasa: "4",
     placarFora: "3",
-    imgUrlCasa:
-      "https://seeklogo.com/images/L/liverpool-fc-logo-3B886CFE17-seeklogo.com.png",
-    imgUrlFora:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png",
+    imgUrlCasa: "https://cdn.sportmonks.com/images/soccer/teams/8/8.png",
+    imgUrlFora: "https://cdn.sportmonks.com/images/soccer/teams/14/14.png",
+  },
+  {
+    equipeCasa: "Real Madrid",
+    equipeFora: "Barcelona",
+    data: "24/12",
+    placarCasa: "2",
+    placarFora: "0",
+    imgUrlCasa: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+    imgUrlFora: "https://cdn.sportmonks.com/images/soccer/teams/19/83.png",
   },
   {
     equipeCasa: "Liverpool",
@@ -40,10 +45,17 @@ const partidas = [
     data: "25/12",
     placarCasa: "4",
     placarFora: "3",
-    imgUrlCasa:
-      "https://seeklogo.com/images/L/liverpool-fc-logo-3B886CFE17-seeklogo.com.png",
-    imgUrlFora:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png",
+    imgUrlCasa: "https://cdn.sportmonks.com/images/soccer/teams/8/8.png",
+    imgUrlFora: "https://cdn.sportmonks.com/images/soccer/teams/14/14.png",
+  },
+  {
+    equipeCasa: "Real Madrid",
+    equipeFora: "Barcelona",
+    data: "24/12",
+    placarCasa: "2",
+    placarFora: "0",
+    imgUrlCasa: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+    imgUrlFora: "https://cdn.sportmonks.com/images/soccer/teams/19/83.png",
   },
   {
     equipeCasa: "Liverpool",
@@ -51,10 +63,17 @@ const partidas = [
     data: "25/12",
     placarCasa: "4",
     placarFora: "3",
-    imgUrlCasa:
-      "https://seeklogo.com/images/L/liverpool-fc-logo-3B886CFE17-seeklogo.com.png",
-    imgUrlFora:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png",
+    imgUrlCasa: "https://cdn.sportmonks.com/images/soccer/teams/8/8.png",
+    imgUrlFora: "https://cdn.sportmonks.com/images/soccer/teams/14/14.png",
+  },
+  {
+    equipeCasa: "Real Madrid",
+    equipeFora: "Barcelona",
+    data: "24/12",
+    placarCasa: "2",
+    placarFora: "0",
+    imgUrlCasa: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+    imgUrlFora: "https://cdn.sportmonks.com/images/soccer/teams/19/83.png",
   },
   {
     equipeCasa: "Liverpool",
@@ -62,10 +81,8 @@ const partidas = [
     data: "25/12",
     placarCasa: "4",
     placarFora: "3",
-    imgUrlCasa:
-      "https://seeklogo.com/images/L/liverpool-fc-logo-3B886CFE17-seeklogo.com.png",
-    imgUrlFora:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png",
+    imgUrlCasa: "https://cdn.sportmonks.com/images/soccer/teams/8/8.png",
+    imgUrlFora: "https://cdn.sportmonks.com/images/soccer/teams/14/14.png",
   },
 ];
 

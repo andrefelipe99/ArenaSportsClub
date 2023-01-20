@@ -1,0 +1,67 @@
+#container-side-bar {
+  background-color: #4a8464;
+  padding: 0;
+}
+
+.pad {
+  margin: 0.5ch;
+}
+
+.titleSideBar {
+  border-radius: 0ch;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: Barrio;
+  font-size: larger;
+  color: antiquewhite;
+  border: none;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgb(250, 235, 215, 0.4);
+}
+
+#title-text-side-bar {
+  padding-left: 10px;
+}
+
+.pais-margin {
+  margin-top: 0.3ch;
+  margin-bottom: 0.3ch;
+}
+
+#side-bar-link {
+  text-decoration: none;
+}
+
+#list-group-sidebar {
+  border-radius: 0ch;
+  background-color: #4a8464;
+  font-family: Barrio;
+  font-size: medium;
+  border: none;
+}
+
+.justify-content-md-center {
+  align-items: center;
+  color: antiquewhite;
+}
+
+#name-camp-sidebar {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#list-group-sidebar:hover {
+  background-color: #88c67e;
+  transition: 0.7s;
+}
+
+#button-favorite {
+  background: rgba(76, 175, 80, 0);
+  padding: 0.1ch;
+  border: none;
+  margin-left: 0.5ch;
+}

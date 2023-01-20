@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import ButtonSumMatch from "../components/ButtonSum";
 import ButtonEstMatch from "../components/ButtonEst";
 import ButtonForMatch from "../components/ButtonFor";
+import "../styles/pages/Match.css";
 
 export function Match() {
   const [listMatch, setListMatch] = useState([{}]);
@@ -37,7 +38,7 @@ export function Match() {
   return (
     <Container>
       <div>
-        <div className="top-nameCamp">
+        <div>
           {typeof listMatch.partida === "undefined" ? (
             <p>Loading...</p>
           ) : (
@@ -114,12 +115,15 @@ export function Match() {
                     </Button>
                   </div>
                 </div>
-                <div>
-                  <ButtonSumMatch actived={buttonChange.sumario} />
-                  <ButtonEstMatch actived={buttonChange.estatistica} />
-                  <ButtonForMatch actived={buttonChange.formacao} listMatch={listMatch}/>
-                </div>
               </Row>
+              <div>
+                <ButtonSumMatch actived={buttonChange.sumario} />
+                <ButtonEstMatch actived={buttonChange.estatistica} />
+                <ButtonForMatch
+                  actived={buttonChange.formacao}
+                  listMatch={listMatch}
+                />
+              </div>
             </>
           )}
         </div>

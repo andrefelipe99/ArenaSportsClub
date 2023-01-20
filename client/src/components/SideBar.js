@@ -6,6 +6,7 @@ import { Button } from "react-bootstrap";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import "../styles/components/SideBar.css";
 
 export function SideBar() {
   const [listaCampeonatos, setListaCampeonatos] = useState([{}]);

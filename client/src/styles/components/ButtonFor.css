@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+#main-header-for{
+  
+}
+
 #header-for {
   display: flex;
   align-items: center;
@@ -33,4 +37,12 @@
 
 .content-field{
   background-image: url("../../../public/field-image.png");
+  background-repeat: no-repeat;
+  background-position: center;
+ 
+}
+
+.field-line{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }

@@ -4,7 +4,7 @@ import "../styles/components/ButtonEst.css";
 function ButtonEstMatch({ actived }) {
   return (
     actived && (
-      <Container>
+      <Container id="container-buttonEst">
         <div>
           <h1> Butão Estatísticas</h1>
         </div>

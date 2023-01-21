@@ -4,7 +4,7 @@ import "../styles/components/ButtonFor.css";
 function ButtonForMatch({ actived, listMatch }) {
   return (
     actived && (
-      <Container id="chuva">
+      <Container id="container-buttonFor">
         <div>
           {typeof listMatch.partida === "undefined" ? (
             <p>Loading...</p>

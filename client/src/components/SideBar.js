@@ -12,33 +12,13 @@ import "../styles/components/SideBar.css";
 
 export function SideBar() {
   const [listaCampeonatos, setListaCampeonatos] = useState([{}]);
-  const [favorites, setFavorites] = useState([
-    { id: 0, favorito: false, nome: "", paisUrl: "" },
-  ]);
+  const [favorites, setFavorites] = useState(
+    JSON.parse(window.localStorage.getItem("favorites")) || ""
+  );
 
-  const addFavorite = (campeonato) => {
-    if (campeonato !== "undefined") {
-      let { id, favorito, nome, paisUrl } = campeonato;
-      console.log(favorites[0]);
-      if (favorites.length === 1 && favorites[0].id !== 0) {
-        setFavorites((favorite) => [
-          ...favorite,
-          { id, favorito, nome, paisUrl },
-        ]);
-      } else {
-        setFavorites((favorite) => [{ id, favorito, nome, paisUrl }]);
-      }
-      console.log(Object.values(favorites));
-    }
-  };
-
-  const removeFavorite = (campeonato) => {
-    if (listaCampeonatos !== "undefined")
-      setFavorites(favorites.filter((camp) => camp.id !== campeonato.id));
-  };
-
-  const isFavorite = (campeonato) =>
-    favorites?.some((camp) => camp.id === campeonato.id);
+  useEffect(() => {
+    window.localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   useEffect(() => {
     fetch("/campeonatos")
@@ -47,6 +27,25 @@ export function SideBar() {
         setListaCampeonatos(data);
       });
   }, []);
+
+  const addFavorite = (campeonato, i) => {
+    if (campeonato !== "undefined") {
+      let { id, favorito, nome, paisUrl } = campeonato;
+      setFavorites((favorite) => [
+        ...favorite,
+        { id, favorito, nome, paisUrl },
+      ]);
+    }
+  };
+
+  const removeFavorite = (campeonato) => {
+    window.localStorage.clear();
+    if (listaCampeonatos !== "undefined")
+      setFavorites(favorites.filter((camp) => camp.id !== campeonato.id));
+  };
+
+  const isFavorite = (campeonato) =>
+    favorites?.some((camp) => camp.id === campeonato.id);
 
   return (
     <Container id="container-side-bar">

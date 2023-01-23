@@ -5,29 +5,57 @@ function ButtonForMatch({ actived, listMatch }) {
   return (
     actived && (
       <Container id="container-buttonFor">
-        <div id="main-header-for">
-          <div id="header-for">
-            <span>{listMatch.partida[0].formacaoCasa}</span>
-            <span> FORMAÇÃO </span>
-            <span>{listMatch.partida[0].formacaoFora}</span>
+        <div id="for-section">
+          <div id="for-section_title">
+            <span> TITULARES </span>
           </div>
 
-          <div className="content-fieldWrap">
-            <div className="content-field">
-              <div className="field-line">
-                {typeof listMatch.partida === "undefined" ? (
-                  <p>Loading...</p>
-                ) : (
-                  listMatch.partida[0].escalacaoCasa.map((jogador, i) => (
-                    <>
-                      <div className="field-player" key={i}>
-                        {" "}
-                        {jogador.numero} <span>{jogador.nome}</span>
-                      </div>
-                    </>
-                  ))
-                )}
-              </div>
+          <div className="for-sideBox">
+            <div className="for-side-left">
+              {typeof listMatch.partida === "undefined" ? (
+                <p>Loading...</p>
+              ) : (
+                listMatch.partida[0].escalacaoCasa.map((jogador, i) => (
+                  <>
+                    <div className="for-player" key={i}>
+                      <div className="for-player_number">{jogador.numero}</div>
+                      <span className="for-player_name">{jogador.nome}</span>
+                    </div>
+                  </>
+                ))
+              )}
+            </div>
+            <div className="for-side-right">
+              {typeof listMatch.partida === "undefined" ? (
+                <p>Loading...</p>
+              ) : (
+                listMatch.partida[0].escalacaoFora.map((jogador, i) => (
+                  <>
+                    <div className="for-player" key={i}>
+                      <span className="for-player_name">{jogador.nome}</span>
+                      <div className="for-player_number">{jogador.numero}</div>
+                    </div>
+                  </>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+        <div id="for-section">
+          <div id="for-section_title">
+            <span> RESERVAS </span>
+          </div>
+        </div>
+        <div id="for-section">
+          <div id="for-section_title">
+            <span> TÉCNICOS </span>
+          </div>
+          <div className="for-sideBox">
+            <div className="for-side-left">
+              <span className="for-player_name">{listMatch.partida[0].tecnicoCasa}</span>
+            </div>
+            <div className="for-side-right">
+              <span className="for-player_name">{listMatch.partida[0].tecnicoFora}</span>
             </div>
           </div>
         </div>

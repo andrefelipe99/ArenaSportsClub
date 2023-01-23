@@ -13,6 +13,7 @@ import "../styles/components/SideBar.css";
 export function SideBar() {
   const [listaCampeonatos, setListaCampeonatos] = useState([{}]);
   const [favorites, setFavorites] = useState(
+    //[{}]
     JSON.parse(window.localStorage.getItem("favorites")) || ""
   );
 

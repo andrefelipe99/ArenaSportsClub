@@ -129,12 +129,12 @@ const partida = [
     placarFora: "3",
     imgUrlCasa: "https://cdn.sportmonks.com/images/soccer/teams/8/8.png",
     imgUrlFora: "https://cdn.sportmonks.com/images/soccer/teams/14/14.png",
-    formacaoCasa: "4-3-3",
-    formacaoFora: "4-3-3",
+    tecnicoCasa: "Cuca",
+    tecnicoFora: "Mourinho",
     escalacaoCasa: [
       {
         numero: 22,
-        nome: "Josep Martinez",
+        nome: "Josep Martinez (G)",
       },
       {
         numero: 4,
@@ -180,7 +180,7 @@ const partida = [
     escalacaoFora: [
       {
         numero: 99,
-        nome: "Joao Cunha",
+        nome: "Joao Cunha (G)",
       },
       {
         numero: 4,

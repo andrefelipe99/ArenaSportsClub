@@ -13,9 +13,15 @@ import "../styles/components/SideBar.css";
 export function SideBar() {
   const [listaCampeonatos, setListaCampeonatos] = useState([{}]);
   const [favorites, setFavorites] = useState(
-    //[{}]
-    JSON.parse(window.localStorage.getItem("favorites")) || ""
+    JSON.parse(window.localStorage.getItem("favorites")) || [{}]
   );
+
+  useEffect(() => {
+    if (favorites.length === 1 && favorites[0]?.id === null) {
+      console.log("entrou");
+      setFavorites((favorito) => []);
+    }
+  }, []);
 
   useEffect(() => {
     window.localStorage.setItem("favorites", JSON.stringify(favorites));

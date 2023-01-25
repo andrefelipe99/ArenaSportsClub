@@ -1,13 +1,15 @@
 import express from "express";
 import cors from "cors";
 import cine from "./api/cinema.route.js";
+import football from "./api/football.route.js";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/v1/cinema", cine);
+//app.use("/api/v1/cinema", cine);
+app.use("/api/v1/football", football);
 //app.use("*", (req, res) => res.status(404).json({ error: "not found" }));
 
 //daqui pra baixo API testes

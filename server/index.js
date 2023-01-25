@@ -3,6 +3,7 @@ import mongodb from "mongodb";
 import dotenv from "dotenv";
 import cinemaDAO from "./dao/cinemaDAO.js";
 import ReviewsDAO from "./dao/reviewsDAO.js";
+import teamsDAO from "./dao/teamsDAO.js";
 
 dotenv.config();
 const MongoClient = mongodb.MongoClient;
@@ -18,8 +19,9 @@ MongoClient.connect(process.env.RESTREVIEWS_DB_URI, {
     process.exit(1);
   })
   .then(async (client) => {
-    await cinemaDAO.injectDB(client);
-    await ReviewsDAO.injectDB(client);
+    //await cinemaDAO.injectDB(client);
+    //await ReviewsDAO.injectDB(client);
+    await teamsDAO.injectDB(client);
     app.listen(port, () => {
       console.log(`listening on port ${port}`);
     });

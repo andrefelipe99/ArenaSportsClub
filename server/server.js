@@ -225,6 +225,94 @@ const partida = [
         nome: "George Pușcaș",
       },
     ],
+    escalacaoReservaCasa: [
+      {
+        numero: 24,
+        nome: "BUCETA",
+      },
+      {
+        numero: 26,
+        nome: "CU",
+      },
+      {
+        numero: 27,
+        nome: "Radu Drăgușin",
+      },
+      {
+        numero: 28,
+        nome: "Mattia Bani",
+      },
+      {
+        numero: 29,
+        nome: "Silvan Hefti",
+      },
+      {
+        numero: 40,
+        nome: "Kevin Strootman",
+      },
+      {
+        numero: 35,
+        nome: "Filip Jagiełło",
+      },
+      {
+        numero: 47,
+        nome: "Morten Wetche Frendrup",
+      },
+      {
+        numero: 66,
+        nome: "Mattia Aramu",
+      },
+      {
+        numero: 89,
+        nome: "Albert Guðmundsson",
+      },
+      {
+        numero: 99,
+        nome: "George Pușcaș",
+      },
+    ],
+    escalacaoReservaFora: [
+      {
+        numero: 47,
+        nome: "ROLA",
+      },
+      {
+        numero: 21,
+        nome: "CUNHÂO",
+      },
+      {
+        numero: 98,
+        nome: "Radu Drăgușin",
+      },
+      {
+        numero: 88,
+        nome: "Mattia Bani",
+      },
+      {
+        numero: 58,
+        nome: "Silvan Hefti",
+      },
+      {
+        numero: 67,
+        nome: "Kevin Strootman",
+      },
+      {
+        numero: 56,
+        nome: "Filip Jagiełło",
+      },
+      {
+        numero: 47,
+        nome: "Morten Wetche Frendrup",
+      },
+      {
+        numero: 23,
+        nome: "Albert Guðmundsson",
+      },
+      {
+        numero: 17,
+        nome: "George Pușcaș",
+      },
+    ],
   },
 ];
 

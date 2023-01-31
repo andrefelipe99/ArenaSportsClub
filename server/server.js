@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import cine from "./api/cinema.route.js";
 import football from "./api/football.route.js";
+import partidasCrawler from "./crawler/partidas.js";
 
 const app = express();
 
@@ -230,6 +231,11 @@ const partida = [
 
 app.get("/partida", (req, res) => {
   res.json({ partida });
+});
+
+const teste = await partidasCrawler.getPartidas();
+app.get("/pp", (req, res) => {
+  res.json({ teste });
 });
 
 export default app;

@@ -1,8 +1,6 @@
 import app from "./server.js";
 import mongodb from "mongodb";
 import dotenv from "dotenv";
-import cinemaDAO from "./dao/cinemaDAO.js";
-import ReviewsDAO from "./dao/reviewsDAO.js";
 import teamsDAO from "./dao/teamsDAO.js";
 
 dotenv.config();

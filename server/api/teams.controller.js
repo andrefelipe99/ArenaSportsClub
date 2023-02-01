@@ -49,6 +49,11 @@ export default class teamsController {
     }
   }
 
+  static async apiGetMaxId(req, res, next) {
+    let id = await teamsDAO.getMaxID();
+    res.json(id);
+  }
+
   //   static async apiGetRestaurantCuisines(req, res, next) {
   //     try {
   //       let cuisines = await RestaurantsDAO.getCuisines()

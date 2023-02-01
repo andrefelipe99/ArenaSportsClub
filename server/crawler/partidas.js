@@ -333,27 +333,27 @@ export default class partidasCrawler {
                         var cartao = "CAV";
                       } else var cartao = "";
 
+                      var gols = [];
+
                       if ($(this).find("img").attr("src") === urlGol) {
-                        var countGol = 0;
                         $(this)
                           .find("img")
                           .each(function (i, e) {
                             if ($(this).attr("src") === urlGol) {
-                              countGol = countGol + 1;
+                              gols.push("GOL");
                             }
                           });
-                      } else var countGol = 0;
+                      }
 
                       if ($(this).find("img").attr("src") === urlGolC) {
-                        var countGolC = 0;
                         $(this)
                           .find("img")
                           .each(function (i, e) {
                             if ($(this).attr("src") === urlGolC) {
-                              countGolC = countGolC + 1;
+                              gols.push("GC");
                             }
                           });
-                      } else var countGolC = 0;
+                      }
 
                       if (nome !== "" && nome) {
                         escalacaoCasaT.push({
@@ -364,8 +364,7 @@ export default class partidasCrawler {
                           acoes: {
                             substituicao: substituicao,
                             cartao: cartao,
-                            countGol: countGol,
-                            countGolC: countGolC,
+                            gols: gols,
                           },
                         });
                       }
@@ -396,27 +395,27 @@ export default class partidasCrawler {
                         var cartao = "CAV";
                       } else var cartao = "";
 
+                      var gols = [];
+
                       if ($(this).find("img").attr("src") === urlGol) {
-                        var countGol = 0;
                         $(this)
                           .find("img")
                           .each(function (i, e) {
                             if ($(this).attr("src") === urlGol) {
-                              countGol = countGol + 1;
+                              gols.push("GOL");
                             }
                           });
-                      } else var countGol = 0;
+                      }
 
                       if ($(this).find("img").attr("src") === urlGolC) {
-                        var countGolC = 0;
                         $(this)
                           .find("img")
                           .each(function (i, e) {
                             if ($(this).attr("src") === urlGolC) {
-                              countGolC = countGolC + 1;
+                              gols.push("GC");
                             }
                           });
-                      } else var countGolC = 0;
+                      }
 
                       if (nome !== "" && nome) {
                         escalacaoForaT.push({
@@ -427,8 +426,7 @@ export default class partidasCrawler {
                           acoes: {
                             substituicao: substituicao,
                             cartao: cartao,
-                            countGol: countGol,
-                            countGolC: countGolC,
+                            gols: gols,
                           },
                         });
                       }
@@ -459,27 +457,27 @@ export default class partidasCrawler {
                         var cartao = "CAV";
                       } else var cartao = "";
 
+                      var gols = [];
+
                       if ($(this).find("img").attr("src") === urlGol) {
-                        var countGol = 0;
                         $(this)
                           .find("img")
                           .each(function (i, e) {
                             if ($(this).attr("src") === urlGol) {
-                              countGol = countGol + 1;
+                              gols.push("GOL");
                             }
                           });
-                      } else var countGol = 0;
+                      }
 
                       if ($(this).find("img").attr("src") === urlGolC) {
-                        var countGolC = 0;
                         $(this)
                           .find("img")
                           .each(function (i, e) {
                             if ($(this).attr("src") === urlGolC) {
-                              countGolC = countGolC + 1;
+                              gols.push("GC");
                             }
                           });
-                      } else var countGolC = 0;
+                      }
 
                       if (nome !== "" && nome) {
                         escalacaoCasaR.push({
@@ -490,8 +488,7 @@ export default class partidasCrawler {
                           acoes: {
                             substituicao: substituicao,
                             cartao: cartao,
-                            countGol: countGol,
-                            countGolC: countGolC,
+                            gols: gols,
                           },
                         });
                       }
@@ -522,27 +519,27 @@ export default class partidasCrawler {
                         var cartao = "CAV";
                       } else var cartao = "";
 
+                      var gols = [];
+
                       if ($(this).find("img").attr("src") === urlGol) {
-                        var countGol = 0;
                         $(this)
                           .find("img")
                           .each(function (i, e) {
                             if ($(this).attr("src") === urlGol) {
-                              countGol = countGol + 1;
+                              gols.push("GOL");
                             }
                           });
-                      } else var countGol = 0;
+                      }
 
                       if ($(this).find("img").attr("src") === urlGolC) {
-                        var countGolC = 0;
                         $(this)
                           .find("img")
                           .each(function (i, e) {
                             if ($(this).attr("src") === urlGolC) {
-                              countGolC = countGolC + 1;
+                              gols.push("GC");
                             }
                           });
-                      } else var countGolC = 0;
+                      }
 
                       if (nome !== "" && nome) {
                         escalacaoForaR.push({
@@ -553,8 +550,7 @@ export default class partidasCrawler {
                           acoes: {
                             substituicao: substituicao,
                             cartao: cartao,
-                            countGol: countGol,
-                            countGolC: countGolC,
+                            gols: gols,
                           },
                         });
                       }
@@ -590,8 +586,7 @@ export default class partidasCrawler {
                         acoes: {
                           substituicao: element.acoes.substituicao,
                           cartao: element.acoes.cartao,
-                          countGol: element.acoes.countGol,
-                          countGolC: element.acoes.countGolC,
+                          gols: element.acoes.gols,
                         },
                       });
                   });
@@ -605,8 +600,7 @@ export default class partidasCrawler {
                         acoes: {
                           substituicao: element.acoes.substituicao,
                           cartao: element.acoes.cartao,
-                          countGol: element.acoes.countGol,
-                          countGolC: element.acoes.countGolC,
+                          gols: element.acoes.gols,
                         },
                       });
                   });
@@ -620,8 +614,7 @@ export default class partidasCrawler {
                         acoes: {
                           substituicao: element.acoes.substituicao,
                           cartao: element.acoes.cartao,
-                          countGol: element.acoes.countGol,
-                          countGolC: element.acoes.countGolC,
+                          gols: element.acoes.gols,
                         },
                       });
                   });
@@ -635,8 +628,7 @@ export default class partidasCrawler {
                         acoes: {
                           substituicao: element.acoes.substituicao,
                           cartao: element.acoes.cartao,
-                          countGol: element.acoes.countGol,
-                          countGolC: element.acoes.countGolC,
+                          gols: element.acoes.gols,
                         },
                       });
                   });
@@ -667,11 +659,11 @@ export default class partidasCrawler {
                     },
                     eventos: eventosAux,
                     estatisticas: estatisticasAux,
-                    escalacao: {
-                      escalacaoCasaTitular: escalacoesCasaTAux,
-                      escalacaoForaTitular: escalacoesForaTAux,
-                      escalacaoCasaReserva: escalacoesCasaRAux,
-                      escalacaoForaReserva: escalacoesForaRAux,
+                    escalacoes: {
+                      casaTitular: escalacoesCasaTAux,
+                      foraTitular: escalacoesForaTAux,
+                      casaReserva: escalacoesCasaRAux,
+                      foraReserva: escalacoesForaRAux,
                     },
                   });
                 });

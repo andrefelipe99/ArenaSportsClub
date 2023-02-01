@@ -67,3 +67,18 @@
 .teams-name {
   padding-top: 0.5ch;
 }
+
+.p_matchTime{
+  flex-basis: 100%;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  margin: 0;
+}
+
+.p_matchStadium{
+  flex-basis: 100%;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 15px;
+}

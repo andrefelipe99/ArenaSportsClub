@@ -44,19 +44,19 @@ export function Match() {
           ) : (
             <>
               <div className="nameCamp">
-                <h1>{listMatch.partida[0].nomeCampeonato}</h1>
+                <h1>{listMatch.partida[0].campeonato}</h1>
               </div>
               <Row md={12} id="row-content-match">
                 <div className="content-match">
                   <Col md={3} id="col-content-match">
                     <img
-                      src={listMatch.partida[0].imgUrlCasa}
-                      alt={`${listMatch.partida[0].equipeCasa}`}
+                      src={listMatch.partida[0].equipes.casaImg}
+                      alt={`${listMatch.partida[0].equipes.casaNome}`}
                       width="128px"
                     />
                     <h3 className="teams-name">
                       {" "}
-                      {listMatch.partida[0].equipeCasa}{" "}
+                      {listMatch.partida[0].equipes.casaNome}{" "}
                     </h3>
                   </Col>
                   <Col md={6} id="col-results-match">
@@ -67,17 +67,18 @@ export function Match() {
                   </Col>
                   <Col md={3} id="col-content-match">
                     <img
-                      src={listMatch.partida[0].imgUrlFora}
-                      alt={`${listMatch.partida[0].equipeFora}`}
+                      src={listMatch.partida[0].equipes.foraImg}
+                      alt={`${listMatch.partida[0].equipes.foraNome}`}
                       width="128px"
                     />
                     <h3 className="teams-name">
                       {" "}
-                      {listMatch.partida[0].equipeFora}
+                      {listMatch.partida[0].equipes.foraNome}
                     </h3>
                   </Col>
 
-                  <p className="datas">{listMatch.partida[0].data}</p>
+                  <p className="p_matchTime"> {listMatch.partida[0].horario}</p>
+                  <p className="p_matchStadium"> {listMatch.partida[0].estadio}</p>
 
                   <div className="button-group-match">
                     <Button

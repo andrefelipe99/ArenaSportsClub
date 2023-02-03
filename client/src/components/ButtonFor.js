@@ -1,7 +1,66 @@
 import Container from "react-bootstrap/Container";
 import "../styles/components/ButtonFor.css";
 import { IoMdFootball } from "react-icons/io";
+import { TbArrowNarrowUp, TbArrowNarrowDown } from "react-icons/tb";
+import { BsFileFill } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
+
+function ShowGoals(jogador) {
+  return jogador.acoes.gols.map((item, i) => {
+    if (item === "GOL") {
+      return <IoMdFootball key={i} title="Gol marcado" />;
+    } else {
+      return (
+        <IconContext.Provider value={{ color: "red" }}>
+          <IoMdFootball key={i} title="Gol contra" />
+        </IconContext.Provider>
+      );
+    }
+  });
+}
+
+function PlayerSwitch(jogador) {
+  if (jogador.acoes.substituicao === "out") {
+    return (
+      <IconContext.Provider value={{ color: "red" }}>
+        <TbArrowNarrowDown title="Jogador saiu" />
+      </IconContext.Provider>
+    );
+  } else if (jogador.acoes.substituicao === "in") {
+    return (
+      <IconContext.Provider value={{ color: "green" }}>
+        <TbArrowNarrowUp title="Jogador entrou" />
+      </IconContext.Provider>
+    );
+  }
+}
+
+function PlayerCards(jogador) {
+  if (jogador.acoes.cartao === "CA") {
+    return (
+      <IconContext.Provider value={{ color: "yellow" }}>
+        <BsFileFill title="Cartão Amarelo" />
+      </IconContext.Provider>
+    );
+  } else if (jogador.acoes.cartao === "CV") {
+    return (
+      <IconContext.Provider value={{ color: "red" }}>
+        <BsFileFill title="Cartão vermelho" />
+      </IconContext.Provider>
+    );
+  } else if (jogador.acoes.cartao === "CAV") {
+    return (
+      <>
+        <IconContext.Provider value={{ color: "yellow" }}>
+          <BsFileFill title="Cartão Amarelo" />
+        </IconContext.Provider>
+        <IconContext.Provider value={{ color: "red" }}>
+          <BsFileFill title="Cartão Vermelho" />
+        </IconContext.Provider>
+      </>
+    );
+  }
+}
 
 function ButtonForMatch({ actived, listMatch }) {
   return (
@@ -23,17 +82,9 @@ function ButtonForMatch({ actived, listMatch }) {
                       <div className="for-player" key={i}>
                         <div className="for-player_number">{jogador.num}</div>
                         <span className="for-player_name">{jogador.nome}</span>
-                        {jogador.acoes.gols.map((item, i) => {
-                          if (item === "GOL") {
-                            return <IoMdFootball key={i} title="Gol marcado" />;
-                          } else {
-                            return (
-                              <IconContext.Provider value={{ color: "red" }}>
-                                <IoMdFootball key={i} title="Gol contra" />
-                              </IconContext.Provider>
-                            );
-                          }
-                        })}
+                        {ShowGoals(jogador)}
+                        {PlayerCards(jogador)}
+                        {PlayerSwitch(jogador)}
                       </div>
                     </>
                   )
@@ -48,17 +99,9 @@ function ButtonForMatch({ actived, listMatch }) {
                   (jogador, i) => (
                     <>
                       <div className="for-player" key={i}>
-                        {jogador.acoes.gols.map((item, i) => {
-                          if (item === "GOL") {
-                            return <IoMdFootball key={i} title="Gol marcado" />;
-                          } else {
-                            return (
-                              <IconContext.Provider value={{ color: "red" }}>
-                                <IoMdFootball key={i} title="Gol contra" />
-                              </IconContext.Provider>
-                            );
-                          }
-                        })}
+                        {PlayerSwitch(jogador)}
+                        {PlayerCards(jogador)}
+                        {ShowGoals(jogador)}
                         <span className="for-player_name">{jogador.nome}</span>
                         <div className="for-player_number">{jogador.num}</div>
                       </div>
@@ -84,17 +127,9 @@ function ButtonForMatch({ actived, listMatch }) {
                       <div className="for-player" key={i}>
                         <div className="for-player_number">{jogador.num}</div>
                         <span className="for-player_name">{jogador.nome}</span>
-                        {jogador.acoes.gols.map((item, i) => {
-                          if (item === "GOL") {
-                            return <IoMdFootball key={i} title="Gol marcado" />;
-                          } else {
-                            return (
-                              <IconContext.Provider value={{ color: "red" }}>
-                                <IoMdFootball key={i} title="Gol contra" />
-                              </IconContext.Provider>
-                            );
-                          }
-                        })}
+                        {ShowGoals(jogador)}
+                        {PlayerCards(jogador)}
+                        {PlayerSwitch(jogador)}
                       </div>
                     </>
                   )
@@ -109,17 +144,9 @@ function ButtonForMatch({ actived, listMatch }) {
                   (jogador, i) => (
                     <>
                       <div className="for-player" key={i}>
-                        {jogador.acoes.gols.map((item, i) => {
-                          if (item === "GOL") {
-                            return <IoMdFootball key={i} title="Gol marcado" />;
-                          } else {
-                            return (
-                              <IconContext.Provider value={{ color: "red" }}>
-                                <IoMdFootball key={i} title="Gol contra" />
-                              </IconContext.Provider>
-                            );
-                          }
-                        })}
+                        {PlayerSwitch(jogador)}
+                        {PlayerCards(jogador)}
+                        {ShowGoals(jogador)}
                         <span className="for-player_name">{jogador.nome}</span>
                         <div className="for-player_number">{jogador.num}</div>
                       </div>

@@ -245,7 +245,7 @@ const partida = [
           nome: " Laoufi",
           acoes: {
             substituicao: "out",
-            cartao: "",
+            cartao: "CAV",
             gols: [],
           },
         },
@@ -299,7 +299,7 @@ const partida = [
           nome: " Aymen Mahious",
           acoes: {
             substituicao: "out",
-            cartao: "",
+            cartao: "CA",
             gols: ["GOL", "GOL"],
           },
         },
@@ -319,7 +319,7 @@ const partida = [
           nome: " A. Djibo",
           acoes: {
             substituicao: "",
-            cartao: "",
+            cartao: "CV",
             gols: [],
           },
         },
@@ -345,8 +345,8 @@ const partida = [
           num: "15.",
           nome: " Boureima Katakore Amadou",
           acoes: {
-            substituicao: "",
-            cartao: "",
+            substituicao: "out",
+            cartao: "CA",
             gols: ["GC"],
           },
         },
@@ -381,7 +381,7 @@ const partida = [
           num: "14.",
           nome: " Imarana Seyni",
           acoes: {
-            substituicao: "out",
+            substituicao: "",
             cartao: "",
             gols: [],
           },

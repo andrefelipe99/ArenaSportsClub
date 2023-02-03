@@ -1,0 +1,21 @@
+.bg-teal {
+  background-color: #aecdbc;
+  font-family: Barrio;
+  font-weight: bold;
+  font-size: large;
+}
+
+.nav-img {
+  margin-bottom: 5px;
+}
+
+#footer {
+  background-color: #aecdbc;
+  font-family: Barrio;
+  font-weight: bold;
+  font-size: large;
+}
+
+.Footer-section {
+  padding-top: 10px;
+}

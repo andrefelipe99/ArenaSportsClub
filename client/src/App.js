@@ -1,5 +1,6 @@
 import "../src/styles/fonts.css";
 import HeaderApp from "./components/Header";
+import FooterApp from "./components/Footer";
 import { AppRoutes } from "./Routes";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <>
       <HeaderApp />
       <AppRoutes />
+      <FooterApp />
     </>
   );
 }

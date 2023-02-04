@@ -28,7 +28,7 @@ export function Match() {
   };
 
   useEffect(() => {
-    fetch("/partida")
+    fetch("/match")
       .then((response) => response.json())
       .then((data) => {
         setListMatch(data);
@@ -39,48 +39,51 @@ export function Match() {
     <Container>
       <div>
         <div>
-          {typeof listMatch.partida === "undefined" ? (
+          {typeof listMatch.match === "undefined" ? (
             <p>Loading...</p>
           ) : (
             <>
               <div className="nameCamp">
-                <h1>{listMatch.partida[0].campeonato}</h1>
+                <h1>{listMatch.match[0].championship}</h1>
               </div>
               <Row md={12} id="row-content-match">
                 <div className="content-match">
                   <Col md={3} id="col-content-match">
                     <img
-                      src={listMatch.partida[0].equipes.casaImg}
-                      alt={`${listMatch.partida[0].equipes.casaNome}`}
+                      src={listMatch.match[0].teams.homeImg}
+                      alt={`${listMatch.match[0].teams.homeName}`}
                       width="128px"
                     />
                     <h3 className="teams-name">
                       {" "}
-                      {listMatch.partida[0].equipes.casaNome}{" "}
+                      {listMatch.match[0].teams.homeName}{" "}
                     </h3>
                   </Col>
                   <Col md={6} id="col-results-match">
                     <h1>
-                      {listMatch.partida[0].placarCasa} X{" "}
-                      {listMatch.partida[0].placarFora}{" "}
+                      {listMatch.match[0].scoreHome} X{" "}
+                      {listMatch.match[0].scoreAway}{" "}
                     </h1>
                   </Col>
                   <Col md={3} id="col-content-match">
                     <img
-                      src={listMatch.partida[0].equipes.foraImg}
-                      alt={`${listMatch.partida[0].equipes.foraNome}`}
+                      src={listMatch.match[0].teams.awayImg}
+                      alt={`${listMatch.match[0].teams.awayName}`}
                       width="128px"
                     />
                     <h3 className="teams-name">
                       {" "}
-                      {listMatch.partida[0].equipes.foraNome}
+                      {listMatch.match[0].teams.awayName}
                     </h3>
                   </Col>
 
-                  <p className="p_matchTime"> {listMatch.partida[0].horario}</p>
+                  <p className="p_matchTime">
+                    {" "}
+                    {listMatch.match[0].day} - {listMatch.match[0].schedule}
+                  </p>
                   <p className="p_matchStadium">
                     {" "}
-                    {listMatch.partida[0].estadio}
+                    {listMatch.match[0].stadium}
                   </p>
 
                   <div className="button-group-match">

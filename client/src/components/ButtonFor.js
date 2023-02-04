@@ -5,9 +5,9 @@ import { TbArrowNarrowUp, TbArrowNarrowDown } from "react-icons/tb";
 import { BsFileFill } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
 
-function ShowGoals(jogador) {
-  return jogador.acoes.gols.map((item, i) => {
-    if (item === "GOL") {
+function ShowGoals(player) {
+  return player.actions.goals.map((item, i) => {
+    if (item === "GOAL") {
       return <IoMdFootball key={i} title="Gol marcado" />;
     } else {
       return (
@@ -19,14 +19,14 @@ function ShowGoals(jogador) {
   });
 }
 
-function PlayerSwitch(jogador) {
-  if (jogador.acoes.substituicao === "out") {
+function PlayerSwitch(player) {
+  if (player.actions.substitution === "out") {
     return (
       <IconContext.Provider value={{ color: "red" }}>
         <TbArrowNarrowDown title="Jogador saiu" />
       </IconContext.Provider>
     );
-  } else if (jogador.acoes.substituicao === "in") {
+  } else if (player.actions.substitution === "in") {
     return (
       <IconContext.Provider value={{ color: "green" }}>
         <TbArrowNarrowUp title="Jogador entrou" />
@@ -35,20 +35,20 @@ function PlayerSwitch(jogador) {
   }
 }
 
-function PlayerCards(jogador) {
-  if (jogador.acoes.cartao === "CA") {
+function PlayerCards(player) {
+  if (player.actions.card === "YC") {
     return (
       <IconContext.Provider value={{ color: "yellow" }}>
         <BsFileFill title="Cartão Amarelo" />
       </IconContext.Provider>
     );
-  } else if (jogador.acoes.cartao === "CV") {
+  } else if (player.actions.card === "RC") {
     return (
       <IconContext.Provider value={{ color: "red" }}>
         <BsFileFill title="Cartão vermelho" />
       </IconContext.Provider>
     );
-  } else if (jogador.acoes.cartao === "CAV") {
+  } else if (player.actions.card === "YR") {
     return (
       <>
         <IconContext.Provider value={{ color: "yellow" }}>
@@ -73,41 +73,37 @@ function ButtonForMatch({ actived, listMatch }) {
 
           <div className="for-sideBox">
             <div className="for-side-left">
-              {typeof listMatch.partida === "undefined" ? (
+              {typeof listMatch.match === "undefined" ? (
                 <p>Loading...</p>
               ) : (
-                listMatch.partida[0].escalacoes.casaTitular.map(
-                  (jogador, i) => (
-                    <>
-                      <div className="for-player" key={i}>
-                        <div className="for-player_number">{jogador.num}</div>
-                        <span className="for-player_name">{jogador.nome}</span>
-                        {ShowGoals(jogador)}
-                        {PlayerCards(jogador)}
-                        {PlayerSwitch(jogador)}
-                      </div>
-                    </>
-                  )
-                )
+                listMatch.match[0].lineups.homeStarting.map((player, i) => (
+                  <>
+                    <div className="for-player" key={i}>
+                      <div className="for-player_number">{player.num}</div>
+                      <span className="for-player_name">{player.name}</span>
+                      {ShowGoals(player)}
+                      {PlayerCards(player)}
+                      {PlayerSwitch(player)}
+                    </div>
+                  </>
+                ))
               )}
             </div>
             <div className="for-side-right">
-              {typeof listMatch.partida === "undefined" ? (
+              {typeof listMatch.match === "undefined" ? (
                 <p>Loading...</p>
               ) : (
-                listMatch.partida[0].escalacoes.foraTitular.map(
-                  (jogador, i) => (
-                    <>
-                      <div className="for-player" key={i}>
-                        {PlayerSwitch(jogador)}
-                        {PlayerCards(jogador)}
-                        {ShowGoals(jogador)}
-                        <span className="for-player_name">{jogador.nome}</span>
-                        <div className="for-player_number">{jogador.num}</div>
-                      </div>
-                    </>
-                  )
-                )
+                listMatch.match[0].lineups.awayStarting.map((player, i) => (
+                  <>
+                    <div className="for-player" key={i}>
+                      {PlayerSwitch(player)}
+                      {PlayerCards(player)}
+                      {ShowGoals(player)}
+                      <span className="for-player_name">{player.name}</span>
+                      <div className="for-player_number">{player.num}</div>
+                    </div>
+                  </>
+                ))
               )}
             </div>
           </div>
@@ -118,41 +114,37 @@ function ButtonForMatch({ actived, listMatch }) {
           </div>
           <div className="for-sideBox">
             <div className="for-side-left">
-              {typeof listMatch.partida === "undefined" ? (
+              {typeof listMatch.match === "undefined" ? (
                 <p>Loading...</p>
               ) : (
-                listMatch.partida[0].escalacoes.casaReserva.map(
-                  (jogador, i) => (
-                    <>
-                      <div className="for-player" key={i}>
-                        <div className="for-player_number">{jogador.num}</div>
-                        <span className="for-player_name">{jogador.nome}</span>
-                        {ShowGoals(jogador)}
-                        {PlayerCards(jogador)}
-                        {PlayerSwitch(jogador)}
-                      </div>
-                    </>
-                  )
-                )
+                listMatch.match[0].lineups.homeBench.map((player, i) => (
+                  <>
+                    <div className="for-player" key={i}>
+                      <div className="for-player_number">{player.num}</div>
+                      <span className="for-player_name">{player.name}</span>
+                      {ShowGoals(player)}
+                      {PlayerCards(player)}
+                      {PlayerSwitch(player)}
+                    </div>
+                  </>
+                ))
               )}
             </div>
             <div className="for-side-right">
-              {typeof listMatch.partida === "undefined" ? (
+              {typeof listMatch.match === "undefined" ? (
                 <p>Loading...</p>
               ) : (
-                listMatch.partida[0].escalacoes.foraReserva.map(
-                  (jogador, i) => (
-                    <>
-                      <div className="for-player" key={i}>
-                        {PlayerSwitch(jogador)}
-                        {PlayerCards(jogador)}
-                        {ShowGoals(jogador)}
-                        <span className="for-player_name">{jogador.nome}</span>
-                        <div className="for-player_number">{jogador.num}</div>
-                      </div>
-                    </>
-                  )
-                )
+                listMatch.match[0].lineups.awayBench.map((player, i) => (
+                  <>
+                    <div className="for-player" key={i}>
+                      {PlayerSwitch(player)}
+                      {PlayerCards(player)}
+                      {ShowGoals(player)}
+                      <span className="for-player_name">{player.name}</span>
+                      <div className="for-player_number">{player.num}</div>
+                    </div>
+                  </>
+                ))
               )}
             </div>
           </div>

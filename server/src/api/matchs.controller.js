@@ -1,4 +1,4 @@
-import partidasCrawler from "../crawler/matchs.js";
+import matchsCrawler from "../crawler/matchs.js";
 import matchsDAO from "../dao/matchsDAO.js";
 
 export default class matchsController {
@@ -56,7 +56,7 @@ export default class matchsController {
       for (let index = 0; index < matchs.length; index++) {
         matchTitle = await matchsDAO.getMatchByTitle(matchs[index].idTitle);
 
-        if (partidaTitle === 0) {
+        if (matchTitle === 0) {
           maxId = await matchsDAO.getMatchMaxID();
           maxId = parseInt(maxId) + 1;
           const MatchResponse = await matchsDAO.addMatch(

@@ -116,507 +116,549 @@ const campeonatos = [
   },
 ];
 
-const partida = [
+const match = [
   {
-    idPartida: "",
-    idTitulo: "Argélia x Niger - 31/01/2023 às 13:00",
-    campeonato: "Campeonato das Nações Africanas - 2022 Algeria",
-    rodada: "Semifinal",
+    _id: "63deba8f8d667aa21a950462",
+    idMatch: "1013",
+    idTitle: "Atlético Madrid x Getafe - 04/02/2023 14:30",
+    championship: "Campeonato Espanhol - 2022/2023",
+    turn: "20ª Rodada",
     status: "ENCERRADO",
-    tempo: "ENCERRADO",
-    horario: "31/01/2023 às 13:00",
-    arbitro: "Abongile Tom",
-    estadio: "Stade Olympique de Radès (Radès)",
-    placarCasa: "5",
-    placarFora: "0",
-    equipes: {
-      casaID: "",
-      casaNome: "Argélia",
-      casaImg: "https://www.placardefutebol.com.br/images/teams/argelia.png",
-      foraID: "",
-      foraNome: "Niger",
-      foraImg: "https://www.placardefutebol.com.br/images/teams/niger.png",
+    time: "ENCERRADO",
+    day: "04/02/2023",
+    schedule: "14:30",
+    referee: "Antonio Miguel Mateu Lahoz",
+    stadium: "Estádio Wanda Metropolitano (Madrid)",
+    scoreHome: "1",
+    scoreAway: "1",
+    teams: {
+      homeId: "",
+      homeName: "Atlético Madrid",
+      homeImg:
+        "https://www.placardefutebol.com.br/images/teams/atletico-madrid.png",
+      awayId: "",
+      awayName: "Getafe",
+      awayImg: "https://www.placardefutebol.com.br/images/teams/getafe.png",
     },
-    eventos: [
+    events: [
       {
-        lado: "casa",
-        descricao: "Ayoub Abdellaoui",
-        tempo: "15'",
-        tipo: "GOL",
+        side: "fora",
+        description: "Djené",
+        time: "2'",
+        type: "YC",
       },
       {
-        lado: "casa",
-        descricao: "Aymen Mahious",
-        tempo: "23'",
-        tipo: "GOL",
+        side: "fora",
+        description: "Portu",
+        time: "34'",
+        type: "YC",
       },
       {
-        lado: "casa",
-        descricao: "Aymen Mahious",
-        tempo: "34'",
-        tipo: "GOL",
+        side: "fora",
+        description: "Aleñà",
+        time: "47'",
+        type: "YC",
       },
       {
-        lado: "fora",
-        descricao: "Ismael Souley",
-        tempo: "37'",
-        tipo: "CA",
+        side: "casa",
+        description: "Koke",
+        time: "57'",
+        type: "YC",
       },
       {
-        lado: "casa",
-        descricao: "Boureima Katakore Amadou (contra)",
-        tempo: "45'",
-        tipo: "GC",
+        side: "casa",
+        description: "Ángel Correa",
+        time: "60'",
+        type: "GOAL",
       },
       {
-        lado: "casa",
-        descricao: "S. Bayazid",
-        tempo: "83'",
-        tipo: "GOL",
+        side: "casa",
+        description: "Saúl",
+        time: "81'",
+        type: "YC",
+      },
+      {
+        side: "fora",
+        description: "Enes Ünal (pênalti)",
+        time: "83'",
+        type: "GOAL",
+      },
+      {
+        side: "casa",
+        description: "Memphis Depay",
+        time: "90'",
+        type: "YC",
+      },
+      {
+        side: "fora",
+        description: "Munir",
+        time: "95'",
+        type: "YC",
+      },
+      {
+        side: "fora",
+        description: "Pedro Álvarez Sosa",
+        time: "96'",
+        type: "YC",
       },
     ],
-    estatisticas: [
+    statistics: [
       {
-        tipo: "Posse de bola (%)",
-        casa: "64",
-        fora: "36",
+        type: "Posse de bola (%)",
+        home: "63",
+        away: "37",
       },
       {
-        tipo: "Total de chutes",
-        casa: "16",
-        fora: "7",
+        type: "Total de passes",
+        home: "633",
+        away: "386",
       },
       {
-        tipo: "Chutes no gol",
-        casa: "7",
-        fora: "0",
+        type: "Passes corretos (%)",
+        home: "82",
+        away: "68",
       },
       {
-        tipo: "Escanteios",
-        casa: "17",
-        fora: "3",
+        type: "Total de chutes",
+        home: "15",
+        away: "10",
+      },
+      {
+        type: "Chutes no gol",
+        home: "6",
+        away: "1",
+      },
+      {
+        type: "Escanteios",
+        home: "8",
+        away: "0",
+      },
+      {
+        type: "Faltas cometidas",
+        home: "11",
+        away: "18",
       },
     ],
-    escalacoes: {
-      casaTitular: [
+    lineups: {
+      homeStarting: [
         {
-          num: "1.",
-          nome: " Farid Chaâl",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "2.",
-          nome: " Chouaib Keddad",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "5.",
-          nome: " Ayoub Abdellaoui",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: ["GOL"],
+          num: "13.",
+          name: " Jan Oblak",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
           },
         },
         {
           num: "15.",
-          nome: " Zineddine Belaïd",
-          acoes: {
-            substituicao: "out",
-            cartao: "",
-            gols: [],
+          name: " Stefan Savić",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
           },
         },
         {
-          num: "21.",
-          nome: " Laoufi",
-          acoes: {
-            substituicao: "out",
-            cartao: "CAV",
-            gols: [],
+          num: "16.",
+          name: " Nahuel Molina",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
           },
         },
         {
           num: "22.",
-          nome: " Mokhtar Belkhiter",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
+          name: " Hermoso",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "23.",
+          name: " Reinildo",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "5.",
+          name: " Rodrigo De Paul",
+          actions: {
+            substitution: "out",
+            card: "",
+            goals: [],
           },
         },
         {
           num: "6.",
-          nome: " Ahmed Kendouci",
-          acoes: {
-            substituicao: "out",
-            cartao: "",
-            gols: [],
+          name: " Koke (C)",
+          actions: {
+            substitution: "",
+            card: "YC",
+            goals: [],
           },
         },
         {
-          num: "8.",
-          nome: " Zakaria Draoui",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "14.",
-          nome: " H. Mrezigue",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "7.",
-          nome: " Abderrahmane Meziane Bentahar",
-          acoes: {
-            substituicao: "out",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "18.",
-          nome: " Aymen Mahious",
-          acoes: {
-            substituicao: "out",
-            cartao: "CA",
-            gols: ["GOL", "GOL"],
-          },
-        },
-      ],
-      foraTitular: [
-        {
-          num: "22.",
-          nome: " M. Djibo",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "2.",
-          nome: " A. Djibo",
-          acoes: {
-            substituicao: "",
-            cartao: "CV",
-            gols: [],
-          },
-        },
-        {
-          num: "3.",
-          nome: " Ismael Souley",
-          acoes: {
-            substituicao: "",
-            cartao: "CA",
-            gols: [],
-          },
-        },
-        {
-          num: "5.",
-          nome: " Abdoul Adamou Garba",
-          acoes: {
-            substituicao: "out",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "15.",
-          nome: " Boureima Katakore Amadou",
-          acoes: {
-            substituicao: "out",
-            cartao: "CA",
-            gols: ["GC"],
+          num: "10.",
+          name: " Ángel Correa",
+          actions: {
+            substitution: "out",
+            card: "",
+            goals: ["GOAL"],
           },
         },
         {
           num: "11.",
-          nome: " Boubacar Hainikoye",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
+          name: " Thomas Lemar",
+          actions: {
+            substitution: "out",
+            card: "",
+            goals: [],
           },
         },
         {
-          num: "23.",
-          nome: " Abdoul Aboubacar Arzakou",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "9.",
-          nome: " Abdoul Ibrahim",
-          acoes: {
-            substituicao: "out",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "14.",
-          nome: " Imarana Seyni",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "18.",
-          nome: " Bilyamine Moussa Sani",
-          acoes: {
-            substituicao: "out",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "20.",
-          nome: " Faysal Iboun Abdoulaye",
-          acoes: {
-            substituicao: "out",
-            cartao: "",
-            gols: [],
-          },
-        },
-      ],
-      casaReserva: [
-        {
-          num: "23.",
-          nome: " Chamseddine Rahmani",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "3.",
-          nome: " H. Dehiri",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
+          num: "8.",
+          name: " Antoine Griezmann",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
           },
         },
         {
           num: "19.",
-          nome: " A. Ghezala",
-          acoes: {
-            substituicao: "in",
-            cartao: "",
-            gols: [],
+          name: " Morata",
+          actions: {
+            substitution: "out",
+            card: "",
+            goals: [],
+          },
+        },
+      ],
+      awayStarting: [
+        {
+          num: "13.",
+          name: " David Soria",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
           },
         },
         {
-          num: "24.",
-          nome: " Saadi Radouani",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "28.",
-          nome: " Houari Baouche",
-          acoes: {
-            substituicao: "in",
-            cartao: "",
-            gols: [],
+          num: "2.",
+          name: " Djené (C)",
+          actions: {
+            substitution: "",
+            card: "YC",
+            goals: [],
           },
         },
         {
           num: "4.",
-          nome: " Akram Djahnit",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "11.",
-          nome: " Oussama Chita",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "27.",
-          nome: " M. Ait El Hadj",
-          acoes: {
-            substituicao: "in",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "9.",
-          nome: " Karim Aribi",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "10.",
-          nome: " Feth-Allah Tahar",
-          acoes: {
-            substituicao: "in",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "12.",
-          nome: " Mohamed Bakir",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "20.",
-          nome: " S. Bayazid",
-          acoes: {
-            substituicao: "in",
-            cartao: "",
-            gols: ["GOL"],
-          },
-        },
-      ],
-      foraReserva: [
-        {
-          num: "1.",
-          nome: " Yahaya Babari",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
+          name: " Pedro Álvarez Sosa",
+          actions: {
+            substitution: "",
+            card: "YC",
+            goals: [],
           },
         },
         {
           num: "6.",
-          nome: " Abdoul Kader Rafiu Kassali",
-          acoes: {
-            substituicao: "in",
-            cartao: "",
-            gols: [],
+          name: " Domingos Duarte",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
           },
         },
         {
-          num: "17.",
-          nome: " M. Karimou",
-          acoes: {
-            substituicao: "in",
-            cartao: "",
-            gols: [],
+          num: "9.",
+          name: " Portu",
+          actions: {
+            substitution: "out",
+            card: "YC",
+            goals: [],
           },
         },
         {
-          num: "25.",
-          nome: " L. Salaou",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
+          num: "15.",
+          name: " Omar Alderete",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
           },
         },
         {
-          num: "26.",
-          nome: " Alhabib Hassane Abdou",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
+          num: "5.",
+          name: " Luis Milla",
+          actions: {
+            substitution: "out",
+            card: "",
+            goals: [],
           },
         },
         {
-          num: "7.",
-          nome: " Yacine Wa Massamba N Laba",
-          acoes: {
-            substituicao: "in",
-            cartao: "",
-            gols: [],
+          num: "11.",
+          name: " Aleñà",
+          actions: {
+            substitution: "out",
+            card: "YC",
+            goals: [],
           },
         },
         {
-          num: "8.",
-          nome: " M. Moudou",
-          acoes: {
-            substituicao: "in",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "12.",
-          nome: " Ousseini Badamassi",
-          acoes: {
-            substituicao: "in",
-            cartao: "",
-            gols: [],
-          },
-        },
-        {
-          num: "13.",
-          nome: " M. Ibrahim",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
+          num: "18.",
+          name: " Mauro Arambarri",
+          actions: {
+            substitution: "out",
+            card: "",
+            goals: [],
           },
         },
         {
           num: "10.",
-          nome: " Mossi Moussa",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
+          name: " Enes Ünal",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: ["GOAL"],
+          },
+        },
+        {
+          num: "19.",
+          name: " Borja Mayoral",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+      ],
+      homeBench: [
+        {
+          num: "1.",
+          name: " Ivo Grbić",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "31.",
+          name: " Antonio Alemán",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "2.",
+          name: " José Giménez",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "3.",
+          name: " Reguilón",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "12.",
+          name: " Matt Doherty",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "4.",
+          name: " Geoffrey Kondogbia",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "14.",
+          name: " Llorente",
+          actions: {
+            substitution: "in",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "17.",
+          name: " Saúl",
+          actions: {
+            substitution: "in",
+            card: "YC",
+            goals: [],
+          },
+        },
+        {
+          num: "20.",
+          name: " Axel Witsel",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
           },
         },
         {
           num: "21.",
-          nome: " A. Inkad",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
+          name: " Yannick Carrasco",
+          actions: {
+            substitution: "in",
+            card: "",
+            goals: [],
           },
         },
         {
           num: "24.",
-          nome: " Marouf Maazou Salissou",
-          acoes: {
-            substituicao: "",
-            cartao: "",
-            gols: [],
+          name: " P. Rivas",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "9.",
+          name: " Memphis Depay",
+          actions: {
+            substitution: "in",
+            card: "YC",
+            goals: [],
+          },
+        },
+      ],
+      awayBench: [
+        {
+          num: "1.",
+          name: " Kiko Casilla",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "27.",
+          name: " Diego Conde",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "12.",
+          name: " Jordan Amavi",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "22.",
+          name: " Damián Suárez",
+          actions: {
+            substitution: "in",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "23.",
+          name: " Stefan Mitrovic",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "8.",
+          name: " Jaime Seoane",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "16.",
+          name: " Ángel Algobia",
+          actions: {
+            substitution: "in",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "20.",
+          name: " Nemanja Maksimović",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "24.",
+          name: " Gonzalo Villar",
+          actions: {
+            substitution: "in",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "7.",
+          name: " Mata",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "14.",
+          name: " Latasa",
+          actions: {
+            substitution: "",
+            card: "",
+            goals: [],
+          },
+        },
+        {
+          num: "17.",
+          name: " Munir",
+          actions: {
+            substitution: "in",
+            card: "YC",
+            goals: [],
           },
         },
       ],
@@ -632,8 +674,8 @@ app.get("/api", (req, res) => {
   res.json({ partidas });
 });
 
-app.get("/partida", (req, res) => {
-  res.json({ partida });
+app.get("/match", (req, res) => {
+  res.json({ match });
 });
 
 export default app;

@@ -9,21 +9,21 @@ function CountGoals(event, half) {
   var countAway = 0;
   event.map((event, i) => {
     if (
-      (event.tipo === "GOL" || event.tipo === "GC") &&
-      parseInt(event.tempo.replace("'", "")) <= 45 &&
+      (event.type === "GOAL" || event.type === "OG") &&
+      parseInt(event.time.replace("'", "")) <= 45 &&
       half === "first-half"
     ) {
-      if (event.lado === "casa") {
+      if (event.side === "home") {
         countHome++;
       } else {
         countAway++;
       }
     } else if (
-      (event.tipo === "GOL" || event.tipo === "GC") &&
-      parseInt(event.tempo.replace("'", "")) > 45 &&
+      (event.type === "GOAL" || event.type === "OG") &&
+      parseInt(event.time.replace("'", "")) > 45 &&
       half === "second-half"
     ) {
-      if (event.lado === "casa") {
+      if (event.side === "casa") {
         countHome++;
       } else {
         countAway++;
@@ -36,60 +36,60 @@ function CountGoals(event, half) {
 
 function Events(event, className) {
   if (className === "sum-icon-home") {
-    if (event.tipo === "GOL") {
+    if (event.type === "GOAL") {
       return (
         <div className={className}>
-          <div className="time-box"> {event.tempo} </div>
+          <div className="time-box"> {event.time} </div>
           <div className="sum-icon">
             {" "}
             <IoMdFootball title="Gol marcado" />
           </div>
-          <div> {event.descricao}</div>
+          <div> {event.description}</div>
         </div>
       );
-    } else if (event.tipo === "CA") {
+    } else if (event.type === "YC") {
       return (
         <div className={className}>
-          <div className="time-box"> {event.tempo} </div>
+          <div className="time-box"> {event.time} </div>
           <div className="sum-icon">
             {" "}
             <IconContext.Provider value={{ color: "yellow" }}>
               <BsFileFill title="Cartão Amarelo" />
             </IconContext.Provider>
           </div>
-          <div> {event.descricao}</div>
+          <div> {event.description}</div>
         </div>
       );
-    } else if (event.tipo === "CV") {
+    } else if (event.type === "RC") {
       return (
         <div className={className}>
-          <div className="time-box"> {event.tempo} </div>
+          <div className="time-box"> {event.time} </div>
           <div className="sum-icon">
             {" "}
             <IconContext.Provider value={{ color: "red" }}>
               <BsFileFill title="Cartão Vermelho" />
             </IconContext.Provider>
           </div>
-          <div> {event.descricao}</div>
+          <div> {event.description}</div>
         </div>
       );
-    } else if (event.tipo === "GC") {
+    } else if (event.type === "OG") {
       return (
         <div className={className}>
-          <div className="time-box"> {event.tempo} </div>
+          <div className="time-box"> {event.time} </div>
           <div className="sum-icon">
             {" "}
             <IconContext.Provider value={{ color: "red" }}>
               <IoMdFootball title="Gol contra" />
             </IconContext.Provider>
           </div>
-          <div> {event.descricao}</div>
+          <div> {event.description}</div>
         </div>
       );
-    } else if (event.tipo === "CAV") {
+    } else if (event.type === "YR") {
       return (
         <div className={className}>
-          <div className="time-box"> {event.tempo} </div>
+          <div className="time-box"> {event.time} </div>
           <>
             <div className="sum-icon">
               {" "}
@@ -101,67 +101,67 @@ function Events(event, className) {
               </IconContext.Provider>
             </div>
           </>
-          <div> {event.descricao}</div>
+          <div> {event.description}</div>
         </div>
       );
     } else {
       return <></>;
     }
   } else {
-    if (event.tipo === "GOL") {
+    if (event.type === "GOAL") {
       return (
         <div className={className}>
-          <div> {event.descricao}</div>
+          <div> {event.description}</div>
           <div className="sum-icon">
             {" "}
             <IoMdFootball title="Gol marcado" />
           </div>
-          <div className="time-box"> {event.tempo} </div>
+          <div className="time-box"> {event.time} </div>
         </div>
       );
-    } else if (event.tipo === "CA") {
+    } else if (event.type === "YC") {
       return (
         <div className={className}>
-          <div> {event.descricao}</div>
+          <div> {event.description}</div>
           <div className="sum-icon">
             {" "}
             <IconContext.Provider value={{ color: "yellow" }}>
               <BsFileFill title="Cartão Amarelo" />
             </IconContext.Provider>
           </div>
-          <div className="time-box"> {event.tempo} </div>
+          <div className="time-box"> {event.time} </div>
         </div>
       );
-    } else if (event.tipo === "CV") {
+    } else if (event.type === "RC") {
       return (
         <div className={className}>
-          <div> {event.descricao}</div>
+          <div> {event.description}</div>
           <div className="sum-icon">
             {" "}
             <IconContext.Provider value={{ color: "red" }}>
               <BsFileFill title="Cartão Vermelho" />
             </IconContext.Provider>
           </div>
-          <div className="time-box"> {event.tempo} </div>
+          <div className="time-box"> {event.time} </div>
         </div>
       );
-    } else if (event.tipo === "GC") {
+    } else if (event.type === "OG") {
       return (
         <div className={className}>
-          <div> {event.descricao}</div>
+          <div> {event.description}</div>
           <div className="sum-icon">
             {" "}
             <IconContext.Provider value={{ color: "red" }}>
               <IoMdFootball title="Gol contra" />
             </IconContext.Provider>
           </div>
-          <div className="time-box"> {event.tempo} </div>
+          <div className="time-box"> {event.time} </div>
         </div>
       );
-    } else if (event.tipo === "CAV") {
+    } else if (event.type === "YR") {
       return (
         <div className={className}>
-          <div> {event.descricao}</div>
+          <div> {event.description}</div>
           <>
             <div className="sum-icon">
               {" "}
@@ -173,7 +173,7 @@ function Events(event, className) {
               </IconContext.Provider>
             </div>
           </>
-          <div className="time-box"> {event.tempo} </div>
+          <div className="time-box"> {event.time} </div>
         </div>
       );
     } else {
@@ -189,19 +189,16 @@ function ButtonSumMatch({ actived, listMatch }) {
         <div id="sum-section">
           <div id="sum-section_title">
             <span> 1º TEMPO </span>
-            <span>
-              {" "}
-              {CountGoals(listMatch.partida[0].eventos, "first-half")}
-            </span>
+            <span> {CountGoals(listMatch.match[0].events, "first-half")}</span>
           </div>
           <div className="sum-sideBox">
-            {typeof listMatch.partida === "undefined" ? (
+            {typeof listMatch.match === "undefined" ? (
               <p>Loading...</p>
             ) : (
-              listMatch.partida[0].eventos.map((event, i) => (
+              listMatch.match[0].events.map((event, i) => (
                 <>
-                  {parseInt(event.tempo.replace("'", "")) <= 45 ? (
-                    event.lado === "casa" ? (
+                  {parseInt(event.time.replace("'", "")) <= 45 ? (
+                    event.side === "casa" ? (
                       <div className="sum-event" key={i}>
                         {Events(event, "sum-icon-home")}
                       </div>
@@ -221,20 +218,17 @@ function ButtonSumMatch({ actived, listMatch }) {
         <div id="sum-section">
           <div id="sum-section_title">
             <span> 2º TEMPO </span>
-            <span>
-              {" "}
-              {CountGoals(listMatch.partida[0].eventos, "second-half")}
-            </span>
+            <span> {CountGoals(listMatch.match[0].events, "second-half")}</span>
           </div>
 
           <div className="sum-sideBox">
-            {typeof listMatch.partida === "undefined" ? (
+            {typeof listMatch.match === "undefined" ? (
               <p>Loading...</p>
             ) : (
-              listMatch.partida[0].eventos.map((event, i) => (
+              listMatch.match[0].events.map((event, i) => (
                 <>
-                  {parseInt(event.tempo.replace("'", "")) > 45 ? (
-                    event.lado === "casa" ? (
+                  {parseInt(event.time.replace("'", "")) > 45 ? (
+                    event.side === "casa" ? (
                       <div className="sum-event" key={i}>
                         {Events(event, "sum-icon-home")}
                       </div>

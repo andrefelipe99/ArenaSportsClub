@@ -338,8 +338,10 @@ export default class matchsCrawler {
                       )
                       .each(function () {
                         var num = $(this).find("small").text().trim();
+                        var number = num.split(".");
+                        num = number[0] + ".";
                         var name = $(this).text().trim();
-                        var name = name.slice(name.indexOf(".") + 1);
+                        name = name.slice(name.indexOf(".") + 1);
 
                         if ($(this).find("i").attr("class") === urlSubIn) {
                           var substitution = "in";
@@ -400,6 +402,8 @@ export default class matchsCrawler {
                       )
                       .each(function () {
                         var num = $(this).find("small").text().trim();
+                        var number = num.split(".");
+                        num = number[0] + ".";
                         var name = $(this).text().trim();
                         var name = name.slice(name.indexOf(".") + 1);
 
@@ -462,6 +466,8 @@ export default class matchsCrawler {
                       )
                       .each(function () {
                         var num = $(this).find("small").text().trim();
+                        var number = num.split(".");
+                        num = number[0] + ".";
                         var name = $(this).text().trim();
                         var name = name.slice(name.indexOf(".") + 1);
 
@@ -524,6 +530,8 @@ export default class matchsCrawler {
                       )
                       .each(function () {
                         var num = $(this).find("small").text().trim();
+                        var number = num.split(".");
+                        num = number[0] + ".";
                         var name = $(this).text().trim();
                         var name = name.slice(name.indexOf(".") + 1);
 

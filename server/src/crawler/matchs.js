@@ -2,35 +2,46 @@ import request from "request";
 import { load } from "cheerio";
 
 const url = "https://www.placardefutebol.com.br";
-const urlHoje = "/jogos-de-hoje";
-const urlOntem = "/jogos-de-ontem";
-const urlAmanha = "/jogos-de-amanha";
+const urlToday = "/jogos-de-hoje";
+const urlYesterday = "/jogos-de-ontem";
+const urlTomorrow = "/jogos-de-amanha";
 
-const urlDias = [url + urlHoje];
-//const urlDias = [url + urlHoje, url + urlOntem, url + urlAmanha];
-const urlGol = "/images/goal.png";
-const urlGolC = "/images/own-goal.png";
-const urlCA = "/images/yellowcard.png";
-const urlCV = "/images/redcard.png";
-const urlCAV = "/images/yellowred.png";
+const urlDays = [url + urlToday];
+//const urlDays = [url + urlToday, url + urlYesterday, url + urlTomorrow];
+const urlGoal = "/images/goal.png";
+const urlOwnGoal = "/images/own-goal.png";
+const urlYC = "/images/yellowcard.png";
+const urlRC = "/images/redcard.png";
+const urlYR = "/images/yellowred.png";
 const urlSubIn = "fas fa-long-arrow-alt-up substitution-in";
 const urlSubOut = "fas fa-long-arrow-alt-down substitution-out";
 
-const partidas = [];
-const eventos = [];
-const estatisticas = [];
-const escalacaoCasaT = [];
-const escalacaoForaT = [];
-const escalacaoCasaR = [];
-const escalacaoForaR = [];
+const matchs = [];
+const events = [];
+const statistics = [];
+const lineupHomeS = [];
+const lineupAwayS = [];
+const lineupHomeB = [];
+const lineupAwayB = [];
 
-export default class partidasCrawler {
-  static async getPartidas() {
-    if (partidas.length != 0) return partidas;
+export default class matchsCrawler {
+  static async clearMatchs() {
+    try {
+      matchs.splice(0, Infinity);
+      const matchsUpdated = await this.getMatchs();
+      return;
+    } catch (error) {
+      console.error(`Unable to clear matchs: ${e}`);
+      return { error: e };
+    }
+  }
+
+  static async getMatchs() {
+    if (matchs.length != 0) return matchs;
     else {
-      urlDias.forEach((urls) => {
+      urlDays.forEach((urls) => {
         request(urls, function (err, res, body) {
-          if (err) console.log("Erro: " + err);
+          if (err) console.log("Error: " + err);
           var $ = load(body);
 
           let count = 0;
@@ -38,27 +49,27 @@ export default class partidasCrawler {
           $("#livescore .container.content a").each(function (idx, e) {
             if ($(this).text().trim() !== "Ver tabela e classificação") {
               count++;
-              var equipeCasa = $(this)
+              var teamHome = $(this)
                 .find("div:nth-child(2) > h5")
                 .text()
                 .trim();
-              var equipeFora = $(this)
+              var teamAway = $(this)
                 .find("div:nth-child(6) > h5")
                 .text()
                 .trim();
-              var placarCasa = $(this)
+              var scoreHome = $(this)
                 .find(
                   "div.row.align-items-center.content > div.w-25.p-1.match-score.d-flex.justify-content-end > h4 > span"
                 )
                 .text()
                 .trim();
-              var placarFora = $(this)
+              var scoreAway = $(this)
                 .find(
                   "div.row.align-items-center.content > div.w-25.p-1.match-score.d-flex.justify-content-start > h4 > span"
                 )
                 .text()
                 .trim();
-              var tempo = $(this)
+              var time = $(this)
                 .find(
                   "div.row.align-items-center.content > div.w-25.p-1.status.text-center > span"
                 )
@@ -66,59 +77,59 @@ export default class partidasCrawler {
                 .trim();
               var hrefName = $(this).attr("href");
 
-              var status = tempo;
+              var status = time;
               if (
-                tempo !== "ENCERRADO" &&
-                tempo !== "SUSPENSO" &&
-                tempo !== "ONTEM" &&
-                !tempo.includes("AMANHÃ") &&
-                !tempo.includes("HOJE")
+                time !== "ENCERRADO" &&
+                time !== "SUSPENSO" &&
+                time !== "ONTEM" &&
+                !time.includes("AMANHÃ") &&
+                !time.includes("HOJE")
               ) {
                 status = "AO VIVO";
-              } else if (tempo.includes("AMANHÃ")) {
+              } else if (time.includes("AMANHÃ")) {
                 status = "AMANHÃ";
               }
 
-              var urlPartida = url + hrefName;
+              var urlMatch = url + hrefName;
 
-              if (equipeCasa !== "") {
-                request(urlPartida, function (err, res, body) {
-                  if (err) console.log("Erro: " + err);
+              if (teamHome !== "") {
+                request(urlMatch, function (err, res, body) {
+                  if (err) console.log("Error: " + err);
                   var $ = load(body);
 
                   $("div.container.main-content").each(function (index, e) {
-                    var campeonato = $(this)
+                    var championship = $(this)
                       .find(
                         "#livescore > div:nth-child(1) > div:nth-child(1) > div > a > h2"
                       )
                       .text()
                       .trim();
-                    var rodada = $(this)
+                    var turn = $(this)
                       .find(
                         "#livescore > div:nth-child(1) > div:nth-child(1) > div > p"
                       )
                       .text()
                       .trim();
-                    var equipeCasaImg = $(this)
+                    var teamHomeImg = $(this)
                       .find(
                         "#livescore > div:nth-child(1) > div:nth-child(1) > div > div.row.match-card-first-row.justify-content-md-center > div:nth-child(1) > img"
                       )
                       .attr("src");
-                    var equipeForaImg = $(this)
+                    var teamAwayImg = $(this)
                       .find(
                         "#livescore > div:nth-child(1) > div:nth-child(1) > div > div.row.match-card-first-row.justify-content-md-center > div:nth-child(3) > img"
                       )
                       .attr("src");
-                    var dataHora = $(this)
+                    var dateTime = $(this)
                       .find(
                         "#livescore > div:nth-child(1) > div.match-details > p:nth-child(1)"
                       )
                       .text()
                       .trim();
 
-                    dataHora = dataHora.split("às");
-                    var dia = dataHora[0].trim();
-                    var horario = dataHora[1].trim();
+                    dateTime = dateTime.split("às");
+                    var day = dateTime[0].trim();
+                    var schedule = dateTime[1].trim();
 
                     if (
                       $(this)
@@ -127,13 +138,13 @@ export default class partidasCrawler {
                         )
                         .attr("title") === "Árbitro da partida"
                     ) {
-                      var arbitro = $(this)
+                      var referee = $(this)
                         .find(
                           "#livescore > div:nth-child(1) > div.match-details > p:nth-child(2)"
                         )
                         .text()
                         .trim();
-                    } else var arbitro = "";
+                    } else var referee = "";
 
                     if (
                       $(this)
@@ -142,7 +153,7 @@ export default class partidasCrawler {
                         )
                         .attr("title") === "Local da partida"
                     ) {
-                      var estadio = $(this)
+                      var stadium = $(this)
                         .find(
                           "#livescore > div:nth-child(1) > div.match-details > p:nth-child(2)"
                         )
@@ -155,13 +166,13 @@ export default class partidasCrawler {
                         )
                         .attr("title") === "Local da partida"
                     ) {
-                      var estadio = $(this)
+                      var stadium = $(this)
                         .find(
                           "#livescore > div:nth-child(1) > div.match-details > p:nth-child(3)"
                         )
                         .text()
                         .trim();
-                    } else var estadio = "";
+                    } else var stadium = "";
 
                     $(this)
                       .find(".row.align-items-center.content")
@@ -172,45 +183,45 @@ export default class partidasCrawler {
                             .text()
                             .trim() !== ""
                         ) {
-                          var lado = "casa";
-                          var descricao = $(this)
+                          var side = "casa";
+                          var description = $(this)
                             .find(".event-line.text-right")
                             .text()
                             .trim();
-                          var tempo = $(this)
+                          var time = $(this)
                             .find(".match-card-events-space")
                             .text()
                             .trim();
                           if (
                             $(this)
                               .find(".event-line.text-right img")
-                              .attr("src") === urlCA
+                              .attr("src") === urlYC
                           ) {
-                            var tipo = "CA";
+                            var type = "YC";
                           } else if (
                             $(this)
                               .find(".event-line.text-right img")
-                              .attr("src") === urlCV
+                              .attr("src") === urlRC
                           ) {
-                            var tipo = "CV";
+                            var type = "RC";
                           } else if (
                             $(this)
                               .find(".event-line.text-right img")
-                              .attr("src") === urlCAV
+                              .attr("src") === urlYR
                           ) {
-                            var tipo = "CAV";
+                            var type = "YR";
                           } else if (
                             $(this)
                               .find(".event-line.text-right img")
-                              .attr("src") === urlGol
+                              .attr("src") === urlGoal
                           ) {
-                            var tipo = "GOL";
+                            var type = "GOAL";
                           } else if (
                             $(this)
                               .find(".event-line.text-right img")
-                              .attr("src") === urlGolC
+                              .attr("src") === urlOwnGoal
                           ) {
-                            var tipo = "GC";
+                            var type = "OG";
                           } else if (
                             $(this)
                               .find(".event-line.text-right")
@@ -218,53 +229,53 @@ export default class partidasCrawler {
                               .trim()
                               .includes("gol anulado")
                           ) {
-                            var tipo = "GA";
-                          } else var tipo = "";
+                            var type = "GA";
+                          } else var type = "";
                         } else if (
                           $(this)
                             .find(".event-line.text-left")
                             .text()
                             .trim() !== ""
                         ) {
-                          var lado = "fora";
-                          var descricao = $(this)
+                          var side = "fora";
+                          var description = $(this)
                             .find(".event-line.text-left")
                             .text()
                             .trim();
-                          var tempo = $(this)
+                          var time = $(this)
                             .find(".match-card-events-space")
                             .text()
                             .trim();
                           if (
                             $(this)
                               .find(".event-line.text-left img")
-                              .attr("src") === urlCA
+                              .attr("src") === urlYC
                           ) {
-                            var tipo = "CA";
+                            var type = "YC";
                           } else if (
                             $(this)
                               .find(".event-line.text-left img")
-                              .attr("src") === urlCV
+                              .attr("src") === urlRC
                           ) {
-                            var tipo = "CV";
+                            var type = "RC";
                           } else if (
                             $(this)
                               .find(".event-line.text-left img")
-                              .attr("src") === urlCAV
+                              .attr("src") === urlYR
                           ) {
-                            var tipo = "CAV";
+                            var type = "YR";
                           } else if (
                             $(this)
                               .find(".event-line.text-left img")
-                              .attr("src") === urlGol
+                              .attr("src") === urlGoal
                           ) {
-                            var tipo = "GOL";
+                            var type = "GOAL";
                           } else if (
                             $(this)
                               .find(".event-line.text-left img")
-                              .attr("src") === urlGolC
+                              .attr("src") === urlOwnGoal
                           ) {
-                            var tipo = "GC";
+                            var type = "OG";
                           } else if (
                             $(this)
                               .find(".event-line.text-left")
@@ -272,18 +283,18 @@ export default class partidasCrawler {
                               .trim()
                               .includes("gol anulado")
                           ) {
-                            var tipo = "GA";
-                          } else var tipo = "";
+                            var type = "GA";
+                          } else var type = "";
                         }
 
-                        if (lado !== "" && lado) {
-                          eventos.push({
+                        if (side !== "" && side) {
+                          events.push({
                             idx: idx,
                             urls: urls,
-                            lado: lado,
-                            descricao: descricao,
-                            tempo: tempo,
-                            tipo: tipo,
+                            side: side,
+                            description: description,
+                            time: time,
+                            type: type,
                           });
                         }
                       });
@@ -293,30 +304,30 @@ export default class partidasCrawler {
                         "#livescore > div:nth-child(3) > table > tbody > tr"
                       )
                       .each(function () {
-                        var tipo = $(this)
+                        var type = $(this)
                           .find("td.standing-table.text-center.stats-category")
                           .text()
                           .trim();
-                        var casa = $(this)
+                        var home = $(this)
                           .find(
                             "td.standing-table.text-center.stats-home-team small"
                           )
                           .text()
                           .trim();
-                        var fora = $(this)
+                        var away = $(this)
                           .find(
                             "td.standing-table.text-center.stats-away-team small"
                           )
                           .text()
                           .trim();
 
-                        if (tipo !== "" && tipo) {
-                          estatisticas.push({
-                            urls: urls,
+                        if (type !== "" && type) {
+                          statistics.push({
                             idx: idx,
-                            tipo: tipo,
-                            casa: casa,
-                            fora: fora,
+                            urls: urls,
+                            type: type,
+                            home: home,
+                            away: away,
                           });
                         }
                       });
@@ -327,57 +338,57 @@ export default class partidasCrawler {
                       )
                       .each(function () {
                         var num = $(this).find("small").text().trim();
-                        var nome = $(this).text().trim();
-                        var nome = nome.slice(nome.indexOf(".") + 1);
+                        var name = $(this).text().trim();
+                        var name = name.slice(name.indexOf(".") + 1);
 
                         if ($(this).find("i").attr("class") === urlSubIn) {
-                          var substituicao = "in";
+                          var substitution = "in";
                         } else if (
                           $(this).find("i").attr("class") === urlSubOut
                         ) {
-                          var substituicao = "out";
-                        } else var substituicao = "";
+                          var substitution = "out";
+                        } else var substitution = "";
 
-                        if ($(this).find("img").attr("src") === urlCA) {
-                          var cartao = "CA";
-                        } else if ($(this).find("img").attr("src") === urlCV) {
-                          var cartao = "CV";
-                        } else if ($(this).find("img").attr("src") === urlCAV) {
-                          var cartao = "CAV";
-                        } else var cartao = "";
+                        if ($(this).find("img").attr("src") === urlYC) {
+                          var card = "YC";
+                        } else if ($(this).find("img").attr("src") === urlRC) {
+                          var card = "RC";
+                        } else if ($(this).find("img").attr("src") === urlYR) {
+                          var card = "YR";
+                        } else var card = "";
 
-                        var gols = [];
+                        var goals = [];
 
-                        if ($(this).find("img").attr("src") === urlGol) {
+                        if ($(this).find("img").attr("src") === urlGoal) {
                           $(this)
                             .find("img")
                             .each(function (i, e) {
-                              if ($(this).attr("src") === urlGol) {
-                                gols.push("GOL");
+                              if ($(this).attr("src") === urlGoal) {
+                                goals.push("GOAL");
                               }
                             });
                         }
 
-                        if ($(this).find("img").attr("src") === urlGolC) {
+                        if ($(this).find("img").attr("src") === urlOwnGoal) {
                           $(this)
                             .find("img")
                             .each(function (i, e) {
-                              if ($(this).attr("src") === urlGolC) {
-                                gols.push("GC");
+                              if ($(this).attr("src") === urlOwnGoal) {
+                                goals.push("OG");
                               }
                             });
                         }
 
-                        if (nome !== "" && nome) {
-                          escalacaoCasaT.push({
-                            urls: urls,
+                        if (name !== "" && name) {
+                          lineupHomeS.push({
                             idx: idx,
+                            urls: urls,
                             num: num,
-                            nome: nome,
-                            acoes: {
-                              substituicao: substituicao,
-                              cartao: cartao,
-                              gols: gols,
+                            name: name,
+                            actions: {
+                              substitution: substitution,
+                              card: card,
+                              goals: goals,
                             },
                           });
                         }
@@ -389,57 +400,57 @@ export default class partidasCrawler {
                       )
                       .each(function () {
                         var num = $(this).find("small").text().trim();
-                        var nome = $(this).text().trim();
-                        var nome = nome.slice(nome.indexOf(".") + 1);
+                        var name = $(this).text().trim();
+                        var name = name.slice(name.indexOf(".") + 1);
 
                         if ($(this).find("i").attr("class") === urlSubIn) {
-                          var substituicao = "in";
+                          var substitution = "in";
                         } else if (
                           $(this).find("i").attr("class") === urlSubOut
                         ) {
-                          var substituicao = "out";
-                        } else var substituicao = "";
+                          var substitution = "out";
+                        } else var substitution = "";
 
-                        if ($(this).find("img").attr("src") === urlCA) {
-                          var cartao = "CA";
-                        } else if ($(this).find("img").attr("src") === urlCV) {
-                          var cartao = "CV";
-                        } else if ($(this).find("img").attr("src") === urlCAV) {
-                          var cartao = "CAV";
-                        } else var cartao = "";
+                        if ($(this).find("img").attr("src") === urlYC) {
+                          var card = "YC";
+                        } else if ($(this).find("img").attr("src") === urlRC) {
+                          var card = "RC";
+                        } else if ($(this).find("img").attr("src") === urlYR) {
+                          var card = "YR";
+                        } else var card = "";
 
-                        var gols = [];
+                        var goals = [];
 
-                        if ($(this).find("img").attr("src") === urlGol) {
+                        if ($(this).find("img").attr("src") === urlGoal) {
                           $(this)
                             .find("img")
                             .each(function (i, e) {
-                              if ($(this).attr("src") === urlGol) {
-                                gols.push("GOL");
+                              if ($(this).attr("src") === urlGoal) {
+                                goals.push("GOAL");
                               }
                             });
                         }
 
-                        if ($(this).find("img").attr("src") === urlGolC) {
+                        if ($(this).find("img").attr("src") === urlOwnGoal) {
                           $(this)
                             .find("img")
                             .each(function (i, e) {
-                              if ($(this).attr("src") === urlGolC) {
-                                gols.push("GC");
+                              if ($(this).attr("src") === urlOwnGoal) {
+                                goals.push("OG");
                               }
                             });
                         }
 
-                        if (nome !== "" && nome) {
-                          escalacaoForaT.push({
-                            urls: urls,
+                        if (name !== "" && name) {
+                          lineupAwayS.push({
                             idx: idx,
+                            urls: urls,
                             num: num,
-                            nome: nome,
-                            acoes: {
-                              substituicao: substituicao,
-                              cartao: cartao,
-                              gols: gols,
+                            name: name,
+                            actions: {
+                              substitution: substitution,
+                              card: card,
+                              goals: goals,
                             },
                           });
                         }
@@ -451,57 +462,57 @@ export default class partidasCrawler {
                       )
                       .each(function () {
                         var num = $(this).find("small").text().trim();
-                        var nome = $(this).text().trim();
-                        var nome = nome.slice(nome.indexOf(".") + 1);
+                        var name = $(this).text().trim();
+                        var name = name.slice(name.indexOf(".") + 1);
 
                         if ($(this).find("i").attr("class") === urlSubIn) {
-                          var substituicao = "in";
+                          var substitution = "in";
                         } else if (
                           $(this).find("i").attr("class") === urlSubOut
                         ) {
-                          var substituicao = "out";
-                        } else var substituicao = "";
+                          var substitution = "out";
+                        } else var substitution = "";
 
-                        if ($(this).find("img").attr("src") === urlCA) {
-                          var cartao = "CA";
-                        } else if ($(this).find("img").attr("src") === urlCV) {
-                          var cartao = "CV";
-                        } else if ($(this).find("img").attr("src") === urlCAV) {
-                          var cartao = "CAV";
-                        } else var cartao = "";
+                        if ($(this).find("img").attr("src") === urlYC) {
+                          var card = "YC";
+                        } else if ($(this).find("img").attr("src") === urlRC) {
+                          var card = "RC";
+                        } else if ($(this).find("img").attr("src") === urlYR) {
+                          var card = "YR";
+                        } else var card = "";
 
-                        var gols = [];
+                        var goals = [];
 
-                        if ($(this).find("img").attr("src") === urlGol) {
+                        if ($(this).find("img").attr("src") === urlGoal) {
                           $(this)
                             .find("img")
                             .each(function (i, e) {
-                              if ($(this).attr("src") === urlGol) {
-                                gols.push("GOL");
+                              if ($(this).attr("src") === urlGoal) {
+                                goals.push("GOAL");
                               }
                             });
                         }
 
-                        if ($(this).find("img").attr("src") === urlGolC) {
+                        if ($(this).find("img").attr("src") === urlOwnGoal) {
                           $(this)
                             .find("img")
                             .each(function (i, e) {
-                              if ($(this).attr("src") === urlGolC) {
-                                gols.push("GC");
+                              if ($(this).attr("src") === urlOwnGoal) {
+                                goals.push("OG");
                               }
                             });
                         }
 
-                        if (nome !== "" && nome) {
-                          escalacaoCasaR.push({
-                            urls: urls,
+                        if (name !== "" && name) {
+                          lineupHomeB.push({
                             idx: idx,
+                            urls: urls,
                             num: num,
-                            nome: nome,
-                            acoes: {
-                              substituicao: substituicao,
-                              cartao: cartao,
-                              gols: gols,
+                            name: name,
+                            actions: {
+                              substitution: substitution,
+                              card: card,
+                              goals: goals,
                             },
                           });
                         }
@@ -513,177 +524,177 @@ export default class partidasCrawler {
                       )
                       .each(function () {
                         var num = $(this).find("small").text().trim();
-                        var nome = $(this).text().trim();
-                        var nome = nome.slice(nome.indexOf(".") + 1);
+                        var name = $(this).text().trim();
+                        var name = name.slice(name.indexOf(".") + 1);
 
                         if ($(this).find("i").attr("class") === urlSubIn) {
-                          var substituicao = "in";
+                          var substitution = "in";
                         } else if (
                           $(this).find("i").attr("class") === urlSubOut
                         ) {
-                          var substituicao = "out";
-                        } else var substituicao = "";
+                          var substitution = "out";
+                        } else var substitution = "";
 
-                        if ($(this).find("img").attr("src") === urlCA) {
-                          var cartao = "CA";
-                        } else if ($(this).find("img").attr("src") === urlCV) {
-                          var cartao = "CV";
-                        } else if ($(this).find("img").attr("src") === urlCAV) {
-                          var cartao = "CAV";
-                        } else var cartao = "";
+                        if ($(this).find("img").attr("src") === urlYC) {
+                          var card = "YC";
+                        } else if ($(this).find("img").attr("src") === urlRC) {
+                          var card = "RC";
+                        } else if ($(this).find("img").attr("src") === urlYR) {
+                          var card = "YR";
+                        } else var card = "";
 
-                        var gols = [];
+                        var goals = [];
 
-                        if ($(this).find("img").attr("src") === urlGol) {
+                        if ($(this).find("img").attr("src") === urlGoal) {
                           $(this)
                             .find("img")
                             .each(function (i, e) {
-                              if ($(this).attr("src") === urlGol) {
-                                gols.push("GOL");
+                              if ($(this).attr("src") === urlGoal) {
+                                goals.push("GOAL");
                               }
                             });
                         }
 
-                        if ($(this).find("img").attr("src") === urlGolC) {
+                        if ($(this).find("img").attr("src") === urlOwnGoal) {
                           $(this)
                             .find("img")
                             .each(function (i, e) {
-                              if ($(this).attr("src") === urlGolC) {
-                                gols.push("GC");
+                              if ($(this).attr("src") === urlOwnGoal) {
+                                goals.push("OG");
                               }
                             });
                         }
 
-                        if (nome !== "" && nome) {
-                          escalacaoForaR.push({
-                            urls: urls,
+                        if (name !== "" && name) {
+                          lineupAwayB.push({
                             idx: idx,
+                            urls: urls,
                             num: num,
-                            nome: nome,
-                            acoes: {
-                              substituicao: substituicao,
-                              cartao: cartao,
-                              gols: gols,
+                            name: name,
+                            actions: {
+                              substitution: substitution,
+                              card: card,
+                              goals: goals,
                             },
                           });
                         }
                       });
 
-                    var eventosAux = [];
-                    eventos.forEach((element) => {
+                    var eventsAux = [];
+                    events.forEach((element) => {
                       if (element.idx === idx && element.urls === urls)
-                        eventosAux.push({
-                          lado: element.lado,
-                          descricao: element.descricao,
-                          tempo: element.tempo,
-                          tipo: element.tipo,
+                        eventsAux.push({
+                          side: element.side,
+                          description: element.description,
+                          time: element.time,
+                          type: element.type,
                         });
                     });
 
-                    var estatisticasAux = [];
-                    estatisticas.forEach((element) => {
+                    var statisticsAux = [];
+                    statistics.forEach((element) => {
                       if (element.idx === idx && element.urls === urls)
-                        estatisticasAux.push({
-                          tipo: element.tipo,
-                          casa: element.casa,
-                          fora: element.fora,
+                        statisticsAux.push({
+                          type: element.type,
+                          home: element.home,
+                          away: element.away,
                         });
                     });
 
-                    var escalacoesCasaTAux = [];
-                    escalacaoCasaT.forEach((element) => {
+                    var lineupHomeSAux = [];
+                    lineupHomeS.forEach((element) => {
                       if (element.idx === idx && element.urls === urls)
-                        escalacoesCasaTAux.push({
+                        lineupHomeSAux.push({
                           num: element.num,
-                          nome: element.nome,
-                          acoes: {
-                            substituicao: element.acoes.substituicao,
-                            cartao: element.acoes.cartao,
-                            gols: element.acoes.gols,
+                          name: element.name,
+                          actions: {
+                            substitution: element.actions.substitution,
+                            card: element.actions.card,
+                            goals: element.actions.goals,
                           },
                         });
                     });
 
-                    var escalacoesForaTAux = [];
-                    escalacaoForaT.forEach((element) => {
+                    var lineupAwaySAux = [];
+                    lineupAwayS.forEach((element) => {
                       if (element.idx === idx && element.urls === urls)
-                        escalacoesForaTAux.push({
+                        lineupAwaySAux.push({
                           num: element.num,
-                          nome: element.nome,
-                          acoes: {
-                            substituicao: element.acoes.substituicao,
-                            cartao: element.acoes.cartao,
-                            gols: element.acoes.gols,
+                          name: element.name,
+                          actions: {
+                            substitution: element.actions.substitution,
+                            card: element.actions.card,
+                            goals: element.actions.goals,
                           },
                         });
                     });
 
-                    var escalacoesCasaRAux = [];
-                    escalacaoCasaR.forEach((element) => {
+                    var lineupHomeBAux = [];
+                    lineupHomeB.forEach((element) => {
                       if (element.idx === idx && element.urls === urls)
-                        escalacoesCasaRAux.push({
+                        lineupHomeBAux.push({
                           num: element.num,
-                          nome: element.nome,
-                          acoes: {
-                            substituicao: element.acoes.substituicao,
-                            cartao: element.acoes.cartao,
-                            gols: element.acoes.gols,
+                          name: element.name,
+                          actions: {
+                            substitution: element.actions.substitution,
+                            card: element.actions.card,
+                            goals: element.actions.goals,
                           },
                         });
                     });
 
-                    var escalacoesForaRAux = [];
-                    escalacaoForaR.forEach((element) => {
+                    var lineupAwayBAux = [];
+                    lineupAwayB.forEach((element) => {
                       if (element.idx === idx && element.urls === urls)
-                        escalacoesForaRAux.push({
+                        lineupAwayBAux.push({
                           num: element.num,
-                          nome: element.nome,
-                          acoes: {
-                            substituicao: element.acoes.substituicao,
-                            cartao: element.acoes.cartao,
-                            gols: element.acoes.gols,
+                          name: element.name,
+                          actions: {
+                            substitution: element.actions.substitution,
+                            card: element.actions.card,
+                            goals: element.actions.goals,
                           },
                         });
                     });
 
-                    var idTitulo =
-                      equipeCasa +
+                    var idTitle =
+                      teamHome +
                       " x " +
-                      equipeFora +
+                      teamAway +
                       " - " +
-                      dia +
+                      day +
                       " " +
-                      horario;
-                    var idPartida = "";
+                      schedule;
+                    var idMatch = "";
 
-                    partidas.push({
-                      idPartida: idPartida,
-                      idTitulo: idTitulo,
-                      campeonato: campeonato,
-                      rodada: rodada,
+                    matchs.push({
+                      idMatch: idMatch,
+                      idTitle: idTitle,
+                      championship: championship,
+                      turn: turn,
                       status: status,
-                      tempo: tempo,
-                      dia: dia,
-                      horario: horario,
-                      arbitro: arbitro,
-                      estadio: estadio,
-                      placarCasa: placarCasa,
-                      placarFora: placarFora,
-                      equipes: {
-                        casaID: "",
-                        casaNome: equipeCasa,
-                        casaImg: equipeCasaImg,
-                        foraID: "",
-                        foraNome: equipeFora,
-                        foraImg: equipeForaImg,
+                      time: time,
+                      day: day,
+                      schedule: schedule,
+                      referee: referee,
+                      stadium: stadium,
+                      scoreHome: scoreHome,
+                      scoreAway: scoreAway,
+                      teams: {
+                        homeId: "",
+                        homeName: teamHome,
+                        homeImg: teamHomeImg,
+                        awayId: "",
+                        awayName: teamAway,
+                        awayImg: teamAwayImg,
                       },
-                      eventos: eventosAux,
-                      estatisticas: estatisticasAux,
-                      escalacoes: {
-                        casaTitular: escalacoesCasaTAux,
-                        foraTitular: escalacoesForaTAux,
-                        casaReserva: escalacoesCasaRAux,
-                        foraReserva: escalacoesForaRAux,
+                      events: eventsAux,
+                      statistics: statisticsAux,
+                      lineups: {
+                        homeStarting: lineupHomeSAux,
+                        awayStarting: lineupAwaySAux,
+                        homeBench: lineupHomeBAux,
+                        awayBench: lineupAwayBAux,
                       },
                     });
                   });
@@ -694,7 +705,7 @@ export default class partidasCrawler {
           console.log(count);
         });
       });
-      return partidas;
+      return matchs;
     }
   }
 }

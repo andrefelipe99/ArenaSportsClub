@@ -4,9 +4,10 @@ import teamsCtrl from "./teams.controller.js";
 
 const router = express.Router();
 
-router.route("/").get(teamsCtrl.apiGetTeams);
+router.route("/teams").get(teamsCtrl.apiGetTeams);
 router.route("/id/:id").get(matchsCtrl.apiGetMatchById);
-router.route("/data/:data").get(matchsCtrl.apiGetMatchsByDate);
-router.route("/partidas").get(matchsCtrl.apiPostMatch);
+router.route("/date/:date").get(matchsCtrl.apiGetMatchsByDate);
+
+router.route("/matchs").get(matchsCtrl.apiPostMatch);
 
 export default router;

@@ -1,4 +1,4 @@
-import partidasCrawler from "../crawler/partidas.js";
+import partidasCrawler from "../crawler/matchs.js";
 import matchsDAO from "../dao/matchsDAO.js";
 
 export default class matchsController {
@@ -19,7 +19,7 @@ export default class matchsController {
 
   static async apiGetMatchsByDate(req, res, next) {
     try {
-      let date = req.params.data || {};
+      let date = req.params.date || {};
       date = date.toString().replace(/-/g, "/");
       let match = await matchsDAO.getMatchsByDate(date);
       if (!match) {
@@ -48,27 +48,23 @@ export default class matchsController {
   }
 
   static async apiPostMatch(req, res, next) {
-    let count = 0;
     try {
-      const partidas = await partidasCrawler.getPartidas();
-      let partidaTitle;
+      const matchs = await matchsCrawler.getMatchs();
+      let matchTitle;
       let maxId;
 
-      for (let index = 0; index < partidas.length; index++) {
-        partidaTitle = await matchsDAO.getMatchByTitle(
-          partidas[index].idTitulo
-        );
+      for (let index = 0; index < matchs.length; index++) {
+        matchTitle = await matchsDAO.getMatchByTitle(matchs[index].idTitle);
 
         if (partidaTitle === 0) {
           maxId = await matchsDAO.getMatchMaxID();
           maxId = parseInt(maxId) + 1;
           const MatchResponse = await matchsDAO.addMatch(
-            partidas[index],
+            matchs[index],
             maxId.toString()
           );
         } else {
-          count++;
-          const MatchResponse = await matchsDAO.updateMatch(partidas[index]);
+          const MatchResponse = await matchsDAO.updateMatch(matchs[index]);
 
           var { error } = MatchResponse;
           if (error) {
@@ -80,6 +76,5 @@ export default class matchsController {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-    console.log(count);
   }
 }

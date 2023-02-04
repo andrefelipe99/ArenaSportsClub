@@ -1,8 +1,8 @@
 import app from "./server.js";
 import mongodb from "mongodb";
 import dotenv from "dotenv";
-import teamsDAO from "./dao/teamsDAO.js";
-import matchsDAO from "./dao/matchsDAO.js";
+import teamsDAO from "./src/dao/teamsDAO.js";
+import matchsDAO from "./src/dao/matchsDAO.js";
 
 dotenv.config();
 const MongoClient = mongodb.MongoClient;

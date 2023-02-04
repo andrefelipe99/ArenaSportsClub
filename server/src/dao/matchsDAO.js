@@ -58,7 +58,7 @@ export default class matchsDAO {
     try {
       const pipeline = [
         {
-          $match: { idPartida: id },
+          $match: { idMatch: id },
         },
       ];
       return await matchs.aggregate(pipeline).toArray();
@@ -72,11 +72,11 @@ export default class matchsDAO {
     try {
       const pipeline = [
         {
-          $match: { idTitulo: title },
+          $match: { idTitle: title },
         },
       ];
-      let encontrado = await matchs.aggregate(pipeline).toArray();
-      return await encontrado.length;
+      let founded = await matchs.aggregate(pipeline).toArray();
+      return await founded.length;
     } catch (e) {
       console.error(`Something went wrong in getMatchByID: ${e}`);
       throw e;
@@ -92,11 +92,11 @@ export default class matchsDAO {
     try {
       const pipeline = [
         {
-          $match: { data: date },
+          $match: { date: date },
         },
         {
           $sort: {
-            horario: 1,
+            schedule: 1,
           },
         },
       ];
@@ -111,10 +111,10 @@ export default class matchsDAO {
   static async getMatchMaxID() {
     let maxId;
     try {
-      maxId = await matchs.find().sort({ idPartida: -1 }).limit(1);
+      maxId = await matchs.find().sort({ idMatch: -1 }).limit(1);
       const teamsList = await maxId.toArray();
-      const idMaxPartida = teamsList[0].idPartida;
-      return await idMaxPartida;
+      const idMaxMatch = teamsList[0].idMatch;
+      return await idMaxMatch;
     } catch (e) {
       console.error(`Something went wrong in getMatchMaxID: ${e}`);
       throw e;
@@ -132,25 +132,25 @@ export default class matchsDAO {
   //     }
   //   }
 
-  static async addMatch(partida, id) {
+  static async addMatch(match, id) {
     try {
       const matchDoc = {
-        idPartida: id,
-        idTitulo: partida.idTitulo,
-        campeonato: partida.campeonato,
-        rodada: partida.rodada,
-        status: partida.status,
-        tempo: partida.tempo,
-        dia: partida.dia,
-        horario: partida.horario,
-        arbitro: partida.arbitro,
-        estadio: partida.estadio,
-        placarCasa: partida.placarCasa,
-        placarFora: partida.placarFora,
-        equipes: partida.equipes,
-        eventos: partida.eventos,
-        estatisticas: partida.estatisticas,
-        escalacoes: partida.escalacoes,
+        idMatch: id,
+        idTitle: match.idTitle,
+        championship: match.championship,
+        turn: match.turn,
+        status: match.status,
+        time: match.time,
+        day: match.day,
+        schedule: match.schedule,
+        referee: match.referee,
+        stadium: match.stadium,
+        scoreHome: match.scoreHome,
+        scoreAway: match.scoreAway,
+        teams: match.teams,
+        events: match.events,
+        statistics: match.statistics,
+        lineups: match.lineups,
       };
 
       return await matchs.insertOne(matchDoc);
@@ -160,20 +160,20 @@ export default class matchsDAO {
     }
   }
 
-  static async updateMatch(partida) {
+  static async updateMatch(match) {
     try {
       const updateResponse = await matchs.updateOne(
-        { idTitulo: partida.idTitulo },
+        { idTitle: match.idTitle },
         {
           $set: {
-            status: partida.status,
-            tempo: partida.tempo,
-            placarCasa: partida.placarCasa,
-            placarFora: partida.placarFora,
-            equipes: partida.equipes,
-            eventos: partida.eventos,
-            estatisticas: partida.estatisticas,
-            escalacoes: partida.escalacoes,
+            status: match.status,
+            time: match.time,
+            scoreHome: match.scoreHome,
+            scoreAway: match.scoreAway,
+            teams: match.teams,
+            events: match.events,
+            statistics: match.statistics,
+            lineups: match.lineups,
           },
         }
       );

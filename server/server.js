@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import football from "./api/football.route.js";
-import partidasCrawler from "./crawler/partidas.js";
+import football from "./src/api/football.route.js";
+import matchsCrawler from "./src/crawler/matchs.js";
 
 const app = express();
 
@@ -9,6 +9,11 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/v1/football", football);
 //app.use("*", (req, res) => res.status(404).json({ error: "not found" }));
+
+const teste = await matchsCrawler.getMatchs();
+app.get("/pp", (req, res) => {
+  res.json({ teste });
+});
 
 //daqui pra baixo API testes
 const partidas = [
@@ -86,10 +91,6 @@ const partidas = [
   },
 ];
 
-app.get("/api", (req, res) => {
-  res.json({ partidas });
-});
-
 const campeonatos = [
   {
     id: "2324",
@@ -114,10 +115,6 @@ const campeonatos = [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/275px-Flag_of_Brazil.svg.png",
   },
 ];
-
-app.get("/campeonatos", (req, res) => {
-  res.json({ campeonatos });
-});
 
 const partida = [
   {
@@ -226,13 +223,16 @@ const partida = [
   },
 ];
 
-app.get("/partida", (req, res) => {
-  res.json({ partida });
+app.get("/campeonatos", (req, res) => {
+  res.json({ campeonatos });
 });
 
-const teste = await partidasCrawler.getPartidas();
-app.get("/pp", (req, res) => {
-  res.json({ teste });
+app.get("/api", (req, res) => {
+  res.json({ partidas });
+});
+
+app.get("/partida", (req, res) => {
+  res.json({ partida });
 });
 
 export default app;

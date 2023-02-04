@@ -78,7 +78,10 @@ export function Match() {
                   </Col>
 
                   <p className="p_matchTime"> {listMatch.partida[0].horario}</p>
-                  <p className="p_matchStadium"> {listMatch.partida[0].estadio}</p>
+                  <p className="p_matchStadium">
+                    {" "}
+                    {listMatch.partida[0].estadio}
+                  </p>
 
                   <div className="button-group-match">
                     <Button
@@ -118,7 +121,10 @@ export function Match() {
                 </div>
               </Row>
               <div>
-                <ButtonSumMatch actived={buttonChange.sumario} />
+                <ButtonSumMatch
+                  actived={buttonChange.sumario}
+                  listMatch={listMatch}
+                />
                 <ButtonEstMatch actived={buttonChange.estatistica} />
                 <ButtonForMatch
                   actived={buttonChange.formacao}

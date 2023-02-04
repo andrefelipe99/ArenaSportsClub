@@ -1,3 +1,74 @@
-#container-buttonSum{
-    background-color: blue;
+#container-buttonSum {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+#sum-section_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 1.1ch;
+  margin-bottom: 1.1ch;
+  padding: 7px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #00897b;
+  border-radius: 8px;
+  color: antiquewhite;
+}
+
+.sum-sideBox {
+  display: flex;
+  padding: 10px;
+  margin-top: 1.1ch;
+  margin-bottom: 1.1ch;
+  background-color: #e8faf0;
+  border-radius: 8px;
+  font-family: "Lucida Console", "Courier New", monospace;
+  flex-direction: column;
+}
+
+ .sum-icon-away {
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+  font-weight: 700;
+  flex-wrap: wrap;
+  height: 48px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.time-box {
+  min-width: 20px;
+}
+
+.sum-icon {
+  align-items: center;
+  border: 1px solid var(--color-support-1);
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  height: 28px;
+  justify-content: center;
+  line-height: 1;
+  margin-left: 8px;
+  margin-right: 8px;
+  min-width: 14px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.sum-icon-home {
+  align-items: center;
+  display: flex;
+  font-weight: 700;
+  flex-wrap: wrap;
+  height: 48px;
+  padding-left: 8px;
+  padding-right: 8px;
 }

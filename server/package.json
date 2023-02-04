@@ -13,10 +13,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongodb": "^4.13.0"
+    "mongodb": "^4.13.0",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.47.0",

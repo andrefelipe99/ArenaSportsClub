@@ -4,10 +4,12 @@ import { Row, Col } from "react-bootstrap";
 import ButtonSumMatch from "../components/ButtonSum";
 import ButtonEstMatch from "../components/ButtonEst";
 import ButtonForMatch from "../components/ButtonFor";
-import MatchDataService from "../contexts/match.js";
+import MatchDataService from "../services/match.js";
+import { useParams } from "react-router-dom";
 import "../styles/pages/Match.css";
 
 export function Match() {
+  let { id } = useParams();
   const [listMatch, setListMatch] = useState([{}]);
   const [buttonChange, setButtonChange] = useState({
     sumario: true,
@@ -26,10 +28,10 @@ export function Match() {
   };
 
   useEffect(() => {
-    MatchDataService.get(1013)
+    MatchDataService.get(id)
       //fetch("/match")
       .then((response) => setListMatch(response.data));
-  }, []);
+  }, [id]);
 
   return (
     <Container>

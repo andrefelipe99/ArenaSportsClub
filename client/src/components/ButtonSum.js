@@ -198,21 +198,23 @@ function ButtonSumMatch({ actived, listMatch }) {
                 {typeof listMatch[0]?.events === "undefined" ? (
                   <p>Loading...</p>
                 ) : (
-                  listMatch[0].events.map((event, i) =>
-                    parseInt(event.time.replace("'", "")) <= 45 ? (
-                      event.side === "casa" ? (
-                        <div className="sum-event" key={i}>
-                          {Events(event, "sum-icon-home")}
-                        </div>
+                  listMatch[0].events.map((event, i) => (
+                    <div key={i}>
+                      {parseInt(event.time.replace("'", "")) <= 45 ? (
+                        event.side === "home" ? (
+                          <div className="sum-event">
+                            {Events(event, "sum-icon-home")}
+                          </div>
+                        ) : (
+                          <div className="sum-event">
+                            {Events(event, "sum-icon-away")}
+                          </div>
+                        )
                       ) : (
-                        <div className="sum-event" key={i}>
-                          {Events(event, "sum-icon-away")}
-                        </div>
-                      )
-                    ) : (
-                      <></>
-                    )
-                  )
+                        <></>
+                      )}
+                    </div>
+                  ))
                 )}
               </div>
             </div>
@@ -226,21 +228,23 @@ function ButtonSumMatch({ actived, listMatch }) {
                 {typeof listMatch[0]?.events === "undefined" ? (
                   <p>Loading...</p>
                 ) : (
-                  listMatch[0].events.map((event, i) =>
-                    parseInt(event.time.replace("'", "")) > 45 ? (
-                      event.side === "casa" ? (
-                        <div className="sum-event" key={i}>
-                          {Events(event, "sum-icon-home")}
-                        </div>
+                  listMatch[0].events.map((event, i) => (
+                    <div key={i}>
+                      {parseInt(event.time.replace("'", "")) > 45 ? (
+                        event.side === "home" ? (
+                          <div className="sum-event">
+                            {Events(event, "sum-icon-home")}
+                          </div>
+                        ) : (
+                          <div className="sum-event">
+                            {Events(event, "sum-icon-away")}
+                          </div>
+                        )
                       ) : (
-                        <div className="sum-event" key={i}>
-                          {Events(event, "sum-icon-away")}
-                        </div>
-                      )
-                    ) : (
-                      <></>
-                    )
-                  )
+                        <></>
+                      )}
+                    </div>
+                  ))
                 )}
               </div>
             </div>

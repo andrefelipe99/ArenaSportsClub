@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import logo from "../assets/images/logo1.jpg";
 import "../styles/components/Header.css";
 
 function HeaderApp() {
@@ -11,13 +12,13 @@ function HeaderApp() {
     <Navbar className="bg-teal" fixed="top" sticky="top" expand="lg">
       <Container>
         <Navbar.Brand href="/">
-          <img src="logo1.jpg" alt="Logo" height="60" width="60"></img> Arena
-          Sport Club
+          <img src={logo} alt="Logo" height="60" width="60"></img> Arena Sport
+          Club
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="m-auto">
-            <Nav.Link href="/equipe">
+            <Nav.Link href="/partida/1370">
               <img
                 src="https://cdn-icons-png.flaticon.com/512/183/183129.png"
                 height="22"
@@ -29,7 +30,7 @@ function HeaderApp() {
                 RESULTADOS
               </span>
             </Nav.Link>
-            <Nav.Link href="/partida">
+            <Nav.Link href="/">
               <img
                 src="https://cdn-icons-png.flaticon.com/512/81/81460.png"
                 height="22"

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Container, Button } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Row, Col } from "react-bootstrap";
 import ButtonSumMatch from "../components/ButtonSum";
 import ButtonEstMatch from "../components/ButtonEst";
 import ButtonForMatch from "../components/ButtonFor";
+import MatchDataService from "../contexts/match.js";
 import "../styles/pages/Match.css";
 
 export function Match() {
@@ -16,7 +16,6 @@ export function Match() {
   });
 
   const changeSelected = (buttonName) => {
-    console.log(buttonChange);
     if (buttonName === "buttonSum") {
       setButtonChange({ sumario: true, estatistica: false, formacao: false });
     } else if (buttonName === "buttonFor") {
@@ -24,67 +23,76 @@ export function Match() {
     } else {
       setButtonChange({ sumario: false, estatistica: true, formacao: false });
     }
-    console.log(buttonChange);
   };
 
   useEffect(() => {
-    fetch("/match")
-      .then((response) => response.json())
-      .then((data) => {
-        setListMatch(data);
-      });
+    MatchDataService.get(1013)
+      //fetch("/match")
+      .then((response) => setListMatch(response.data));
   }, []);
 
   return (
     <Container>
       <div>
         <div>
-          {typeof listMatch.match === "undefined" ? (
-            <p>Loading...</p>
+          {typeof listMatch[0]?.teams?.homeImg === "undefined" ? (
+            <div id="match-section_title">
+              <span> PARTIDA NÃO ENCONTRADA </span>
+            </div>
           ) : (
             <>
               <div className="nameCamp">
-                <h1>{listMatch.match[0].championship}</h1>
+                <h1>{listMatch[0].championship}</h1>
               </div>
               <Row md={12} id="row-content-match">
                 <div className="content-match">
                   <Col md={3} id="col-content-match">
                     <img
-                      src={listMatch.match[0].teams.homeImg}
-                      alt={`${listMatch.match[0].teams.homeName}`}
+                      src={listMatch[0].teams.homeImg}
+                      alt={`${listMatch[0].teams.homeName}`}
                       width="128px"
                     />
-                    <h3 className="teams-name">
-                      {" "}
-                      {listMatch.match[0].teams.homeName}{" "}
-                    </h3>
+                    <span className="teams-name">
+                      {listMatch[0].teams.homeName}
+                    </span>
                   </Col>
                   <Col md={6} id="col-results-match">
-                    <h1>
-                      {listMatch.match[0].scoreHome} X{" "}
-                      {listMatch.match[0].scoreAway}{" "}
-                    </h1>
+                    <div>
+                      <span className="p_matchTime">{listMatch[0].turn}</span>
+                    </div>
+                    <div>
+                      <span className="number-results-match">
+                        {listMatch[0].scoreHome}
+                      </span>
+                      <span className="number-results-match">-</span>
+                      <span className="number-results-match">
+                        {listMatch[0].scoreAway}
+                      </span>
+                    </div>
+                    <div>
+                      <span className=".p_matchTime">{listMatch[0].time}</span>
+                    </div>
                   </Col>
                   <Col md={3} id="col-content-match">
                     <img
-                      src={listMatch.match[0].teams.awayImg}
-                      alt={`${listMatch.match[0].teams.awayName}`}
+                      src={listMatch[0].teams.awayImg}
+                      alt={`${listMatch[0].teams.awayName}`}
                       width="128px"
                     />
-                    <h3 className="teams-name">
+                    <span className="teams-name">
                       {" "}
-                      {listMatch.match[0].teams.awayName}
-                    </h3>
+                      {listMatch[0].teams.awayName}
+                    </span>
                   </Col>
 
                   <p className="p_matchTime">
-                    {" "}
-                    {listMatch.match[0].day} - {listMatch.match[0].schedule}
+                    {listMatch[0].day} - {listMatch[0].schedule}
                   </p>
-                  <p className="p_matchStadium">
-                    {" "}
-                    {listMatch.match[0].stadium}
-                  </p>
+                  {listMatch[0].stadium !== "TBC (TBC)" ? (
+                    <p className="p_matchStadium"> {listMatch[0].stadium}</p>
+                  ) : (
+                    <p className="p_matchStadium"></p>
+                  )}
 
                   <div className="button-group-match">
                     <Button
@@ -123,12 +131,16 @@ export function Match() {
                   </div>
                 </div>
               </Row>
+
               <div>
                 <ButtonSumMatch
                   actived={buttonChange.sumario}
                   listMatch={listMatch}
                 />
-                <ButtonEstMatch actived={buttonChange.estatistica} />
+                <ButtonEstMatch
+                  actived={buttonChange.estatistica}
+                  listMatch={listMatch}
+                />
                 <ButtonForMatch
                   actived={buttonChange.formacao}
                   listMatch={listMatch}

@@ -183,7 +183,7 @@ export default class matchsCrawler {
                             .text()
                             .trim() !== ""
                         ) {
-                          var side = "casa";
+                          var side = "home";
                           var description = $(this)
                             .find(".event-line.text-right")
                             .text()
@@ -237,7 +237,7 @@ export default class matchsCrawler {
                             .text()
                             .trim() !== ""
                         ) {
-                          var side = "fora";
+                          var side = "away";
                           var description = $(this)
                             .find(".event-line.text-left")
                             .text()

@@ -16,6 +16,17 @@
   font-size: large;
 }
 
-.Footer-section {
-  padding-top: 10px;
+.footer-div {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-icon {
+  margin-right: 5px;
+}
+
+#footer-link {
+  text-decoration: none;
 }

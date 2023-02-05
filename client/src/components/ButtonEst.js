@@ -1,13 +1,17 @@
 import Container from "react-bootstrap/Container";
 import "../styles/components/ButtonEst.css";
 
-function ButtonEstMatch({ actived }) {
+function ButtonEstMatch({ actived, listMatch }) {
   return (
     actived && (
       <Container id="container-buttonEst">
-        <div>
-          <h1> Butão Estatísticas</h1>
-        </div>
+        {listMatch[0]?.statistics?.length > 0 ? (
+          <></>
+        ) : (
+          <div id="est-section_title">
+            <span> ESTATÍSTICAS NÃO DISPONIBILIZADAS </span>
+          </div>
+        )}
       </Container>
     )
   );

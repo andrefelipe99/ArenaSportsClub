@@ -1,38 +1,34 @@
-import { Container, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { ButtonTest } from "../components/ButtonTest";
 import React, { useState } from "react";
+import { Container, Button } from "react-bootstrap";
+//import { Link } from "react-router-dom";
+
 import "../styles/pages/Equipe.css";
 
 export function Equipe() {
-  const [butao, setButao] = useState({ disabou: false, valor: 2 });
+  const [butao, setButao] = useState({ disabou: false });
+  const [butao2, setButao2] = useState({ disabou: true });
 
   const handleSubmit = () => {
-    if (!butao.disabou)
-      setButao((butao) => ({
-        ...butao,
-        disabou: true,
-      }));
+    if (!butao.disabou) setButao({ disabou: true });
+    if (butao2.disabou) setButao2({ disabou: false });
   };
 
   const handleTirar = () => {
-    if (butao.disabou)
-      setButao((butao) => ({
-        ...butao,
-        disabou: false,
-      }));
+    if (butao.disabou) setButao({ disabou: false });
+    if (!butao2.disabou) setButao2({ disabou: true });
   };
 
   return (
     <Container>
       <div>
+        <p>Tela equipe</p>
         <Button onClick={handleSubmit} disabled={butao.disabou}>
-          Tire
+          Teste desativar
         </Button>
-        <Button onClick={handleTirar}>Destire</Button>
-        <Link to="/">
-          <ButtonTest />
-        </Link>
+        <p></p>
+        <Button onClick={handleTirar} disabled={butao2.disabou}>
+          Teste ativar
+        </Button>
       </div>
     </Container>
   );

@@ -6,7 +6,7 @@
   margin-bottom: 5px;
 }
 
-.partida {
+#partida {
   font-size: large;
   display: flex;
   flex-wrap: wrap;
@@ -15,18 +15,29 @@
   align-items: center;
   background-color: #4a8464;
   border: 0;
-  color: "white";
+  color: antiquewhite;
+  padding-top: 8px;
+  padding-bottom: 8px;
   border-bottom: 1px solid rgb(250, 235, 215, 0.4);
+  position: relative;
+}
+
+#partida:hover {
+  background-color: #88c67e;
+  transition: 0.7s;
 }
 
 .matchs-text-home {
-  font-family: monospace;
-  font-size: 30px;
-  font-weight: bolder;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.back {
-  background-color: gray;
+.match-result-home {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 24px;
+  padding: 2px;
 }
 
 #content-matchs-home {
@@ -39,3 +50,46 @@
   margin-top: 10px;
 }
 
+#list-group-home {
+  border-radius: 0ch;
+  background-color: #4a8464;
+  font-family: Barrio;
+  font-size: medium;
+  border: none;
+}
+
+.align-home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.align-team-home-home {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.align-team-away-home {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+#name-team-home {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#button-favorite-home {
+  background: rgba(76, 175, 80, 0);
+  padding: 0.1ch;
+  border: none;
+}
+
+#link-home {
+  text-decoration: none;
+}

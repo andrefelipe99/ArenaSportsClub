@@ -28,9 +28,9 @@ export function Match() {
   };
 
   useEffect(() => {
-    MatchDataService.get(id)
-      //fetch("/match")
-      .then((response) => setListMatch(response.data));
+    MatchDataService.getMatch(id).then((response) =>
+      setListMatch(response.data)
+    );
   }, [id]);
 
   return (
@@ -82,7 +82,6 @@ export function Match() {
                       width="128px"
                     />
                     <span className="teams-name">
-                      {" "}
                       {listMatch[0].teams.awayName}
                     </span>
                   </Col>

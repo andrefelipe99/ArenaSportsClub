@@ -5,8 +5,12 @@ class MatchDataService {
   //     return http.get(`restaurants?page=${page}`);
   //   }
 
-  get(id) {
+  getMatch(id) {
     return http.get(`/id/${id}`);
+  }
+
+  getMatchsByDate(date) {
+    return http.get(`/date/${date}`);
   }
 
   //   find(query, by = "name", page = 0) {

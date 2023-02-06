@@ -49,7 +49,6 @@ function FooterApp() {
           rel="noreferrer"
           id="footer-link"
         >
-          {" "}
           MDBootstrap.com
         </a>
       </div>

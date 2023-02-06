@@ -43,7 +43,6 @@ function ButtonSumMatch({ actived, listMatch }) {
           <div className={className}>
             <div className="time-box"> {event.time} </div>
             <div className="sum-icon">
-              {" "}
               <IoMdFootball title="Gol marcado" />
             </div>
             <div> {event.description}</div>
@@ -54,7 +53,6 @@ function ButtonSumMatch({ actived, listMatch }) {
           <div className={className}>
             <div className="time-box"> {event.time} </div>
             <div className="sum-icon">
-              {" "}
               <IconContext.Provider value={{ color: "yellow" }}>
                 <BsFileFill title="Cartão Amarelo" />
               </IconContext.Provider>
@@ -67,7 +65,6 @@ function ButtonSumMatch({ actived, listMatch }) {
           <div className={className}>
             <div className="time-box"> {event.time} </div>
             <div className="sum-icon">
-              {" "}
               <IconContext.Provider value={{ color: "red" }}>
                 <BsFileFill title="Cartão Vermelho" />
               </IconContext.Provider>
@@ -80,7 +77,6 @@ function ButtonSumMatch({ actived, listMatch }) {
           <div className={className}>
             <div className="time-box"> {event.time} </div>
             <div className="sum-icon">
-              {" "}
               <IconContext.Provider value={{ color: "red" }}>
                 <IoMdFootball title="Gol contra" />
               </IconContext.Provider>
@@ -94,7 +90,6 @@ function ButtonSumMatch({ actived, listMatch }) {
             <div className="time-box"> {event.time} </div>
 
             <div className="sum-icon">
-              {" "}
               <IconContext.Provider value={{ color: "yellow" }}>
                 <BsFileFill title="Cartão Amarelo" />
               </IconContext.Provider>
@@ -115,7 +110,6 @@ function ButtonSumMatch({ actived, listMatch }) {
           <div className={className}>
             <div> {event.description}</div>
             <div className="sum-icon">
-              {" "}
               <IoMdFootball title="Gol marcado" />
             </div>
             <div className="time-box"> {event.time} </div>
@@ -126,7 +120,6 @@ function ButtonSumMatch({ actived, listMatch }) {
           <div className={className}>
             <div> {event.description}</div>
             <div className="sum-icon">
-              {" "}
               <IconContext.Provider value={{ color: "yellow" }}>
                 <BsFileFill title="Cartão Amarelo" />
               </IconContext.Provider>
@@ -139,7 +132,6 @@ function ButtonSumMatch({ actived, listMatch }) {
           <div className={className}>
             <div> {event.description}</div>
             <div className="sum-icon">
-              {" "}
               <IconContext.Provider value={{ color: "red" }}>
                 <BsFileFill title="Cartão Vermelho" />
               </IconContext.Provider>
@@ -152,7 +144,6 @@ function ButtonSumMatch({ actived, listMatch }) {
           <div className={className}>
             <div> {event.description}</div>
             <div className="sum-icon">
-              {" "}
               <IconContext.Provider value={{ color: "red" }}>
                 <IoMdFootball title="Gol contra" />
               </IconContext.Provider>
@@ -166,7 +157,6 @@ function ButtonSumMatch({ actived, listMatch }) {
             <div> {event.description}</div>
 
             <div className="sum-icon">
-              {" "}
               <IconContext.Provider value={{ color: "yellow" }}>
                 <BsFileFill title="Cartão Amarelo" />
               </IconContext.Provider>

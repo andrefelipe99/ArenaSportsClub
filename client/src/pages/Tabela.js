@@ -59,7 +59,7 @@ export function Tabela() {
             <p>Loading...</p>
           ) : (
             backendData.partidas.map((partida, i) => (
-              <Link to="/partida/1013" id="link-home" key={i}>
+              <Link to="/partida/1370" id="link-home" key={i}>
                 <ListGroup id="list-group-home">
                   <Row id="partida">
                     <Col className="align-home" md={1}>

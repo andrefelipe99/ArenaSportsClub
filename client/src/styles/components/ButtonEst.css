@@ -20,3 +20,33 @@
   border-radius: 8px;
   color: antiquewhite;
 }
+
+#progress-bar {
+  background-color: rgb(175, 173, 173);
+}
+
+.stat_category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.est-section {
+  display: flex;
+  padding: 10px;
+  margin-top: 1.1ch;
+  margin-bottom: 1.1ch;
+  background-color: #e8faf0;
+  border-radius: 8px;
+  font-family: "Lucida Console", "Courier New", monospace;
+  flex-direction: column;
+}
+
+.stat_category {
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.stat_row {
+  margin: 16px 12px;
+}

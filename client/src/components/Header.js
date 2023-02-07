@@ -25,7 +25,7 @@ function HeaderApp() {
                 width="22"
                 alt="Search"
                 className="nav-img"
-              />
+              />{" "}
               <span className="nav-font" title="Resultados">
                 RESULTADOS
               </span>
@@ -37,7 +37,7 @@ function HeaderApp() {
                 width="22"
                 alt="Search"
                 className="nav-img"
-              />
+              />{" "}
               <span className="nav-font" title="Notícias">
                 NOTÍCIAS
               </span>

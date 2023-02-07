@@ -13,13 +13,13 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  border-radius: 0ch;
   background-color: #4a8464;
-  border: 0;
+  border: none;
   color: antiquewhite;
   padding-top: 8px;
   padding-bottom: 8px;
   border-bottom: 1px solid rgb(250, 235, 215, 0.4);
-  position: relative;
 }
 
 #partida:hover {
@@ -43,19 +43,12 @@
 #content-matchs-home {
   margin: 0;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #content-side-bar-home {
   margin: 0;
   margin-top: 10px;
-}
-
-#list-group-home {
-  border-radius: 0ch;
-  background-color: #4a8464;
-  font-family: Barrio;
-  font-size: medium;
-  border: none;
 }
 
 .align-home {

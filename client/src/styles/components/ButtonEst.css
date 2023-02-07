@@ -50,3 +50,7 @@
 .stat_row {
   margin: 16px 12px;
 }
+
+.stat_percent_pad {
+  padding-left: 1px;
+}

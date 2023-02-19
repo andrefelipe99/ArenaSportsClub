@@ -1,3 +1,8 @@
+#container-results {
+  background-color: #4a8464;
+  padding: 0;
+}
+
 .datas {
   flex-basis: 100%;
   font-family: "Courier New", Courier, monospace;
@@ -38,17 +43,6 @@
   font-weight: bold;
   font-size: 24px;
   padding: 2px;
-}
-
-#content-matchs-home {
-  margin: 0;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-#content-side-bar-home {
-  margin: 0;
-  margin-top: 10px;
 }
 
 .align-home {

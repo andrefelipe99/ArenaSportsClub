@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import { IoMdFootball } from "react-icons/io";
 import { BsFileFill } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
-import "../styles/components/ButtonSum.css";
+import "../../styles/components/Match/ButtonSum.css";
 
 function ButtonSumMatch({ actived, listMatch }) {
   function CountGoals(event, half) {

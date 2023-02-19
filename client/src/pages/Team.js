@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Container, Button } from "react-bootstrap";
 //import { Link } from "react-router-dom";
+import "../styles/pages/Team.css";
 
-import "../styles/pages/Equipe.css";
-
-export function Equipe() {
+export function Team() {
   const [butao, setButao] = useState({ disabou: false });
   const [butao2, setButao2] = useState({ disabou: true });
 

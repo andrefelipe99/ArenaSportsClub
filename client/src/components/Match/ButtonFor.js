@@ -4,7 +4,7 @@ import { IoMdFootball } from "react-icons/io";
 import { TbArrowNarrowUp, TbArrowNarrowDown } from "react-icons/tb";
 import { BsFileFill } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
-import "../styles/components/ButtonFor.css";
+import "../../styles/components/Match/ButtonFor.css";
 
 function ButtonForMatch({ actived, listMatch }) {
   function ShowGoals(player) {

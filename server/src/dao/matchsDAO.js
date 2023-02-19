@@ -92,7 +92,7 @@ export default class matchsDAO {
     try {
       const pipeline = [
         {
-          $match: { date: date },
+          $match: { day: date },
         },
         {
           $sort: {

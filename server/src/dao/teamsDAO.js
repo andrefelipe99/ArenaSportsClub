@@ -118,7 +118,6 @@ export default class teamsDAO {
     try {
       const teamsList = await maxId.toArray();
       const x = teamsList[0].api_id;
-      console.log(x);
       return { teamsList };
     } catch (e) {
       console.error(

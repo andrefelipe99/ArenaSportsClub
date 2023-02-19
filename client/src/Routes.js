@@ -1,15 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Equipe } from "./pages/Equipe";
-import { Tabela } from "./pages/Tabela";
+import { Team } from "./pages/Team";
+import { Home } from "./pages/Home";
 import { Match } from "./pages/Match";
 
 export function AppRoutes() {
   return (
     <Router>
       <Routes>
-        <Route path="/equipe" element={<Equipe />} />
+        <Route path="/equipe" element={<Team />} />
         <Route path="/partida/:id" element={<Match />} />
-        <Route path="/" element={<Tabela />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </Router>
   );

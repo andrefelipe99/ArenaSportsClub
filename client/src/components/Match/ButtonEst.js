@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import "../styles/components/ButtonEst.css";
+import "../../styles/components/Match/ButtonEst.css";
 
 function CalculateStatistic(statistic_home, statistic_away) {
   const total = parseInt(statistic_home) + parseInt(statistic_away);

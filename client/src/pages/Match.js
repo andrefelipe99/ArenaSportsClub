@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
-import ButtonSumMatch from "../components/ButtonSum";
-import ButtonEstMatch from "../components/ButtonEst";
-import ButtonForMatch from "../components/ButtonFor";
+import ButtonSumMatch from "../components/Match/ButtonSum";
+import ButtonEstMatch from "../components/Match/ButtonEst";
+import ButtonForMatch from "../components/Match/ButtonFor";
 import MatchDataService from "../services/match.js";
 import { useParams } from "react-router-dom";
 import "../styles/pages/Match.css";

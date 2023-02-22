@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -6,8 +6,25 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import logo from "../assets/images/logo1.jpg";
 import "../styles/components/Header.css";
+import TeamDataService from "../services/team";
 
 function HeaderApp() {
+  const [searchField, setSearchField] = useState("");
+  const [listTeams, setListTeams] = useState([]);
+
+  const handleSearch = (event) => {
+    const { value } = event.target;
+    setSearchField(value);
+    console.log(searchField);
+  };
+
+  useEffect(() => {
+    TeamDataService.getTeams(searchField).then((response) => {
+      setListTeams(response.data);
+      console.log(response.data);
+    });
+  }, [searchField]);
+
   return (
     <Navbar className="bg-teal" fixed="top" sticky="top" expand="lg">
       <Container>
@@ -49,6 +66,8 @@ function HeaderApp() {
               placeholder="Pesquisar"
               className="me-2"
               aria-label="Search"
+              value={searchField}
+              onChange={handleSearch}
             />
             <Button variant="outline-off">
               <img

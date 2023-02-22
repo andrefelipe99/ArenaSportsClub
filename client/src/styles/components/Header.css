@@ -8,3 +8,9 @@
 .nav-img {
   margin-bottom: 5px;
 }
+
+#saiarapariga {
+  position: absolute;
+  top: 10%;
+  left: 68%;
+}

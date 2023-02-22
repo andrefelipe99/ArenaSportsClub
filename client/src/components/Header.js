@@ -3,14 +3,15 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import logo from "../assets/images/logo1.jpg";
 import "../styles/components/Header.css";
 import TeamDataService from "../services/team";
+import Search from "./Home/Search";
 
 function HeaderApp() {
   const [searchField, setSearchField] = useState("");
   const [listTeams, setListTeams] = useState([]);
+  const [teamsSearchActive, setTeamsSearchActive] = useState(false);
 
   const handleSearch = (event) => {
     const { value } = event.target;
@@ -18,69 +19,71 @@ function HeaderApp() {
     console.log(searchField);
   };
 
+  const changeActive = (active) => setTeamsSearchActive(active);
+
   useEffect(() => {
-    TeamDataService.getTeams(searchField).then((response) => {
-      setListTeams(response.data);
-      console.log(response.data);
-    });
+    console.log(searchField);
+    if (searchField != "") {
+      TeamDataService.getTeams(searchField).then((response) => {
+        setListTeams(response.data);
+        console.log(response.data);
+      });
+    }
   }, [searchField]);
 
   return (
-    <Navbar className="bg-teal" fixed="top" sticky="top" expand="lg">
-      <Container>
-        <Navbar.Brand href="/">
-          <img src={logo} alt="Logo" height="60" width="60"></img> Arena Sport
-          Club
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="m-auto">
-            <Nav.Link href="/partida/1370">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/183/183129.png"
-                height="22"
-                width="22"
-                alt="Search"
-                className="nav-img"
-              />{" "}
-              <span className="nav-font" title="Resultados">
-                RESULTADOS
-              </span>
-            </Nav.Link>
-            <Nav.Link href="/">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/81/81460.png"
-                height="22"
-                width="22"
-                alt="Search"
-                className="nav-img"
-              />{" "}
-              <span className="nav-font" title="Notícias">
-                NOTÍCIAS
-              </span>
-            </Nav.Link>
-          </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Pesquisar"
-              className="me-2"
-              aria-label="Search"
-              value={searchField}
-              onChange={handleSearch}
-            />
-            <Button variant="outline-off">
-              <img
-                src="https://img.icons8.com/external-others-zufarizal-robiyanto/512/external-lup-mutuline-science-education-others-zufarizal-robiyanto.png"
-                height="22"
-                width="22"
-                alt="Search"
+    <>
+      <Navbar className="bg-teal" fixed="top" sticky="top" expand="lg">
+        <Container>
+          <Navbar.Brand href="/">
+            <img src={logo} alt="Logo" height="60" width="60"></img> Arena Sport
+            Club
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="m-auto">
+              <Nav.Link href="/partida/1370">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/183/183129.png"
+                  height="22"
+                  width="22"
+                  alt="Search"
+                  className="nav-img"
+                />{" "}
+                <span className="nav-font" title="Resultados">
+                  RESULTADOS
+                </span>
+              </Nav.Link>
+              <Nav.Link href="/">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/81/81460.png"
+                  height="22"
+                  width="22"
+                  alt="Search"
+                  className="nav-img"
+                />{" "}
+                <span className="nav-font" title="Notícias">
+                  NOTÍCIAS
+                </span>
+              </Nav.Link>
+            </Nav>
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Pesquisar"
+                className="me-2"
+                aria-label="Search"
+                value={searchField}
+                onChange={handleSearch}
               />
-            </Button>
-          </Form>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+            </Form>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <div id="saiarapariga">
+        {listTeams?.team?.length > 0 ? <Search list={listTeams.team} /> : <></>}
+      </div>
+    </>
   );
 }
 

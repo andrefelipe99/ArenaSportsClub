@@ -80,7 +80,7 @@ function HeaderApp() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div id="saiarapariga">
+      <div id="position-search">
         {listTeams?.team?.length > 0 ? <Search list={listTeams.team} /> : <></>}
       </div>
     </>

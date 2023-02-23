@@ -3,6 +3,11 @@
   src: url("../../public/fonts/Stadio-Now-Novarese-trial.ttf");
 }
 
+@font-face {
+  font-family: Lato;
+  src: url("https://fonts.googleapis.com/css2?family=Lato:ital@1&display=swap");
+}
+
 /* remover depois abaixo */
 
 h1 {

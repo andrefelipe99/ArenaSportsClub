@@ -814,6 +814,75 @@ const match = [
   },
 ];
 
+const equipes = [
+  {
+    id: "1",
+    name: "Real Madrid",
+    logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+    locality: "Madrid, Espanha",
+  },
+  {
+    id: "2",
+    name: "Liverpool",
+    logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+    locality: "Liverpool, United Kindgon",
+  },
+  {
+    id: "3",
+    name: "Manchester United",
+    logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+    locality: "Manchester, United Kindgon",
+  },
+  {
+    id: "4",
+    name: "Manchester City",
+    logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+    locality: "Manchester, United Kindgon",
+  },
+  {
+    id: "5",
+    name: "United Kingdon",
+    logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+    locality: "Liverpool, United Kindgon",
+  },
+  {
+    id: "6",
+    name: "Barcelona",
+    logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+    locality: "Madrid, Espanha",
+  },
+  {
+    id: "7",
+    name: "Real Zaragoza",
+    logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+    locality: "Madrid, Espanha",
+  },
+  {
+    id: "8",
+    name: "Liverton",
+    logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+    locality: "Liverpool, United Kindgon",
+  },
+];
+
+const equipe = [
+  {
+    id: "1",
+    name: "Real Madrid",
+    img: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+    locality: "Madrid, Espanha",
+    stadium: "Santiago Bernabeu",
+  },
+];
+
+app.get("/equipes", (req, res) => {
+  res.json({ equipes });
+});
+
+app.get("/equipe", (req, res) => {
+  res.json({ equipe });
+});
+
 app.get("/campeonatos", (req, res) => {
   res.json({ campeonatos });
 });

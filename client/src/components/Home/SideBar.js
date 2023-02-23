@@ -4,48 +4,88 @@ import { Link } from "react-router-dom";
 import { AiOutlineStar, AiFillStar, AiFillPlusCircle } from "react-icons/ai";
 import { ImTrophy } from "react-icons/im";
 import { GiStarsStack } from "react-icons/gi";
-import "../../styles/components/Home/SideBar.css";
 import Search from "./Search";
+import "../../styles/components/Home/SideBar.css";
 
 export function SideBar() {
-  const [listaCampeonatos, setListaCampeonatos] = useState([{}]);
-  const [favorites, setFavorites] = useState(
-    JSON.parse(window.localStorage.getItem("favorites")) || []
+  const [listaCampeonatos, setListaCampeonatos] = useState([]);
+  const [favoritesChamp, setFavoritesChamp] = useState(
+    JSON.parse(window.localStorage.getItem("favorites-champ")) || []
   );
   const [teamsSearchActive, setTeamsSearchActive] = useState(false);
+  const [listTeams, setlistTeams] = useState([]);
+  const [favoritesTeams, setFavoritesTeams] = useState(
+    JSON.parse(window.localStorage.getItem("favorites-teams")) || []
+  );
 
   useEffect(() => {
-    window.localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
+    window.localStorage.setItem(
+      "favorites-champ",
+      JSON.stringify(favoritesChamp)
+    );
+  }, [favoritesChamp]);
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      "favorites-teams",
+      JSON.stringify(favoritesTeams)
+    );
+  }, [favoritesTeams]);
 
   useEffect(() => {
     fetch("/campeonatos")
       .then((response) => response.json())
       .then((data) => {
-        setListaCampeonatos(data);
+        setListaCampeonatos(data.campeonatos);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("/equipes")
+      .then((response) => response.json())
+      .then((data) => {
+        setlistTeams(data.equipes);
       });
   }, []);
 
   const changeActive = (active) => setTeamsSearchActive(active);
 
-  const addFavorite = (campeonato, i) => {
+  const addFavoriteChamp = (campeonato, i) => {
     if (campeonato !== "undefined") {
-      let { id, favorito, nome, paisUrl } = campeonato;
-      setFavorites((favorite) => [
+      let { id, nome, paisUrl } = campeonato;
+      setFavoritesChamp((favorite) => [...favorite, { id, nome, paisUrl }]);
+    }
+  };
+
+  const removeFavoriteChamp = (campeonato) => {
+    window.localStorage.removeItem("favorites-champ");
+    if (listaCampeonatos !== "undefined")
+      setFavoritesChamp(
+        favoritesChamp.filter((camp) => camp.id !== campeonato.id)
+      );
+  };
+
+  const isFavoriteChamp = (campeonato) =>
+    favoritesChamp?.some((camp) => camp.id === campeonato.id);
+
+  const addFavoriteTeams = (team, i) => {
+    if (team !== "undefined") {
+      let { id, name, logo, locality } = team;
+      setFavoritesTeams((favorite) => [
         ...favorite,
-        { id, favorito, nome, paisUrl },
+        { id, name, logo, locality },
       ]);
     }
   };
 
-  const removeFavorite = (campeonato) => {
-    window.localStorage.removeItem("favorite");
-    if (listaCampeonatos !== "undefined")
-      setFavorites(favorites.filter((camp) => camp.id !== campeonato.id));
+  const removeFavoriteTeams = (team) => {
+    window.localStorage.removeItem("favorites-teams");
+    if (listTeams !== "undefined")
+      setFavoritesTeams(favoritesTeams.filter((tea) => tea.id !== team.id));
   };
 
-  const isFavorite = (campeonato) =>
-    favorites?.some((camp) => camp.id === campeonato.id);
+  const isFavoriteTeams = (team) =>
+    favoritesTeams?.some((tea) => tea.id === team.id);
 
   return (
     <Container id="container-side-bar">
@@ -53,144 +93,138 @@ export function SideBar() {
         <GiStarsStack />
         <span id="title-text-side-bar">Minhas Ligas</span>
       </div>
-      {favorites[0]?.id === 0 || favorites.length === 0 ? (
+      {favoritesChamp[0]?.id === 0 || favoritesChamp.length === 0 ? (
         <span id="titleSideBar">Nenhum Campeonato Adicionado</span>
       ) : (
-        favorites.map((favorito, i) => (
-          <div key={i}>
-            <Link to="" id="side-bar-link">
-              <ListGroup>
-                <ListGroup.Item id="list-group-sidebar">
-                  <Row className="justify-content-md-center">
-                    <Col md={2}>
-                      <img
-                        className="pais-margin"
-                        src={favorito.paisUrl}
-                        alt={`${favorito.paisUrl}`}
-                        width="25"
-                      />
-                    </Col>
-                    <Col md={8} id="name-camp-sidebar" title={favorito.nome}>
-                      <span>{favorito.nome}</span>
-                    </Col>
-                    <Col md={2}>
-                      <Button
-                        id="button-favorite-sidebar"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          isFavorite(favorito)
-                            ? removeFavorite(favorito)
-                            : addFavorite(favorito);
-                        }}
-                      >
-                        {isFavorite(favorito) ? (
-                          <AiFillStar />
-                        ) : (
-                          <AiOutlineStar />
-                        )}
-                      </Button>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-              </ListGroup>
-            </Link>
-          </div>
+        favoritesChamp.map((favorito, i) => (
+          <Link key={i} to="" id="side-bar-link">
+            <ListGroup>
+              <ListGroup.Item id="list-group-sidebar">
+                <Row className="justify-content-md-center">
+                  <Col md={2}>
+                    <img
+                      className="pais-margin"
+                      src={favorito.paisUrl}
+                      alt={`${favorito.paisUrl}`}
+                      width="25"
+                    />
+                  </Col>
+                  <Col md={8} id="name-camp-sidebar" title={favorito.nome}>
+                    <span>{favorito.nome}</span>
+                  </Col>
+                  <Col md={2}>
+                    <Button
+                      id="button-favorite-sidebar"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        isFavoriteChamp(favorito)
+                          ? removeFavoriteChamp(favorito)
+                          : addFavoriteChamp(favorito);
+                      }}
+                    >
+                      {isFavoriteChamp(favorito) ? (
+                        <AiFillStar />
+                      ) : (
+                        <AiOutlineStar />
+                      )}
+                    </Button>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            </ListGroup>
+          </Link>
         ))
       )}
       <div id="titleSideBar" className="border-bottom-side-bar">
         <ImTrophy />
         <span id="title-text-side-bar">Principais Campeonatos</span>
       </div>
-      {typeof listaCampeonatos.campeonatos === "undefined" ? (
+      {typeof listaCampeonatos === "undefined" ? (
         <p>Loading...</p>
       ) : (
-        listaCampeonatos.campeonatos.map((campeonato, i) => (
-          <div key={i}>
-            <Link to="" id="side-bar-link">
-              <ListGroup>
-                <ListGroup.Item id="list-group-sidebar">
-                  <Row className="justify-content-md-center">
-                    <Col md={2}>
-                      <img
-                        className="pais-margin"
-                        src={campeonato.paisUrl}
-                        alt={`${campeonato.paisUrl}`}
-                        width="25"
-                      />
-                    </Col>
-                    <Col md={8} id="name-camp-sidebar" title={campeonato.nome}>
-                      <span>{campeonato.nome}</span>
-                    </Col>
-                    <Col md={2}>
-                      <Button
-                        id="button-favorite-sidebar"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          isFavorite(campeonato)
-                            ? removeFavorite(campeonato)
-                            : addFavorite(campeonato);
-                        }}
-                      >
-                        {isFavorite(campeonato) ? (
-                          <AiFillStar />
-                        ) : (
-                          <AiOutlineStar />
-                        )}
-                      </Button>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-              </ListGroup>
-            </Link>
-          </div>
+        listaCampeonatos?.map((campeonato, i) => (
+          <Link key={i} to="" id="side-bar-link">
+            <ListGroup>
+              <ListGroup.Item id="list-group-sidebar">
+                <Row className="justify-content-md-center">
+                  <Col md={2}>
+                    <img
+                      className="pais-margin"
+                      src={campeonato.paisUrl}
+                      alt={`${campeonato.paisUrl}`}
+                      width="25"
+                    />
+                  </Col>
+                  <Col md={8} id="name-camp-sidebar" title={campeonato.nome}>
+                    <span>{campeonato.nome}</span>
+                  </Col>
+                  <Col md={2}>
+                    <Button
+                      id="button-favorite-sidebar"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        isFavoriteChamp(campeonato)
+                          ? removeFavoriteChamp(campeonato)
+                          : addFavoriteChamp(campeonato);
+                      }}
+                    >
+                      {isFavoriteChamp(campeonato) ? (
+                        <AiFillStar />
+                      ) : (
+                        <AiOutlineStar />
+                      )}
+                    </Button>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            </ListGroup>
+          </Link>
         ))
       )}
       <div id="titleSideBar" className="border-bottom-side-bar">
         <ImTrophy />
         <span id="title-text-side-bar">Minhas Equipes</span>
       </div>
-      {favorites[0]?.id === 0 || favorites.length === 0 ? (
-        <span id="titleSideBar">Nenhum Campeonato Adicionado</span>
+      {favoritesTeams[0]?.id === 0 || favoritesTeams.length === 0 ? (
+        <span id="titleSideBar">Nenhuma Equipe Adicionada</span>
       ) : (
-        favorites.map((favorito, i) => (
-          <div key={i}>
-            <Link to="" id="side-bar-link">
-              <ListGroup>
-                <ListGroup.Item id="list-group-sidebar">
-                  <Row className="justify-content-md-center">
-                    <Col md={2}>
-                      <img
-                        className="pais-margin"
-                        src={favorito.paisUrl}
-                        alt={`${favorito.paisUrl}`}
-                        width="25"
-                      />
-                    </Col>
-                    <Col md={8} id="name-camp-sidebar" title={favorito.nome}>
-                      <span>{favorito.nome}</span>
-                    </Col>
-                    <Col md={2}>
-                      <Button
-                        id="button-favorite-sidebar"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          isFavorite(favorito)
-                            ? removeFavorite(favorito)
-                            : addFavorite(favorito);
-                        }}
-                      >
-                        {isFavorite(favorito) ? (
-                          <AiFillStar />
-                        ) : (
-                          <AiOutlineStar />
-                        )}
-                      </Button>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-              </ListGroup>
-            </Link>
-          </div>
+        favoritesTeams.map((favorito, i) => (
+          <Link key={i} to="" id="side-bar-link">
+            <ListGroup>
+              <ListGroup.Item id="list-group-sidebar">
+                <Row className="justify-content-md-center">
+                  <Col md={2}>
+                    <img
+                      className="pais-margin"
+                      src={favorito.logo}
+                      alt={`${favorito.logo}`}
+                      width="25"
+                    />
+                  </Col>
+                  <Col md={8} id="name-camp-sidebar" title={favorito.name}>
+                    <span>{favorito.name}</span>
+                  </Col>
+                  <Col md={2}>
+                    <Button
+                      id="button-favorite-sidebar"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        isFavoriteTeams(favorito)
+                          ? removeFavoriteTeams(favorito)
+                          : addFavoriteTeams(favorito);
+                      }}
+                    >
+                      {isFavoriteTeams(favorito) ? (
+                        <AiFillStar />
+                      ) : (
+                        <AiOutlineStar />
+                      )}
+                    </Button>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            </ListGroup>
+          </Link>
         ))
       )}
       <div id="titleSideBar" className="border-bottom-side-bar">
@@ -206,14 +240,21 @@ export function SideBar() {
         </Button>
       </div>
       {teamsSearchActive ? (
-        <div>
-          <Form.Control
-            type="search"
-            placeholder="Pesquisar"
-            aria-label="Search"
+        <>
+          <div id="form-sidebar">
+            <Form.Control
+              type="search"
+              placeholder="Pesquisar"
+              aria-label="Search"
+            />
+          </div>
+          <Search
+            theme={"side"}
+            listTeams={listTeams}
+            favoritesTeams={favoritesTeams}
+            setFavoritesTeams={setFavoritesTeams}
           />
-          <Search list={listaCampeonatos.campeonatos} />
-        </div>
+        </>
       ) : (
         <></>
       )}

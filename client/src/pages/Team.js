@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Button } from "react-bootstrap";
 //import { Link } from "react-router-dom";
 import "../styles/pages/Team.css";
 
 export function Team() {
+  const [team, setTeam] = useState([]);
+
+  useEffect(() => {
+    fetch("/equipe")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.equipe);
+        setTeam(data.equipe);
+      });
+  }, []);
+
   const [butao, setButao] = useState({ disabou: false });
   const [butao2, setButao2] = useState({ disabou: true });
 
@@ -20,7 +31,8 @@ export function Team() {
   return (
     <Container>
       <div>
-        <p>Tela equipe</p>
+        <img src={team[0]?.img} alt={`${team[0]?.img}`} />
+        <p>{team[0]?.name}</p>
         <Button onClick={handleSubmit} disabled={butao.disabou}>
           Teste desativar
         </Button>

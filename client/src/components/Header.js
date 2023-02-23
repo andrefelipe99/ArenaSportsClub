@@ -11,22 +11,18 @@ import Search from "./Home/Search";
 function HeaderApp() {
   const [searchField, setSearchField] = useState("");
   const [listTeams, setListTeams] = useState([]);
-  const [teamsSearchActive, setTeamsSearchActive] = useState(false);
 
   const handleSearch = (event) => {
     const { value } = event.target;
     setSearchField(value);
-    console.log(searchField);
   };
 
-  const changeActive = (active) => setTeamsSearchActive(active);
-
   useEffect(() => {
-    console.log(searchField);
-    if (searchField != "") {
+    if (searchField === "") {
+      setListTeams([]);
+    } else {
       TeamDataService.getTeams(searchField).then((response) => {
-        setListTeams(response.data);
-        console.log(response.data);
+        setListTeams(response.data.team);
       });
     }
   }, [searchField]);
@@ -54,7 +50,7 @@ function HeaderApp() {
                   RESULTADOS
                 </span>
               </Nav.Link>
-              <Nav.Link href="/">
+              <Nav.Link href="/equipe">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/81/81460.png"
                   height="22"
@@ -81,7 +77,11 @@ function HeaderApp() {
         </Container>
       </Navbar>
       <div id="position-search">
-        {listTeams?.team?.length > 0 ? <Search list={listTeams.team} /> : <></>}
+        {listTeams?.length > 0 ? (
+          <Search theme={"nav"} listTeams={listTeams} />
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

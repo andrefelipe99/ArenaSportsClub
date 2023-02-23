@@ -69,17 +69,7 @@
   margin-left: 0.5ch;
 }
 
-#display-search {
-  background-color: #aecdbc;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  width: 304px;
-  max-height: 280px;
-  overflow-y: auto;
-  padding-left: 2px;
-}
-
-#letra {
-  font-family: Arial, Helvetica, sans-serif;
+#form-sidebar {
+  font-family: Lato, sans-serif;
+  margin: 5px;
 }

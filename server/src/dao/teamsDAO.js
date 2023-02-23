@@ -59,7 +59,7 @@ export default class teamsDAO {
     try {
       const pipeline = [
         {
-          $match: { api_id: id },
+          $match: { id: id },
         },
         // {
         //   $addFields: { score: { $meta: "textScore" } },
@@ -109,7 +109,7 @@ export default class teamsDAO {
   static async getMaxID(id) {
     let maxId;
     try {
-      maxId = await teams.find().sort({ api_id: -1 }).limit(1);
+      maxId = await teams.find().sort({ id: -1 }).limit(1);
     } catch (e) {
       console.error(`Something went wrong in getMaxID: ${e}`);
       throw e;
@@ -117,7 +117,7 @@ export default class teamsDAO {
 
     try {
       const teamsList = await maxId.toArray();
-      const x = teamsList[0].api_id;
+      const x = teamsList[0].id;
       return { teamsList };
     } catch (e) {
       console.error(

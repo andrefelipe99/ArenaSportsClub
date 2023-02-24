@@ -875,6 +875,132 @@ const equipe = [
   },
 ];
 
+const camp = [
+  {
+    id: "1",
+    name: "Premier League",
+    season: "2022/2023",
+    img: "https://static.wikia.nocookie.net/universecwsports/images/3/37/PLeng.png/revision/latest?cb=20200404132848&path-prefix=es",
+    table: [
+      {
+        nome: "Time A",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 25,
+      },
+      {
+        nome: "Time B",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 20,
+      },
+      {
+        nome: "Time C",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 18,
+      },
+      {
+        nome: "Time D",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 16,
+      },
+      {
+        nome: "Time E",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 15,
+      },
+      {
+        nome: "Time F",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 12,
+      },
+      {
+        nome: "Time G",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 10,
+      },
+      {
+        nome: "Time H",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 8,
+      },
+      {
+        nome: "Time I",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 6,
+      },
+      {
+        nome: "Time J",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 5,
+      },
+      {
+        nome: "Time K",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 4,
+      },
+      {
+        nome: "Time L",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 3,
+      },
+      {
+        nome: "Time M",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 2,
+      },
+      {
+        nome: "Time N",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 1,
+      },
+      {
+        nome: "Time O",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 0,
+      },
+      {
+        nome: "Time P",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 0,
+      },
+      {
+        nome: "Time Q",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 0,
+      },
+      {
+        nome: "Time R",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 0,
+      },
+      {
+        nome: "Time S",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 0,
+      },
+      {
+        nome: "Time T",
+        logo: "https://cdn.sportmonks.com/images/soccer/teams/12/3468.png",
+        pontos: 0,
+      },
+    ],
+    partidas: [partidas],
+    estatisticas: [
+      {
+        artilheiros: [
+          { nome: "Joao", gols: "12" },
+          { nome: "Maria", gols: "10" },
+          { nome: "Andre", gols: "3" },
+          { nome: "Ricardo", gols: "1" },
+        ],
+      },
+    ],
+  },
+];
+
+app.get("/camp", (req, res) => {
+  res.json({ camp });
+});
+
 app.get("/equipes", (req, res) => {
   res.json({ equipes });
 });

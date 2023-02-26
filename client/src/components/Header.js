@@ -50,7 +50,7 @@ function HeaderApp() {
                   RESULTADOS
                 </span>
               </Nav.Link>
-              <Nav.Link href="/equipe">
+              <Nav.Link href="/campeonato">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/81/81460.png"
                   height="22"

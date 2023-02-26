@@ -1,10 +1,54 @@
 import React, { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 //import { Link } from "react-router-dom";
+import ButtonResume from "../components/Championship/ButtonResume";
+import ButtonMatchs from "../components/Championship/ButtonMatchs";
+import ButtonTable from "../components/Championship/ButtonTable";
+import ButtonStatistic from "../components/Championship/ButtonStatistic";
 import "../styles/pages/Championship.css";
+
 
 export function Championship() {
   const [championship, setChampionship] = useState([]);
+
+  const [buttonChange, setButtonChange] = useState({
+    resultado: true,
+    calendario: false,
+    tabela: false,
+    estatistica: false,
+  });
+
+  const changeSelected = (buttonName) => {
+    if (buttonName === "buttonResume") {
+      setButtonChange({
+        resultado: true,
+        calendario: false,
+        tabela: false,
+        estatistica: false,
+      });
+    } else if (buttonName === "buttonMatchs") {
+      setButtonChange({
+        resultado: false,
+        calendario: true,
+        tabela: false,
+        estatistica: false,
+      });
+    } else if (buttonName === "buttonTable") {
+      setButtonChange({
+        resultado: false,
+        calendario: false,
+        tabela: true,
+        estatistica: false,
+      });
+    } else {
+      setButtonChange({
+        resultado: false,
+        calendario: false,
+        tabela: false,
+        estatistica: true,
+      });
+    }
+  };
 
   useEffect(() => {
     fetch("/camp")
@@ -15,31 +59,94 @@ export function Championship() {
       });
   }, []);
 
-  //feito pelo chat GPT daqui pra baixo
-
   return (
     <Container>
-      <div className="table-responsive">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Logo</th>
-              <th>Pontos</th>
-            </tr>
-          </thead>
-          <tbody>
-            {championship[0]?.table.map((row) => (
-              <tr key={row.nome}>
-                <td>{row.nome}</td>
-                <td>
-                  <img src={row.logo} alt={row.nome} width="30px" />
-                </td>
-                <td>{row.pontos}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div>
+        {typeof championship[0]?.name === "undefined" ? (
+          <div id="match-section_title">
+            <span> CAMPEONATO NÃO ENCONTRADO </span>
+          </div>
+        ) : (
+          <>
+            <div className="heading">
+              <img
+                className="heading_logo heading_logo--1"
+                src={championship[0].img}
+                alt={`${championship[0].name}`}
+                width="128px"
+              />
+              <div className="heading_title">
+                <div className="heading_name">{championship[0].name}</div>
+              </div>
+              <div className="heading_info">{championship[0].season}</div>
+            </div>
+            <div className="button-group-championship">
+              <Button
+                id={
+                  buttonChange.resultado
+                    ? "button-championship-selected"
+                    : "button-championship"
+                }
+                title="Resultados"
+                onClick={() => changeSelected("buttonResume")}
+              >
+                RESULTADOS
+              </Button>
+              <Button
+                id={
+                  buttonChange.calendario
+                    ? "button-championship-selected"
+                    : "button-championship"
+                }
+                title="Calendário"
+                onClick={() => changeSelected("buttonMatchs")}
+              >
+                CALENDÁRIO
+              </Button>
+              <Button
+                id={
+                  buttonChange.tabela
+                    ? "button-championship-selected"
+                    : "button-championship"
+                }
+                title="Tabela"
+                onClick={() => changeSelected("buttonTable")}
+              >
+                TABELA
+              </Button>
+              <Button
+                id={
+                  buttonChange.estatistica
+                    ? "button-championship-selected"
+                    : "button-championship"
+                }
+                title="Estatísticas"
+                onClick={() => changeSelected("buttonStatistic")}
+              >
+                ESTATÍSTICAS
+              </Button>
+            </div>
+
+            <div>
+              <ButtonResume
+                actived={buttonChange.resultado}
+                listMatch={championship}
+              />
+              <ButtonMatchs
+                actived={buttonChange.calendario}
+                listMatch={championship}
+              />
+              <ButtonTable
+                actived={buttonChange.tabela}
+                listMatch={championship}
+              />
+              <ButtonStatistic
+                actived={buttonChange.estatistica}
+                listMatch={championship}
+              />
+            </div>
+          </>
+        )}
       </div>
     </Container>
   );

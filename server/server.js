@@ -880,7 +880,7 @@ const camp = [
     id: "1",
     name: "Premier League",
     season: "2022/2023",
-    img: "https://static.wikia.nocookie.net/universecwsports/images/3/37/PLeng.png/revision/latest?cb=20200404132848&path-prefix=es",
+    img: "https://b.fssta.com/uploads/application/soccer/competition-logos/EnglishPremierLeague.png",
     table: [
       {
         nome: "Time A",

@@ -33,7 +33,7 @@ export function SideBar() {
   }, [favoritesTeams]);
 
   useEffect(() => {
-    fetch("/campeonatos")
+    fetch("https://arena-sports-club-api.vercel.app/campeonatos")
       .then((response) => response.json())
       .then((data) => {
         setListaCampeonatos(data.campeonatos);
@@ -41,7 +41,7 @@ export function SideBar() {
   }, []);
 
   useEffect(() => {
-    fetch("/equipes")
+    fetch("https://arena-sports-club-api.vercel.app/equipes")
       .then((response) => response.json())
       .then((data) => {
         setlistTeams(data.equipes);

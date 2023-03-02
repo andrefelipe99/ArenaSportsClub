@@ -7,7 +7,6 @@ import ButtonTable from "../components/Championship/ButtonTable";
 import ButtonStatistic from "../components/Championship/ButtonStatistic";
 import "../styles/pages/Championship.css";
 
-
 export function Championship() {
   const [championship, setChampionship] = useState([]);
 
@@ -51,7 +50,7 @@ export function Championship() {
   };
 
   useEffect(() => {
-    fetch("/camp")
+    fetch("https://arena-sports-club-api.vercel.app/camp")
       .then((response) => response.json())
       .then((data) => {
         console.log(data.camp);

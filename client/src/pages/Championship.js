@@ -50,7 +50,7 @@ export function Championship() {
   };
 
   useEffect(() => {
-    fetch("https://arena-sports-club-api.vercel.app/camp")
+    fetch("http://localhost:5000/camp")
       .then((response) => response.json())
       .then((data) => {
         console.log(data.camp);
@@ -129,19 +129,19 @@ export function Championship() {
             <div>
               <ButtonResume
                 actived={buttonChange.resultado}
-                listMatch={championship}
+                championship={championship}
               />
               <ButtonMatchs
                 actived={buttonChange.calendario}
-                listMatch={championship}
+                championship={championship}
               />
               <ButtonTable
                 actived={buttonChange.tabela}
-                listMatch={championship}
+                championship={championship}
               />
               <ButtonStatistic
                 actived={buttonChange.estatistica}
-                listMatch={championship}
+                championship={championship}
               />
             </div>
           </>

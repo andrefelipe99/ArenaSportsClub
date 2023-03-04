@@ -7,7 +7,7 @@ export function Team() {
   const [team, setTeam] = useState([]);
 
   useEffect(() => {
-    fetch("https://arena-sports-club-api.vercel.app/equipe")
+    fetch("http://localhost:5000/equipe")
       .then((response) => response.json())
       .then((data) => {
         console.log(data.equipe);

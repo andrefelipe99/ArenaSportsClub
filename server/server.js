@@ -987,10 +987,17 @@ const camp = [
     estatisticas: [
       {
         artilheiros: [
-          { nome: "Joao", gols: "12" },
-          { nome: "Maria", gols: "10" },
-          { nome: "Andre", gols: "3" },
-          { nome: "Ricardo", gols: "1" },
+          { nome: "Joao", equipe: "Liverpool", gols: "12" },
+          { nome: "Maria", equipe: "Liverpool", gols: "10" },
+          { nome: "Andre", equipe: "Liverpool", gols: "3" },
+          { nome: "Ricardo", equipe: "Liverpool", gols: "1" },
+        ],
+        assistencia: [
+          { nome: "André", equipe: "System", assistencias: "10" },
+          { nome: "Thiago", equipe: "System", assistencias: "7" },
+          { nome: "Daniel", equipe: "System", assistencias: "6" },
+          { nome: "Diego", equipe: "System", assistencias: "3" },
+          { nome: "GG", equipe: "System", assistencias: "1" },
         ],
       },
     ],

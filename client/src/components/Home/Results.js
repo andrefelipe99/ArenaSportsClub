@@ -9,7 +9,7 @@ export function Results() {
   useEffect(() => {
     fetch(
       //"https://soccer.sportmonks.com/api/v2.0/standings/season/19735?api_token=EyTipP3KYREnTTUsvLNXeaRO29eD10yZcovutsceLeo7dtCXtwdiicwJHm3p&include="
-      "https://arena-sports-club-api.vercel.app/api"
+      "http://localhost:5000/api"
     )
       .then((response) => response.json())
       .then((data) => {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button } from "react-bootstrap";
-import { Row, Col } from "react-bootstrap";
+import { Container, Button, Row, Col } from "react-bootstrap";
 import ButtonSumMatch from "../components/Match/ButtonSum";
 import ButtonEstMatch from "../components/Match/ButtonEst";
 import ButtonForMatch from "../components/Match/ButtonFor";
@@ -52,7 +51,7 @@ export function Match() {
                     <img
                       src={listMatch[0].teams.homeImg}
                       alt={`${listMatch[0].teams.homeName}`}
-                      width="128px"
+                      width="128"
                     />
                     <span className="teams-name">
                       {listMatch[0].teams.homeName}

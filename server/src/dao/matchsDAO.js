@@ -99,6 +99,35 @@ export default class matchsDAO {
             schedule: 1,
           },
         },
+        {
+          $group: {
+            _id: { championship: "$championship" },
+            matchs: {
+              $addToSet: {
+                idMatch: "$idMatch",
+                status: "$status",
+                time: "$time",
+                schedule: "$schedule",
+                scoreHome: "$scoreHome",
+                scoreAway: "$scoreAway",
+                teams: {
+                  homeId: "$teams.homeId",
+                  homeName: "$teams.homeName",
+                  homeImg: "$teams.homeImg",
+                  awayId: "$teams.awayId",
+                  awayName: "$teams.awayName",
+                  awayImg: "$teams.awayImg",
+                },
+              },
+            },
+          },
+        },
+        {
+          $sort: {
+            "_id.championship": 1,
+            "matchs.schedule": 1,
+          },
+        },
       ];
       return await matchs.aggregate(pipeline).toArray();
     } catch (e) {

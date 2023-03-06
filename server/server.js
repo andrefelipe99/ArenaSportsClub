@@ -11,6 +11,11 @@ app.use("/api/v1/football", football);
 //app.use("*", (req, res) => res.status(404).json({ error: "not found" }));
 
 const teste = await matchsCrawler.getMatchs();
+const teste2 = async () => {
+  const chupa = await matchsCrawler.clearMatchs();
+};
+setTimeout(teste2, 5000);
+
 app.get("/pp", (req, res) => {
   res.json({ teste });
 });

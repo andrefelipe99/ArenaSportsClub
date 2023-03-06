@@ -47,10 +47,14 @@ export function Search(props) {
         listTeams?.map((team, i) => (
           <ListGroup.Item
             key={i}
-            id="list-group-sidebar-search"
+            id={
+              theme === "nav"
+                ? "list-group-navbar-search"
+                : "list-group-sidebar-search"
+            }
             className="justify-content-center-search"
           >
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-center-search">
               <Col md={2}>
                 <img
                   className="img-margin"

@@ -42,7 +42,56 @@
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
   font-size: 24px;
-  padding: 2px;
+  justify-content: center;
+}
+
+.button-group-results {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  gap: 1rem;
+}
+
+select.form-results {
+  color: antiquewhite;
+  border-radius: 10px;
+  background-color: rgb(131, 125, 125);
+  border-color: rgb(131, 125, 125);
+  width: auto;
+}
+
+#button-filter {
+  color: antiquewhite;
+  background-color: rgb(131, 125, 125);
+  border-color: rgb(131, 125, 125);
+  border-radius: 10px;
+  align-items: center;
+}
+
+#button-filter:hover {
+  background-color: rgb(175, 173, 173);
+  border-color: rgb(131, 125, 125);
+}
+
+#button-filter-selected {
+  color: antiquewhite;
+  background-color: #000000b3;
+  border-color: #000000b3;
+  border-radius: 10px;
+  align-items: center;
+}
+
+.match-result-number-home {
+  background-color: antiquewhite;
+  color: #4a8464;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 24px;
+  justify-content: center;
 }
 
 .align-home {

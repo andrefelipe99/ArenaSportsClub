@@ -10,9 +10,26 @@
   padding-left: 2px;
 }
 
+#list-group-navbar-search {
+  border-radius: 0ch;
+  background-color: #aecdbc;
+  color: black;
+  font-family: Lato, sans-serif;
+  font-size: medium;
+  border: none;
+  padding: 4px;
+  padding-right: 1rem;
+}
+
+#list-group-navbar-search:hover {
+  background-color: #88c67e;
+  transition: 0.7s;
+}
+
 #list-group-sidebar-search {
   border-radius: 0ch;
   background-color: #4a8464;
+  color: antiquewhite;
   font-family: Lato, sans-serif;
   font-size: medium;
   border: none;

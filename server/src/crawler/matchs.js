@@ -15,6 +15,8 @@ const urlRC = "/images/redcard.png";
 const urlYR = "/images/yellowred.png";
 const urlSubIn = "fas fa-long-arrow-alt-up substitution-in";
 const urlSubOut = "fas fa-long-arrow-alt-down substitution-out";
+const imgDefault =
+  "https://www.placardefutebol.com.br/images/escudo-de-futebol.png";
 
 const matchs = [];
 const events = [];
@@ -27,12 +29,13 @@ const lineupAwayB = [];
 export default class matchsCrawler {
   static async clearMatchs() {
     try {
+      console.log(matchs.length);
       matchs.splice(0, Infinity);
       const matchsUpdated = await this.getMatchs();
       return;
     } catch (error) {
-      console.error(`Unable to clear matchs: ${e}`);
-      return { error: e };
+      console.error(`Unable to clear matchs: ${error}`);
+      return { error: error };
     }
   }
 
@@ -48,7 +51,6 @@ export default class matchsCrawler {
 
           $("#livescore .container.content a").each(function (idx, e) {
             if ($(this).text().trim() !== "Ver tabela e classificação") {
-              count++;
               var teamHome = $(this)
                 .find("div:nth-child(2) > h5")
                 .text()
@@ -675,42 +677,48 @@ export default class matchsCrawler {
                       schedule;
                     var idMatch = "";
 
-                    matchs.push({
-                      idMatch: idMatch,
-                      idTitle: idTitle,
-                      championship: championship,
-                      turn: turn,
-                      status: status,
-                      time: time,
-                      day: day,
-                      schedule: schedule,
-                      referee: referee,
-                      stadium: stadium,
-                      scoreHome: scoreHome,
-                      scoreAway: scoreAway,
-                      teams: {
-                        homeId: "",
-                        homeName: teamHome,
-                        homeImg: teamHomeImg,
-                        awayId: "",
-                        awayName: teamAway,
-                        awayImg: teamAwayImg,
-                      },
-                      events: eventsAux,
-                      statistics: statisticsAux,
-                      lineups: {
-                        homeStarting: lineupHomeSAux,
-                        awayStarting: lineupAwaySAux,
-                        homeBench: lineupHomeBAux,
-                        awayBench: lineupAwayBAux,
-                      },
-                    });
+                    if (
+                      teamHomeImg !== imgDefault &&
+                      teamAwayImg !== imgDefault
+                    ) {
+                      count++;
+                      matchs.push({
+                        idMatch: idMatch,
+                        idTitle: idTitle,
+                        championship: championship,
+                        championshipId: "",
+                        turn: turn,
+                        status: status,
+                        time: time,
+                        day: day,
+                        schedule: schedule,
+                        referee: referee,
+                        stadium: stadium,
+                        scoreHome: scoreHome,
+                        scoreAway: scoreAway,
+                        teams: {
+                          homeId: "",
+                          homeName: teamHome,
+                          homeImg: teamHomeImg,
+                          awayId: "",
+                          awayName: teamAway,
+                          awayImg: teamAwayImg,
+                        },
+                        events: eventsAux,
+                        statistics: statisticsAux,
+                        lineups: {
+                          homeStarting: lineupHomeSAux,
+                          awayStarting: lineupAwaySAux,
+                          homeBench: lineupHomeBAux,
+                          awayBench: lineupAwayBAux,
+                        },
+                      });
+                    }
                   });
                 });
               }
             }
           });
-          console.log(count);
         });
       });
       return matchs;

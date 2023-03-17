@@ -11,40 +11,40 @@ export function Championship() {
   const [championship, setChampionship] = useState([]);
 
   const [buttonChange, setButtonChange] = useState({
-    resultado: true,
-    calendario: false,
-    tabela: false,
-    estatistica: false,
+    result: true,
+    calendar: false,
+    table: false,
+    statistic: false,
   });
 
   const changeSelected = (buttonName) => {
     if (buttonName === "buttonResume") {
       setButtonChange({
-        resultado: true,
-        calendario: false,
-        tabela: false,
-        estatistica: false,
+        result: true,
+        calendar: false,
+        table: false,
+        statistic: false,
       });
     } else if (buttonName === "buttonMatchs") {
       setButtonChange({
-        resultado: false,
-        calendario: true,
-        tabela: false,
-        estatistica: false,
+        result: false,
+        calendar: true,
+        table: false,
+        statistic: false,
       });
     } else if (buttonName === "buttonTable") {
       setButtonChange({
-        resultado: false,
-        calendario: false,
-        tabela: true,
-        estatistica: false,
+        result: false,
+        calendar: false,
+        table: true,
+        statistic: false,
       });
     } else {
       setButtonChange({
-        resultado: false,
-        calendario: false,
-        tabela: false,
-        estatistica: true,
+        result: false,
+        calendar: false,
+        table: false,
+        statistic: true,
       });
     }
   };
@@ -61,7 +61,7 @@ export function Championship() {
   return (
     <Container>
       <div>
-        {typeof championship[0]?.name === "undefined" ? (
+        {typeof championship[1]?.name === "undefined" ? (
           <div id="match-section_title">
             <span> CAMPEONATO NÃO ENCONTRADO </span>
           </div>
@@ -70,19 +70,18 @@ export function Championship() {
             <div className="heading">
               <img
                 className="heading_logo heading_logo--1"
-                src={championship[0].img}
-                alt={`${championship[0].name}`}
+                src={championship[1].img}
+                alt={`${championship[1].name}`}
                 width="128px"
               />
               <div className="heading_title">
-                <div className="heading_name">{championship[0].name}</div>
+                <div className="heading_name">{championship[1].name}</div>
               </div>
-              <div className="heading_info">{championship[0].season}</div>
             </div>
             <div className="button-group-championship">
               <Button
                 id={
-                  buttonChange.resultado
+                  buttonChange.result
                     ? "button-championship-selected"
                     : "button-championship"
                 }
@@ -93,7 +92,7 @@ export function Championship() {
               </Button>
               <Button
                 id={
-                  buttonChange.calendario
+                  buttonChange.calendar
                     ? "button-championship-selected"
                     : "button-championship"
                 }
@@ -104,7 +103,7 @@ export function Championship() {
               </Button>
               <Button
                 id={
-                  buttonChange.tabela
+                  buttonChange.table
                     ? "button-championship-selected"
                     : "button-championship"
                 }
@@ -115,7 +114,7 @@ export function Championship() {
               </Button>
               <Button
                 id={
-                  buttonChange.estatistica
+                  buttonChange.statistic
                     ? "button-championship-selected"
                     : "button-championship"
                 }
@@ -128,19 +127,19 @@ export function Championship() {
 
             <div>
               <ButtonResume
-                actived={buttonChange.resultado}
+                actived={buttonChange.result}
                 championship={championship}
               />
               <ButtonMatchs
-                actived={buttonChange.calendario}
+                actived={buttonChange.calendar}
                 championship={championship}
               />
               <ButtonTable
-                actived={buttonChange.tabela}
+                actived={buttonChange.table}
                 championship={championship}
               />
               <ButtonStatistic
-                actived={buttonChange.estatistica}
+                actived={buttonChange.statistic}
                 championship={championship}
               />
             </div>

@@ -4,13 +4,13 @@ import ButtonSumMatch from "../components/Match/ButtonSum";
 import ButtonEstMatch from "../components/Match/ButtonEst";
 import ButtonForMatch from "../components/Match/ButtonFor";
 import MatchDataService from "../services/match.js";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "../styles/pages/Match.css";
 
 export function Match() {
   let { id } = useParams();
   const [loading, setLoading] = useState(true);
-  const [listMatch, setListMatch] = useState([{}]);
+  const [listMatch, setListMatch] = useState([]);
   const [buttonChange, setButtonChange] = useState({
     sumario: true,
     estatistica: false,
@@ -57,7 +57,9 @@ export function Match() {
           ) : (
             <>
               <div className="nameCamp">
-                <h1>{listMatch[0].championship}</h1>
+                <Link to="/campeonato" className="link-match">
+                  <h1>{listMatch[0].championship}</h1>
+                </Link>
               </div>
               <Row md={12} id="row-content-match">
                 <div className="content-match">

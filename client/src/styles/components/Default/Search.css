@@ -21,7 +21,7 @@
 }
 
 #list-group-navbar-search:hover {
-  background-color: #88c67e;
+  background-color: rgb(136, 198, 126, 0.6);
   transition: 0.7s;
 }
 
@@ -37,7 +37,7 @@
 }
 
 #list-group-sidebar-search:hover {
-  background-color: #88c67e;
+  background-color: rgb(136, 198, 126, 0.6);
   transition: 0.7s;
 }
 
@@ -55,6 +55,7 @@
 }
 
 .img-margin {
+  width: 40px;
   margin-top: 0.3ch;
   margin-bottom: 0.3ch;
 }

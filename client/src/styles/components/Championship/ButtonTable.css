@@ -1,10 +1,10 @@
-#container-buttonStatistic {
+#container-buttonTable {
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 0;
 }
 
-.butSta-section {
+.butTable-section {
   display: flex;
   padding: 10px;
   margin-top: 1.1ch;
@@ -16,7 +16,7 @@
   margin-bottom: 30px;
 }
 
-.butSta-header {
+.butTable-header {
   text-align: center;
   padding-bottom: 20px;
   font-weight: 700;
@@ -28,7 +28,7 @@
   padding: 0.8rem;
 }
 
-#text-goals {
+#text-point {
   font-weight: bolder;
   text-align: center;
   padding: 0.8rem;
@@ -40,7 +40,12 @@
   width: 400px;
 }
 
-#stat_Notitle {
+.butTable-group {
+  display: flex;
+  flex-direction: column;
+}
+
+#table_Notitle {
   display: flex;
   align-items: center;
   justify-content: center;

@@ -62,7 +62,6 @@ export function Search(props) {
                   className="img-margin"
                   src={team.logo}
                   alt={`${team.logo}`}
-                  width="40"
                 />
               </Col>
               <Col md={8}>
@@ -89,7 +88,6 @@ export function Search(props) {
                   className="img-margin"
                   src={team.logo}
                   alt={`${team.logo}`}
-                  width="40"
                 />
               </Col>
               <Col md={8}>

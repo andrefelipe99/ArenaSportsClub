@@ -122,7 +122,6 @@ export function SideBar() {
                       src={favorito.paisUrl}
                       alt={`${favorito.paisUrl}`}
                       title={`${favorito.nome}`}
-                      width="25"
                     />
                   </Col>
                   <Col md={8} id="name-camp-sidebar">
@@ -169,7 +168,6 @@ export function SideBar() {
                       src={campeonato.paisUrl}
                       alt={`${campeonato.paisUrl}`}
                       title={`${campeonato.nome}`}
-                      width="25"
                     />
                   </Col>
                   <Col md={8} id="name-camp-sidebar">
@@ -216,7 +214,6 @@ export function SideBar() {
                       src={favorito.logo}
                       alt={`${favorito.logo}`}
                       title={`${favorito.name}`}
-                      width="25"
                     />
                   </Col>
                   <Col md={8} id="name-camp-sidebar">

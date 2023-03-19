@@ -32,7 +32,7 @@ export function Header() {
         <Container>
           <Navbar.Brand>
             <Link to="/" className="link-header">
-              <img src={logo} alt="Logo" height="60" width="60"></img> Arena
+              <img src={logo} alt="Logo" className="logo-header"></img> Arena
               Sport Club
             </Link>
           </Navbar.Brand>
@@ -48,8 +48,6 @@ export function Header() {
               >
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/183/183129.png"
-                  height="22"
-                  width="22"
                   alt="Search"
                   className="nav-img"
                 />{" "}
@@ -67,8 +65,6 @@ export function Header() {
               >
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/81/81460.png"
-                  height="22"
-                  width="22"
                   alt="Search"
                   className="nav-img"
                 />{" "}

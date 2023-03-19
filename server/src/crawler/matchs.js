@@ -6,8 +6,8 @@ const urlToday = "/jogos-de-hoje";
 const urlYesterday = "/jogos-de-ontem";
 const urlTomorrow = "/jogos-de-amanha";
 
-const urlDays = [url + urlToday];
-//const urlDays = [url + urlToday, url + urlYesterday, url + urlTomorrow];
+//const urlDays = [url + urlToday, url + urlTomorrow];
+const urlDays = [url + urlToday, url + urlYesterday, url + urlTomorrow];
 const urlGoal = "/images/goal.png";
 const urlOwnGoal = "/images/own-goal.png";
 const urlYC = "/images/yellowcard.png";
@@ -19,6 +19,7 @@ const imgDefault =
   "https://www.placardefutebol.com.br/images/escudo-de-futebol.png";
 
 const matchs = [];
+const championships = [];
 const events = [];
 const statistics = [];
 const lineupHomeS = [];
@@ -27,9 +28,12 @@ const lineupHomeB = [];
 const lineupAwayB = [];
 
 export default class matchsCrawler {
+  static async getchampionships() {
+    return championships;
+  }
+
   static async clearMatchs() {
     try {
-      console.log(matchs.length);
       matchs.splice(0, Infinity);
       const matchsUpdated = await this.getMatchs();
       return;
@@ -42,6 +46,12 @@ export default class matchsCrawler {
   static async getMatchs() {
     if (matchs.length != 0) return matchs;
     else {
+      events.splice(0, Infinity);
+      statistics.splice(0, Infinity);
+      lineupHomeS.splice(0, Infinity);
+      lineupAwayS.splice(0, Infinity);
+      lineupHomeB.splice(0, Infinity);
+      lineupAwayB.splice(0, Infinity);
       urlDays.forEach((urls) => {
         request(urls, function (err, res, body) {
           if (err) console.log("Error: " + err);
@@ -61,13 +71,13 @@ export default class matchsCrawler {
                 .trim();
               var scoreHome = $(this)
                 .find(
-                  "div.row.align-items-center.content > div.w-25.p-1.match-score.d-flex.justify-content-end > h4 > span"
+                  "div.row.align-items-center.content > div.w-25.p-1.match-score.d-flex.justify-content-end > h4 > span.badge-default"
                 )
                 .text()
                 .trim();
               var scoreAway = $(this)
                 .find(
-                  "div.row.align-items-center.content > div.w-25.p-1.match-score.d-flex.justify-content-start > h4 > span"
+                  "div.row.align-items-center.content > div.w-25.p-1.match-score.d-flex.justify-content-start > h4 > span.badge-default"
                 )
                 .text()
                 .trim();
@@ -88,8 +98,8 @@ export default class matchsCrawler {
                 !time.includes("HOJE")
               ) {
                 status = "AO VIVO";
-              } else if (time.includes("AMANHÃ")) {
-                status = "AMANHÃ";
+              } else if (time.includes("AMANHÃ") || time.includes("HOJE")) {
+                status = "A REALIZAR";
               }
 
               var urlMatch = url + hrefName;
@@ -100,6 +110,11 @@ export default class matchsCrawler {
                   var $ = load(body);
 
                   $("div.container.main-content").each(function (index, e) {
+                    var championshipUrl = $(this)
+                      .find(
+                        "#livescore > div:nth-child(1) > div:nth-child(1) > div > a"
+                      )
+                      .attr("href");
                     var championship = $(this)
                       .find(
                         "#livescore > div:nth-child(1) > div:nth-child(1) > div > a > h2"
@@ -130,8 +145,8 @@ export default class matchsCrawler {
                       .trim();
 
                     dateTime = dateTime.split("às");
-                    var day = dateTime[0].trim();
-                    var schedule = dateTime[1].trim();
+                    var day = dateTime[0]?.trim();
+                    var schedule = dateTime[1]?.trim();
 
                     if (
                       $(this)
@@ -667,14 +682,7 @@ export default class matchsCrawler {
                         });
                     });
 
-                    var idTitle =
-                      teamHome +
-                      " x " +
-                      teamAway +
-                      " - " +
-                      day +
-                      " " +
-                      schedule;
+                    var idTitle = teamHome + " x " + teamAway + " - " + day;
                     var idMatch = "";
 
                     if (
@@ -685,8 +693,9 @@ export default class matchsCrawler {
                       matchs.push({
                         idMatch: idMatch,
                         idTitle: idTitle,
+                        idChampionship: "",
                         championship: championship,
-                        championshipId: "",
+                        championshipUrl: championshipUrl,
                         turn: turn,
                         status: status,
                         time: time,
@@ -717,6 +726,17 @@ export default class matchsCrawler {
                   });
                 });
               }
+            } else if ($(this).text().trim() === "Ver tabela e classificação") {
+              var hrefChampionship = $(this).attr("href");
+              var repeated = false;
+
+              championships.forEach((c) => {
+                if (c === hrefChampionship) {
+                  repeated = true;
+                }
+              });
+
+              if (!repeated) championships.push(hrefChampionship);
             }
           });
         });

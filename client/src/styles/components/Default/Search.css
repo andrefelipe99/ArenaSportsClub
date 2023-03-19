@@ -1,24 +1,23 @@
 #display-search {
-  /* background-color: #aecdbc; */
-  background-color: #4a8464;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
   width: 306px;
   max-height: 300px;
   overflow-y: auto;
-  padding-left: 2px;
+  color: black;
 }
 
 #list-group-navbar-search {
   border-radius: 0ch;
   background-color: #aecdbc;
   color: black;
-  font-family: Lato, sans-serif;
+  font-family: Lato;
   font-size: medium;
   border: none;
   padding: 4px;
   padding-right: 1rem;
+  text-decoration: none;
 }
 
 #list-group-navbar-search:hover {
@@ -30,7 +29,7 @@
   border-radius: 0ch;
   background-color: #4a8464;
   color: antiquewhite;
-  font-family: Lato, sans-serif;
+  font-family: Lato;
   font-size: medium;
   border: none;
   padding: 4px;

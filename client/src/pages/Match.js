@@ -9,6 +9,7 @@ import "../styles/pages/Match.css";
 
 export function Match() {
   let { id } = useParams();
+  const [loading, setLoading] = useState(true);
   const [listMatch, setListMatch] = useState([{}]);
   const [buttonChange, setButtonChange] = useState({
     sumario: true,
@@ -27,17 +28,30 @@ export function Match() {
   };
 
   useEffect(() => {
-    MatchDataService.getMatch(id).then((response) =>
-      setListMatch(response.data)
-    );
+    MatchDataService.getMatch(id).then((response) => {
+      setListMatch(response.data);
+      const timer = setTimeout(() => {
+        setLoading(false);
+      }, 500);
+      return () => clearTimeout(timer);
+    });
   }, [id]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      MatchDataService.getMatch(id).then((response) =>
+        setListMatch(response.data)
+      );
+    }, 30000);
+    return () => clearTimeout(timer);
+  });
+
   return (
-    <Container>
+    <Container id="container-match">
       <div>
         <div>
           {typeof listMatch[0]?.teams?.homeImg === "undefined" ? (
-            <div id="match-section_title">
+            <div className="match-section_title">
               <span> PARTIDA NÃO ENCONTRADA </span>
             </div>
           ) : (
@@ -48,18 +62,23 @@ export function Match() {
               <Row md={12} id="row-content-match">
                 <div className="content-match">
                   <Col md={3} id="col-content-match">
-                    <img
-                      src={listMatch[0].teams.homeImg}
-                      alt={`${listMatch[0].teams.homeName}`}
-                      width="128"
-                    />
-                    <span className="teams-name">
-                      {listMatch[0].teams.homeName}
-                    </span>
+                    <Row className="col-img-match">
+                      <img
+                        src={listMatch[0].teams.homeImg}
+                        alt={`${listMatch[0].teams.homeName}`}
+                        title={`${listMatch[0].teams.homeName}`}
+                        className="img-content-match"
+                      />
+                    </Row>
+                    <Row>
+                      <span className="teams-name">
+                        {listMatch[0].teams.homeName}
+                      </span>
+                    </Row>
                   </Col>
                   <Col md={6} id="col-results-match">
                     <div>
-                      <span className="p_matchTime">{listMatch[0].turn}</span>
+                      <span className="time-match">{listMatch[0].turn}</span>
                     </div>
                     <div>
                       <span className="number-results-match">
@@ -71,23 +90,28 @@ export function Match() {
                       </span>
                     </div>
                     <div>
-                      <span className=".p_matchTime">{listMatch[0].time}</span>
+                      <span className="time-match">{listMatch[0].time}</span>
                     </div>
                   </Col>
                   <Col md={3} id="col-content-match">
-                    <img
-                      src={listMatch[0].teams.awayImg}
-                      alt={`${listMatch[0].teams.awayName}`}
-                      width="128px"
-                    />
-                    <span className="teams-name">
-                      {listMatch[0].teams.awayName}
-                    </span>
+                    <Row className="col-img-match">
+                      <img
+                        src={listMatch[0].teams.awayImg}
+                        alt={`${listMatch[0].teams.awayName}`}
+                        title={`${listMatch[0].teams.awayName}`}
+                        className="img-content-match"
+                      />
+                    </Row>
+                    <Row>
+                      <span className="teams-name">
+                        {listMatch[0].teams.awayName}
+                      </span>
+                    </Row>
                   </Col>
 
-                  <p className="p_matchTime">
+                  <span className="time-match">
                     {listMatch[0].day} - {listMatch[0].schedule}
-                  </p>
+                  </span>
                   {listMatch[0].stadium !== "TBC (TBC)" ? (
                     <p className="p_matchStadium"> {listMatch[0].stadium}</p>
                   ) : (

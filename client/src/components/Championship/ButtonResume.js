@@ -2,9 +2,7 @@
 // import Container from "react-bootstrap/Container";
 
 function ButtonResume({ actived, championship }) {
-  return (
-    console.log('aloo')
-  );
+  return;
 }
 
 export default ButtonResume;

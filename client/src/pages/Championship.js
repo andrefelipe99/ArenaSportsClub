@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button } from "react-bootstrap";
-//import { Link } from "react-router-dom";
 import ButtonResume from "../components/Championship/ButtonResume";
 import ButtonMatchs from "../components/Championship/ButtonMatchs";
 import ButtonTable from "../components/Championship/ButtonTable";
@@ -53,100 +52,97 @@ export function Championship() {
     fetch("http://localhost:5000/camp")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.camp);
         setChampionship(data.camp);
       });
   }, []);
 
   return (
     <Container>
-      <div>
-        {typeof championship[0]?.name === "undefined" ? (
-          <div id="match-section_title">
-            <span> CAMPEONATO NÃO ENCONTRADO </span>
+      {typeof championship[0]?.name === "undefined" ? (
+        <div className="match-section_title">
+          <span> CAMPEONATO NÃO ENCONTRADO </span>
+        </div>
+      ) : (
+        <>
+          <div className="heading">
+            <img
+              className="heading_logo heading_logo--1"
+              src={championship[0].img}
+              alt={`${championship[0].name}`}
+              width="128px"
+            />
+            <div className="heading_title">
+              <div className="heading_name">{championship[0].name}</div>
+            </div>
+            <div className="heading_info">{championship[0].season}</div>
           </div>
-        ) : (
-          <>
-            <div className="heading">
-              <img
-                className="heading_logo heading_logo--1"
-                src={championship[0].img}
-                alt={`${championship[0].name}`}
-                width="128px"
-              />
-              <div className="heading_title">
-                <div className="heading_name">{championship[0].name}</div>
-              </div>
-              <div className="heading_info">{championship[0].season}</div>
-            </div>
-            <div className="button-group-championship">
-              <Button
-                id={
-                  buttonChange.resultado
-                    ? "button-championship-selected"
-                    : "button-championship"
-                }
-                title="Resultados"
-                onClick={() => changeSelected("buttonResume")}
-              >
-                RESULTADOS
-              </Button>
-              <Button
-                id={
-                  buttonChange.calendario
-                    ? "button-championship-selected"
-                    : "button-championship"
-                }
-                title="Calendário"
-                onClick={() => changeSelected("buttonMatchs")}
-              >
-                CALENDÁRIO
-              </Button>
-              <Button
-                id={
-                  buttonChange.tabela
-                    ? "button-championship-selected"
-                    : "button-championship"
-                }
-                title="Tabela"
-                onClick={() => changeSelected("buttonTable")}
-              >
-                TABELA
-              </Button>
-              <Button
-                id={
-                  buttonChange.estatistica
-                    ? "button-championship-selected"
-                    : "button-championship"
-                }
-                title="Estatísticas"
-                onClick={() => changeSelected("buttonStatistic")}
-              >
-                ESTATÍSTICAS
-              </Button>
-            </div>
+          <div className="button-group-championship">
+            <Button
+              id={
+                buttonChange.resultado
+                  ? "button-championship-selected"
+                  : "button-championship"
+              }
+              title="Resultados"
+              onClick={() => changeSelected("buttonResume")}
+            >
+              RESULTADOS
+            </Button>
+            <Button
+              id={
+                buttonChange.calendario
+                  ? "button-championship-selected"
+                  : "button-championship"
+              }
+              title="Calendário"
+              onClick={() => changeSelected("buttonMatchs")}
+            >
+              CALENDÁRIO
+            </Button>
+            <Button
+              id={
+                buttonChange.tabela
+                  ? "button-championship-selected"
+                  : "button-championship"
+              }
+              title="Tabela"
+              onClick={() => changeSelected("buttonTable")}
+            >
+              TABELA
+            </Button>
+            <Button
+              id={
+                buttonChange.estatistica
+                  ? "button-championship-selected"
+                  : "button-championship"
+              }
+              title="Estatísticas"
+              onClick={() => changeSelected("buttonStatistic")}
+            >
+              ESTATÍSTICAS
+            </Button>
+          </div>
 
-            <div>
-              <ButtonResume
-                actived={buttonChange.resultado}
-                championship={championship}
-              />
-              <ButtonMatchs
-                actived={buttonChange.calendario}
-                championship={championship}
-              />
-              <ButtonTable
-                actived={buttonChange.tabela}
-                championship={championship}
-              />
-              <ButtonStatistic
-                actived={buttonChange.estatistica}
-                championship={championship}
-              />
-            </div>
-          </>
-        )}
-      </div>
+          <div>
+            <ButtonResume
+              actived={buttonChange.resultado}
+              championship={championship}
+            />
+            <ButtonMatchs
+              actived={buttonChange.calendario}
+              championship={championship}
+            />
+            <ButtonTable
+              actived={buttonChange.tabela}
+              championship={championship}
+            />
+            <ButtonStatistic
+              actived={buttonChange.estatistica}
+              championship={championship}
+            />
+          </div>
+        </>
+      )}
     </Container>
   );
 }

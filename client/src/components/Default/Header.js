@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
-import logo from "../assets/images/logo1.jpg";
-import "../styles/components/Header.css";
-import TeamDataService from "../services/team";
-import Search from "./Home/Search";
+import { Container, Nav, Navbar, Form } from "react-bootstrap";
+import logo from "../../assets/images/logo1.jpg";
+import { useLocation, Link } from "react-router-dom";
+import TeamDataService from "../../services/team";
+import Search from "./Search";
+import "../../styles/components/Default/Header.css";
 
-function HeaderApp() {
+export function Header() {
   const [searchField, setSearchField] = useState("");
   const [listTeams, setListTeams] = useState([]);
+  const location = useLocation();
 
   const handleSearch = (event) => {
     const { value } = event.target;
@@ -31,14 +30,22 @@ function HeaderApp() {
     <>
       <Navbar className="bg-teal" fixed="top" sticky="top" expand="lg">
         <Container>
-          <Navbar.Brand href="/">
-            <img src={logo} alt="Logo" height="60" width="60"></img> Arena Sport
-            Club
+          <Navbar.Brand>
+            <Link to="/" className="link-header">
+              <img src={logo} alt="Logo" height="60" width="60"></img> Arena
+              Sport Club
+            </Link>
           </Navbar.Brand>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="m-auto">
-              <Nav.Link href="/partida/1370">
+              <Link
+                to="/"
+                className={
+                  location.pathname === "/" ? "match-header" : "link-header"
+                }
+              >
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/183/183129.png"
                   height="22"
@@ -49,8 +56,15 @@ function HeaderApp() {
                 <span className="nav-font" title="Resultados">
                   RESULTADOS
                 </span>
-              </Nav.Link>
-              <Nav.Link href="/campeonato">
+              </Link>
+              <Link
+                to="/noticias"
+                className={
+                  location.pathname === "/noticias"
+                    ? "championship-header"
+                    : "link-header"
+                }
+              >
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/81/81460.png"
                   height="22"
@@ -61,13 +75,13 @@ function HeaderApp() {
                 <span className="nav-font" title="Notícias">
                   NOTÍCIAS
                 </span>
-              </Nav.Link>
+              </Link>
             </Nav>
             <Form className="d-flex">
               <Form.Control
                 type="search"
                 placeholder="Pesquisar"
-                className="me-2"
+                className="me-2 search-header"
                 aria-label="Search"
                 value={searchField}
                 onChange={handleSearch}
@@ -78,7 +92,11 @@ function HeaderApp() {
       </Navbar>
       <div id="position-search">
         {listTeams?.length > 0 ? (
-          <Search theme={"nav"} listTeams={listTeams} />
+          <Search
+            theme={"nav"}
+            listTeams={listTeams}
+            setSearchField={setSearchField}
+          />
         ) : (
           <></>
         )}
@@ -86,5 +104,3 @@ function HeaderApp() {
     </>
   );
 }
-
-export default HeaderApp;

@@ -2,9 +2,7 @@
 // import Container from "react-bootstrap/Container";
 
 function ButtonMatchs({ actived, championship }) {
-  return (
-    console.log('aloo')
-  );
+  return;
 }
 
 export default ButtonMatchs;

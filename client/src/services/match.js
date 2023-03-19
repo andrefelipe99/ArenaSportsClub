@@ -36,4 +36,5 @@ class MatchDataService {
   //   }
 }
 
+// eslint-disable-next-line
 export default new MatchDataService();

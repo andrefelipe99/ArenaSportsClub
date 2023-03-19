@@ -1,0 +1,52 @@
+.bg-teal {
+  background-color: #aecdbc;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-weight: bold;
+  font-size: large;
+}
+
+.nav-img {
+  margin-bottom: 5px;
+}
+
+#position-search {
+  background-color: #aecdbc;
+  border-radius: 0.5rem;
+  position: absolute;
+  width: 300px;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /*This is relative to the navbar now*/
+  left: 67.7vw;
+  right: 0;
+  top: 88px;
+}
+
+.search-header {
+  font-family: Lato;
+}
+
+a.link-header {
+  padding: 0.25rem 0.5rem;
+  color: rgb(0, 0, 0, 0.6);
+  text-decoration: none;
+  border-top: 3px solid #aecdbc;
+  border-bottom: 3px solid #aecdbc;
+}
+
+a.match-header,
+a.championship-header {
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-top: 3px solid #aecdbc;
+  border-bottom: 3px solid #4a8464;
+  color: rgb(0, 0, 0, 0.9);
+}
+
+a.link-header:hover,
+a.match-header:hover,
+a.championship-header:hover {
+  color: rgb(0, 0, 0, 0.9);
+}

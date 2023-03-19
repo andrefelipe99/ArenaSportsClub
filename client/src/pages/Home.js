@@ -6,7 +6,7 @@ import "../styles/pages/Home.css";
 
 export function Home() {
   return (
-    <Container>
+    <Container id="container-home">
       <Row md={12}>
         <Col md={3} id="content-side-bar-home">
           <SideBar />

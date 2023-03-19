@@ -1,16 +1,9 @@
-import "../src/styles/fonts.css";
-import HeaderApp from "./components/Header";
-import FooterApp from "./components/Footer";
+// import { Footer } from "./components/default/Footer";
 import { AppRoutes } from "./Routes";
+import "../src/styles/fonts.css";
 
 function App() {
-  return (
-    <>
-      <HeaderApp />
-      <AppRoutes />
-      <FooterApp />
-    </>
-  );
+  return <AppRoutes />;
 }
 
 export default App;

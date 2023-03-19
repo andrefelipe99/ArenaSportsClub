@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { ListGroup, Button, Placeholder, Row, Col } from "react-bootstrap";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
-import "../../styles/components/Home/Search.css";
+import { Link } from "react-router-dom";
+import "../../styles/components/Default/Search.css";
 
 export function Search(props) {
-  const { theme, listTeams } = props;
+  const { theme, listTeams, setSearchField } = props;
   const { favoritesTeams, setFavoritesTeams } = props;
 
   useEffect(() => {
@@ -35,6 +36,10 @@ export function Search(props) {
   const isFavoriteTeams = (team) =>
     favoritesTeams?.some((tea) => tea.id === team.id);
 
+  const deleteSearch = () => {
+    setSearchField("");
+  };
+
   return (
     <ListGroup id="display-search">
       {typeof listTeams === "undefined" ? (
@@ -43,15 +48,39 @@ export function Search(props) {
             <Placeholder xs={8} />
           </Placeholder>
         </ListGroup.Item>
+      ) : theme === "nav" ? (
+        listTeams?.map((team, i) => (
+          <Link
+            to="/equipe"
+            key={i}
+            id="list-group-navbar-search"
+            onClick={() => deleteSearch()}
+          >
+            <Row className="justify-content-center-search">
+              <Col md={2}>
+                <img
+                  className="img-margin"
+                  src={team.logo}
+                  alt={`${team.logo}`}
+                  width="40"
+                />
+              </Col>
+              <Col md={8}>
+                <Row>
+                  <span className="name-search">{team.name}</span>
+                </Row>
+                <Row>
+                  <span className="locality-search">{team.locality}</span>
+                </Row>
+              </Col>
+            </Row>
+          </Link>
+        ))
       ) : (
         listTeams?.map((team, i) => (
           <ListGroup.Item
             key={i}
-            id={
-              theme === "nav"
-                ? "list-group-navbar-search"
-                : "list-group-sidebar-search"
-            }
+            id="list-group-sidebar-search"
             className="justify-content-center-search"
           >
             <Row className="justify-content-center-search">

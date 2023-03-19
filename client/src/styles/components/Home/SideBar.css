@@ -1,5 +1,6 @@
 #container-side-bar {
   background-color: #4a8464;
+  border-radius: 0.5rem;
   padding: 0;
 }
 
@@ -29,6 +30,7 @@
 }
 
 .pais-margin {
+  width: 25px;
   margin-top: 0.3ch;
   margin-bottom: 0.3ch;
 }
@@ -46,7 +48,7 @@
 }
 
 #list-group-sidebar:hover {
-  background-color: #88c67e;
+  background-color: rgb(136, 198, 126, 0.6);
   transition: 0.7s;
 }
 
@@ -71,5 +73,13 @@
 
 #form-sidebar {
   font-family: Lato, sans-serif;
-  margin: 5px;
+  padding: 5px;
+}
+
+input.form-control:focus,
+input.form-control:active {
+  background-color: #fff;
+  border-color: #fff;
+  outline: 0;
+  box-shadow: 0 0 0 0.15rem rgb(136, 198, 126, 0.6);
 }

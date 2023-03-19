@@ -1,47 +1,55 @@
 #container-results {
-  background-color: #4a8464;
+  background-color: #e8faf0;
+  border-radius: 0.5rem;
   padding: 0;
 }
 
-.datas {
-  flex-basis: 100%;
-  font-family: "Courier New", Courier, monospace;
-  font-weight: bold;
-  margin: 0;
-  margin-bottom: 5px;
-}
-
-#partida {
+div.match {
+  background-color: #e8faf0;
+  color: black;
   font-size: large;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-radius: 0ch;
-  background-color: #4a8464;
+  padding: 0.3rem 0;
+  border-radius: 0.5rem;
   border: none;
-  color: antiquewhite;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgb(250, 235, 215, 0.4);
 }
 
-#partida:hover {
-  background-color: #88c67e;
+.match:hover {
+  background-color: rgb(136, 198, 126, 0.6);
   transition: 0.7s;
 }
 
-.matchs-text-home {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 18px;
+hr.border-match {
+  margin: 0 0.5rem;
+  color: rgb(74, 132, 100);
+  border-top: 1px solid;
+}
+
+.matchs-text-results {
+  font-family: Lato;
+  font-size: 1rem;
   font-weight: bold;
 }
 
-.match-result-home {
-  font-family: "Courier New", Courier, monospace;
+.match-results {
+  font-family: Lato;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 2rem;
+  justify-content: center;
+}
+
+.match-number-results {
+  background-color: antiquewhite;
+  color: black;
+  padding: 0 0.4rem;
+  font-size: 1.5rem;
+  font-family: Lato;
+  font-weight: bold;
+  border-radius: 0.5rem;
   justify-content: center;
 }
 
@@ -55,77 +63,138 @@
 
 select.form-results {
   color: antiquewhite;
-  border-radius: 10px;
+  border-radius: 0.75rem;
+  padding: 0.25rem;
   background-color: rgb(131, 125, 125);
   border-color: rgb(131, 125, 125);
   width: auto;
 }
 
-#button-filter {
+button.btn-primary {
+  --bs-btn-active-color: antiquewhite;
+  --bs-btn-active-bg: rgb(131, 125, 125);
+  --bs-btn-active-border-color: rgb(131, 125, 125);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+button.button-filter {
   color: antiquewhite;
   background-color: rgb(131, 125, 125);
   border-color: rgb(131, 125, 125);
-  border-radius: 10px;
+  border-radius: 0.75rem;
   align-items: center;
 }
 
-#button-filter:hover {
+button.button-filter:disabled {
+  color: antiquewhite;
+  background-color: rgb(131, 125, 125);
+  border-color: rgb(131, 125, 125);
+}
+
+button.button-filter:hover {
   background-color: rgb(175, 173, 173);
   border-color: rgb(131, 125, 125);
 }
 
-#button-filter-selected {
+button.button-filter-selected {
   color: antiquewhite;
-  background-color: #000000b3;
-  border-color: #000000b3;
-  border-radius: 10px;
+  background-color: #00897b;
+  border-color: #00897b;
+  border-radius: 0.75rem;
   align-items: center;
 }
 
-.match-result-number-home {
-  background-color: antiquewhite;
-  color: #4a8464;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-radius: 5px;
-  font-family: "Courier New", Courier, monospace;
-  font-weight: bold;
-  font-size: 24px;
+button.button-filter-selected:hover {
+  background-color: #00897b;
+  border-color: #00897b;
+  color: antiquewhite;
+}
+
+div.spinner-results {
+  display: flex;
   justify-content: center;
 }
 
-.align-home {
+.img-results {
+  max-width: 90%;
+  max-height: 100%;
+}
+
+.align-results {
+  height: 3rem;
+  width: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.align-team-home-home {
+.align-team-home-results {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   flex-wrap: wrap;
 }
 
-.align-team-away-home {
+.align-team-away-results {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
 }
 
-#name-team-home {
+.name-team-results {
   overflow: hidden;
   white-space: nowrap;
 }
 
-#button-favorite-home {
+a.link-results {
+  text-decoration: none;
+}
+
+.championship-results {
+  border-radius: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(74, 132, 100);
+}
+
+.col-championship-results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-championship-results {
+  color: antiquewhite;
+}
+
+button.button-championship-results {
+  color: antiquewhite;
+  text-decoration: none;
   background: rgba(76, 175, 80, 0);
   padding: 0.1ch;
   border: none;
 }
 
-#link-home {
-  text-decoration: none;
+.goal-effect-results {
+  color: rgb(74, 132, 100);
+  width: 1.3rem;
+  height: 1.3rem;
+  padding-left: 0.2rem;
+  animation: animate 3s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+  }
 }

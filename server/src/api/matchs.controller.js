@@ -47,7 +47,7 @@ export default class matchsController {
     }
   }
 
-  static async apiPostMatch(req, res, next) {
+  static async apiPostMatch() {
     try {
       const matchs = await matchsCrawler.getMatchs();
       let matchTitle;
@@ -68,13 +68,13 @@ export default class matchsController {
 
           var { error } = MatchResponse;
           if (error) {
-            res.status(400).json({ error });
+            return { error };
           }
         }
       }
-      res.json({ status: "success" });
+      return { status: "success" };
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return { error: error.message };
     }
   }
 }

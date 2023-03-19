@@ -92,16 +92,44 @@ export default class matchsDAO {
     try {
       const pipeline = [
         {
-          $match: { day: date },
+          $match: {
+            day: date,
+          },
         },
         {
           $sort: {
             schedule: 1,
+            idTitle: 1,
+          },
+        },
+        {
+          $lookup: {
+            from: "championships",
+            let: {
+              id: "$idChampionship",
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $eq: ["$idChampionship", "$$id"],
+                  },
+                },
+              },
+            ],
+            as: "championshipObj",
+          },
+        },
+        {
+          $addFields: {
+            championshipObj: "$championshipObj",
           },
         },
         {
           $group: {
-            _id: { championship: "$championship" },
+            _id: {
+              championship: "$championship",
+            },
             matchs: {
               $addToSet: {
                 idMatch: "$idMatch",
@@ -110,22 +138,27 @@ export default class matchsDAO {
                 schedule: "$schedule",
                 scoreHome: "$scoreHome",
                 scoreAway: "$scoreAway",
-                teams: {
-                  homeId: "$teams.homeId",
-                  homeName: "$teams.homeName",
-                  homeImg: "$teams.homeImg",
-                  awayId: "$teams.awayId",
-                  awayName: "$teams.awayName",
-                  awayImg: "$teams.awayImg",
-                },
+                teams: "$teams",
+                events: "$events",
               },
+            },
+          },
+        },
+        { $unwind: "$matchs" },
+        { $sort: { "matchs.schedule": 1, "matchs.idMatch": 1 } },
+        {
+          // this $group stage is needed, because we did
+          // $unwind before
+          $group: {
+            _id: "$_id",
+            matchs: {
+              $push: "$matchs",
             },
           },
         },
         {
           $sort: {
             "_id.championship": 1,
-            "matchs.schedule": 1,
           },
         },
       ];
@@ -166,6 +199,8 @@ export default class matchsDAO {
       const matchDoc = {
         idMatch: id,
         idTitle: match.idTitle,
+        idChampionship: match.idChampionship,
+        championshipUrl: match.championshipUrl,
         championship: match.championship,
         turn: match.turn,
         status: match.status,
@@ -197,6 +232,8 @@ export default class matchsDAO {
           $set: {
             status: match.status,
             time: match.time,
+            day: match.day,
+            schedule: match.schedule,
             scoreHome: match.scoreHome,
             scoreAway: match.scoreAway,
             teams: match.teams,

@@ -10,4 +10,5 @@ class TeamDataService {
   }
 }
 
+// eslint-disable-next-line
 export default new TeamDataService();

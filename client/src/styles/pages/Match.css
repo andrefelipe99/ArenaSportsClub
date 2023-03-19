@@ -1,14 +1,30 @@
+#container-match {
+  border-radius: 0.5rem;
+}
+
 .nameCamp {
   text-align: center;
   background-color: #00897b;
-  color: antiquewhite;
   font-family: monospace;
-  padding: 1ch;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.link-match {
+  color: antiquewhite;
+  text-decoration: none;
+}
+
+.link-match:hover {
+  color: antiquewhite;
+  text-decoration: underline;
 }
 
 .content-match {
   background-color: #e8faf0;
   border: 0;
+  border-radius: 8px;
   color: black;
   display: flex;
   flex-wrap: wrap;
@@ -59,19 +75,34 @@
   text-align: center;
 }
 
+div.col-img-match {
+  display: flex;
+  height: 128px;
+  width: 128px;
+  justify-content: center;
+  align-items: center;
+}
+
+img.img-content-match {
+  max-height: 100%;
+  max-width: 100%;
+}
+
 #col-results-match {
   text-align: center;
 }
 
-.teams-name {
-  padding-top: 0.5ch;
+span.teams-name {
+  display: flex;
+  align-items: center;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 2rem;
+  height: 96px;
 }
 
-.p_matchTime {
-  flex-basis: 100%;
+span.time-match {
+  font-size: 1.3rem;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
   margin: 0;
@@ -81,18 +112,19 @@
   flex-basis: 100%;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
+  font-size: 1.3rem;
   margin: 0;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 .number-results-match {
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
   font-size: 60px;
-  padding: 2px;
+  padding: 1rem;
 }
 
-#match-section_title {
+.match-section_title {
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,10 +1,10 @@
-import "../styles/components/Footer.css";
 import React from "react";
 import { MDBFooter } from "mdb-react-ui-kit";
 import { BsGithub } from "react-icons/bs";
 import { Col, Row, Container } from "react-bootstrap";
+import "../../styles/components/Default/Footer.css";
 
-function FooterApp() {
+export function Footer() {
   return (
     <MDBFooter id="footer" className="text-center text-lg-start">
       <Container>
@@ -49,5 +49,3 @@ function FooterApp() {
     </MDBFooter>
   );
 }
-
-export default FooterApp;

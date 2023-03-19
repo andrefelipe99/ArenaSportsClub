@@ -1,0 +1,41 @@
+div.center-news {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+div.row-news {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: self-start;
+}
+
+.link-news {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
+  align-items: center;
+}
+
+div.col-news {
+  display: flex;
+  justify-content: center;
+}
+
+.img-news {
+  width: 100%;
+}
+
+.description-news {
+  color: black;
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+}
+
+.description-news:hover {
+  text-decoration: underline;
+}

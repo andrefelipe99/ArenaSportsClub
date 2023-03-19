@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: Lato;
-  src: url("https://fonts.googleapis.com/css2?family=Lato:ital@1&display=swap");
+  src: url("../../public/fonts/Lato-Regular.ttf");
 }
 
 /* remover depois abaixo */
@@ -37,4 +37,5 @@ body {
   height: 100%;
   min-height: 100%;
   background-color: white;
+  overflow-y: scroll;
 }

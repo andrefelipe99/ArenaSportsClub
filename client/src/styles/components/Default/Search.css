@@ -1,28 +1,27 @@
 #display-search {
-  /* background-color: #aecdbc; */
-  background-color: #4a8464;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
   width: 306px;
   max-height: 300px;
   overflow-y: auto;
-  padding-left: 2px;
+  color: black;
 }
 
 #list-group-navbar-search {
   border-radius: 0ch;
   background-color: #aecdbc;
   color: black;
-  font-family: Lato, sans-serif;
+  font-family: Lato;
   font-size: medium;
   border: none;
   padding: 4px;
   padding-right: 1rem;
+  text-decoration: none;
 }
 
 #list-group-navbar-search:hover {
-  background-color: #88c67e;
+  background-color: rgb(136, 198, 126, 0.6);
   transition: 0.7s;
 }
 
@@ -30,7 +29,7 @@
   border-radius: 0ch;
   background-color: #4a8464;
   color: antiquewhite;
-  font-family: Lato, sans-serif;
+  font-family: Lato;
   font-size: medium;
   border: none;
   padding: 4px;
@@ -38,7 +37,7 @@
 }
 
 #list-group-sidebar-search:hover {
-  background-color: #88c67e;
+  background-color: rgb(136, 198, 126, 0.6);
   transition: 0.7s;
 }
 
@@ -56,6 +55,7 @@
 }
 
 .img-margin {
+  width: 40px;
   margin-top: 0.3ch;
   margin-bottom: 0.3ch;
 }

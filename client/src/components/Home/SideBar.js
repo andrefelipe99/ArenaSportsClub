@@ -1,22 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Container, ListGroup, Row, Col, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AiOutlineStar, AiFillStar, AiFillPlusCircle } from "react-icons/ai";
 import { ImTrophy } from "react-icons/im";
 import { GiStarsStack } from "react-icons/gi";
-import Search from "./Search";
+import { MdGroups } from "react-icons/md";
+import Search from "../Default/Search";
+import TeamDataService from "../../services/team";
 import "../../styles/components/Home/SideBar.css";
 
 export function SideBar() {
+  const inputRef = useRef(null);
+  const [searchField, setSearchField] = useState("");
   const [listaCampeonatos, setListaCampeonatos] = useState([]);
   const [favoritesChamp, setFavoritesChamp] = useState(
     JSON.parse(window.localStorage.getItem("favorites-champ")) || []
   );
   const [teamsSearchActive, setTeamsSearchActive] = useState(false);
-  const [listTeams, setlistTeams] = useState([]);
+  const [listTeams, setListTeams] = useState([]);
   const [favoritesTeams, setFavoritesTeams] = useState(
     JSON.parse(window.localStorage.getItem("favorites-teams")) || []
   );
+
+  useEffect(() => {
+    if (searchField === "") {
+      setListTeams([]);
+    } else {
+      TeamDataService.getTeams(searchField).then((response) => {
+        setListTeams(response.data.team);
+      });
+    }
+  }, [searchField]);
+
+  useEffect(() => {
+    if (teamsSearchActive) inputRef.current.focus();
+  }, [teamsSearchActive]);
+
+  const changeActive = (active) => setTeamsSearchActive(active);
+
+  const handleSearch = (event) => {
+    const { value } = event.target;
+    setSearchField(value);
+  };
 
   useEffect(() => {
     window.localStorage.setItem(
@@ -39,16 +64,6 @@ export function SideBar() {
         setListaCampeonatos(data.campeonatos);
       });
   }, []);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/equipes")
-      .then((response) => response.json())
-      .then((data) => {
-        setlistTeams(data.equipes);
-      });
-  }, []);
-
-  const changeActive = (active) => setTeamsSearchActive(active);
 
   const addFavoriteChamp = (campeonato, i) => {
     if (campeonato !== "undefined") {
@@ -91,13 +106,13 @@ export function SideBar() {
     <Container id="container-side-bar">
       <div id="titleSideBar" className="border-bottom-side-bar">
         <GiStarsStack />
-        <span id="title-text-side-bar">Minhas Ligas</span>
+        <span id="title-text-side-bar">Meus campeonatos</span>
       </div>
       {favoritesChamp[0]?.id === 0 || favoritesChamp.length === 0 ? (
-        <span id="titleSideBar">Nenhum Campeonato Adicionado</span>
+        <span id="titleSideBar">Nenhum Campeonato favorito</span>
       ) : (
         favoritesChamp.map((favorito, i) => (
-          <Link key={i} to="" id="side-bar-link">
+          <Link key={i} to="/campeonato" id="side-bar-link">
             <ListGroup>
               <ListGroup.Item id="list-group-sidebar">
                 <Row className="justify-content-md-center">
@@ -106,10 +121,10 @@ export function SideBar() {
                       className="pais-margin"
                       src={favorito.paisUrl}
                       alt={`${favorito.paisUrl}`}
-                      width="25"
+                      title={`${favorito.nome}`}
                     />
                   </Col>
-                  <Col md={8} id="name-camp-sidebar" title={favorito.nome}>
+                  <Col md={8} id="name-camp-sidebar">
                     <span>{favorito.nome}</span>
                   </Col>
                   <Col md={2}>
@@ -143,7 +158,7 @@ export function SideBar() {
         <p>Loading...</p>
       ) : (
         listaCampeonatos?.map((campeonato, i) => (
-          <Link key={i} to="" id="side-bar-link">
+          <Link key={i} to="/campeonato" id="side-bar-link">
             <ListGroup>
               <ListGroup.Item id="list-group-sidebar">
                 <Row className="justify-content-md-center">
@@ -152,10 +167,10 @@ export function SideBar() {
                       className="pais-margin"
                       src={campeonato.paisUrl}
                       alt={`${campeonato.paisUrl}`}
-                      width="25"
+                      title={`${campeonato.nome}`}
                     />
                   </Col>
-                  <Col md={8} id="name-camp-sidebar" title={campeonato.nome}>
+                  <Col md={8} id="name-camp-sidebar">
                     <span>{campeonato.nome}</span>
                   </Col>
                   <Col md={2}>
@@ -182,14 +197,14 @@ export function SideBar() {
         ))
       )}
       <div id="titleSideBar" className="border-bottom-side-bar">
-        <ImTrophy />
+        <MdGroups />
         <span id="title-text-side-bar">Minhas Equipes</span>
       </div>
       {favoritesTeams[0]?.id === 0 || favoritesTeams.length === 0 ? (
-        <span id="titleSideBar">Nenhuma Equipe Adicionada</span>
+        <span id="titleSideBar">Nenhuma Equipe favorita</span>
       ) : (
         favoritesTeams.map((favorito, i) => (
-          <Link key={i} to="" id="side-bar-link">
+          <Link key={i} to="/equipe" id="side-bar-link">
             <ListGroup>
               <ListGroup.Item id="list-group-sidebar">
                 <Row className="justify-content-md-center">
@@ -198,10 +213,10 @@ export function SideBar() {
                       className="pais-margin"
                       src={favorito.logo}
                       alt={`${favorito.logo}`}
-                      width="25"
+                      title={`${favorito.name}`}
                     />
                   </Col>
-                  <Col md={8} id="name-camp-sidebar" title={favorito.name}>
+                  <Col md={8} id="name-camp-sidebar">
                     <span>{favorito.name}</span>
                   </Col>
                   <Col md={2}>
@@ -246,14 +261,22 @@ export function SideBar() {
               type="search"
               placeholder="Pesquisar"
               aria-label="Search"
+              value={searchField}
+              onChange={handleSearch}
+              ref={inputRef}
             />
           </div>
-          <Search
-            theme={"side"}
-            listTeams={listTeams}
-            favoritesTeams={favoritesTeams}
-            setFavoritesTeams={setFavoritesTeams}
-          />
+          {listTeams?.length > 0 ? (
+            <Search
+              theme={"side"}
+              listTeams={listTeams}
+              favoritesTeams={favoritesTeams}
+              setFavoritesTeams={setFavoritesTeams}
+              setSearchField={setSearchField}
+            />
+          ) : (
+            <></>
+          )}
         </>
       ) : (
         <></>

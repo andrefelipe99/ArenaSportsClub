@@ -7,6 +7,8 @@ div.center-news {
 
 div.row-news {
   padding: 0.5rem;
+  margin: 1rem 0;
+  background-color: #e8faf0;
   display: flex;
   justify-content: center;
   align-items: self-start;
@@ -27,6 +29,14 @@ div.col-news {
 
 .img-news {
   width: 100%;
+}
+
+.category-news {
+  color: black;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
 
 .description-news {

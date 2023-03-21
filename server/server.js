@@ -5,6 +5,7 @@ import matchsCrawler from "./src/crawler/matchs.js";
 import matchsController from "./src/api/matchs.controller.js";
 import championshipsCrawler from "./src/crawler/championships.js";
 import newsCrawler from "./src/crawler/news.js";
+import newsController from "./src/api/news.controller.js";
 
 const app = express();
 
@@ -21,10 +22,15 @@ app.get("/pp", (req, res) => {
 });
 
 setInterval(async () => {
+  const news = await newsController.apiPostNews();
+  console.log(news);
+}, 60000);
+
+setInterval(async () => {
   const post = await matchsController.apiPostMatch();
   const clear = await matchsCrawler.clearMatchs();
   console.log(post);
-}, 45000);
+}, 40000);
 
 //daqui pra baixo API testes
 const partidas = [
@@ -888,7 +894,7 @@ const equipe = [
 
 const camp = [
   {
-    ChampionshipId: "",
+    idChampionship: "",
     url: "https://www.placardefutebol.com.br/copa-do-nordeste",
     name: "Copa do Nordeste",
     img: "https://www.placardefutebol.com.br/images/countries/brasil.png",
@@ -1166,7 +1172,7 @@ const camp = [
     ],
   },
   {
-    ChampionshipId: "",
+    idChampionship: "",
     url: "https://www.placardefutebol.com.br/campeonato-espanhol",
     name: "Campeonato Espanhol",
     img: "https://www.placardefutebol.com.br/images/countries/espanha.png",

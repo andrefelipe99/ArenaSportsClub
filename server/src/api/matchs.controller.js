@@ -2,51 +2,6 @@ import matchsCrawler from "../crawler/matchs.js";
 import matchsDAO from "../dao/matchsDAO.js";
 
 export default class matchsController {
-  static async apiGetMatchById(req, res, next) {
-    try {
-      let id = req.params.id || {};
-      let match = await matchsDAO.getMatchByID(id);
-      if (!match) {
-        res.status(404).json({ error: "Not found" });
-        return;
-      }
-      res.json(match);
-    } catch (e) {
-      console.log(`api, ${e}`);
-      res.status(500).json({ error: e });
-    }
-  }
-
-  static async apiGetMatchsByDate(req, res, next) {
-    try {
-      let date = req.params.date || {};
-      date = date.toString().replace(/-/g, "/");
-      let match = await matchsDAO.getMatchsByDate(date);
-      if (!match) {
-        res.status(404).json({ error: "Not found" });
-        return;
-      }
-      res.json(match);
-    } catch (e) {
-      console.log(`api, ${e}`);
-      res.status(500).json({ error: e });
-    }
-  }
-
-  static async apiGetMatchMaxId() {
-    try {
-      let maxId = await matchsDAO.getMatchMaxID();
-      if (!maxId) {
-        res.status(404).json({ error: "Not found" });
-        return;
-      }
-      return maxId;
-    } catch (error) {
-      console.log(`api, ${e}`);
-      res.status(500).json({ error: e });
-    }
-  }
-
   static async apiPostMatch() {
     try {
       const matchs = await matchsCrawler.getMatchs();
@@ -75,6 +30,37 @@ export default class matchsController {
       return { status: "success" };
     } catch (error) {
       return { error: error.message };
+    }
+  }
+
+  static async apiGetMatchById(req, res, next) {
+    try {
+      let id = req.params.id || {};
+      let match = await matchsDAO.getMatchByID(id);
+      if (!match) {
+        res.status(404).json({ error: "Not found" });
+        return;
+      }
+      res.json(match);
+    } catch (e) {
+      console.log(`api, ${e}`);
+      res.status(500).json({ error: e });
+    }
+  }
+
+  static async apiGetMatchsByDate(req, res, next) {
+    try {
+      let date = req.params.date || {};
+      date = date.toString().replace(/-/g, "/");
+      let match = await matchsDAO.getMatchsByDate(date);
+      if (!match) {
+        res.status(404).json({ error: "Not found" });
+        return;
+      }
+      res.json(match);
+    } catch (e) {
+      console.log(`api, ${e}`);
+      res.status(500).json({ error: e });
     }
   }
 }

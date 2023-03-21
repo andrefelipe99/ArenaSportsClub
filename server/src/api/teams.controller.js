@@ -1,6 +1,21 @@
 import teamsDAO from "../dao/teamsDAO.js";
 
 export default class teamsController {
+  static async apiGetTeamById(req, res, next) {
+    try {
+      let id = req.params.id || {};
+      let team = await teamsDAO.getTeamByID(id);
+      if (!team) {
+        res.status(404).json({ error: "Not found" });
+        return;
+      }
+      res.json(team);
+    } catch (e) {
+      console.log(`api, ${e}`);
+      res.status(500).json({ error: e });
+    }
+  }
+
   static async apiGetTeams(req, res, next) {
     const teamsPerPage = req.query.teamsPerPage
       ? parseInt(req.query.teamsPerPage, 10)
@@ -33,34 +48,4 @@ export default class teamsController {
     };
     res.json(response);
   }
-
-  static async apiGetTeamById(req, res, next) {
-    try {
-      let id = req.params.id || {};
-      let team = await teamsDAO.getTeamByID(id);
-      if (!team) {
-        res.status(404).json({ error: "Not found" });
-        return;
-      }
-      res.json(team);
-    } catch (e) {
-      console.log(`api, ${e}`);
-      res.status(500).json({ error: e });
-    }
-  }
-
-  static async apiGetMaxId(req, res, next) {
-    let id = await teamsDAO.getMaxID();
-    res.json(id);
-  }
-
-  //   static async apiGetRestaurantCuisines(req, res, next) {
-  //     try {
-  //       let cuisines = await RestaurantsDAO.getCuisines()
-  //       res.json(cuisines)
-  //     } catch (e) {
-  //       console.log(`api, ${e}`)
-  //       res.status(500).json({ error: e })
-  //     }
-  //   }
 }

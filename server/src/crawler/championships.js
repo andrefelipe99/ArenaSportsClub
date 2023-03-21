@@ -161,7 +161,7 @@ export default class championshipsCrawler {
           });
 
           championships.push({
-            ChampionshipId: "",
+            idChampionship: "",
             url,
             name,
             img,

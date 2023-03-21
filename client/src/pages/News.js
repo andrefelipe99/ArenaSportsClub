@@ -32,38 +32,35 @@ export function News() {
   return (
     <Container>
       {news.map((category, i) => (
-        <Row key={i} className="row-news">
+        <div key={i} className="row-news">
           <span className="category-news">{category?._id.category}</span>
           {category.news.map((news, i) => (
-            <Col key={i} md={6} className="center-news">
-              <Col md={6} className="col-news">
-                <a
-                  className="link-news"
-                  href={news?.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img
-                    src={news?.img}
-                    alt={news?.title}
-                    title={news?.title}
-                    className="img-news"
-                  ></img>
-                </a>
-              </Col>
-              <Col md={6} className="col-news">
-                <a
-                  className="link-news"
-                  href={news?.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="description-news">{news?.title}</span>
-                </a>
-              </Col>
-            </Col>
+            <div className="center-news">
+              <a
+                className="link-news"
+                href={news?.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src={news?.img}
+                  alt={news?.title}
+                  title={news?.title}
+                  className="img-news"
+                ></img>
+              </a>
+
+              <a
+                className="link-news"
+                href={news?.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="description-news">{news?.title}</span>
+              </a>
+            </div>
           ))}
-        </Row>
+        </div>
       ))}
     </Container>
   );

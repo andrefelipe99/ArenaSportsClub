@@ -2,16 +2,18 @@ div.center-news {
   padding: 0.5rem;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 div.row-news {
   padding: 0.5rem;
-  margin: 1rem 0;
+  margin: 20px;
   background-color: #e8faf0;
   display: flex;
   justify-content: center;
-  align-items: self-start;
+  align-items: flex-start;
+  flex-direction: column;
+  border-radius: 10px;
 }
 
 .link-news {
@@ -28,22 +30,25 @@ div.col-news {
 }
 
 .img-news {
-  width: 100%;
+  width: 192px;
+  border-radius: 8px;
 }
 
 .category-news {
   color: black;
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 600;
   text-align: center;
   margin-bottom: 0.5rem;
 }
 
 .description-news {
   color: black;
-  font-size: large;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 600;
   text-align: center;
+  grid-area: content;
+  margin: 20px;
 }
 
 .description-news:hover {

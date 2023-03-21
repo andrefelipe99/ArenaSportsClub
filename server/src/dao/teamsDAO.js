@@ -18,6 +18,33 @@ export default class teamsDAO {
     }
   }
 
+  static async getTeamMaxID() {
+    let maxId;
+    try {
+      maxId = await teams.find().sort({ id: -1 }).limit(1);
+      const teamsList = await maxId.toArray();
+      const idMatch = teamsList[0].id;
+      return await idMatch;
+    } catch (e) {
+      console.error(`Something went wrong in getTeamMaxID: ${e}`);
+      throw e;
+    }
+  }
+
+  static async getTeamByID(id) {
+    try {
+      const pipeline = [
+        {
+          $match: { id: id },
+        },
+      ];
+      return await teams.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getTeamByID: ${e}`);
+      throw e;
+    }
+  }
+
   static async getTeams({ filters = null, page = 0, teamsPerPage = 20 } = {}) {
     let query;
     if (filters) {
@@ -52,89 +79,4 @@ export default class teamsDAO {
       return { teamsList: [], totalNumTeams: 0 };
     }
   }
-
-  //get by id para varias ocasioes
-  //mudando para $match: { title: id } e verificar o length, encontra se existe algum title desse jogo se sim update se nao create
-  static async getTeamByID(id) {
-    try {
-      const pipeline = [
-        {
-          $match: { id: id },
-        },
-        // {
-        //   $addFields: { score: { $meta: "textScore" } },
-        // },
-        // {
-        //   $sort: {
-        //     score: { $meta: "textScore" },
-        //   },
-        // },
-        // {
-        //   $lookup: {
-        //     from: "reviews",
-        //     let: {
-        //       id: "$_id",
-        //     },
-        //     pipeline: [
-        //       {
-        //         $match: {
-        //           $expr: {
-        //             $eq: ["$restaurant_id", "$$id"],
-        //           },
-        //         },
-        //       },
-        //       {
-        //         $sort: {
-        //           date: -1,
-        //         },
-        //       },
-        //     ],
-        //     as: "reviews",
-        //   },
-        // },
-        // {
-        //   $addFields: {
-        //     reviews: "$reviews",
-        //   },
-        // },
-      ];
-      return await teams.aggregate(pipeline).toArray();
-    } catch (e) {
-      console.error(`Something went wrong in getTeamByID: ${e}`);
-      throw e;
-    }
-  }
-
-  //pega o id max e retorna no X, tem que tratar e testar toarray no maxid
-  static async getMaxID(id) {
-    let maxId;
-    try {
-      maxId = await teams.find().sort({ id: -1 }).limit(1);
-    } catch (e) {
-      console.error(`Something went wrong in getMaxID: ${e}`);
-      throw e;
-    }
-
-    try {
-      const teamsList = await maxId.toArray();
-      const x = teamsList[0].id;
-      return { teamsList };
-    } catch (e) {
-      console.error(
-        `Unable to convert cursor to array or problem counting documents, ${e}`
-      );
-      return { teamsList: [] };
-    }
-  }
-
-  //   static async getCuisines() {
-  //     let cuisines = [];
-  //     try {
-  //       cuisines = await restaurants.distinct("cuisine");
-  //       return cuisines;
-  //     } catch (e) {
-  //       console.error(`Unable to get cuisines, ${e}`);
-  //       return cuisines;
-  //     }
-  //   }
 }

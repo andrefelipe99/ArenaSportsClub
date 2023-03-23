@@ -67,14 +67,14 @@ export function Championship() {
           <div className="heading">
             <img
               className="heading_logo heading_logo--1"
-              src={championship[1].img}
-              alt={`${championship[1].name}`}
-              title={`${championship[1].name}`}
+              src={championship[0].img}
+              alt={`${championship[0].name}`}
+              title={`${championship[0].name}`}
             />
             <div className="heading_title">
-              <div className="heading_name">{championship[1].name}</div>
+              <div className="heading_name">{championship[0].name}</div>
             </div>
-            <div className="heading_info">{championship[1].season}</div>
+            <div className="heading_info">{championship[0].season}</div>
           </div>
           <div className="button-group-championship">
             <Button

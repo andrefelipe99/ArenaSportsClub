@@ -7,12 +7,12 @@ function ButtonTable({ actived, championship }) {
   return (
     actived && (
       <Container id="container-buttonTable">
-        {championship[1]?.table?.length > 0 ? (
+        {championship[0]?.table?.length > 0 ? (
           <>
-            {typeof championship[1]?.table[0] === "undefined" ? (
+            {typeof championship[0]?.table[0] === "undefined" ? (
               <p>Loading...</p>
             ) : (
-              championship[1]?.table?.map((teams, i) => (
+              championship[0]?.table?.map((teams, i) => (
                 <div className="butTable-section" key={i}>
                   <div className="butTable-header">
                     {teams?.phase === "" ? (
@@ -21,7 +21,10 @@ function ButtonTable({ actived, championship }) {
                       <>
                         <div className="butTable-group">
                           {i === 0 && teams.group !== "" ? (
-                            <span> {teams.phase} </span>
+                            <span className="phase-butTable">
+                              {" "}
+                              {teams.phase}{" "}
+                            </span>
                           ) : (
                             <></>
                           )}

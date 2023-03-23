@@ -1,16 +1,16 @@
 import http from "../http-common.js";
 
 class MatchDataService {
-  //   getAll(page = 0) {
-  //     return http.get(`restaurants?page=${page}`);
-  //   }
-
   getMatch(id) {
-    return http.get(`/id/${id}`);
+    return http.get(`/matchs/id/${id}`);
   }
 
   getMatchsByDate(date) {
-    return http.get(`/date/${date}`);
+    return http.get(`/matchs/date/${date}`);
+  }
+
+  getMatchsByChampionship(id) {
+    return http.get(`/matchs/championship/${id}`);
   }
 
   //   find(query, by = "name", page = 0) {

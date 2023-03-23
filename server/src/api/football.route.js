@@ -8,9 +8,12 @@ const router = express.Router();
 
 router.route("/teams").get(teamsCtrl.apiGetTeams);
 
-router.route("/id/:id").get(matchsCtrl.apiGetMatchById);
-router.route("/date/:date").get(matchsCtrl.apiGetMatchsByDate);
+router.route("/matchs/id/:id").get(matchsCtrl.apiGetMatchById);
+router.route("/matchs/date/:date").get(matchsCtrl.apiGetMatchsByDate);
 router.route("/matchs").get(matchsCtrl.apiPostMatch);
+router
+  .route("/matchs/championship/:id")
+  .get(matchsCtrl.apiGetMatchsByChampionship);
 
 // router.route("/championships").get(championshipsCtrl);
 router.route("/news").get(newsCtrl.apiGetAllNews);

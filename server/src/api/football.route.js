@@ -1,4 +1,4 @@
-import express, { response } from "express";
+import express from "express";
 import matchsCtrl from "./matchs.controller.js";
 import teamsCtrl from "./teams.controller.js";
 import championshipsCtrl from "./championships.controller.js";

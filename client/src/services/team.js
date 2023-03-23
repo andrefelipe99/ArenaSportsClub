@@ -4,10 +4,6 @@ class TeamDataService {
   getTeams(search) {
     return http.get(`/teams?name=${search}`);
   }
-
-  getMatchsByDate(date) {
-    return http.get(`/date/${date}`);
-  }
 }
 
 // eslint-disable-next-line

@@ -8,10 +8,10 @@ export function Home() {
   return (
     <Container id="container-home">
       <Row md={12}>
-        <Col md={3} id="content-side-bar-home">
+        <Col md={3} sm={12} id="content-side-bar-home">
           <SideBar />
         </Col>
-        <Col md={9} id="content-matchs-home">
+        <Col md={9} sm={12} id="content-matchs-home">
           <Results />
         </Col>
       </Row>

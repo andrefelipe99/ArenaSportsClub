@@ -63,4 +63,21 @@ export default class matchsController {
       res.status(500).json({ error: e });
     }
   }
+
+  static async apiGetMatchsByChampionship(req, res, next) {
+    try {
+      // let championship = req.params.id || {};
+      let championship = "Copa do Nordeste - 2022/2023";
+      let today = "01/04/2023";
+      let matchs = await matchsDAO.getMatchsByChampionship(championship, today);
+      if (!matchs) {
+        res.status(404).json({ error: "Not found" });
+        return;
+      }
+      res.json(matchs);
+    } catch (e) {
+      console.log(`api, ${e}`);
+      res.status(500).json({ error: e });
+    }
+  }
 }

@@ -45,6 +45,10 @@
   flex-direction: column;
 }
 
+.phase-butTable {
+  padding-bottom: 10px;
+}
+
 #table_Notitle {
   display: flex;
   align-items: center;

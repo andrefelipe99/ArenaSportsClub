@@ -83,3 +83,6 @@ input.form-control:active {
   outline: 0;
   box-shadow: 0 0 0 0.15rem rgb(136, 198, 126, 0.6);
 }
+
+@media only screen and (max-width: 768px) {
+}

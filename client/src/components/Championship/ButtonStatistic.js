@@ -9,10 +9,10 @@ function ButtonStatistic({ actived, championship }) {
       <Container id="container-buttonStatistic">
         {championship[0]?.statistics?.length > 0 ? (
           <>
-            {typeof championship[1]?.statistics[0]?.name === "undefined" ? (
+            {typeof championship[0]?.statistics[0]?.name === "undefined" ? (
               <p>Loading...</p>
             ) : (
-              championship[1]?.statistics?.map((statistic, i) => (
+              championship[0]?.statistics?.map((statistic, i) => (
                 <div className="butSta-section" key={i}>
                   <div className="butSta-header">
                     <span>{statistic.name}</span>

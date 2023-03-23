@@ -196,4 +196,88 @@ export default class matchsDAO {
       throw e;
     }
   }
+
+  static async getMatchsByChampionship(championship, today) {
+    try {
+      const pipeline = [
+        {
+          $match: {
+            championship: championship,
+            day: { $gte: today },
+            // status: { $ne: "ENCERRADO" },
+          },
+        },
+        {
+          $sort: {
+            schedule: 1,
+            idTitle: 1,
+          },
+        },
+        {
+          $lookup: {
+            from: "championships",
+            let: {
+              id: "$idChampionship",
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $eq: ["$idChampionship", "$$id"],
+                  },
+                },
+              },
+            ],
+            as: "championshipObj",
+          },
+        },
+        {
+          $addFields: {
+            championshipObj: "$championshipObj",
+          },
+        },
+        {
+          $group: {
+            _id: {
+              day: "$day",
+            },
+            matchs: {
+              $addToSet: {
+                idMatch: "$idMatch",
+                status: "$status",
+                time: "$time",
+                schedule: "$schedule",
+                scoreHome: "$scoreHome",
+                scoreAway: "$scoreAway",
+                teams: "$teams",
+                events: "$events",
+              },
+            },
+          },
+        },
+        { $unwind: "$matchs" },
+        { $sort: { "matchs.schedule": 1, "matchs.idMatch": 1 } },
+        {
+          // this $group stage is needed, because we did
+          // $unwind before
+          $group: {
+            _id: "$_id",
+            matchs: {
+              $push: "$matchs",
+            },
+          },
+        },
+        {
+          $sort: {
+            "_id.day": 1,
+          },
+        },
+      ];
+
+      return await matchs.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getMatchsByDate: ${e}`);
+      throw e;
+    }
+  }
 }

@@ -24,7 +24,7 @@ app.get("/pp", (req, res) => {
 setInterval(async () => {
   const news = await newsController.apiPostNews();
   console.log(news);
-}, 60000);
+}, 600000);
 
 setInterval(async () => {
   const post = await matchsController.apiPostMatch();

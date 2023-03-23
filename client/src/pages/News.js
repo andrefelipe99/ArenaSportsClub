@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import NewsDataService from "../services/news.js";
 import "../styles/pages/News.css";
 
@@ -9,7 +9,6 @@ export function News() {
 
   useEffect(() => {
     NewsDataService.getAllNews().then((response) => {
-      console.log(response.data);
       setNews(response.data);
       const timer = setTimeout(() => {
         setLoading(false);
@@ -23,45 +22,49 @@ export function News() {
       NewsDataService.getAllNews().then((response) => {
         setNews(response.data);
       });
-    }, 30000);
+    }, 606000);
     return () => clearTimeout(timer);
   });
 
-  //https://react-bootstrap.github.io/components/cards/
-
   return (
     <Container>
-      {news.map((category, i) => (
-        <div key={i} className="row-news">
-          <span className="category-news">{category?._id.category}</span>
-          {category.news.map((news, i) => (
-            <div className="center-news">
-              <a
-                className="link-news"
-                href={news?.href}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img
-                  src={news?.img}
-                  alt={news?.title}
-                  title={news?.title}
-                  className="img-news"
-                ></img>
-              </a>
-
-              <a
-                className="link-news"
-                href={news?.href}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className="description-news">{news?.title}</span>
-              </a>
-            </div>
-          ))}
+      {loading ? (
+        <div className="spinner-results">
+          <Spinner animation="border" />
         </div>
-      ))}
+      ) : (
+        news.map((category, i) => (
+          <div key={i} className="row-news">
+            <span className="category-news">{category?._id.category}</span>
+            {category.news.map((news, i) => (
+              <div key={i} className="center-news">
+                <a
+                  className="link-news"
+                  href={news?.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    src={news?.img}
+                    alt={news?.title}
+                    title={news?.title}
+                    className="img-news"
+                  ></img>
+                </a>
+
+                <a
+                  className="link-news"
+                  href={news?.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="description-news">{news?.title}</span>
+                </a>
+              </div>
+            ))}
+          </div>
+        ))
+      )}
     </Container>
   );
 }

@@ -9,7 +9,6 @@ import "../styles/pages/Match.css";
 
 export function Match() {
   let { id } = useParams();
-  const [loading, setLoading] = useState(true);
   const [listMatch, setListMatch] = useState([]);
   const [buttonChange, setButtonChange] = useState({
     sumario: true,
@@ -30,10 +29,6 @@ export function Match() {
   useEffect(() => {
     MatchDataService.getMatch(id).then((response) => {
       setListMatch(response.data);
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 500);
-      return () => clearTimeout(timer);
     });
   }, [id]);
 
@@ -52,12 +47,12 @@ export function Match() {
         <div>
           {typeof listMatch[0]?.teams?.homeImg === "undefined" ? (
             <div className="match-section_title">
-              <span> PARTIDA NÃO ENCONTRADA </span>
+              <span>PARTIDA NÃO ENCONTRADA</span>
             </div>
           ) : (
             <>
               <div className="nameCamp">
-                <Link to="/campeonato" className="link-match">
+                <Link to="/campeonato/1001" className="link-match">
                   <h1>{listMatch[0].championship}</h1>
                 </Link>
               </div>

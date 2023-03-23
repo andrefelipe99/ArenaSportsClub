@@ -111,7 +111,7 @@ export default class matchsDAO {
       let founded = await matchs.aggregate(pipeline).toArray();
       return await founded.length;
     } catch (e) {
-      console.error(`Something went wrong in getMatchByID: ${e}`);
+      console.error(`Something went wrong in getMatchByTitle: ${e}`);
       throw e;
     }
   }
@@ -121,7 +121,7 @@ export default class matchsDAO {
       const pipeline = [
         {
           $match: {
-            day: date,
+            date: date,
           },
         },
         {
@@ -276,7 +276,7 @@ export default class matchsDAO {
 
       return await matchs.aggregate(pipeline).toArray();
     } catch (e) {
-      console.error(`Something went wrong in getMatchsByDate: ${e}`);
+      console.error(`Something went wrong in getMatchsByChampionship: ${e}`);
       throw e;
     }
   }

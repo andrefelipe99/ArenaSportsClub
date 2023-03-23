@@ -145,8 +145,14 @@ export default class matchsCrawler {
                       .trim();
 
                     dateTime = dateTime.split("às");
-                    var day = dateTime[0]?.trim();
+                    var dateMatch = dateTime[0]?.trim();
                     var schedule = dateTime[1]?.trim();
+
+                    let splitter = dateMatch.split("/");
+                    let year = parseInt(splitter[2]?.trim());
+                    let month = parseInt(splitter[1]?.trim()) - 1;
+                    let day = parseInt(splitter[0]?.trim());
+                    const date = new Date(year, month, day);
 
                     if (
                       $(this)
@@ -682,7 +688,7 @@ export default class matchsCrawler {
                         });
                     });
 
-                    var idTitle = teamHome + " x " + teamAway + " - " + day;
+                    var idTitle = teamHome + " x " + teamAway + " - " + date;
                     var idMatch = "";
 
                     if (
@@ -698,8 +704,9 @@ export default class matchsCrawler {
                         championshipUrl: championshipUrl,
                         turn: turn,
                         status: status,
+                        date: date,
                         time: time,
-                        day: day,
+                        day: dateMatch,
                         schedule: schedule,
                         referee: referee,
                         stadium: stadium,

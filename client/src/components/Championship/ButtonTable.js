@@ -15,15 +15,14 @@ function ButtonTable({ actived, championship }) {
               championship[0]?.table?.map((teams, i) => (
                 <div className="butTable-section" key={i}>
                   <div className="butTable-header">
-                    {teams?.phase === "" ? (
-                      <span> Classificação</span>
+                    {teams?.group === "" ? (
+                      <span>Classificação</span>
                     ) : (
                       <>
                         <div className="butTable-group">
                           {i === 0 && teams.group !== "" ? (
                             <span className="phase-butTable">
-                              {" "}
-                              {teams.phase}{" "}
+                              {teams.phase}
                             </span>
                           ) : (
                             <></>
@@ -67,7 +66,7 @@ function ButtonTable({ actived, championship }) {
           </>
         ) : (
           <div id="table_Notitle">
-            <span> TABELA NÃO DISPONIBILIZADAS </span>
+            <span>TABELA NÃO DISPONÍVEL</span>
           </div>
         )}
       </Container>

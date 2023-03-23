@@ -170,7 +170,7 @@ function ButtonForMatch({ actived, listMatch }) {
           </>
         ) : (
           <div id="for-section_title">
-            <span> ESCALAÇÕES NÃO DISPONIBILIZADAS </span>
+            <span>ESCALAÇÕES NÃO DISPONÍVEIS</span>
           </div>
         )}
       </Container>

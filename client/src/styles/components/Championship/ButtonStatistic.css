@@ -28,6 +28,11 @@
   padding: 0.8rem;
 }
 
+#text-left {
+  text-align: left;
+  padding: 0.8rem;
+}
+
 #text-goals {
   font-weight: bolder;
   text-align: center;

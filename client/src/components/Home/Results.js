@@ -223,7 +223,7 @@ export function Results() {
         </div>
       ) : matchsData?.length === 0 ? (
         <div className="match-section_title">
-          <span> NENHUMA PARTIDA ENCONTRADA PARA O DIA {dateFilter} </span>
+          <span>NENHUMA PARTIDA ENCONTRADA PARA O DIA {dateFilter}</span>
         </div>
       ) : haveChampionships(matchsData) ? (
         matchsData?.map((championship, i) =>
@@ -248,7 +248,7 @@ export function Results() {
                 <Col md={10} className="col-championship-results">
                   <Link
                     // to={`/campeonato/${championship.idChampionship}`}
-                    to={`/campeonato`}
+                    to={`/campeonato/1001`}
                     className="link-results"
                   >
                     <span className="text-championship-results">

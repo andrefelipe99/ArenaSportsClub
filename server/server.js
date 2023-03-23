@@ -21,16 +21,16 @@ app.get("/pp", (req, res) => {
   res.json({ news });
 });
 
-setInterval(async () => {
-  const news = await newsController.apiPostNews();
-  console.log(news);
-}, 600000);
+// setInterval(async () => {
+//   const news = await newsController.apiPostNews();
+//   console.log(news);
+// }, 600000);
 
-setInterval(async () => {
-  const post = await matchsController.apiPostMatch();
-  const clear = await matchsCrawler.clearMatchs();
-  console.log(post);
-}, 40000);
+// setInterval(async () => {
+//   const post = await matchsController.apiPostMatch();
+//   const clear = await matchsCrawler.clearMatchs();
+//   console.log(post);
+// }, 40000);
 
 //daqui pra baixo API testes
 const partidas = [

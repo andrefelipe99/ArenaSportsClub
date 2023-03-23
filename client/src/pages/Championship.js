@@ -49,7 +49,7 @@ export function Championship() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/camp")
+    fetch("https://arena-sports-club-api.vercel.app/camp")
       .then((response) => response.json())
       .then((data) => {
         setChampionship(data.camp);

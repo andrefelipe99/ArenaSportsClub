@@ -15,7 +15,7 @@ app.use("/api/v1/football", football);
 //app.use("*", (req, res) => res.status(404).json({ error: "not found" }));
 
 const championships = await championshipsCrawler.getChampionships();
-const news = await newsCrawler.getNews();
+// const news = await newsCrawler.getNews();
 const matchs = await matchsCrawler.getMatchs();
 // app.get("/pp", (req, res) => {
 //   res.json({ news });

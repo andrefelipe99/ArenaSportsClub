@@ -25,8 +25,8 @@ router
   .route("/championships/priority")
   .get(championshipsCtrl.apiGetChampionshipPriority);
 
-router.route("/matchs").get(matchsCtrl.apiGetAllChampionships);
-router.route("/putid").get(matchsCtrl.apiGetMatchs);
+// router.route("/matchs").get(matchsCtrl.apiGetAllChampionships);
+// router.route("/putid").get(matchsCtrl.apiGetMatchs);
 // router.route("/matchs").get(matchsCtrl.apiPostMatch);
 // router.route("/championships").get(championshipsCtrl.apiPostChampionships);
 

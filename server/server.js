@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 import football from "./src/api/football.route.js";
 import matchsCrawler from "./src/crawler/matchs.js";
-import matchsController from "./src/api/matchs.controller.js";
 import championshipsCrawler from "./src/crawler/championships.js";
 import newsCrawler from "./src/crawler/news.js";
+import matchsController from "./src/api/matchs.controller.js";
 import newsController from "./src/api/news.controller.js";
 import championshipsController from "./src/api/championships.controller.js";
 import matchsDAO from "./src/dao/matchsDAO.js";
@@ -26,7 +26,7 @@ app.use("/api/v1/football", football);
 setInterval(async () => {
   const championship = await championshipsController.apiPostChampionships();
   console.log(championship);
-}, 60000);
+}, 600000);
 
 setInterval(async () => {
   const news = await newsController.apiPostNews();

@@ -17,6 +17,7 @@ export function Match() {
     formacao: false,
   });
 
+  console.log(listMatch);
   const changeSelected = (buttonName) => {
     if (buttonName === "buttonSum") {
       setButtonChange({ sumario: true, estatistica: false, formacao: false });
@@ -58,9 +59,16 @@ export function Match() {
           ) : (
             <>
               <div className="nameCamp">
-                <Link to="/campeonato/1001" className="link-match">
+                {listMatch[0].idChampionship !== "" ? (
+                  <Link
+                    to={`/campeonato/${listMatch[0].idChampionship}`}
+                    className="link-match"
+                  >
+                    <h1>{listMatch[0].championship}</h1>
+                  </Link>
+                ) : (
                   <h1>{listMatch[0].championship}</h1>
-                </Link>
+                )}
               </div>
               <Row md={12} id="row-content-match">
                 <div className="content-match">

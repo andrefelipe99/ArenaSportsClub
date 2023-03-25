@@ -162,6 +162,7 @@ export default class matchsDAO {
             },
             matchs: {
               $addToSet: {
+                idChampionship: "$idChampionship",
                 idMatch: "$idMatch",
                 status: "$status",
                 time: "$time",

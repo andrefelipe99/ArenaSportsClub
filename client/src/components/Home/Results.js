@@ -243,15 +243,20 @@ export function Results() {
                   </button>
                 </Col>
                 <Col md={10} className="col-championship-results">
-                  <Link
-                    // to={`/campeonato/${championship.idChampionship}`}
-                    to={`/campeonato/1001`}
-                    className="link-results"
-                  >
+                  {championship.matchs[0].idChampionship !== "" ? (
+                    <Link
+                      to={`/campeonato/${championship.matchs[0].idChampionship}`}
+                      className="link-results"
+                    >
+                      <span className="text-championship-results">
+                        {championship._id.championship}
+                      </span>
+                    </Link>
+                  ) : (
                     <span className="text-championship-results">
                       {championship._id.championship}
                     </span>
-                  </Link>
+                  )}
                 </Col>
               </div>
 

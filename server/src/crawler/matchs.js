@@ -1,5 +1,6 @@
 import request from "request";
 import { load } from "cheerio";
+import championshipsDAO from "../dao/championshipsDAO.js";
 
 const url = "https://www.placardefutebol.com.br";
 const urlToday = "/jogos-de-hoje";
@@ -109,7 +110,10 @@ export default class matchsCrawler {
                   if (err) console.log("Error: " + err);
                   var $ = load(body);
 
-                  $("div.container.main-content").each(function (index, e) {
+                  $("div.container.main-content").each(async function (
+                    index,
+                    e
+                  ) {
                     var championshipUrl = $(this)
                       .find(
                         "#livescore > div:nth-child(1) > div:nth-child(1) > div > a"
@@ -145,8 +149,14 @@ export default class matchsCrawler {
                       .trim();
 
                     dateTime = dateTime.split("às");
-                    var day = dateTime[0]?.trim();
+                    var dateMatch = dateTime[0]?.trim();
                     var schedule = dateTime[1]?.trim();
+
+                    let splitter = dateMatch.split("/");
+                    let year = parseInt(splitter[2]?.trim());
+                    let month = parseInt(splitter[1]?.trim()) - 1;
+                    let day = parseInt(splitter[0]?.trim());
+                    const date = new Date(year, month, day);
 
                     if (
                       $(this)
@@ -682,7 +692,8 @@ export default class matchsCrawler {
                         });
                     });
 
-                    var idTitle = teamHome + " x " + teamAway + " - " + day;
+                    var idTitle =
+                      teamHome + " x " + teamAway + " - " + dateMatch;
                     var idMatch = "";
 
                     if (
@@ -698,8 +709,9 @@ export default class matchsCrawler {
                         championshipUrl: championshipUrl,
                         turn: turn,
                         status: status,
+                        date: date,
                         time: time,
-                        day: day,
+                        day: dateMatch,
                         schedule: schedule,
                         referee: referee,
                         stadium: stadium,

@@ -47,7 +47,7 @@ function ButtonStatistic({ actived, championship }) {
           </>
         ) : (
           <div id="stat_Notitle">
-            <span> ESTATÍSTICAS NÃO DISPONIBILIZADAS </span>
+            <span>ESTATÍSTICAS NÃO DISPONÍVEIS</span>
           </div>
         )}
       </Container>

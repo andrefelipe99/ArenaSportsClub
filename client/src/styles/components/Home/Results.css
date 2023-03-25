@@ -111,6 +111,7 @@ button.button-filter-selected:hover {
 }
 
 div.spinner-results {
+  padding: 10px 0;
   display: flex;
   justify-content: center;
 }

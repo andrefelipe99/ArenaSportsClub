@@ -1,19 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Spinner } from "react-bootstrap";
 import ButtonResume from "../components/Championship/ButtonResume";
 import ButtonMatchs from "../components/Championship/ButtonMatchs";
 import ButtonTable from "../components/Championship/ButtonTable";
 import ButtonStatistic from "../components/Championship/ButtonStatistic";
+import ChampionshipDataService from "../services/championship";
+import { useParams } from "react-router-dom";
 import "../styles/pages/Championship.css";
 
 export function Championship() {
+  let { id } = useParams();
+  const [loading, setLoading] = useState(true);
   const [championship, setChampionship] = useState([]);
-
   const [buttonChange, setButtonChange] = useState({
     result: true,
     calendar: false,
     table: false,
     statistic: false,
+  });
+
+  useEffect(() => {
+    ChampionshipDataService.getChampionshipById(id).then((response) => {
+      setChampionship(response.data);
+      setLoading(false);
+    });
+  }, [id]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      ChampionshipDataService.getChampionshipById(id).then((response) =>
+        setChampionship(response.data)
+      );
+    }, 600000);
+    return () => clearTimeout(timer);
   });
 
   const changeSelected = (buttonName) => {
@@ -48,26 +67,26 @@ export function Championship() {
     }
   };
 
-  useEffect(() => {
-    fetch("https://arena-sports-club-api.vercel.app/camp")
-      .then((response) => response.json())
-      .then((data) => {
-        setChampionship(data.camp);
-      });
-  }, []);
-
   return (
     <Container>
-      {typeof championship[0]?.name === "undefined" ? (
+      {loading ? (
+        <div className="spinner-buttonMatchs">
+          <Spinner animation="border" />
+        </div>
+      ) : typeof championship[0]?.name === "undefined" ? (
         <div className="match-section_title">
-          <span> CAMPEONATO NÃO ENCONTRADO </span>
+          <span>CAMPEONATO NÃO ENCONTRADO</span>
         </div>
       ) : (
         <>
           <div className="heading">
             <img
               className="heading_logo heading_logo--1"
-              src={championship[0].img}
+              src={
+                championship[0].imgChampionship !== ""
+                  ? `${championship[0].imgChampionship}`
+                  : `${championship[0].img}`
+              }
               alt={`${championship[0].name}`}
               title={`${championship[0].name}`}
             />
@@ -76,6 +95,7 @@ export function Championship() {
             </div>
             <div className="heading_info">{championship[0].season}</div>
           </div>
+
           <div className="button-group-championship">
             <Button
               id={

@@ -9,8 +9,12 @@ class MatchDataService {
     return http.get(`/matchs/date/${date}`);
   }
 
-  getMatchsByChampionship(id) {
-    return http.get(`/matchs/championship/${id}`);
+  getFutureMatchsByChampionship(id) {
+    return http.get(`/matchs/championship/future/${id}`);
+  }
+
+  getPastMatchsByChampionship(id) {
+    return http.get(`/matchs/championship/past/${id}`);
   }
 
   //   find(query, by = "name", page = 0) {

@@ -30,18 +30,19 @@ export default class matchsDAO {
     }
   }
 
-  static async addMatch(match, id) {
+  static async addMatch(match, id, idChampionship) {
     try {
       const matchDoc = {
         idMatch: id,
         idTitle: match.idTitle,
-        idChampionship: match.idChampionship,
+        idChampionship: idChampionship,
         championshipUrl: match.championshipUrl,
         championship: match.championship,
         turn: match.turn,
         status: match.status,
         time: match.time,
         day: match.day,
+        date: match.date,
         schedule: match.schedule,
         referee: match.referee,
         stadium: match.stadium,
@@ -69,6 +70,7 @@ export default class matchsDAO {
             status: match.status,
             time: match.time,
             day: match.day,
+            date: match.date,
             schedule: match.schedule,
             scoreHome: match.scoreHome,
             scoreAway: match.scoreAway,
@@ -111,7 +113,7 @@ export default class matchsDAO {
       let founded = await matchs.aggregate(pipeline).toArray();
       return await founded.length;
     } catch (e) {
-      console.error(`Something went wrong in getMatchByID: ${e}`);
+      console.error(`Something went wrong in getMatchByTitle: ${e}`);
       throw e;
     }
   }
@@ -121,7 +123,7 @@ export default class matchsDAO {
       const pipeline = [
         {
           $match: {
-            day: date,
+            date: date,
           },
         },
         {
@@ -197,14 +199,97 @@ export default class matchsDAO {
     }
   }
 
-  static async getMatchsByChampionship(championship, today) {
+  static async getPastMatchsByChampionship(id, today) {
     try {
       const pipeline = [
         {
           $match: {
-            championship: championship,
-            day: { $gte: today },
-            // status: { $ne: "ENCERRADO" },
+            idChampionship: id,
+            status: { $eq: "ENCERRADO" },
+          },
+        },
+        {
+          $sort: {
+            schedule: 1,
+            idTitle: 1,
+          },
+        },
+        {
+          $lookup: {
+            from: "championships",
+            let: {
+              id: "$idChampionship",
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $eq: ["$idChampionship", "$$id"],
+                  },
+                },
+              },
+            ],
+            as: "championshipObj",
+          },
+        },
+        {
+          $addFields: {
+            championshipObj: "$championshipObj",
+          },
+        },
+        {
+          $group: {
+            _id: {
+              day: "$day",
+            },
+            matchs: {
+              $addToSet: {
+                idMatch: "$idMatch",
+                status: "$status",
+                time: "$time",
+                schedule: "$schedule",
+                scoreHome: "$scoreHome",
+                scoreAway: "$scoreAway",
+                teams: "$teams",
+                events: "$events",
+              },
+            },
+          },
+        },
+        { $unwind: "$matchs" },
+        { $sort: { "matchs.schedule": 1, "matchs.idMatch": 1 } },
+        {
+          // this $group stage is needed, because we did
+          // $unwind before
+          $group: {
+            _id: "$_id",
+            matchs: {
+              $push: "$matchs",
+            },
+          },
+        },
+        {
+          $sort: {
+            "_id.day": -1,
+          },
+        },
+      ];
+
+      return await matchs.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getMatchsByChampionship: ${e}`);
+      throw e;
+    }
+  }
+
+  static async getFutureMatchsByChampionship(id, today) {
+    try {
+      const pipeline = [
+        {
+          $match: {
+            idChampionship: id,
+            date: { $gte: today },
+            status: { $ne: "ENCERRADO" },
           },
         },
         {
@@ -275,6 +360,83 @@ export default class matchsDAO {
       ];
 
       return await matchs.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getMatchsByChampionship: ${e}`);
+      throw e;
+    }
+  }
+
+  static async getAllChampionships() {
+    try {
+      const pipeline = [
+        {
+          $group: {
+            _id: {
+              idChampionship: "$idChampionship",
+              championshipUrl: "$championshipUrl",
+            },
+            count: { $count: {} },
+          },
+        },
+        {
+          $sort: {
+            count: -1,
+          },
+        },
+      ];
+
+      return await matchs.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getAllChampionships: ${e}`);
+      throw e;
+    }
+  }
+
+  // static async getDelete() {
+  //   try {
+  //     return await matchs.deleteMany({
+  //       idMatch: { $gte: "1993" },
+  //     });
+  //   } catch (e) {
+  //     console.error(`Unable to delete news: ${e}`);
+  //     return { error: e };
+  //   }
+  // }
+
+  static async getMatchs() {
+    try {
+      const pipeline = [
+        {
+          $match: {},
+        },
+      ];
+      return await matchs.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getMatchs: ${e}`);
+      throw e;
+    }
+  }
+
+  static async update(match) {
+    try {
+      if (
+        match?.championshipUrl ===
+        "https://www.placardefutebol.com.br/amistosos-selecoes"
+      ) {
+        console.log(match?.idMatch + " " + match?.championship);
+
+        const updateResponse = await matchs.updateOne(
+          { idMatch: match.idMatch },
+          {
+            $set: {
+              idChampionship: "1021",
+            },
+          }
+        );
+        return updateResponse;
+        return true;
+      }
+      return true;
     } catch (e) {
       console.error(`Something went wrong in getMatchsByDate: ${e}`);
       throw e;

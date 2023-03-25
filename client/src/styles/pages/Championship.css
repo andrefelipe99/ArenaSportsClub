@@ -38,15 +38,13 @@
 
 .heading_logo {
   align-items: center;
-  background-color: #fff;
+  background-color: antiquewhite;
   border-radius: 12px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   padding: 4px;
-  min-width: 90px;
-  width: 100%;
-  height: 100%;
+  max-width: 60px;
 }
 
 .button-group-championship {

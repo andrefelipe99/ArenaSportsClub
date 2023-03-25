@@ -1,5 +1,6 @@
 import request from "request";
 import { load } from "cheerio";
+import matchsDAO from "../dao/matchsDAO.js";
 
 const urls = [
   "https://www.placardefutebol.com.br/campeonato-ingles",
@@ -7,6 +8,67 @@ const urls = [
   "https://www.placardefutebol.com.br/copa-do-nordeste",
   "https://www.placardefutebol.com.br/campeonato-pernambucano",
   "https://www.placardefutebol.com.br/champions-league",
+  "https://www.placardefutebol.com.br/eurocopa-eliminatorias",
+  "https://www.placardefutebol.com.br/copa-verde",
+  "https://www.placardefutebol.com.br/uefa-sub-19-championship-qualification",
+  "https://www.placardefutebol.com.br/mls-eua",
+  "https://www.placardefutebol.com.br/liga-das-nacoes-concacaf",
+  "https://www.placardefutebol.com.br/jogos-amistosos",
+  "https://www.placardefutebol.com.br/amistosos-selecoes",
+  "https://www.placardefutebol.com.br/premier-league-2-divison-two",
+  "https://www.placardefutebol.com.br/paulista-a3",
+  "https://www.placardefutebol.com.br/paulista-a2",
+  "https://www.placardefutebol.com.br/copa-liga-japonesa",
+  "https://www.placardefutebol.com.br/champions-league-feminina",
+  "https://www.placardefutebol.com.br/cearense-serie-b",
+  "https://www.placardefutebol.com.br/carioca-sub-20",
+  "https://www.placardefutebol.com.br/campeonato-uruguaio",
+  "https://www.placardefutebol.com.br/campeonato-tocantinense",
+  "https://www.placardefutebol.com.br/campeonato-sul-matogrossense",
+  "https://www.placardefutebol.com.br/campeonato-sergipano",
+  "https://www.placardefutebol.com.br/campeonato-roraimense",
+  "https://www.placardefutebol.com.br/campeonato-rondoniense",
+  "https://www.placardefutebol.com.br/campeonato-potiguar",
+  "https://www.placardefutebol.com.br/campeonato-piauiense",
+  "https://www.placardefutebol.com.br/campeonato-peruano",
+  "https://www.placardefutebol.com.br/campeonato-paulista",
+  "https://www.placardefutebol.com.br/campeonato-paranaense",
+  "https://www.placardefutebol.com.br/campeonato-paraibano",
+  "https://www.placardefutebol.com.br/campeonato-paraguaio",
+  "https://www.placardefutebol.com.br/campeonato-paraense",
+  "https://www.placardefutebol.com.br/campeonato-mineiro",
+  "https://www.placardefutebol.com.br/campeonato-mexicano",
+  "https://www.placardefutebol.com.br/campeonato-maranhense",
+  "https://www.placardefutebol.com.br/campeonato-gaucho",
+  "https://www.placardefutebol.com.br/campeonato-colombiano",
+  "https://www.placardefutebol.com.br/campeonato-catarinense",
+  "https://www.placardefutebol.com.br/campeonato-carioca",
+  "https://www.placardefutebol.com.br/campeonato-capixaba",
+  "https://www.placardefutebol.com.br/campeonato-brasileiro-feminino",
+  "https://www.placardefutebol.com.br/campeonato-argentino",
+  "https://www.placardefutebol.com.br/campeonato-africano-nacoes-qualificacao",
+  "https://www.placardefutebol.com.br/brasileiro-sub-20",
+  "https://www.placardefutebol.com.br/amistosos-selecoes-sub-21",
+  "https://www.placardefutebol.com.br/amistosos-selecoes-sub-20",
+  "https://www.placardefutebol.com.br/efl-championship",
+  "https://www.placardefutebol.com.br/campeonato-equatoriano",
+  "https://www.placardefutebol.com.br/copa-do-brasil",
+  "https://www.placardefutebol.com.br/campeonato-frances",
+  "https://www.placardefutebol.com.br/frances-2-divisao",
+  "https://www.placardefutebol.com.br/campeonato-italiano",
+  "https://www.placardefutebol.com.br/copa-liga-japonesa",
+  "https://www.placardefutebol.com.br/campeonato-alemao",
+  "https://www.placardefutebol.com.br/bundesliga-2-divisao",
+  "https://www.placardefutebol.com.br/campeonato-holandes",
+  "https://www.placardefutebol.com.br/liga-das-nacoes-concacaf",
+  "https://www.placardefutebol.com.br/uefa-europe-league",
+  "https://www.placardefutebol.com.br/campeonato-portugues",
+  "https://www.placardefutebol.com.br/japao-j1-league",
+  "https://www.placardefutebol.com.br/liga-conferencia-europa-da-uefa",
+  "https://www.placardefutebol.com.br/campeonato-turco",
+  "https://www.placardefutebol.com.br/campeonato-chileno",
+  "https://www.placardefutebol.com.br/copa-sul-americana",
+  "https://www.placardefutebol.com.br/copa-libertadores",
 ];
 
 const championships = [];
@@ -14,10 +76,14 @@ const table = [];
 const statistics = [];
 
 export default class championshipsCrawler {
+  static async getUrls() {
+    const championshipsArray = await matchsDAO.getAllChampionships();
+    console.log(championshipsArray);
+  }
+
   static async getChampionships() {
     if (championships.length != 0) return championships;
     else {
-      // urls = await matchsCrawler.getChampionships();
       table.splice(0, Infinity);
       statistics.splice(0, Infinity);
       urls.forEach((url) => {
@@ -34,12 +100,18 @@ export default class championshipsCrawler {
 
           $("#livescore > div:nth-child(3) > div").each(function (i, e) {
             var phase = $(this).find("p.text-center.match-stage").text().trim();
+            var length = 0;
+            $(this)
+              .find("table")
+              .each(function (i, e) {
+                length++;
+              });
             $(this)
               .find("table")
               .each(function (id, e) {
                 var tr = [];
                 var group = "";
-                if (phase !== "" && phase.includes("Grupo")) {
+                if (phase !== "" && length > 1) {
                   group = "Grupo " + id;
 
                   group = group.replace("0", "A");

@@ -241,7 +241,7 @@ function ButtonSumMatch({ actived, listMatch }) {
           </>
         ) : (
           <div id="sum-section_Notitle">
-            <span> SUMÁRIO NÃO DISPONIBILIZADO </span>
+            <span>SUMÁRIO NÃO DISPONÍVEL</span>
           </div>
         )}
       </Container>

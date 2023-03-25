@@ -1,31 +1,23 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { Container, Col, ListGroup, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Container, Spinner } from "react-bootstrap";
 import MatchDataService from "../../services/match.js";
-import { GiSoccerBall } from "react-icons/gi";
-import {
-  MdOutlineKeyboardArrowDown,
-  MdOutlineKeyboardArrowUp,
-} from "react-icons/md";
-import "../../styles/components/Championship/ButtonMatch.css";
 import ResultsChampionship from "./Results.js";
+import { useParams } from "react-router-dom";
+import "../../styles/components/Championship/ButtonMatchs.css";
 
 function ButtonMatchs({ actived, championship }) {
+  let { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [matchsData, setMatchsData] = useState([]);
   const [buttonExpand, setButtonExpand] = useState([]);
 
   useEffect(() => {
-    MatchDataService.getMatchsByChampionship(1).then((response) => {
-      console.log(response.data);
+    MatchDataService.getFutureMatchsByChampionship(id).then((response) => {
       setMatchsData(response.data);
       setExpand(response?.data.length);
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 500);
-      return () => clearTimeout(timer);
+      setLoading(false);
     });
-  }, [championship]);
+  }, [id]);
 
   const setExpand = (length) => {
     const array = [];
@@ -39,15 +31,12 @@ function ButtonMatchs({ actived, championship }) {
     actived && (
       <Container id="container-buttonMatch">
         {loading ? (
-          <div className="spinner-results">
+          <div className="spinner-buttonMatchs">
             <Spinner animation="border" />
           </div>
         ) : matchsData?.length === 0 ? (
           <div className="match-section_title">
-            <span>
-              {" "}
-              NENHUMA PARTIDA FUTURA ENCONTRADA PARA ESTE CAMPEONATO{" "}
-            </span>
+            <span>NENHUMA PARTIDA FUTURA ENCONTRADA PARA ESTE CAMPEONATO</span>
           </div>
         ) : (
           <ResultsChampionship

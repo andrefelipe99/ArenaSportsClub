@@ -95,7 +95,7 @@ function ButtonEstMatch({ actived, listMatch }) {
           </>
         ) : (
           <div id="est-section_title">
-            <span> ESTATÍSTICAS NÃO DISPONIBILIZADAS </span>
+            <span>ESTATÍSTICAS NÃO DISPONÍVEIS</span>
           </div>
         )}
       </Container>

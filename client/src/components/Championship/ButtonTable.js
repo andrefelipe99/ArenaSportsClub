@@ -12,25 +12,24 @@ function ButtonTable({ actived, championship }) {
             {typeof championship[0]?.table[0] === "undefined" ? (
               <p>Loading...</p>
             ) : (
-              championship[0]?.table?.map((teams, i) => (
+              championship[0]?.table?.map((champ, i) => (
                 <div className="butTable-section" key={i}>
                   <div className="butTable-header">
-                    {teams?.phase === "" ? (
-                      <span> Classificação</span>
+                    {champ?.group === "" ? (
+                      champ?.phase !== "" ? (
+                        <span>{champ.phase}</span>
+                      ) : (
+                        <span>Classificação</span>
+                      )
                     ) : (
-                      <>
-                        <div className="butTable-group">
-                          {i === 0 && teams.group !== "" ? (
-                            <span className="phase-butTable">
-                              {" "}
-                              {teams.phase}{" "}
-                            </span>
-                          ) : (
-                            <></>
-                          )}
-                          <span> {teams.group} </span>
-                        </div>
-                      </>
+                      <div className="butTable-group">
+                        {champ.group === "Grupo A" ? (
+                          <span className="phase-butTable">{champ.phase}</span>
+                        ) : (
+                          <></>
+                        )}
+                        <span> {champ.group} </span>
+                      </div>
                     )}
                   </div>
                   <Table className="table-hover">
@@ -47,7 +46,7 @@ function ButtonTable({ actived, championship }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {teams?.table.map((scores, i) => (
+                      {champ?.table.map((scores, i) => (
                         <tr key={i}>
                           <td id="text-center">{i + 1}</td>
                           <td id="text-center">{scores.team}</td>
@@ -67,7 +66,7 @@ function ButtonTable({ actived, championship }) {
           </>
         ) : (
           <div id="table_Notitle">
-            <span> TABELA NÃO DISPONIBILIZADAS </span>
+            <span>TABELA NÃO DISPONÍVEL</span>
           </div>
         )}
       </Container>

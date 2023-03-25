@@ -20,10 +20,9 @@ export function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/noticias" element={<News />} />
         <Route path="/equipe" element={<Team />} />
-        <Route path="/campeonato" element={<Championship />} />
-        {/* <Route path="/equipe/:id" element={<Team />} /> */}
-        {/* <Route path="/campeonato/:id" element={<Championship />} /> */}
+        <Route path="/campeonato/:id" element={<Championship />} />
         <Route path="/partida/:id" element={<Match />} />
+        {/* <Route path="/equipe/:id" element={<Team />} /> */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Footer />

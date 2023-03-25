@@ -29,8 +29,32 @@
   padding-left: 10px;
 }
 
+div.col-sidebar-center {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+div.col-sidebar-left {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+div.col-sidebar {
+  padding: 0;
+}
+
+div.spinner-sidebar {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  color: antiquewhite;
+}
+
 .pais-margin {
-  width: 25px;
+  max-width: 25px;
+  max-height: 25px;
   margin-top: 0.3ch;
   margin-bottom: 0.3ch;
 }
@@ -54,6 +78,7 @@
 
 .justify-content-md-center {
   align-items: center;
+  height: 38px;
   color: antiquewhite;
 }
 
@@ -66,9 +91,8 @@
 #button-favorite-sidebar {
   color: antiquewhite;
   background: rgba(76, 175, 80, 0);
-  padding: 0.1ch;
+  padding: 0;
   border: none;
-  margin-left: 0.5ch;
 }
 
 #form-sidebar {

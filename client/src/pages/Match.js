@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button, Row, Col } from "react-bootstrap";
+import { Container, Button, Row, Col, Spinner } from "react-bootstrap";
 import ButtonSumMatch from "../components/Match/ButtonSum";
 import ButtonEstMatch from "../components/Match/ButtonEst";
 import ButtonForMatch from "../components/Match/ButtonFor";
@@ -30,10 +30,7 @@ export function Match() {
   useEffect(() => {
     MatchDataService.getMatch(id).then((response) => {
       setListMatch(response.data);
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 500);
-      return () => clearTimeout(timer);
+      setLoading(false);
     });
   }, [id]);
 
@@ -50,14 +47,18 @@ export function Match() {
     <Container id="container-match">
       <div>
         <div>
-          {typeof listMatch[0]?.teams?.homeImg === "undefined" ? (
+          {loading ? (
+            <div className="spinner-buttonMatchs">
+              <Spinner animation="border" />
+            </div>
+          ) : typeof listMatch[0]?.teams?.homeImg === "undefined" ? (
             <div className="match-section_title">
-              <span> PARTIDA NÃO ENCONTRADA </span>
+              <span>PARTIDA NÃO ENCONTRADA</span>
             </div>
           ) : (
             <>
               <div className="nameCamp">
-                <Link to="/campeonato" className="link-match">
+                <Link to="/campeonato/1001" className="link-match">
                   <h1>{listMatch[0].championship}</h1>
                 </Link>
               </div>

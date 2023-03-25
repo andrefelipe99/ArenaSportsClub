@@ -32,6 +32,20 @@ export default class championshipsDAO {
     }
   }
 
+  static async getChampionshipByChampionshipUrl(url) {
+    try {
+      const pipeline = [
+        {
+          $match: { url: url },
+        },
+      ];
+      return await championships.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getChampionshipByUrl: ${e}`);
+      throw e;
+    }
+  }
+
   static async getChampionshipByUrl(url) {
     try {
       const pipeline = [
@@ -70,7 +84,7 @@ export default class championshipsDAO {
   static async updateChampionship(championship) {
     try {
       const updateResponse = await championships.updateOne(
-        { idChampionship: championship.idChampionship },
+        { url: championship.url },
         {
           $set: {
             table: championship.table,

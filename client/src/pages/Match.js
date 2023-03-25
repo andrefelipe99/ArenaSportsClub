@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button, Row, Col } from "react-bootstrap";
+import { Container, Button, Row, Col, Spinner } from "react-bootstrap";
 import ButtonSumMatch from "../components/Match/ButtonSum";
 import ButtonEstMatch from "../components/Match/ButtonEst";
 import ButtonForMatch from "../components/Match/ButtonFor";
@@ -9,6 +9,7 @@ import "../styles/pages/Match.css";
 
 export function Match() {
   let { id } = useParams();
+  const [loading, setLoading] = useState(true);
   const [listMatch, setListMatch] = useState([]);
   const [buttonChange, setButtonChange] = useState({
     sumario: true,
@@ -29,6 +30,7 @@ export function Match() {
   useEffect(() => {
     MatchDataService.getMatch(id).then((response) => {
       setListMatch(response.data);
+      setLoading(false);
     });
   }, [id]);
 
@@ -45,7 +47,11 @@ export function Match() {
     <Container id="container-match">
       <div>
         <div>
-          {typeof listMatch[0]?.teams?.homeImg === "undefined" ? (
+          {loading ? (
+            <div className="spinner-buttonMatchs">
+              <Spinner animation="border" />
+            </div>
+          ) : typeof listMatch[0]?.teams?.homeImg === "undefined" ? (
             <div className="match-section_title">
               <span>PARTIDA NÃO ENCONTRADA</span>
             </div>

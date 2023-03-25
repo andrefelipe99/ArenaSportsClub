@@ -44,10 +44,7 @@ export function Results() {
     MatchDataService.getMatchsByDate(dateFilter).then((response) => {
       setMatchsData(response.data);
       setExpand(response.data.length);
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 500);
-      return () => clearTimeout(timer);
+      setLoading(false);
     });
   }, [dateFilter]);
 

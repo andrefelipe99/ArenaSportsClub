@@ -1,5 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Container, ListGroup, Row, Col, Button, Form } from "react-bootstrap";
+import {
+  Container,
+  ListGroup,
+  Row,
+  Col,
+  Button,
+  Form,
+  Spinner,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AiOutlineStar, AiFillStar, AiFillPlusCircle } from "react-icons/ai";
 import { ImTrophy } from "react-icons/im";
@@ -27,10 +35,7 @@ export function SideBar() {
   useEffect(() => {
     ChampionshipDataService.getChampionshipsPriority().then((response) => {
       setChampionshipList(response.data);
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 500);
-      return () => clearTimeout(timer);
+      setLoading(false);
     });
   }, []);
 
@@ -90,7 +95,7 @@ export function SideBar() {
 
   const removeFavoriteChamp = (championship) => {
     window.localStorage.removeItem("favorites-champ");
-    if (championshipList !== "undefined")
+    if (championshipList !== undefined)
       setFavoritesChamp(
         favoritesChamp.filter(
           (camp) => camp.idChampionship !== championship.idChampionship
@@ -104,7 +109,7 @@ export function SideBar() {
     );
 
   const addFavoriteTeams = (team, i) => {
-    if (team !== "undefined") {
+    if (team !== undefined) {
       let { id, name, logo, locality } = team;
       setFavoritesTeams((favorite) => [
         ...favorite,
@@ -115,7 +120,7 @@ export function SideBar() {
 
   const removeFavoriteTeams = (team) => {
     window.localStorage.removeItem("favorites-teams");
-    if (listTeams !== "undefined")
+    if (listTeams !== undefined)
       setFavoritesTeams(favoritesTeams.filter((tea) => tea.id !== team.id));
   };
 
@@ -128,7 +133,11 @@ export function SideBar() {
         <GiStarsStack />
         <span id="title-text-side-bar">Meus campeonatos</span>
       </div>
-      {favoritesChamp[0]?.id === 0 || favoritesChamp.length === 0 ? (
+      {loading ? (
+        <div className="spinner-sidebar">
+          <Spinner animation="border" />
+        </div>
+      ) : favoritesChamp[0]?.id === 0 || favoritesChamp.length === 0 ? (
         <span id="titleSideBar">Nenhum Campeonato favorito</span>
       ) : (
         favoritesChamp.map((favorito, i) => (
@@ -187,7 +196,11 @@ export function SideBar() {
         <ImTrophy />
         <span id="title-text-side-bar">Principais Campeonatos</span>
       </div>
-      {typeof championshipList === "undefined" ? (
+      {loading ? (
+        <div className="spinner-sidebar">
+          <Spinner animation="border" />
+        </div>
+      ) : typeof championshipList === "undefined" ? (
         <p>Loading...</p>
       ) : (
         championshipList?.map((championship, i) => (
@@ -246,7 +259,11 @@ export function SideBar() {
         <MdGroups />
         <span id="title-text-side-bar">Minhas Equipes</span>
       </div>
-      {favoritesTeams[0]?.id === 0 || favoritesTeams.length === 0 ? (
+      {loading ? (
+        <div className="spinner-sidebar">
+          <Spinner animation="border" />
+        </div>
+      ) : favoritesTeams[0]?.id === 0 || favoritesTeams.length === 0 ? (
         <span id="titleSideBar">Nenhuma Equipe favorita</span>
       ) : (
         favoritesTeams.map((favorito, i) => (
@@ -321,7 +338,9 @@ export function SideBar() {
               setSearchField={setSearchField}
             />
           ) : (
-            <></>
+            <div className="spinner-sidebar">
+              <Spinner animation="border" />
+            </div>
           )}
         </>
       ) : (

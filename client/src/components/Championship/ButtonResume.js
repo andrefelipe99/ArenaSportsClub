@@ -2,22 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Container, Spinner } from "react-bootstrap";
 import MatchDataService from "../../services/match.js";
 import ResultsChampionship from "./Results.js";
+import { useParams } from "react-router-dom";
 
 function ButtonResume({ actived, championship }) {
+  let { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [matchsData, setMatchsData] = useState([]);
   const [buttonExpand, setButtonExpand] = useState([]);
 
   useEffect(() => {
-    MatchDataService.getMatchsByChampionship(1).then((response) => {
+    MatchDataService.getPastMatchsByChampionship(id).then((response) => {
       setMatchsData(response.data);
       setExpand(response?.data.length);
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 500);
-      return () => clearTimeout(timer);
+      setLoading(false);
     });
-  }, [championship]);
+  }, [id]);
 
   const setExpand = (length) => {
     const array = [];
@@ -31,7 +30,7 @@ function ButtonResume({ actived, championship }) {
     actived && (
       <Container id="container-buttonMatch">
         {loading ? (
-          <div className="spinner-results">
+          <div className="spinner-buttonMatchs">
             <Spinner animation="border" />
           </div>
         ) : matchsData?.length === 0 ? (

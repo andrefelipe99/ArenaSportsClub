@@ -45,6 +45,13 @@ div.col-sidebar {
   padding: 0;
 }
 
+div.spinner-sidebar {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  color: antiquewhite;
+}
+
 .pais-margin {
   max-width: 25px;
   max-height: 25px;

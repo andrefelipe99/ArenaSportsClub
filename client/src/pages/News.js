@@ -10,10 +10,7 @@ export function News() {
   useEffect(() => {
     NewsDataService.getAllNews().then((response) => {
       setNews(response.data);
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 500);
-      return () => clearTimeout(timer);
+      setLoading(false);
     });
   }, []);
 
@@ -29,7 +26,7 @@ export function News() {
   return (
     <Container>
       {loading ? (
-        <div className="spinner-results">
+        <div className="spinner-news">
           <Spinner animation="border" />
         </div>
       ) : (

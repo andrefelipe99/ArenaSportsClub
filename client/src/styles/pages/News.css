@@ -16,6 +16,12 @@ div.row-news {
   border-radius: 10px;
 }
 
+div.spinner-news {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
 .link-news {
   display: flex;
   flex-direction: column;

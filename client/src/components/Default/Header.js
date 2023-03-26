@@ -10,6 +10,19 @@ export function Header() {
   const [searchField, setSearchField] = useState("");
   const [listTeams, setListTeams] = useState([]);
   const location = useLocation();
+  const [width, setWidth] = useState(window.innerWidth);
+
+  console.log(width);
+
+  useEffect(() => {
+    const updateWindowDimensions = () => {
+      const newWidth = window.innerWidth;
+      setWidth(newWidth);
+    };
+
+    window.addEventListener("resize", updateWindowDimensions);
+    return () => window.removeEventListener("resize", updateWindowDimensions);
+  }, []);
 
   const handleSearch = (event) => {
     const { value } = event.target;
@@ -32,8 +45,8 @@ export function Header() {
         <Container>
           <Navbar.Brand>
             <Link to="/" className="link-header">
-              <img src={logo} alt="Logo" className="logo-header"></img> Arena
-              Sport Club
+              <img src={logo} alt="Logo" className="logo-header"></img>
+              {width > 380 ? <>Arena Sport Club</> : <>Arena SC</>}
             </Link>
           </Navbar.Brand>
 

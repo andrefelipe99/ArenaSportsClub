@@ -108,5 +108,53 @@ input.form-control:active {
   box-shadow: 0 0 0 0.15rem rgb(136, 198, 126, 0.6);
 }
 
+@media only screen and (max-width: 1200px) {
+  #title-text-side-bar {
+    padding-left: 8px;
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  #titleSideBar {
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+  }
+
+  #title-text-side-bar {
+    padding-left: 8px;
+    font-size: 0.75rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  #name-camp-sidebar {
+    font-size: 0.75rem;
+    padding-left: 0.2rem;
+  }
+}
+
 @media only screen and (max-width: 768px) {
+  #titleSideBar {
+    font-size: 1.2rem;
+  }
+
+  #title-text-side-bar {
+    padding-left: 8px;
+    font-size: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  #name-camp-sidebar {
+    font-size: 1rem;
+    padding-left: 0;
+  }
+
+  .pais-margin {
+    max-width: 35px;
+    max-height: 35px;
+  }
 }

@@ -23,21 +23,21 @@ app.use("/api/v1/football", football);
 //   res.json({ championships });
 // });
 
-// setInterval(async () => {
-//   const championship = await championshipsController.apiPostChampionships();
-//   console.log(championship);
-// }, 600000);
+setInterval(async () => {
+  const championship = await championshipsController.apiPostChampionships();
+  console.log(championship);
+}, 600000);
 
-// setInterval(async () => {
-//   const news = await newsController.apiPostNews();
-//   console.log(news);
-// }, 600000);
+setInterval(async () => {
+  const news = await newsController.apiPostNews();
+  console.log(news);
+}, 600000);
 
-// setInterval(async () => {
-//   const post = await matchsController.apiPostMatch();
-//   const clear = await matchsCrawler.clearMatchs();
-//   console.log(post);
-// }, 40000);
+setInterval(async () => {
+  const post = await matchsController.apiPostMatch();
+  const clear = await matchsCrawler.clearMatchs();
+  console.log(post);
+}, 40000);
 
 //daqui pra baixo API testes
 const partidas = [

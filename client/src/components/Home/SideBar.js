@@ -149,7 +149,7 @@ export function SideBar() {
             <ListGroup>
               <ListGroup.Item id="list-group-sidebar">
                 <Row className="justify-content-md-center">
-                  <Col md={2} sm={2} className="col-sidebar-center">
+                  <Col md={2} sm={2} xs={2} className="col-sidebar-center">
                     <img
                       className="pais-margin"
                       src={
@@ -164,12 +164,13 @@ export function SideBar() {
                   <Col
                     md={9}
                     sm={9}
+                    xs={9}
                     id="name-camp-sidebar"
                     className="col-sidebar"
                   >
                     <span>{favorito.name}</span>
                   </Col>
-                  <Col md={1} sm={1} className="col-sidebar-left">
+                  <Col md={1} sm={1} xs={1} className="col-sidebar-left">
                     <Button
                       id="button-favorite-sidebar"
                       onClick={(e) => {
@@ -212,7 +213,7 @@ export function SideBar() {
             <ListGroup>
               <ListGroup.Item id="list-group-sidebar">
                 <Row className="justify-content-md-center">
-                  <Col md={2} sm={2} className="col-sidebar-center">
+                  <Col md={2} sm={2} xs={2} className="col-sidebar-center">
                     <img
                       className="pais-margin"
                       src={
@@ -227,12 +228,13 @@ export function SideBar() {
                   <Col
                     md={9}
                     sm={9}
+                    xs={9}
                     id="name-camp-sidebar"
                     className="col-sidebar"
                   >
                     <span>{championship.name}</span>
                   </Col>
-                  <Col md={1} sm={1} className="col-sidebar-left">
+                  <Col md={1} sm={1} xs={1} className="col-sidebar-left">
                     <Button
                       id="button-favorite-sidebar"
                       onClick={(e) => {
@@ -271,7 +273,7 @@ export function SideBar() {
             <ListGroup>
               <ListGroup.Item id="list-group-sidebar">
                 <Row className="justify-content-md-center">
-                  <Col md={2}>
+                  <Col md={2} sm={2} xs={2} className="col-sidebar-center">
                     <img
                       className="pais-margin"
                       src={favorito.logo}
@@ -279,10 +281,16 @@ export function SideBar() {
                       title={`${favorito.name}`}
                     />
                   </Col>
-                  <Col md={8} id="name-camp-sidebar">
+                  <Col
+                    md={9}
+                    sm={9}
+                    xs={9}
+                    id="name-camp-sidebar"
+                    className="col-sidebar"
+                  >
                     <span>{favorito.name}</span>
                   </Col>
-                  <Col md={2}>
+                  <Col md={1} sm={1} xs={1} className="col-sidebar-left">
                     <Button
                       id="button-favorite-sidebar"
                       onClick={(e) => {

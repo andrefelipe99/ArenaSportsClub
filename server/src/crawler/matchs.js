@@ -20,7 +20,6 @@ const imgDefault =
   "https://www.placardefutebol.com.br/images/escudo-de-futebol.png";
 
 const matchs = [];
-const championships = [];
 const events = [];
 const statistics = [];
 const lineupHomeS = [];
@@ -29,10 +28,6 @@ const lineupHomeB = [];
 const lineupAwayB = [];
 
 export default class matchsCrawler {
-  static async getchampionships() {
-    return championships;
-  }
-
   static async clearMatchs() {
     try {
       matchs.splice(0, Infinity);
@@ -738,17 +733,6 @@ export default class matchsCrawler {
                   });
                 });
               }
-            } else if ($(this).text().trim() === "Ver tabela e classificação") {
-              var hrefChampionship = $(this).attr("href");
-              var repeated = false;
-
-              championships.forEach((c) => {
-                if (c === hrefChampionship) {
-                  repeated = true;
-                }
-              });
-
-              if (!repeated) championships.push(hrefChampionship);
             }
           });
         });

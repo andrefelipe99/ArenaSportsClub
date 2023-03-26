@@ -51,20 +51,20 @@ export function Search(props) {
       ) : theme === "nav" ? (
         listTeams?.map((team, i) => (
           <Link
-            to="/equipe"
+            // to="/equipe"
             key={i}
             id="list-group-navbar-search"
             onClick={() => deleteSearch()}
           >
             <Row className="justify-content-center-search">
-              <Col md={2}>
+              <Col md={2} sm={2} xs={2} className="col-search">
                 <img
                   className="img-margin"
                   src={team.logo}
                   alt={`${team.logo}`}
                 />
               </Col>
-              <Col md={8}>
+              <Col md={8} sm={8} xs={8} className="col-search">
                 <Row>
                   <span className="name-search">{team.name}</span>
                 </Row>
@@ -83,14 +83,14 @@ export function Search(props) {
             className="justify-content-center-search"
           >
             <Row className="justify-content-center-search">
-              <Col md={2}>
+              <Col md={2} sm={2} xs={2} className="col-logo-search">
                 <img
                   className="img-margin"
                   src={team.logo}
                   alt={`${team.logo}`}
                 />
               </Col>
-              <Col md={8}>
+              <Col md={8} sm={8} xs={8} className="col-search">
                 <Row>
                   <span className="name-search">{team.name}</span>
                 </Row>
@@ -99,7 +99,7 @@ export function Search(props) {
                 </Row>
               </Col>
               {favoritesTeams !== undefined ? (
-                <Col md={2}>
+                <Col md={2} sm={2} xs={2} className="col-search">
                   <Button
                     id="button-favorite-sidebar"
                     onClick={(e) => {
@@ -113,7 +113,7 @@ export function Search(props) {
                   </Button>
                 </Col>
               ) : (
-                <Col md={2}></Col>
+                <Col md={2} sm={2} xs={2}></Col>
               )}
             </Row>
           </ListGroup.Item>

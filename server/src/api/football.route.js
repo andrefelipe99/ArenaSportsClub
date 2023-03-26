@@ -18,7 +18,6 @@ router
   .route("/matchs/championship/past/:id")
   .get(matchsCtrl.apiGetPastMatchsByChampionship);
 router
-
   .route("/championship/id/:id")
   .get(championshipsCtrl.apiGetChampionshipById);
 router
@@ -26,7 +25,9 @@ router
   .get(championshipsCtrl.apiGetChampionshipPriority);
 
 // router.route("/matchs").get(matchsCtrl.apiGetAllChampionships);
+// router.route("/putid").get(matchsCtrl.apiDelete);
 // router.route("/putid").get(matchsCtrl.apiGetMatchs);
+
 // router.route("/matchs").get(matchsCtrl.apiPostMatch);
 // router.route("/championships").get(championshipsCtrl.apiPostChampionships);
 

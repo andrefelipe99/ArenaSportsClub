@@ -12,8 +12,6 @@ export function Header() {
   const location = useLocation();
   const [width, setWidth] = useState(window.innerWidth);
 
-  console.log(width);
-
   useEffect(() => {
     const updateWindowDimensions = () => {
       const newWidth = window.innerWidth;

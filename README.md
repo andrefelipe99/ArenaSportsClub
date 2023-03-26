@@ -4,9 +4,7 @@
 
 Projeto realizado no período 2022.1 na disciplina de Desenvolvimento de Aplicações Web na UFRPE.
 
-***
-
-## **Equipe:** 
+## **Equipe:**
 
 - André Felipe
 - Ricardo Alves
@@ -14,11 +12,7 @@ Projeto realizado no período 2022.1 na disciplina de Desenvolvimento de Aplica�
 
 Professor: Vanilson Buregio
 
-***
-
 ## [Notion do projeto](https://mini-earl-2a4.notion.site/Arena-Sports-Club-a3b396bb8fc346d38674615e2ac0fee1)
-
-***
 
 > ## **Instalação**
 >

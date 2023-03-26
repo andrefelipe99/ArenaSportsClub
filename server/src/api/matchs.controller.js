@@ -32,7 +32,23 @@ export default class matchsController {
             return { error };
           }
         } else {
-          const MatchResponse = await matchsDAO.updateMatch(matchs[index]);
+          if (
+            matchs[index].idChampionship !== "" &&
+            matchs[index].idChampionship !== null
+          ) {
+            championshipId = matchs[index].idChampionship;
+          } else {
+            championshipId =
+              await championshipsDAO.getChampionshipByChampionshipUrl(
+                matchs[index].championshipUrl
+              );
+            championshipId = championshipId[0]?.idChampionship;
+            if (championshipId === undefined) championshipId = "";
+          }
+          const MatchResponse = await matchsDAO.updateMatch(
+            matchs[index],
+            championshipId
+          );
 
           var { error } = MatchResponse;
           if (error) {
@@ -149,11 +165,18 @@ export default class matchsController {
       if (error) {
         return { error };
       }
-
-      res.json(championships);
+      let array = [];
+      championships.forEach((element) => {
+        if (
+          element._id.championshipUrl !== "" &&
+          element._id.championshipUrl !== null
+        )
+          array.push(element._id.championshipUrl);
+      });
+      return array;
     } catch (e) {
       console.log(`api, ${e}`);
-      res.status(500).json({ error: e });
+      return { error: e.message };
     }
   }
 

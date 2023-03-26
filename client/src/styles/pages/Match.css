@@ -130,7 +130,7 @@ span.time-match {
   font-family: "Lucida Console", "Courier New", monospace;
   font-size: 18px;
   font-weight: 900;
-  margin-bottom: 1.1ch;
+  margin: 0.5rem 0;
   padding: 7px;
   padding-left: 20px;
   padding-right: 20px;

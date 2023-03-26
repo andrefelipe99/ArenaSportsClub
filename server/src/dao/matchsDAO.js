@@ -61,12 +61,13 @@ export default class matchsDAO {
     }
   }
 
-  static async updateMatch(match) {
+  static async updateMatch(match, idChampionship) {
     try {
       const updateResponse = await matchs.updateOne(
         { idTitle: match.idTitle },
         {
           $set: {
+            idChampionship: idChampionship,
             status: match.status,
             time: match.time,
             day: match.day,
@@ -152,7 +153,7 @@ export default class matchsDAO {
         },
         {
           $addFields: {
-            championshipObj: "$championshipObj",
+            championshipObj: { $arrayElemAt: ["$championshipObj", 0] },
           },
         },
         {
@@ -162,6 +163,7 @@ export default class matchsDAO {
             },
             matchs: {
               $addToSet: {
+                priority: "$championshipObj.priority",
                 idChampionship: "$idChampionship",
                 idMatch: "$idMatch",
                 status: "$status",
@@ -189,6 +191,7 @@ export default class matchsDAO {
         },
         {
           $sort: {
+            "matchs.priority": -1,
             "_id.championship": 1,
           },
         },
@@ -373,7 +376,8 @@ export default class matchsDAO {
         {
           $group: {
             _id: {
-              idChampionship: "$idChampionship",
+              // idMatch: "$idMatch",
+              // idChampionship: "$idChampionship",
               championshipUrl: "$championshipUrl",
             },
             count: { $count: {} },
@@ -396,7 +400,7 @@ export default class matchsDAO {
   // static async getDelete() {
   //   try {
   //     return await matchs.deleteMany({
-  //       idMatch: { $gte: "1993" },
+  //       idMatch: "2190",
   //     });
   //   } catch (e) {
   //     console.error(`Unable to delete news: ${e}`);

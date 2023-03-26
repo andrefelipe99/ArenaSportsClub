@@ -188,6 +188,21 @@ button.button-championship-results {
   animation: animate 3s linear infinite;
 }
 
+.results-section_title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 18px;
+  font-weight: 900;
+  padding: 7px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #00897b;
+  border-radius: 8px;
+  color: antiquewhite;
+}
+
 @keyframes animate {
   0% {
     opacity: 0;
@@ -200,7 +215,7 @@ button.button-championship-results {
   }
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 991px) {
   button.button-filter {
     font-size: 0.8rem;
   }

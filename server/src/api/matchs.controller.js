@@ -64,13 +64,14 @@ export default class matchsController {
   static async apiGetMatchsByDate(req, res, next) {
     try {
       let date = req.params.date || {};
-      let splitter = date.split("-");
-      let year = parseInt(splitter[2]?.trim());
-      let month = parseInt(splitter[1]?.trim()) - 1;
-      let day = parseInt(splitter[0]?.trim());
-      const dateFilter = new Date(year, month, day);
-      console.log(dateFilter);
-      let match = await matchsDAO.getMatchsByDate(dateFilter);
+      let day = date.toString().replace(/-/g, "/");
+      // let splitter = date.split("-");
+      // let year = parseInt(splitter[2]?.trim());
+      // let month = parseInt(splitter[1]?.trim()) - 1;
+      // let day = parseInt(splitter[0]?.trim());
+      // const dateFilter = new Date(year, month, day);
+      console.log(day);
+      let match = await matchsDAO.getMatchsByDate(day);
       if (!match) {
         res.status(404).json({ error: "Not found" });
         return;

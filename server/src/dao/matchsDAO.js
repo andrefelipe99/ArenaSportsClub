@@ -123,7 +123,7 @@ export default class matchsDAO {
       const pipeline = [
         {
           $match: {
-            date: date,
+            day: date,
           },
         },
         {

@@ -69,6 +69,7 @@ export default class matchsController {
       let month = parseInt(splitter[1]?.trim()) - 1;
       let day = parseInt(splitter[0]?.trim());
       const dateFilter = new Date(year, month, day);
+      console.log(dateFilter);
       let match = await matchsDAO.getMatchsByDate(dateFilter);
       if (!match) {
         res.status(404).json({ error: "Not found" });

@@ -138,3 +138,13 @@ span.time-match {
   border-radius: 8px;
   color: antiquewhite;
 }
+
+@media only screen and (max-width: 425px) {
+  #button-match,
+  #button-match-selected {
+    font-size: 12px;
+  }
+  .button-group-match {
+    gap: 0.3rem;
+  }
+}

@@ -9,7 +9,7 @@ import {
 } from "react-icons/md";
 import "../../styles/components/Home/Results.css";
 
-export function Results() {
+export function Results({ favoritesChamp, favoritesTeams }) {
   const getTodayDate = (x) => {
     var date = new Date();
     date.setDate(date.getDate() + x);
@@ -41,19 +41,24 @@ export function Results() {
   });
 
   useEffect(() => {
-    MatchDataService.getMatchsByDate(dateFilter).then((response) => {
-      setMatchsData(response.data);
-      setExpand(response.data.length);
-      setLoading(false);
-    });
-  }, [dateFilter]);
+    MatchDataService.getMatchsByDate(dateFilter, favoritesChamp).then(
+      (response) => {
+        setMatchsData(response.data);
+        setExpand(response.data.length);
+        setLoading(false);
+      }
+    );
+    // eslint-disable-next-line
+  }, [dateFilter, favoritesChamp]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      MatchDataService.getMatchsByDate(dateFilter).then((response) => {
-        setMatchsData(response.data);
-      });
-    }, 30000);
+      MatchDataService.getMatchsByDate(dateFilter, favoritesChamp).then(
+        (response) => {
+          setMatchsData(response.data);
+        }
+      );
+    }, 10000);
     return () => clearTimeout(timer);
   });
 
@@ -219,7 +224,7 @@ export function Results() {
           <Spinner animation="border" />
         </div>
       ) : matchsData?.length === 0 ? (
-        <div className="match-section_title">
+        <div className="results-section_title">
           <span>NENHUMA PARTIDA ENCONTRADA PARA O DIA {dateFilter}</span>
         </div>
       ) : haveChampionships(matchsData) ? (
@@ -227,7 +232,7 @@ export function Results() {
           haveMatchs(championship) ? (
             <div key={i}>
               <div className="championship-results">
-                <Col md={1} className="col-championship-results">
+                <Col md={1} sm={1} xs={1} className="col-championship-results">
                   <button
                     onClick={(e) => {
                       e.preventDefault();
@@ -242,7 +247,12 @@ export function Results() {
                     )}
                   </button>
                 </Col>
-                <Col md={10} className="col-championship-results">
+                <Col
+                  md={10}
+                  sm={10}
+                  xs={10}
+                  className="col-championship-results"
+                >
                   {championship.matchs[0].idChampionship !== "" ? (
                     <Link
                       to={`/campeonato/${championship.matchs[0].idChampionship}`}
@@ -269,7 +279,7 @@ export function Results() {
                       key={i}
                     >
                       <ListGroup className="match">
-                        <Col className="align-results" md={1}>
+                        <Col className="align-results" md={1} sm={1} xs={1}>
                           {match.status === "AO VIVO" ? (
                             checkLastEvent(match) !== "" ? (
                               <>
@@ -294,12 +304,17 @@ export function Results() {
                           )}
                         </Col>
 
-                        <Col className="align-team-home-results" md={3}>
+                        <Col
+                          className="align-team-home-results"
+                          md={3}
+                          sm={3}
+                          xs={3}
+                        >
                           <span className="matchs-text-results name-team-results">
                             {match.teams?.homeName}
                           </span>
                         </Col>
-                        <Col className="align-results" md={1}>
+                        <Col className="align-results" md={1} sm={1} xs={1}>
                           <img
                             className="img-results"
                             src={match.teams?.homeImg}
@@ -307,22 +322,22 @@ export function Results() {
                             title={`${match.teams?.homeName}`}
                           />
                         </Col>
-                        <Col className="align-results" md={2}>
-                          <Col className="align-results" md={5}>
+                        <Col className="align-results" md={2} sm={2} xs={2}>
+                          <Col className="align-results" md={5} sm={5} xs={5}>
                             <span className="match-number-results">
                               {match.scoreHome}
                             </span>
                           </Col>
-                          <Col className="align-results" md={2}>
+                          <Col className="align-results" md={2} sm={2} xs={2}>
                             <span className="match-results">-</span>
                           </Col>
-                          <Col className="align-results" md={5}>
+                          <Col className="align-results" md={5} sm={5} xs={5}>
                             <span className="match-number-results">
                               {match.scoreAway}
                             </span>
                           </Col>
                         </Col>
-                        <Col className="align-results" md={1}>
+                        <Col className="align-results" md={1} sm={1} xs={1}>
                           <img
                             className="img-results"
                             src={match.teams?.awayImg}
@@ -330,7 +345,12 @@ export function Results() {
                             title={`${match.teams?.awayName}`}
                           />
                         </Col>
-                        <Col className="align-team-away-results" md={3}>
+                        <Col
+                          className="align-team-away-results"
+                          md={3}
+                          sm={3}
+                          xs={3}
+                        >
                           <span className="matchs-text-results name-team-results">
                             {match.teams?.awayName}
                           </span>
@@ -355,11 +375,11 @@ export function Results() {
           )
         )
       ) : filterSelected === "ENCERRADO" ? (
-        <div className="match-section_title">
+        <div className="results-section_title">
           <span>NENHUMA PARTIDA ENCERRADA PARA O DIA {dateFilter}</span>
         </div>
       ) : (
-        <div className="match-section_title">
+        <div className="results-section_title">
           <span>
             NENHUMA PARTIDA {filterSelected} PARA O DIA {dateFilter}
           </span>

@@ -17,7 +17,6 @@ export function Match() {
     formacao: false,
   });
 
-  console.log(listMatch);
   const changeSelected = (buttonName) => {
     if (buttonName === "buttonSum") {
       setButtonChange({ sumario: true, estatistica: false, formacao: false });

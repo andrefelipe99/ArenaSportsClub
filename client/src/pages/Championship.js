@@ -5,6 +5,7 @@ import ButtonMatchs from "../components/Championship/ButtonMatchs";
 import ButtonTable from "../components/Championship/ButtonTable";
 import ButtonStatistic from "../components/Championship/ButtonStatistic";
 import ChampionshipDataService from "../services/championship";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import "../styles/pages/Championship.css";
 
@@ -18,22 +19,57 @@ export function Championship() {
     table: false,
     statistic: false,
   });
+  const [favoritesChamp, setFavoritesChamp] = useState(
+    JSON.parse(window.localStorage.getItem("favorites-champ")) || []
+  );
 
   useEffect(() => {
     ChampionshipDataService.getChampionshipById(id).then((response) => {
-      setChampionship(response.data);
+      setChampionship(response.data[0]);
       setLoading(false);
     });
   }, [id]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      ChampionshipDataService.getChampionshipById(id).then((response) =>
-        setChampionship(response.data)
-      );
+      ChampionshipDataService.getChampionshipById(id).then((response) => {
+        setChampionship(response.data);
+      });
     }, 600000);
     return () => clearTimeout(timer);
   });
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      "favorites-champ",
+      JSON.stringify(favoritesChamp)
+    );
+  }, [favoritesChamp]);
+
+  const addFavoriteChamp = () => {
+    if (championship !== undefined) {
+      let { idChampionship, name, img, imgChampionship } = championship;
+      setFavoritesChamp((favorite) => [
+        ...favorite,
+        { idChampionship, name, img, imgChampionship },
+      ]);
+    }
+  };
+
+  const removeFavoriteChamp = () => {
+    window.localStorage.removeItem("favorites-champ");
+    if (championship !== undefined)
+      setFavoritesChamp(
+        favoritesChamp.filter(
+          (champ) => champ.idChampionship !== championship.idChampionship
+        )
+      );
+  };
+
+  const isFavoriteChamp = () =>
+    favoritesChamp?.some(
+      (champ) => champ.idChampionship === championship.idChampionship
+    );
 
   const changeSelected = (buttonName) => {
     if (buttonName === "buttonResume") {
@@ -73,7 +109,7 @@ export function Championship() {
         <div className="spinner-buttonMatchs">
           <Spinner animation="border" />
         </div>
-      ) : typeof championship[0]?.name === "undefined" ? (
+      ) : typeof championship?.name === "undefined" ? (
         <div className="match-section_title">
           <span>CAMPEONATO NÃO ENCONTRADO</span>
         </div>
@@ -83,17 +119,29 @@ export function Championship() {
             <img
               className="heading_logo heading_logo--1"
               src={
-                championship[0].imgChampionship !== ""
-                  ? `${championship[0].imgChampionship}`
-                  : `${championship[0].img}`
+                championship.imgChampionship !== ""
+                  ? `${championship.imgChampionship}`
+                  : `${championship.img}`
               }
-              alt={`${championship[0].name}`}
-              title={`${championship[0].name}`}
+              alt={`${championship.name}`}
+              title={`${championship.name}`}
             />
             <div className="heading_title">
-              <div className="heading_name">{championship[0].name}</div>
+              <div className="heading_name">{championship.name}</div>
             </div>
-            <div className="heading_info">{championship[0].season}</div>
+            <button
+              id="button-favorite-championship"
+              onClick={(e) => {
+                e.preventDefault();
+                isFavoriteChamp() ? removeFavoriteChamp() : addFavoriteChamp();
+              }}
+            >
+              {isFavoriteChamp() ? (
+                <AiFillStar className="icon-championship" />
+              ) : (
+                <AiOutlineStar className="icon-championship" />
+              )}
+            </button>
           </div>
 
           <div className="button-group-championship">

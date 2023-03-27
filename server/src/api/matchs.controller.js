@@ -32,7 +32,23 @@ export default class matchsController {
             return { error };
           }
         } else {
-          const MatchResponse = await matchsDAO.updateMatch(matchs[index]);
+          if (
+            matchs[index].idChampionship !== "" &&
+            matchs[index].idChampionship !== null
+          ) {
+            championshipId = matchs[index].idChampionship;
+          } else {
+            championshipId =
+              await championshipsDAO.getChampionshipByChampionshipUrl(
+                matchs[index].championshipUrl
+              );
+            championshipId = championshipId[0]?.idChampionship;
+            if (championshipId === undefined) championshipId = "";
+          }
+          const MatchResponse = await matchsDAO.updateMatch(
+            matchs[index],
+            championshipId
+          );
 
           var { error } = MatchResponse;
           if (error) {
@@ -64,14 +80,16 @@ export default class matchsController {
   static async apiGetMatchsByDate(req, res, next) {
     try {
       let date = req.params.date || {};
-      let day = date.toString().replace(/-/g, "/");
-      // let splitter = date.split("-");
-      // let year = parseInt(splitter[2]?.trim());
-      // let month = parseInt(splitter[1]?.trim()) - 1;
-      // let day = parseInt(splitter[0]?.trim());
-      // const dateFilter = new Date(year, month, day);
-      console.log(day);
-      let match = await matchsDAO.getMatchsByDate(day);
+
+      let favorites = req.params.favorites || {};
+      favorites = favorites.split(",");
+      let splitter = date.split("-");
+      let year = parseInt(splitter[2]?.trim());
+      let month = parseInt(splitter[1]?.trim()) - 1;
+      let day = parseInt(splitter[0]?.trim());
+      const dateFilter = new Date(year, month, day);
+      let match = await matchsDAO.getMatchsByDate(dateFilter, favorites);
+      
       if (!match) {
         res.status(404).json({ error: "Not found" });
         return;
@@ -125,24 +143,52 @@ export default class matchsController {
     }
   }
 
-  static async apiGetMatchs(req, res, next) {
+  static async apiUpdateYesterdayMatchs() {
     try {
       const matchs = await matchsDAO.getMatchs();
-
+      let today = new Date();
+      let day = today.getDate();
+      let month = today.getMonth();
+      let year = today.getFullYear();
+      let date = new Date(year, month, day);
       for (let index = 0; index < matchs.length; index++) {
-        const MatchResponse = await matchsDAO.update(matchs[index]);
+        const MatchResponse = await matchsDAO.updateYesterday(
+          matchs[index],
+          date
+        );
         var { error } = MatchResponse;
         if (error) {
           return { error };
         }
       }
-
-      res.json(matchs.length);
-    } catch (e) {
-      console.log(`api, ${e}`);
-      res.status(500).json({ error: e });
+      return { status: "success yesterday" };
+    } catch (error) {
+      return { error: error.message };
     }
   }
+
+  // static async apiGetAllMatchs(req, res, next) {
+  //   try {
+  //     const matchs = await matchsDAO.getMatchs();
+  //     let today = new Date();
+  //     let day = today.getDate();
+  //     let month = today.getMonth();
+  //     let year = today.getFullYear();
+  //     let date = new Date(year, month, day);
+  //     for (let index = 0; index < matchs.length; index++) {
+  //       const MatchResponse = await matchsDAO.update(matchs[index], date);
+  //       var { error } = MatchResponse;
+  //       if (error) {
+  //         return { error };
+  //       }
+  //     }
+
+  //     res.json(matchs.length);
+  //   } catch (e) {
+  //     console.log(`api, ${e}`);
+  //     res.status(500).json({ error: e });
+  //   }
+  // }
 
   static async apiGetAllChampionships(req, res, next) {
     try {
@@ -151,11 +197,18 @@ export default class matchsController {
       if (error) {
         return { error };
       }
-
-      res.json(championships);
+      let array = [];
+      championships.forEach((element) => {
+        if (
+          element._id.championshipUrl !== "" &&
+          element._id.championshipUrl !== null
+        )
+          array.push(element._id.championshipUrl);
+      });
+      return array;
     } catch (e) {
       console.log(`api, ${e}`);
-      res.status(500).json({ error: e });
+      return { error: e.message };
     }
   }
 

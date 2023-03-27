@@ -5,8 +5,12 @@ class MatchDataService {
     return http.get(`/matchs/id/${id}`);
   }
 
-  getMatchsByDate(date) {
-    return http.get(`/matchs/date/${date}`);
+  getMatchsByDate(date, favorites) {
+    const array = [];
+    for (let index = 0; index < favorites.length; index++) {
+      array.push(favorites[index].idChampionship);
+    }
+    return http.get(`/matchs/date/${date}/${array}`);
   }
 
   getFutureMatchsByChampionship(id) {

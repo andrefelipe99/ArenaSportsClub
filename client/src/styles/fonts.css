@@ -39,3 +39,12 @@ body {
   background-color: white;
   overflow-y: scroll;
 }
+
+a:focus-visible {
+  outline: 1px solid antiquewhite;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 1px auto antiquewhite;
+}

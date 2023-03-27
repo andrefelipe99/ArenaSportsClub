@@ -19,6 +19,43 @@ export default class championshipsDAO {
     }
   }
 
+  static async getChampionships({
+    filters = null,
+    page = 0,
+    championshipsPerPage = 20,
+  } = {}) {
+    let query;
+    if (filters) {
+      if ("name" in filters) {
+        query = { $text: { $search: filters["name"] } };
+      }
+    }
+
+    let cursor;
+
+    try {
+      cursor = await championships.find(query);
+    } catch (e) {
+      console.error(`Unable to issue find command, ${e}`);
+      return { championshipsList: [], totalNumChampionships: 0 };
+    }
+
+    const displayCursor = cursor
+      .limit(championshipsPerPage)
+      .skip(championshipsPerPage * page);
+
+    try {
+      const championshipsList = await displayCursor.toArray();
+      const totalNumChampionships = await championships.countDocuments(query);
+      return { championshipsList, totalNumChampionships };
+    } catch (e) {
+      console.error(
+        `Unable to convert cursor to array or problem counting documents, ${e}`
+      );
+      return { championshipsList: [], totalNumChampionships: 0 };
+    }
+  }
+
   static async getChampionshipMaxID() {
     let maxId;
     try {

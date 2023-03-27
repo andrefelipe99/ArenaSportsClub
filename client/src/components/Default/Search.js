@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "../../styles/components/Default/Search.css";
 
 export function Search(props) {
-  const { theme, listTeams, setSearchField } = props;
+  const { theme, listTeams, listChamps, setSearchField } = props;
   const { favoritesTeams, setFavoritesTeams } = props;
 
   useEffect(() => {
@@ -49,32 +49,61 @@ export function Search(props) {
           </Placeholder>
         </ListGroup.Item>
       ) : theme === "nav" ? (
-        listTeams?.map((team, i) => (
-          <Link
-            to="/equipe"
-            key={i}
-            id="list-group-navbar-search"
-            onClick={() => deleteSearch()}
-          >
-            <Row className="justify-content-center-search">
-              <Col md={2}>
-                <img
-                  className="img-margin"
-                  src={team.logo}
-                  alt={`${team.logo}`}
-                />
-              </Col>
-              <Col md={8}>
-                <Row>
-                  <span className="name-search">{team.name}</span>
-                </Row>
-                <Row>
-                  <span className="locality-search">{team.locality}</span>
-                </Row>
-              </Col>
-            </Row>
-          </Link>
-        ))
+        <>
+          {listTeams?.map((team, i) => (
+            <Link
+              // to="/equipe"
+              key={i}
+              id="list-group-navbar-search"
+              onClick={() => deleteSearch()}
+            >
+              <Row className="justify-content-center-search">
+                <Col md={2} sm={2} xs={2} className="col-search">
+                  <img
+                    className="img-margin"
+                    src={team.logo}
+                    alt={`${team.logo}`}
+                  />
+                </Col>
+                <Col md={8} sm={8} xs={8} className="col-search">
+                  <Row>
+                    <span className="name-search">{team.name}</span>
+                  </Row>
+                  <Row>
+                    <span className="locality-search">{team.locality}</span>
+                  </Row>
+                </Col>
+              </Row>
+            </Link>
+          ))}
+          {listChamps?.map((champ, i) => (
+            <Link
+              to={`/campeonato/${champ.idChampionship}`}
+              key={i}
+              id="list-group-navbar-search"
+              onClick={() => deleteSearch()}
+            >
+              <Row className="justify-content-center-search">
+                <Col md={2} sm={2} xs={2} className="col-search">
+                  <img
+                    className="img-margin"
+                    src={
+                      champ.imgChampionship !== ""
+                        ? `${champ.imgChampionship}`
+                        : `${champ.img}`
+                    }
+                    alt={`${champ.name}`}
+                  />
+                </Col>
+                <Col md={8} sm={8} xs={8} className="col-search">
+                  <Row>
+                    <span className="name-search">{champ.name}</span>
+                  </Row>
+                </Col>
+              </Row>
+            </Link>
+          ))}
+        </>
       ) : (
         listTeams?.map((team, i) => (
           <ListGroup.Item
@@ -83,14 +112,14 @@ export function Search(props) {
             className="justify-content-center-search"
           >
             <Row className="justify-content-center-search">
-              <Col md={2}>
+              <Col md={2} sm={2} xs={2} className="col-logo-search">
                 <img
                   className="img-margin"
                   src={team.logo}
                   alt={`${team.logo}`}
                 />
               </Col>
-              <Col md={8}>
+              <Col md={8} sm={8} xs={8} className="col-search">
                 <Row>
                   <span className="name-search">{team.name}</span>
                 </Row>
@@ -99,7 +128,7 @@ export function Search(props) {
                 </Row>
               </Col>
               {favoritesTeams !== undefined ? (
-                <Col md={2}>
+                <Col md={2} sm={2} xs={2} className="col-search">
                   <Button
                     id="button-favorite-sidebar"
                     onClick={(e) => {
@@ -113,7 +142,7 @@ export function Search(props) {
                   </Button>
                 </Col>
               ) : (
-                <Col md={2}></Col>
+                <Col md={2} sm={2} xs={2}></Col>
               )}
             </Row>
           </ListGroup.Item>

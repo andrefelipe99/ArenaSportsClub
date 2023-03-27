@@ -80,12 +80,14 @@ export default class matchsController {
   static async apiGetMatchsByDate(req, res, next) {
     try {
       let date = req.params.date || {};
+      let favorites = req.params.favorites || {};
+      favorites = favorites.split(",");
       let splitter = date.split("-");
       let year = parseInt(splitter[2]?.trim());
       let month = parseInt(splitter[1]?.trim()) - 1;
       let day = parseInt(splitter[0]?.trim());
       const dateFilter = new Date(year, month, day);
-      let match = await matchsDAO.getMatchsByDate(dateFilter);
+      let match = await matchsDAO.getMatchsByDate(dateFilter, favorites);
       if (!match) {
         res.status(404).json({ error: "Not found" });
         return;
@@ -139,24 +141,52 @@ export default class matchsController {
     }
   }
 
-  static async apiGetMatchs(req, res, next) {
+  static async apiUpdateYesterdayMatchs() {
     try {
       const matchs = await matchsDAO.getMatchs();
-
+      let today = new Date();
+      let day = today.getDate();
+      let month = today.getMonth();
+      let year = today.getFullYear();
+      let date = new Date(year, month, day);
       for (let index = 0; index < matchs.length; index++) {
-        const MatchResponse = await matchsDAO.update(matchs[index]);
+        const MatchResponse = await matchsDAO.updateYesterday(
+          matchs[index],
+          date
+        );
         var { error } = MatchResponse;
         if (error) {
           return { error };
         }
       }
-
-      res.json(matchs.length);
-    } catch (e) {
-      console.log(`api, ${e}`);
-      res.status(500).json({ error: e });
+      return { status: "success yesterday" };
+    } catch (error) {
+      return { error: error.message };
     }
   }
+
+  // static async apiGetAllMatchs(req, res, next) {
+  //   try {
+  //     const matchs = await matchsDAO.getMatchs();
+  //     let today = new Date();
+  //     let day = today.getDate();
+  //     let month = today.getMonth();
+  //     let year = today.getFullYear();
+  //     let date = new Date(year, month, day);
+  //     for (let index = 0; index < matchs.length; index++) {
+  //       const MatchResponse = await matchsDAO.update(matchs[index], date);
+  //       var { error } = MatchResponse;
+  //       if (error) {
+  //         return { error };
+  //       }
+  //     }
+
+  //     res.json(matchs.length);
+  //   } catch (e) {
+  //     console.log(`api, ${e}`);
+  //     res.status(500).json({ error: e });
+  //   }
+  // }
 
   static async apiGetAllChampionships(req, res, next) {
     try {

@@ -119,12 +119,13 @@ export default class matchsDAO {
     }
   }
 
-  static async getMatchsByDate(date) {
+  static async getMatchsByDate(date, favorites) {
     try {
       const pipeline = [
         {
           $match: {
             date: date,
+            status: { $ne: "CANCELADO" },
           },
         },
         {
@@ -147,10 +148,45 @@ export default class matchsDAO {
                   },
                 },
               },
+              {
+                $set: {
+                  priority: {
+                    $switch: {
+                      branches: [
+                        { case: { $in: ["$$id", favorites] }, then: 3 },
+                      ],
+                      default: "$priority",
+                    },
+                  },
+                },
+              },
             ],
             as: "championshipObj",
           },
         },
+        // {
+        //   $lookup: {
+        //     from: "championships",
+        //     let: {
+        //       id: "$idChampionship",
+        //     },
+        //     pipeline: [
+        //       {
+        //         $match: {
+        //           $expr: {
+        //             $eq: ["$idChampionship", "1022"],
+        //           },
+        //         },
+        //       },
+        //       {
+        //         $set: {
+        //           priority: 3,
+        //         },
+        //       },
+        //     ],
+        //     as: "championshipFavorites",
+        //   },
+        // },
         {
           $addFields: {
             championshipObj: { $arrayElemAt: ["$championshipObj", 0] },
@@ -160,10 +196,12 @@ export default class matchsDAO {
           $group: {
             _id: {
               championship: "$championship",
+              idChampionship: "$idChampionship",
+              priority: "$championshipObj.priority",
             },
             matchs: {
               $addToSet: {
-                priority: "$championshipObj.priority",
+                championshipObj: "$championshipObj",
                 idChampionship: "$idChampionship",
                 idMatch: "$idMatch",
                 status: "$status",
@@ -191,7 +229,8 @@ export default class matchsDAO {
         },
         {
           $sort: {
-            "matchs.priority": -1,
+            "matchs.favoritePriority": -1,
+            "_id.priority": -1,
             "_id.championship": 1,
           },
         },
@@ -370,6 +409,40 @@ export default class matchsDAO {
     }
   }
 
+  static async getMatchs() {
+    try {
+      const pipeline = [
+        {
+          $match: {},
+        },
+      ];
+      return await matchs.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getMatchs: ${e}`);
+      throw e;
+    }
+  }
+
+  static async updateYesterday(match, dateToday) {
+    try {
+      if (match?.date < dateToday && match?.status !== "ENCERRADO") {
+        const updateResponse = await matchs.updateOne(
+          { idMatch: match.idMatch },
+          {
+            $set: {
+              status: "CANCELADO",
+            },
+          }
+        );
+        return updateResponse;
+      }
+      return true;
+    } catch (e) {
+      console.error(`Something went wrong in getMatchsByDate: ${e}`);
+      throw e;
+    }
+  }
+
   static async getAllChampionships() {
     try {
       const pipeline = [
@@ -407,44 +480,4 @@ export default class matchsDAO {
   //     return { error: e };
   //   }
   // }
-
-  static async getMatchs() {
-    try {
-      const pipeline = [
-        {
-          $match: {},
-        },
-      ];
-      return await matchs.aggregate(pipeline).toArray();
-    } catch (e) {
-      console.error(`Something went wrong in getMatchs: ${e}`);
-      throw e;
-    }
-  }
-
-  static async update(match) {
-    try {
-      if (
-        match?.championshipUrl ===
-        "https://www.placardefutebol.com.br/amistosos-selecoes"
-      ) {
-        console.log(match?.idMatch + " " + match?.championship);
-
-        const updateResponse = await matchs.updateOne(
-          { idMatch: match.idMatch },
-          {
-            $set: {
-              idChampionship: "1021",
-            },
-          }
-        );
-        return updateResponse;
-        return true;
-      }
-      return true;
-    } catch (e) {
-      console.error(`Something went wrong in getMatchsByDate: ${e}`);
-      throw e;
-    }
-  }
 }

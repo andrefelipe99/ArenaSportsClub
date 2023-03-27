@@ -9,7 +9,7 @@ import {
 } from "react-icons/md";
 import "../../styles/components/Home/Results.css";
 
-export function Results() {
+export function Results({ favoritesChamp, favoritesTeams }) {
   const getTodayDate = (x) => {
     var date = new Date();
     date.setDate(date.getDate() + x);
@@ -40,21 +40,25 @@ export function Results() {
     next: false,
   });
 
-  console.log(matchsData);
   useEffect(() => {
-    MatchDataService.getMatchsByDate(dateFilter).then((response) => {
-      setMatchsData(response.data);
-      setExpand(response.data.length);
-      setLoading(false);
-    });
-  }, [dateFilter]);
+    MatchDataService.getMatchsByDate(dateFilter, favoritesChamp).then(
+      (response) => {
+        setMatchsData(response.data);
+        setExpand(response.data.length);
+        setLoading(false);
+      }
+    );
+    // eslint-disable-next-line
+  }, [dateFilter, favoritesChamp]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      MatchDataService.getMatchsByDate(dateFilter).then((response) => {
-        setMatchsData(response.data);
-      });
-    }, 30000);
+      MatchDataService.getMatchsByDate(dateFilter, favoritesChamp).then(
+        (response) => {
+          setMatchsData(response.data);
+        }
+      );
+    }, 10000);
     return () => clearTimeout(timer);
   });
 

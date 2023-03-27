@@ -3,12 +3,14 @@ import { Container, Nav, Navbar, Form } from "react-bootstrap";
 import logo from "../../assets/images/logo1.jpg";
 import { useLocation, Link } from "react-router-dom";
 import TeamDataService from "../../services/team";
+import ChampionshipDataService from "../../services/championship";
 import Search from "./Search";
 import "../../styles/components/Default/Header.css";
 
 export function Header() {
   const [searchField, setSearchField] = useState("");
   const [listTeams, setListTeams] = useState([]);
+  const [listChamps, setListChamps] = useState([]);
   const location = useLocation();
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -30,9 +32,13 @@ export function Header() {
   useEffect(() => {
     if (searchField === "") {
       setListTeams([]);
+      setListChamps([]);
     } else {
       TeamDataService.getTeams(searchField).then((response) => {
         setListTeams(response.data.team);
+      });
+      ChampionshipDataService.getChampionships(searchField).then((response) => {
+        setListChamps(response.data.championship);
       });
     }
   }, [searchField]);
@@ -98,10 +104,11 @@ export function Header() {
         </Container>
       </Navbar>
       <div id="position-search">
-        {listTeams?.length > 0 ? (
+        {listTeams?.length > 0 || listChamps?.length > 0 ? (
           <Search
             theme={"nav"}
             listTeams={listTeams}
+            listChamps={listChamps}
             setSearchField={setSearchField}
           />
         ) : (

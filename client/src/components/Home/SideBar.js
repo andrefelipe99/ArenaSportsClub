@@ -22,19 +22,18 @@ import TeamDataService from "../../services/team";
 import ChampionshipDataService from "../../services/championship";
 import "../../styles/components/Home/SideBar.css";
 
-export function SideBar() {
+export function SideBar({
+  favoritesChamp,
+  setFavoritesChamp,
+  favoritesTeams,
+  setFavoritesTeams,
+}) {
   const inputRef = useRef(null);
   const [loading, setLoading] = useState(true);
   const [searchField, setSearchField] = useState("");
   const [championshipList, setChampionshipList] = useState([]);
-  const [favoritesChamp, setFavoritesChamp] = useState(
-    JSON.parse(window.localStorage.getItem("favorites-champ")) || []
-  );
   const [teamsSearchActive, setTeamsSearchActive] = useState(false);
   const [listTeams, setListTeams] = useState([]);
-  const [favoritesTeams, setFavoritesTeams] = useState(
-    JSON.parse(window.localStorage.getItem("favorites-teams")) || []
-  );
   const [buttonExpand, setButtonExpand] = useState(true);
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -144,7 +143,7 @@ export function SideBar() {
   const isFavoriteTeams = (team) =>
     favoritesTeams?.some((tea) => tea.id === team.id);
 
-  const changeExpand = (key) => {
+  const changeExpand = () => {
     if (buttonExpand) setButtonExpand(false);
     else setButtonExpand(true);
   };
@@ -189,7 +188,7 @@ export function SideBar() {
           ) : favoritesChamp[0]?.id === 0 || favoritesChamp.length === 0 ? (
             <span id="titleSideBar">Nenhum Campeonato favorito</span>
           ) : (
-            favoritesChamp.map((favorito, i) => (
+            favoritesChamp?.map((favorito, i) => (
               <Link
                 key={i}
                 to={`/campeonato/${favorito.idChampionship}`}

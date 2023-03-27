@@ -41,6 +41,36 @@ export default class championshipsController {
     }
   }
 
+  static async apiGetChampionships(req, res, next) {
+    const championshipsPerPage = req.query.championshipsPerPage
+      ? parseInt(req.query.championshipsPerPage, 10)
+      : 20;
+
+    const page = req.query.page ? parseInt(req.query.page, 10) : 0;
+
+    let filters = {};
+
+    if (req.query.name) {
+      filters.name = req.query.name;
+    }
+
+    const { championshipsList, totalNumChampionships } =
+      await championshipsDAO.getChampionships({
+        filters,
+        page,
+        championshipsPerPage,
+      });
+
+    let response = {
+      championship: championshipsList,
+      page: page,
+      filters: filters,
+      entries_per_page: championshipsPerPage,
+      total_results: totalNumChampionships,
+    };
+    res.json(response);
+  }
+
   static async apiGetChampionshipById(req, res, next) {
     try {
       let id = req.params.id || {};

@@ -38,6 +38,7 @@ app.use("/api/v1/football", football);
 //   console.log(post);
 // }, 40000);
 
+
 // setTimeout(async () => {
 //   const updateYesterday = await matchsController.apiUpdateYesterdayMatchs();
 //   console.log(updateYesterday);
@@ -46,6 +47,7 @@ app.use("/api/v1/football", football);
 //API testes
 // app.get("/test", (req, res) => {
 //   res.json({ championships });
+
 // });
 
 export default app;

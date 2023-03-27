@@ -10,6 +10,7 @@ class MatchDataService {
     for (let index = 0; index < favorites.length; index++) {
       array.push(favorites[index].idChampionship);
     }
+    if (array.length === 0) array.push(1);
     return http.get(`/matchs/date/${date}/${array}`);
   }
 

@@ -110,7 +110,7 @@ export function Results({ favoritesChamp, favoritesTeams }) {
   const haveChampionships = (data) => {
     let count = 0;
     for (let i = 0; i < data?.length; i++) {
-      for (let j = 0; j < data[i]?.matchs.length; j++) {
+      for (let j = 0; j < data[i]?.matchs?.length; j++) {
         if (
           filterSelected === "" ||
           data[i].matchs[j].status === filterSelected

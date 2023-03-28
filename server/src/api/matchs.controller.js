@@ -80,9 +80,9 @@ export default class matchsController {
   static async apiGetMatchsByDate(req, res, next) {
     try {
       let date = req.params.date || {};
-
-      let favorites = req.params.favorites || {};
-      favorites = favorites.split("-");
+      // let favorites = req.params.favorites || {};
+      // favorites = favorites.split("-");
+      let favorites = ["1022"];
       let splitter = date.split("-");
       let year = parseInt(splitter[2]?.trim());
       let month = parseInt(splitter[1]?.trim()) - 1;

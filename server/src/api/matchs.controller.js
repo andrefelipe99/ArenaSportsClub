@@ -80,16 +80,15 @@ export default class matchsController {
   static async apiGetMatchsByDate(req, res, next) {
     try {
       let date = req.params.date || {};
-
       let favorites = req.params.favorites || {};
-      favorites = favorites.split(",");
+      favorites = favorites.split("-");
       let splitter = date.split("-");
       let year = parseInt(splitter[2]?.trim());
       let month = parseInt(splitter[1]?.trim()) - 1;
       let day = parseInt(splitter[0]?.trim());
       const dateFilter = new Date(year, month, day);
       let match = await matchsDAO.getMatchsByDate(dateFilter, favorites);
-      
+
       if (!match) {
         res.status(404).json({ error: "Not found" });
         return;

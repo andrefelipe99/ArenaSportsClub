@@ -67,3 +67,19 @@
   font-weight: 700;
   margin-right: 8px;
 }
+
+@media only screen and (max-width: 767px) {
+  .for-player {
+    font-size: 13px;
+  }
+  #for-section_title {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .for-sideBox {
+    display: flex;
+    flex-direction: column;
+  }
+}

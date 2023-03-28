@@ -63,15 +63,15 @@ export function Match() {
                     to={`/campeonato/${listMatch[0].idChampionship}`}
                     className="link-match"
                   >
-                    <h1>{listMatch[0].championship}</h1>
+                    <span>{listMatch[0].championship}</span>
                   </Link>
                 ) : (
-                  <h1>{listMatch[0].championship}</h1>
+                  <span>{listMatch[0].championship}</span>
                 )}
               </div>
-              <Row md={12} id="row-content-match">
+              <Row md={12} sm={12} xs={12} id="row-content-match">
                 <div className="content-match">
-                  <Col md={3} id="col-content-match">
+                  <Col md={3} sm={3} xs={3} id="col-content-match">
                     <Row className="col-img-match">
                       <img
                         src={listMatch[0].teams.homeImg}
@@ -86,7 +86,7 @@ export function Match() {
                       </span>
                     </Row>
                   </Col>
-                  <Col md={6} id="col-results-match">
+                  <Col md={6} sm={6} xs={6} id="col-results-match">
                     <div>
                       <span className="time-match">{listMatch[0].turn}</span>
                     </div>
@@ -103,7 +103,7 @@ export function Match() {
                       <span className="time-match">{listMatch[0].time}</span>
                     </div>
                   </Col>
-                  <Col md={3} id="col-content-match">
+                  <Col md={3} sm={3} xs={3} id="col-content-match">
                     <Row className="col-img-match">
                       <img
                         src={listMatch[0].teams.awayImg}

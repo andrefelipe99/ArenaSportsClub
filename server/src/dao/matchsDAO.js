@@ -119,12 +119,12 @@ export default class matchsDAO {
     }
   }
 
-  static async getMatchsByDate(date, favorites) {
+  static async getMatchsByDate(date) {
     try {
       const pipeline = [
         {
           $match: {
-            date: date,
+            day: day,
             status: { $ne: "CANCELADO" },
           },
         },
@@ -148,18 +148,18 @@ export default class matchsDAO {
                   },
                 },
               },
-              {
-                $set: {
-                  priority: {
-                    $switch: {
-                      branches: [
-                        { case: { $in: ["$$id", favorites] }, then: 3 },
-                      ],
-                      default: "$priority",
-                    },
-                  },
-                },
-              },
+              // {
+              //   $set: {
+              //     priority: {
+              //       $switch: {
+              //         branches: [
+              //           { case: { $in: ["$$id", favorites] }, then: 3 },
+              //         ],
+              //         default: "$priority",
+              //       },
+              //     },
+              //   },
+              // },
             ],
             as: "championshipObj",
           },

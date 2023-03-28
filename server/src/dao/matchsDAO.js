@@ -124,7 +124,7 @@ export default class matchsDAO {
       const pipeline = [
         {
           $match: {
-            day: day,
+            day: date,
             status: { $ne: "CANCELADO" },
           },
         },

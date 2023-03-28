@@ -186,7 +186,7 @@ export function SideBar({
               <Spinner animation="border" />
             </div>
           ) : favoritesChamp[0]?.id === 0 || favoritesChamp.length === 0 ? (
-            <span id="titleSideBar">Nenhum Campeonato favorito</span>
+            <span className="none-sidebar">Nenhum Campeonato favorito</span>
           ) : (
             favoritesChamp?.map((favorito, i) => (
               <Link
@@ -314,7 +314,7 @@ export function SideBar({
               <Spinner animation="border" />
             </div>
           ) : favoritesTeams[0]?.id === 0 || favoritesTeams.length === 0 ? (
-            <span id="titleSideBar">Nenhuma Equipe favorita</span>
+            <span className="none-sidebar">Nenhuma Equipe favorita</span>
           ) : (
             favoritesTeams.map((favorito, i) => (
               <Link

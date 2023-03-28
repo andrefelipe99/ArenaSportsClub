@@ -25,6 +25,7 @@
   background-color: #e8faf0;
   border: 0;
   border-radius: 8px;
+  padding: 8px 4px;
   color: black;
   display: flex;
   flex-wrap: wrap;
@@ -66,13 +67,21 @@
   margin: 0;
 }
 
-#col-content-match {
+div.col-content-match {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-top: 1ch;
   text-align: center;
+}
+
+div.col-top-match {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  text-align: center;
+  height: 96px;
 }
 
 div.col-img-match {
@@ -102,6 +111,9 @@ span.teams-name {
 }
 
 span.time-match {
+  display: flex;
+  justify-content: center;
+  width: 100%;
   font-size: 1.3rem;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
@@ -140,13 +152,14 @@ span.time-match {
   color: antiquewhite;
 }
 
-@media only screen and (max-width: 425px) {
-  #button-match,
-  #button-match-selected {
-    font-size: 12px;
+@media only screen and (max-width: 767px) {
+  .number-results-match {
+    font-size: 3rem;
+    padding: 0.5rem;
   }
-  .button-group-match {
-    gap: 0.3rem;
+
+  span.teams-name {
+    font-size: 1.5rem;
   }
 }
 
@@ -156,7 +169,7 @@ span.time-match {
     max-width: 80%;
   }
   span.teams-name {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
   span.time-match {
     font-size: 1rem;
@@ -170,5 +183,31 @@ span.time-match {
   }
   .nameCamp {
     font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  #button-match,
+  #button-match-selected {
+    font-size: 12px;
+  }
+  .button-group-match {
+    gap: 0.3rem;
+  }
+  span.teams-name {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 309px) {
+  #button-match,
+  #button-match-selected {
+    font-size: 12px;
+  }
+  .button-group-match {
+    gap: 0.2rem;
+  }
+  span.teams-name {
+    font-size: 0.9rem;
   }
 }

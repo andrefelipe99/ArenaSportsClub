@@ -33,7 +33,7 @@ export function Championship() {
   useEffect(() => {
     const timer = setTimeout(() => {
       ChampionshipDataService.getChampionshipById(id).then((response) => {
-        setChampionship(response.data);
+        setChampionship(response.data[0]);
       });
     }, 600000);
     return () => clearTimeout(timer);

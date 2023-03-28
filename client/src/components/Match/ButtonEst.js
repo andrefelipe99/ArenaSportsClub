@@ -79,13 +79,13 @@ function ButtonEstMatch({ actived, listMatch }) {
   return (
     actived && (
       <Container id="container-buttonEst">
-        {listMatch[0]?.statistics?.length > 0 ? (
+        {listMatch?.statistics?.length > 0 ? (
           <>
             <div className="est-section">
-              {typeof listMatch[0]?.statistics === "undefined" ? (
+              {typeof listMatch?.statistics === "undefined" ? (
                 <p>Loading...</p>
               ) : (
-                listMatch[0].statistics.map((statistic, i) => (
+                listMatch.statistics.map((statistic, i) => (
                   <div className="stat_row" key={i}>
                     {ShowStatistics(statistic)}
                   </div>

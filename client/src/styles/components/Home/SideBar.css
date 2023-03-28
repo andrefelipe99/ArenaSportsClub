@@ -9,13 +9,26 @@
 }
 
 #titleSideBar {
-  border-radius: 0ch;
+  border-radius: 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   font-family: Barrio;
   font-size: larger;
+  color: antiquewhite;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.none-sidebar {
+  border-radius: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: Barrio;
+  font-size: 1rem;
   color: antiquewhite;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -118,11 +131,19 @@ input.form-control:active {
     padding-left: 8px;
     font-size: 1rem;
   }
+
+  .none-sidebar {
+    font-size: 0.9rem;
+  }
 }
 
 @media only screen and (max-width: 991px) {
   .pais-margin {
     max-height: 30px;
+  }
+
+  .none-sidebar {
+    font-size: 0.7rem;
   }
 
   #titleSideBar {
@@ -147,6 +168,10 @@ input.form-control:active {
 @media only screen and (max-width: 767px) {
   #titleSideBar {
     font-size: 1.2rem;
+  }
+
+  .none-sidebar {
+    font-size: 1rem;
   }
 
   #title-text-side-bar {

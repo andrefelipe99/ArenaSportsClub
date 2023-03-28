@@ -177,18 +177,18 @@ function ButtonSumMatch({ actived, listMatch }) {
   return (
     actived && (
       <Container id="container-buttonSum">
-        {listMatch[0]?.events.length > 0 ? (
+        {listMatch?.events.length > 0 ? (
           <>
             <div id="sum-section">
               <div id="sum-section_title">
                 <span> 1º TEMPO </span>
-                <span> {CountGoals(listMatch[0]?.events, "first-half")}</span>
+                <span> {CountGoals(listMatch?.events, "first-half")}</span>
               </div>
               <div className="sum-sideBox">
-                {typeof listMatch[0]?.events === "undefined" ? (
+                {typeof listMatch?.events === "undefined" ? (
                   <p>Loading...</p>
                 ) : (
-                  listMatch[0].events.map((event, i) => (
+                  listMatch.events.map((event, i) => (
                     <div key={i}>
                       {parseInt(event.time.replace("'", "")) <= 45 ? (
                         event.side === "home" ? (
@@ -211,14 +211,14 @@ function ButtonSumMatch({ actived, listMatch }) {
             <div id="sum-section">
               <div id="sum-section_title">
                 <span> 2º TEMPO </span>
-                <span> {CountGoals(listMatch[0]?.events, "second-half")}</span>
+                <span> {CountGoals(listMatch?.events, "second-half")}</span>
               </div>
 
               <div className="sum-sideBox">
-                {typeof listMatch[0]?.events === "undefined" ? (
+                {typeof listMatch?.events === "undefined" ? (
                   <p>Loading...</p>
                 ) : (
-                  listMatch[0].events.map((event, i) => (
+                  listMatch.events.map((event, i) => (
                     <div key={i}>
                       {parseInt(event.time.replace("'", "")) > 45 ? (
                         event.side === "home" ? (

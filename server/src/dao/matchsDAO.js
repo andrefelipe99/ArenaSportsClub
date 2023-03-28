@@ -164,29 +164,6 @@ export default class matchsDAO {
             as: "championshipObj",
           },
         },
-        // {
-        //   $lookup: {
-        //     from: "championships",
-        //     let: {
-        //       id: "$idChampionship",
-        //     },
-        //     pipeline: [
-        //       {
-        //         $match: {
-        //           $expr: {
-        //             $eq: ["$idChampionship", "1022"],
-        //           },
-        //         },
-        //       },
-        //       {
-        //         $set: {
-        //           priority: 3,
-        //         },
-        //       },
-        //     ],
-        //     as: "championshipFavorites",
-        //   },
-        // },
         {
           $addFields: {
             championshipObj: { $arrayElemAt: ["$championshipObj", 0] },

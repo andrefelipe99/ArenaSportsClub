@@ -39,17 +39,6 @@ export function Results({ favoritesChamp, favoritesTeams }) {
     finished: false,
     next: false,
   });
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const updateWindowDimensions = () => {
-      const newWidth = window.innerWidth;
-      setWidth(newWidth);
-    };
-
-    window.addEventListener("resize", updateWindowDimensions);
-    return () => window.removeEventListener("resize", updateWindowDimensions);
-  }, []);
 
   useEffect(() => {
     MatchDataService.getMatchsByDate(dateFilter, favoritesChamp).then(

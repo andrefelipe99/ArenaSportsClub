@@ -44,8 +44,8 @@ setInterval(async () => {
 // }, 10000);
 
 //API testes
-app.get("/test", (req, res) => {
-  res.json({ championships });
-});
+// app.get("/test", (req, res) => {
+//   res.json({ championships });
+// });
 
 export default app;

@@ -3,7 +3,8 @@
   justify-content: flex-start;
   flex-direction: column;
   width: 306px;
-  max-height: 300px;
+  max-height: 306px;
+  overflow-x: hidden;
   overflow-y: auto;
   color: black;
 }
@@ -71,7 +72,8 @@ div.col-logo-search {
 }
 
 .img-margin {
-  width: 40px;
+  max-height: 34px;
+  max-width: 34px;
   margin-top: 0.3ch;
   margin-bottom: 0.3ch;
 }
@@ -102,7 +104,8 @@ div.col-logo-search {
   }
 
   .img-margin {
-    width: 34px;
+    max-height: 32px;
+    max-width: 32px;
   }
 }
 
@@ -112,7 +115,9 @@ div.col-logo-search {
   }
 
   .img-margin {
-    width: 25px;
+    max-height: 30px;
+    max-width: 30px;
+    padding: 2px;
   }
 }
 
@@ -122,7 +127,9 @@ div.col-logo-search {
   }
 
   .img-margin {
-    width: 35px;
+    max-width: 35px;
+    max-height: 35px;
+    padding: 0;
   }
 }
 

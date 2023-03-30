@@ -19,6 +19,15 @@ function ButtonMatchs({ actived, championship }) {
     });
   }, [id]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      MatchDataService.getFutureMatchsByChampionship(id).then((response) => {
+        setMatchsData(response.data);
+      });
+    }, 15000);
+    return () => clearTimeout(timer);
+  });
+
   const setExpand = (length) => {
     const array = [];
     for (let index = 0; index < length; index++) {

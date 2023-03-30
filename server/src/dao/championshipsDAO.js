@@ -34,7 +34,7 @@ export default class championshipsDAO {
     let cursor;
 
     try {
-      cursor = await championships.find(query);
+      cursor = await championships.find(query).sort({ priority: -1, name: 1 });
     } catch (e) {
       console.error(`Unable to issue find command, ${e}`);
       return { championshipsList: [], totalNumChampionships: 0 };
@@ -156,6 +156,9 @@ export default class championshipsDAO {
       const pipeline = [
         {
           $match: { priority: { $gte: 2 } },
+        },
+        {
+          $sort: { priority: -1, name: 1 },
         },
       ];
       return await championships.aggregate(pipeline).toArray();

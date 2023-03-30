@@ -6,6 +6,17 @@ import "../styles/pages/News.css";
 export function News() {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const updateWindowDimensions = () => {
+      const newWidth = window.innerWidth;
+      setWidth(newWidth);
+    };
+
+    window.addEventListener("resize", updateWindowDimensions);
+    return () => window.removeEventListener("resize", updateWindowDimensions);
+  }, []);
 
   useEffect(() => {
     NewsDataService.getAllNews().then((response) => {
@@ -50,12 +61,15 @@ export function News() {
                 </a>
 
                 <a
-                  className="link-news"
+                  className="link2-news"
                   href={news?.href}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <span className="description-news">{news?.title}</span>
+                  <span className="title-news">{news?.title}</span>
+                  {width > 768 && (
+                    <span className="subtitle-news">{news?.subtitle}</span>
+                  )}
                 </a>
               </div>
             ))}

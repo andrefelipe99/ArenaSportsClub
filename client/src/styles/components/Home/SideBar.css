@@ -67,6 +67,7 @@ div.spinner-sidebar {
 
 .pais-margin {
   max-height: 34px;
+  max-width: 34px;
   margin-top: 0.3ch;
   margin-bottom: 0.3ch;
 }
@@ -125,6 +126,7 @@ input.form-control:active {
 @media only screen and (max-width: 1199px) {
   .pais-margin {
     max-height: 32px;
+    max-width: 32px;
   }
 
   #title-text-side-bar {
@@ -140,6 +142,8 @@ input.form-control:active {
 @media only screen and (max-width: 991px) {
   .pais-margin {
     max-height: 30px;
+    max-width: 30px;
+    padding: 3px;
   }
 
   .none-sidebar {
@@ -190,5 +194,6 @@ input.form-control:active {
   .pais-margin {
     max-width: 35px;
     max-height: 35px;
+    padding: 0;
   }
 }

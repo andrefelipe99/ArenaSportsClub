@@ -5,6 +5,7 @@
 }
 
 .butSta-section {
+  overflow-x: auto;
   display: flex;
   padding: 10px;
   margin-top: 1.1ch;
@@ -39,10 +40,10 @@
   padding: 0.8rem;
 }
 
-#text-value-center {
+#text-value-center-sta {
   text-align: center;
   padding: 0.8rem;
-  width: 400px;
+  width: 300px;
 }
 
 #stat_Notitle {
@@ -60,4 +61,25 @@
   background-color: #00897b;
   border-radius: 8px;
   color: antiquewhite;
+}
+
+@media only screen and (max-width: 767px) {
+  #text-value-center-sta {
+    min-width: 240px;
+  }
+}
+
+@media only screen and (max-width: 489px) {
+  #text-value-center-sta {
+    min-width: 200px;
+  }
+}
+
+@media only screen and (max-width: 349px) {
+  #text-value-center-sta {
+    min-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

@@ -15,9 +15,15 @@ app.use(express.json());
 app.use("/api/v1/football", football);
 //app.use("*", (req, res) => res.status(404).json({ error: "not found" }));
 
-const news = await newsCrawler.getNews();
 const matchs = await matchsCrawler.getMatchs();
 const championships = await championshipsCrawler.getChampionships();
+const news = await newsCrawler.getNews();
+
+setInterval(async () => {
+  const post = await matchsController.apiPostMatch();
+  const clear = await matchsCrawler.clearMatchs();
+  console.log(post);
+}, 40000);
 
 setInterval(async () => {
   const championships = await matchsController.apiGetAllChampionships();
@@ -32,21 +38,14 @@ setInterval(async () => {
   console.log(post);
 }, 600000);
 
-setInterval(async () => {
-  const post = await matchsController.apiPostMatch();
-  const clear = await matchsCrawler.clearMatchs();
-  console.log(post);
-}, 40000);
-
 // setTimeout(async () => {
 //   const updateYesterday = await matchsController.apiUpdateYesterdayMatchs();
 //   console.log(updateYesterday);
 // }, 10000);
 
 //API testes
-// app.get("/test", (req, res) => {
-//   res.json({ championships });
-
-// });
+app.get("/test", (req, res) => {
+  res.json({ championships });
+});
 
 export default app;

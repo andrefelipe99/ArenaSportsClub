@@ -25,6 +25,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   font-family: "Lucida Console", "Courier New", monospace;
   font-size: 18px;
   font-weight: 900;

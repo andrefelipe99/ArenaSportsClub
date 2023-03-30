@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Button, Col, Spinner } from "react-bootstrap";
 import ButtonSumMatch from "../components/Match/ButtonSum";
 import ButtonEstMatch from "../components/Match/ButtonEst";
 import ButtonForMatch from "../components/Match/ButtonFor";
@@ -39,7 +39,7 @@ export function Match() {
       MatchDataService.getMatch(id).then((response) =>
         setListMatch(response.data[0])
       );
-    }, 30000);
+    }, 15000);
     return () => clearTimeout(timer);
   });
 
@@ -96,15 +96,15 @@ export function Match() {
                       className="img-content-match"
                     />
                   </Col>
-                  <Col className="col-content-match">
+                  <Col md={4} sm={4} xs={4} className="col-content-match">
                     <span className="teams-name">
                       {listMatch.teams.homeName}
                     </span>
                   </Col>
-                  <Col className="col-top-match">
+                  <Col md={4} sm={4} xs={4} className="col-top-match">
                     <span className="time-match">{listMatch.time}</span>
                   </Col>
-                  <Col className="col-content-match">
+                  <Col md={4} sm={4} xs={4} className="col-content-match">
                     <span className="teams-name">
                       {listMatch.teams.awayName}
                     </span>

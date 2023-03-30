@@ -41,7 +41,7 @@ export function Search(props) {
   };
 
   return (
-    <ListGroup id="display-search">
+    <ListGroup id={theme === "nav" ? "" : "display-search"}>
       {typeof listTeams === "undefined" ? (
         <ListGroup.Item id="list-group-sidebar-search">
           <Placeholder type="text" animation="glow">
@@ -60,12 +60,12 @@ export function Search(props) {
               <Row className="justify-content-center-search">
                 <Col md={2} sm={2} xs={2} className="col-search">
                   <img
-                    className="img-margin"
+                    className="pais-margin"
                     src={team.logo}
                     alt={`${team.logo}`}
                   />
                 </Col>
-                <Col md={8} sm={8} xs={8} className="col-search">
+                <Col md={10} sm={10} xs={10} className="col-search">
                   <Row>
                     <span className="name-search">{team.name}</span>
                   </Row>
@@ -86,7 +86,7 @@ export function Search(props) {
               <Row className="justify-content-center-search">
                 <Col md={2} sm={2} xs={2} className="col-search">
                   <img
-                    className="img-margin"
+                    className="pais-margin"
                     src={
                       champ.imgChampionship !== ""
                         ? `${champ.imgChampionship}`
@@ -95,7 +95,7 @@ export function Search(props) {
                     alt={`${champ.name}`}
                   />
                 </Col>
-                <Col md={8} sm={8} xs={8} className="col-search">
+                <Col md={10} sm={10} xs={10} className="col-search">
                   <Row>
                     <span className="name-search">{champ.name}</span>
                   </Row>
@@ -114,12 +114,12 @@ export function Search(props) {
             <Row className="justify-content-center-search">
               <Col md={2} sm={2} xs={2} className="col-logo-search">
                 <img
-                  className="img-margin"
+                  className="pais-margin"
                   src={team.logo}
                   alt={`${team.logo}`}
                 />
               </Col>
-              <Col md={8} sm={8} xs={8} className="col-search">
+              <Col md={9} sm={9} xs={9} className="col-search">
                 <Row>
                   <span className="name-search">{team.name}</span>
                 </Row>
@@ -128,7 +128,7 @@ export function Search(props) {
                 </Row>
               </Col>
               {favoritesTeams !== undefined ? (
-                <Col md={2} sm={2} xs={2} className="col-search">
+                <Col md={1} sm={1} xs={1} className="col-search">
                   <Button
                     id="button-favorite-sidebar"
                     onClick={(e) => {
@@ -142,7 +142,7 @@ export function Search(props) {
                   </Button>
                 </Col>
               ) : (
-                <Col md={2} sm={2} xs={2}></Col>
+                <Col md={1} sm={1} xs={1}></Col>
               )}
             </Row>
           </ListGroup.Item>

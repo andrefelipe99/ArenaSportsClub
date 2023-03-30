@@ -9,29 +9,31 @@ export default class championshipsController {
       let maxId;
 
       for (let index = 0; index < championships.length; index++) {
-        championshipFound = await championshipsDAO.getChampionshipByUrl(
-          championships[index].url
-        );
-
-        if (championshipFound === 0) {
-          maxId = await championshipsDAO.getChampionshipMaxID();
-          maxId = parseInt(maxId) + 1;
-          const ChampionshipResponse = await championshipsDAO.addChampionship(
-            championships[index],
-            maxId.toString()
+        if (championships[index].url !== undefined) {
+          championshipFound = await championshipsDAO.getChampionshipByUrl(
+            championships[index].url
           );
 
-          var { error } = ChampionshipResponse;
-          if (error) {
-            return { error };
-          }
-        } else {
-          const ChampionshipResponse =
-            await championshipsDAO.updateChampionship(championships[index]);
+          if (championshipFound === 0) {
+            maxId = await championshipsDAO.getChampionshipMaxID();
+            maxId = parseInt(maxId) + 1;
+            const ChampionshipResponse = await championshipsDAO.addChampionship(
+              championships[index],
+              maxId.toString()
+            );
 
-          var { error } = ChampionshipResponse;
-          if (error) {
-            return { error };
+            var { error } = ChampionshipResponse;
+            if (error) {
+              return { error };
+            }
+          } else {
+            const ChampionshipResponse =
+              await championshipsDAO.updateChampionship(championships[index]);
+
+            var { error } = ChampionshipResponse;
+            if (error) {
+              return { error };
+            }
           }
         }
       }

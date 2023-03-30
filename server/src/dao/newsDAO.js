@@ -22,6 +22,7 @@ export default class newsDAO {
         href: newsObj.href,
         category: newsObj.category,
         title: newsObj.title,
+        subtitle: newsObj.subtitle,
         img: newsObj.img,
       };
 
@@ -54,6 +55,7 @@ export default class newsDAO {
               $addToSet: {
                 href: "$href",
                 title: "$title",
+                subtitle: "$subtitle",
                 img: "$img",
               },
             },

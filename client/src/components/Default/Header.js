@@ -13,6 +13,7 @@ export function Header() {
   const [listChamps, setListChamps] = useState([]);
   const location = useLocation();
   const [width, setWidth] = useState(window.innerWidth);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const updateWindowDimensions = () => {
@@ -43,18 +44,34 @@ export function Header() {
     }
   }, [searchField]);
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+  };
+
+  const changeExpanded = () => {
+    console.log("oi");
+    if (expanded) setExpanded(false);
+    else setExpanded(true);
+  };
+
   return (
     <>
       <Navbar className="bg-teal" fixed="top" sticky="top" expand="lg">
         <Container>
-          <Navbar.Brand>
-            <Link to="/" className="link-header">
+          <Link to="/" className="brand-header">
+            <Navbar.Brand>
               <img src={logo} alt="Logo" className="logo-header"></img>
               {width > 380 ? <>Arena Sport Club</> : <>Arena SC</>}
-            </Link>
-          </Navbar.Brand>
+            </Navbar.Brand>
+          </Link>
 
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            onClick={(e) => {
+              e.preventDefault();
+              changeExpanded();
+            }}
+          />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="m-auto">
               <Link
@@ -90,11 +107,16 @@ export function Header() {
                 </span>
               </Link>
             </Nav>
-            <Form className="d-flex">
+            <Form
+              className="d-flex"
+              onSubmit={(e) => {
+                submitHandler(e);
+              }}
+            >
               <Form.Control
                 type="search"
                 placeholder="Pesquisar"
-                className="me-2 search-header"
+                className="search-header"
                 aria-label="Search"
                 value={searchField}
                 onChange={handleSearch}
@@ -103,7 +125,7 @@ export function Header() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div id="position-search">
+      <div id="position-search" className={expanded ? "expanded-search" : ""}>
         {listTeams?.length > 0 || listChamps?.length > 0 ? (
           <Search
             theme={"nav"}

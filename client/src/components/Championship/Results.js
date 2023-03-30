@@ -45,11 +45,29 @@ function ResultsChampionship({ matchsData, buttonExpand, setButtonExpand }) {
     return event;
   };
 
+  const changeMinMatch = (match) => {
+    let time;
+    if (match?.time === "INTERVALO")
+      time = match?.time?.replace("INTERVALO", "INT");
+    else if (match?.time === "SUSPENSO")
+      time = match?.time?.replace("SUSPENSO", "SUSP");
+    else if (match?.time === "ADIADO")
+      time = match?.time?.replace("ADIADO", "CANC");
+    else time = time = match?.time?.replace(" MIN", "'");
+
+    return time;
+  };
+
   return matchsData?.map((date, i) =>
     haveMatchs(date) ? (
       <div key={i}>
         <div className="championship-results">
-          <Col md={1} className="col-championship-results">
+          <Col
+            md={1}
+            sm={1}
+            xs={1}
+            className="col-championship-results col-first-results"
+          >
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -64,9 +82,10 @@ function ResultsChampionship({ matchsData, buttonExpand, setButtonExpand }) {
               )}
             </button>
           </Col>
-          <Col md={10} className="col-championship-results">
+          <Col md={10} sm={10} xs={10} className="col-championship-results">
             <span className="text-championship-results">{date._id.day}</span>
           </Col>
+          <Col md={1} sm={1} xs={1} className="col-championship-results"></Col>
         </div>
 
         {buttonExpand[i]?.value ? (
@@ -77,20 +96,18 @@ function ResultsChampionship({ matchsData, buttonExpand, setButtonExpand }) {
               key={i}
             >
               <ListGroup className="match">
-                <Col className="align-results" md={1}>
-                  {match.status === "AO VIVO" ? (
-                    checkLastEvent(match) !== "" ? (
-                      <>
-                        <span className="matchs-text-results">
-                          {match.time}
-                        </span>
-                        <GiSoccerBall className="goal-effect-results" />
-                      </>
-                    ) : (
-                      <span className="matchs-text-results">{match.time}</span>
-                    )
-                  ) : match.status === "ENCERRADO" ? (
-                    <span className="matchs-text-results">ENCERRADO</span>
+                <Col
+                  md={1}
+                  sm={1}
+                  xs={1}
+                  className="align-results col-first-results"
+                >
+                  {match?.status === "AO VIVO" ? (
+                    <span className="matchs-text-results">
+                      {changeMinMatch(match)}
+                    </span>
+                  ) : match?.status === "ENCERRADO" ? (
+                    <span className="matchs-text-results">FIM</span>
                   ) : (
                     <span className="matchs-text-results">
                       {match.schedule}
@@ -98,12 +115,12 @@ function ResultsChampionship({ matchsData, buttonExpand, setButtonExpand }) {
                   )}
                 </Col>
 
-                <Col className="align-team-home-results" md={3}>
+                <Col className="align-team-home-results" md={3} sm={3} xs={3}>
                   <span className="matchs-text-results name-team-results">
                     {match.teams?.homeName}
                   </span>
                 </Col>
-                <Col className="align-results" md={1}>
+                <Col className="align-results" md={1} sm={1} xs={1}>
                   <img
                     className="img-results"
                     src={match.teams?.homeImg}
@@ -111,22 +128,22 @@ function ResultsChampionship({ matchsData, buttonExpand, setButtonExpand }) {
                     title={`${match.teams?.homeName}`}
                   />
                 </Col>
-                <Col className="align-results" md={2}>
-                  <Col className="align-results" md={5}>
+                <Col className="align-results" md={2} sm={2} xs={2}>
+                  <Col className="align-results" md={5} sm={5} xs={5}>
                     <span className="match-number-results">
                       {match.scoreHome}
                     </span>
                   </Col>
-                  <Col className="align-results" md={2}>
+                  <Col className="align-results" md={2} sm={2} xs={2}>
                     <span className="match-results">-</span>
                   </Col>
-                  <Col className="align-results" md={5}>
+                  <Col className="align-results" md={5} sm={5} xs={5}>
                     <span className="match-number-results">
                       {match.scoreAway}
                     </span>
                   </Col>
                 </Col>
-                <Col className="align-results" md={1}>
+                <Col className="align-results" md={1} sm={1} xs={1}>
                   <img
                     className="img-results"
                     src={match.teams?.awayImg}
@@ -134,10 +151,16 @@ function ResultsChampionship({ matchsData, buttonExpand, setButtonExpand }) {
                     title={`${match.teams?.awayName}`}
                   />
                 </Col>
-                <Col className="align-team-away-results" md={3}>
+                <Col className="align-team-away-results" md={3} sm={3} xs={3}>
                   <span className="matchs-text-results name-team-results">
                     {match.teams?.awayName}
                   </span>
+                </Col>
+                <Col className="align-results" md={1} sm={1} xs={1}>
+                  {match.status === "AO VIVO" &&
+                    checkLastEvent(match) !== "" && (
+                      <GiSoccerBall className="goal-effect-results" />
+                    )}
                 </Col>
               </ListGroup>
               {i !== date?.matchs.length - 1 ? (

@@ -48,9 +48,16 @@ export default class newsCrawler {
                 var $ = load(body);
 
                 $(
-                  "#fsNews > div.fsNews__block.fsNews__block--article > article > figure > picture"
+                  "#fsNews > div.fsNews__block.fsNews__block--article > article"
                 ).each(function (idx, e) {
-                  var img = $(this).find("img").attr("src");
+                  var subtitle = $(this)
+                    .find(
+                      "div.fsNewsArticle__content > div.fsNewsArticle__perex"
+                    )
+                    .text()
+                    .trim();
+
+                  var img = $(this).find("figure > picture > img").attr("src");
 
                   if (title !== "" && category !== "Mais Lidas")
                     news.push({
@@ -58,6 +65,7 @@ export default class newsCrawler {
                       href,
                       category,
                       title,
+                      subtitle,
                       img,
                     });
                 });

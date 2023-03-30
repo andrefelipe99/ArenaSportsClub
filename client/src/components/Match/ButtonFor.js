@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import { IoMdFootball } from "react-icons/io";
 import { TbArrowNarrowUp, TbArrowNarrowDown } from "react-icons/tb";
@@ -7,6 +7,18 @@ import { IconContext } from "react-icons/lib";
 import "../../styles/components/Match/ButtonFor.css";
 
 function ButtonForMatch({ actived, listMatch }) {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const updateWindowDimensions = () => {
+      const newWidth = window.innerWidth;
+      setWidth(newWidth);
+    };
+
+    window.addEventListener("resize", updateWindowDimensions);
+    return () => window.removeEventListener("resize", updateWindowDimensions);
+  }, []);
+
   function ShowGoals(player) {
     return player.actions.goals.map((item, i) => {
       if (item === "GOAL") {
@@ -67,7 +79,7 @@ function ButtonForMatch({ actived, listMatch }) {
   return (
     actived && (
       <Container id="container-buttonFor">
-        {listMatch[0]?.lineups?.homeStarting.length > 5 ? (
+        {listMatch?.lineups?.homeStarting.length > 5 ? (
           <>
             <div id="for-section">
               <div id="for-section_title">
@@ -75,40 +87,97 @@ function ButtonForMatch({ actived, listMatch }) {
               </div>
 
               <div className="for-sideBox">
-                <div className="for-side-left">
-                  {typeof listMatch[0]?.lineups?.homeStarting ===
-                  "undefined" ? (
-                    <p>Loading...</p>
-                  ) : (
-                    listMatch[0].lineups.homeStarting.map((player, i) => (
-                      <div className="for-player" key={i}>
-                        <div className="for-player_number">{player.num}</div>
-                        <span className="for-player_name">{player.name}</span>
-                        {ShowGoals(player)}
-                        {PlayerCards(player)}
-                        {PlayerSwitch(player)}
-                      </div>
-                    ))
-                  )}
-                </div>
-                <div className="for-side-right">
-                  {typeof listMatch[0]?.lineups?.awayStarting ===
-                  "undefined" ? (
-                    <p>Loading...</p>
-                  ) : (
-                    listMatch[0].lineups.awayStarting.map((player, i) => (
-                      <div className="for-player" key={i}>
-                        <div>
-                          {PlayerSwitch(player)}
-                          {PlayerCards(player)}
-                          {ShowGoals(player)}
-                        </div>
-                        <span className="for-player_name">{player.name}</span>
-                        <div className="for-player_number">{player.num}</div>
-                      </div>
-                    ))
-                  )}
-                </div>
+                {width < 600 ? (
+                  <>
+                    <div className="for-side-left">
+                      {typeof listMatch?.lineups?.homeStarting ===
+                      "undefined" ? (
+                        <p>Loading...</p>
+                      ) : (
+                        listMatch.lineups.homeStarting.map((player, i) => (
+                          <div className="for-player" key={i}>
+                            <div className="for-player_number">
+                              {player.num}
+                            </div>
+                            <span className="for-player_name">
+                              {player.name}
+                            </span>
+                            {ShowGoals(player)}
+                            {PlayerCards(player)}
+                            {PlayerSwitch(player)}
+                          </div>
+                        ))
+                      )}
+                    </div>
+                    <div className="for-side-right">
+                      {typeof listMatch?.lineups?.awayStarting ===
+                      "undefined" ? (
+                        <p>Loading...</p>
+                      ) : (
+                        listMatch.lineups.awayStarting.map((player, i) => (
+                          <div className="for-player" key={i}>
+                            <div>
+                              {PlayerSwitch(player)}
+                              {PlayerCards(player)}
+                              {ShowGoals(player)}
+                            </div>
+                            <span className="for-player_name">
+                              {player.name}
+                            </span>
+                            <div className="for-player_number">
+                              {player.num}
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="for-side-left">
+                      {typeof listMatch?.lineups?.homeStarting ===
+                      "undefined" ? (
+                        <p>Loading...</p>
+                      ) : (
+                        listMatch.lineups.homeStarting.map((player, i) => (
+                          <div className="for-player" key={i}>
+                            <div className="for-player_number">
+                              {player.num}
+                            </div>
+                            <span className="for-player_name">
+                              {player.name}
+                            </span>
+                            {ShowGoals(player)}
+                            {PlayerCards(player)}
+                            {PlayerSwitch(player)}
+                          </div>
+                        ))
+                      )}
+                    </div>
+                    <div className="for-side-right">
+                      {typeof listMatch?.lineups?.awayStarting ===
+                      "undefined" ? (
+                        <p>Loading...</p>
+                      ) : (
+                        listMatch.lineups.awayStarting.map((player, i) => (
+                          <div className="for-player" key={i}>
+                            <div>
+                              {PlayerSwitch(player)}
+                              {PlayerCards(player)}
+                              {ShowGoals(player)}
+                            </div>
+                            <span className="for-player_name">
+                              {player.name}
+                            </span>
+                            <div className="for-player_number">
+                              {player.num}
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
             <div id="for-section">
@@ -117,10 +186,10 @@ function ButtonForMatch({ actived, listMatch }) {
               </div>
               <div className="for-sideBox">
                 <div className="for-side-left">
-                  {typeof listMatch[0]?.lineups?.homeBench === "undefined" ? (
+                  {typeof listMatch?.lineups?.homeBench === "undefined" ? (
                     <p>Loading...</p>
                   ) : (
-                    listMatch[0].lineups.homeBench.map((player, i) => (
+                    listMatch.lineups.homeBench.map((player, i) => (
                       <div className="for-player" key={i}>
                         <div className="for-player_number">{player.num}</div>
                         <span className="for-player_name">{player.name}</span>
@@ -134,10 +203,10 @@ function ButtonForMatch({ actived, listMatch }) {
                   )}
                 </div>
                 <div className="for-side-right">
-                  {typeof listMatch[0]?.lineups?.awayBench === "undefined" ? (
+                  {typeof listMatch?.lineups?.awayBench === "undefined" ? (
                     <p>Loading...</p>
                   ) : (
-                    listMatch[0].lineups.awayBench.map((player, i) => (
+                    listMatch.lineups.awayBench.map((player, i) => (
                       <div className="for-player" key={i}>
                         {PlayerSwitch(player)}
                         {PlayerCards(player)}
@@ -150,23 +219,6 @@ function ButtonForMatch({ actived, listMatch }) {
                 </div>
               </div>
             </div>
-            {/* <div id="for-section">
-          <div id="for-section_title">
-            <span> TÉCNICOS </span>
-          </div>
-          <div className="for-sideBox">
-            <div className="for-side-left">
-              <span className="for-player_name">
-                {listMatch.partida[0].tecnicoCasa}
-              </span>
-            </div>
-            <div className="for-side-right">
-              <span className="for-player_name">
-                {listMatch.partida[0].tecnicoFora}
-              </span>
-            </div>
-          </div>
-        </div> */}
           </>
         ) : (
           <div id="for-section_title">

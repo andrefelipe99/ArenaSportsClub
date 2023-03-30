@@ -12,7 +12,7 @@ class MatchDataService {
     }
     if (array.length === 0) array.push(1);
     return http.get(
-      `/matchs/date/${date}/${array.map((n, index) => `${n}`).join("-")}`
+      `/matchs/date/${date}/${array.map((n) => `${n}`).join("-")}`
     );
   }
 

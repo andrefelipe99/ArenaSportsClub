@@ -58,7 +58,7 @@ export function Results({ favoritesChamp, favoritesTeams }) {
           setMatchsData(response.data);
         }
       );
-    }, 10000);
+    }, 15000);
     return () => clearTimeout(timer);
   });
 
@@ -160,6 +160,19 @@ export function Results({ favoritesChamp, favoritesTeams }) {
     return event;
   };
 
+  const changeMinMatch = (match) => {
+    let time;
+    if (match?.time === "INTERVALO")
+      time = match?.time?.replace("INTERVALO", "INT");
+    else if (match?.time === "SUSPENSO")
+      time = match?.time?.replace("SUSPENSO", "SUSP");
+    else if (match?.time === "ADIADO")
+      time = match?.time?.replace("ADIADO", "CANC");
+    else time = time = match?.time?.replace(" MIN", "'");
+
+    return time;
+  };
+
   return (
     <Container id="container-results">
       <div className="button-group-results">
@@ -232,7 +245,12 @@ export function Results({ favoritesChamp, favoritesTeams }) {
           haveMatchs(championship) ? (
             <div key={i}>
               <div className="championship-results">
-                <Col md={1} sm={1} xs={1} className="col-championship-results">
+                <Col
+                  md={1}
+                  sm={1}
+                  xs={1}
+                  className="col-championship-results col-first-results"
+                >
                   <button
                     onClick={(e) => {
                       e.preventDefault();
@@ -268,6 +286,12 @@ export function Results({ favoritesChamp, favoritesTeams }) {
                     </span>
                   )}
                 </Col>
+                <Col
+                  md={1}
+                  sm={1}
+                  xs={1}
+                  className="col-championship-results"
+                ></Col>
               </div>
 
               {buttonExpand[i]?.value ? (
@@ -279,31 +303,24 @@ export function Results({ favoritesChamp, favoritesTeams }) {
                       key={i}
                     >
                       <ListGroup className="match">
-                        <Col className="align-results" md={1} sm={1} xs={1}>
-                          {match.status === "AO VIVO" ? (
-                            checkLastEvent(match) !== "" ? (
-                              <>
-                                <span className="matchs-text-results">
-                                  {match.time}
-                                </span>
-                                <GiSoccerBall className="goal-effect-results" />
-                              </>
-                            ) : (
-                              <span className="matchs-text-results">
-                                {match.time}
-                              </span>
-                            )
-                          ) : match.status === "ENCERRADO" ? (
+                        <Col
+                          md={1}
+                          sm={1}
+                          xs={1}
+                          className="align-results col-first-results"
+                        >
+                          {match?.status === "AO VIVO" ? (
                             <span className="matchs-text-results">
-                              ENCERRADO
+                              {changeMinMatch(match)}
                             </span>
+                          ) : match?.status === "ENCERRADO" ? (
+                            <span className="matchs-text-results">FIM</span>
                           ) : (
                             <span className="matchs-text-results">
                               {match.schedule}
                             </span>
                           )}
                         </Col>
-
                         <Col
                           className="align-team-home-results"
                           md={3}
@@ -354,6 +371,12 @@ export function Results({ favoritesChamp, favoritesTeams }) {
                           <span className="matchs-text-results name-team-results">
                             {match.teams?.awayName}
                           </span>
+                        </Col>
+                        <Col className="align-results" md={1} sm={1} xs={1}>
+                          {match.status === "AO VIVO" &&
+                            checkLastEvent(match) !== "" && (
+                              <GiSoccerBall className="goal-effect-results" />
+                            )}
                         </Col>
                       </ListGroup>
                       {i !== championship?.matchs.length - 1 ? (

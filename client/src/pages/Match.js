@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Button, Col, Spinner } from "react-bootstrap";
 import ButtonSumMatch from "../components/Match/ButtonSum";
 import ButtonEstMatch from "../components/Match/ButtonEst";
 import ButtonForMatch from "../components/Match/ButtonFor";
@@ -29,7 +29,7 @@ export function Match() {
 
   useEffect(() => {
     MatchDataService.getMatch(id).then((response) => {
-      setListMatch(response.data);
+      setListMatch(response.data[0]);
       setLoading(false);
     });
   }, [id]);
@@ -37,9 +37,9 @@ export function Match() {
   useEffect(() => {
     const timer = setTimeout(() => {
       MatchDataService.getMatch(id).then((response) =>
-        setListMatch(response.data)
+        setListMatch(response.data[0])
       );
-    }, 30000);
+    }, 15000);
     return () => clearTimeout(timer);
   });
 
@@ -51,79 +51,72 @@ export function Match() {
             <div className="spinner-buttonMatchs">
               <Spinner animation="border" />
             </div>
-          ) : typeof listMatch[0]?.teams?.homeImg === "undefined" ? (
+          ) : typeof listMatch?.teams?.homeImg === "undefined" ? (
             <div className="match-section_title">
               <span>PARTIDA NÃO ENCONTRADA</span>
             </div>
           ) : (
             <>
               <div className="nameCamp">
-                {listMatch[0].idChampionship !== "" ? (
+                {listMatch.idChampionship !== "" ? (
                   <Link
-                    to={`/campeonato/${listMatch[0].idChampionship}`}
+                    to={`/campeonato/${listMatch.idChampionship}`}
                     className="link-match"
                   >
-                    <h1>{listMatch[0].championship}</h1>
+                    <span>{listMatch.championship}</span>
                   </Link>
                 ) : (
-                  <h1>{listMatch[0].championship}</h1>
+                  <span>{listMatch.championship}</span>
                 )}
               </div>
-              <Row md={12} id="row-content-match">
+              <Col md={12} sm={12} xs={12} id="row-content-match">
                 <div className="content-match">
-                  <Col md={3} id="col-content-match">
-                    <Row className="col-img-match">
-                      <img
-                        src={listMatch[0].teams.homeImg}
-                        alt={`${listMatch[0].teams.homeName}`}
-                        title={`${listMatch[0].teams.homeName}`}
-                        className="img-content-match"
-                      />
-                    </Row>
-                    <Row>
-                      <span className="teams-name">
-                        {listMatch[0].teams.homeName}
-                      </span>
-                    </Row>
+                  <Col md={4} sm={4} xs={4} className="col-content-match">
+                    <img
+                      src={listMatch.teams.homeImg}
+                      alt={`${listMatch.teams.homeName}`}
+                      title={`${listMatch.teams.homeName}`}
+                      className="img-content-match"
+                    />
                   </Col>
-                  <Col md={6} id="col-results-match">
-                    <div>
-                      <span className="time-match">{listMatch[0].turn}</span>
-                    </div>
-                    <div>
-                      <span className="number-results-match">
-                        {listMatch[0].scoreHome}
-                      </span>
-                      <span className="number-results-match">-</span>
-                      <span className="number-results-match">
-                        {listMatch[0].scoreAway}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="time-match">{listMatch[0].time}</span>
-                    </div>
+                  <Col md={4} sm={4} xs={4} id="col-results-match">
+                    <span className="number-results-match">
+                      {listMatch.scoreHome}
+                    </span>
+                    <span className="number-results-match">-</span>
+                    <span className="number-results-match">
+                      {listMatch.scoreAway}
+                    </span>
                   </Col>
-                  <Col md={3} id="col-content-match">
-                    <Row className="col-img-match">
-                      <img
-                        src={listMatch[0].teams.awayImg}
-                        alt={`${listMatch[0].teams.awayName}`}
-                        title={`${listMatch[0].teams.awayName}`}
-                        className="img-content-match"
-                      />
-                    </Row>
-                    <Row>
-                      <span className="teams-name">
-                        {listMatch[0].teams.awayName}
-                      </span>
-                    </Row>
+                  <Col md={4} sm={4} xs={4} className="col-content-match">
+                    <img
+                      src={listMatch.teams.awayImg}
+                      alt={`${listMatch.teams.awayName}`}
+                      title={`${listMatch.teams.awayName}`}
+                      className="img-content-match"
+                    />
+                  </Col>
+                  <Col md={4} sm={4} xs={4} className="col-content-match">
+                    <span className="teams-name">
+                      {listMatch.teams.homeName}
+                    </span>
+                  </Col>
+                  <Col md={4} sm={4} xs={4} className="col-top-match">
+                    <span className="time-match">{listMatch.time}</span>
+                  </Col>
+                  <Col md={4} sm={4} xs={4} className="col-content-match">
+                    <span className="teams-name">
+                      {listMatch.teams.awayName}
+                    </span>
                   </Col>
 
                   <span className="time-match">
-                    {listMatch[0].day} - {listMatch[0].schedule}
+                    {listMatch.day} - {listMatch.schedule}
                   </span>
-                  {listMatch[0].stadium !== "TBC (TBC)" ? (
-                    <p className="p_matchStadium"> {listMatch[0].stadium}</p>
+                  <span className="time-match">{listMatch.turn}</span>
+
+                  {listMatch.stadium !== "TBC (TBC)" ? (
+                    <p className="p_matchStadium"> {listMatch.stadium}</p>
                   ) : (
                     <p className="p_matchStadium"></p>
                   )}
@@ -164,7 +157,7 @@ export function Match() {
                     </Button>
                   </div>
                 </div>
-              </Row>
+              </Col>
 
               <div>
                 <ButtonSumMatch

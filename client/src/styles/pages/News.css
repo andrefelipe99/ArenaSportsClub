@@ -3,11 +3,17 @@ div.center-news {
   display: flex;
   align-items: center;
   flex-direction: row;
+  width: 100%;
+  border-radius: 8px;
+}
+
+div.center-news:hover {
+  background-color: antiquewhite;
 }
 
 div.row-news {
   padding: 0.5rem;
-  margin: 20px;
+  margin: 20px 0;
   background-color: #e8faf0;
   display: flex;
   justify-content: center;
@@ -22,12 +28,16 @@ div.spinner-news {
   justify-content: center;
 }
 
-.link-news {
+.link-news,
+.link2-news {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-decoration: none;
-  align-items: center;
+}
+
+.link2-news {
+  padding-left: 16px;
 }
 
 div.col-news {
@@ -48,21 +58,41 @@ div.col-news {
   margin-bottom: 0.5rem;
 }
 
-.description-news {
+.title-news {
   color: black;
   font-size: 18px;
   font-weight: 600;
-  text-align: center;
-  grid-area: content;
-  margin: 20px;
+  text-align: left;
+  margin: 8px 0;
 }
 
-.description-news:hover {
-  text-decoration: underline;
+.title-news:hover {
+  text-decoration: none;
 }
 
-@media only screen and (max-width: 575px) {
+.subtitle-news {
+  color: black;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: left;
+}
+
+.subtitle-news:hover {
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 767px) {
   div.center-news {
     flex-direction: column;
+  }
+
+  .title-news,
+  .subtitle-news {
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .link2-news {
+    padding-left: 0;
   }
 }

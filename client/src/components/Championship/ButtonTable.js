@@ -49,7 +49,7 @@ function ButtonTable({ actived, championship }) {
                       {champ?.table.map((scores, i) => (
                         <tr key={i}>
                           <td id="text-center">{i + 1}</td>
-                          <td id="text-center">{scores.team}</td>
+                          <td id="text-value-center">{scores.team}</td>
                           <td id="text-point">{scores.points}</td>
                           <td id="text-center">{scores.games}</td>
                           <td id="text-center">{scores.victorys}</td>

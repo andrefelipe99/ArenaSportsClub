@@ -21,12 +21,12 @@ function ButtonStatistic({ actived, championship }) {
                     <thead className="table-bordered">
                       <tr>
                         <th> </th>
-                        <th id="text-center">Jogador</th>
-                        <th id="text-center">Equipe</th>
+                        <th id="text-value-center-sta">Jogador</th>
+                        <th id="text-value-center-sta">Equipe</th>
                         {statistic?.name === "Artilheiros" ? (
-                          <th id="text-value-center">Gols</th>
+                          <th id="text-value-center-sta">Gols</th>
                         ) : (
-                          <th id="text-value-center">Assistências</th>
+                          <th id="text-value-center-sta">Assistências</th>
                         )}
                       </tr>
                     </thead>
@@ -34,8 +34,8 @@ function ButtonStatistic({ actived, championship }) {
                       {statistic?.table.map((goals, i) => (
                         <tr key={i}>
                           <td id="text-center">{i + 1}</td>
-                          <td id="text-center">{goals.player}</td>
-                          <td id="text-center">{goals.team}</td>
+                          <td id="text-value-center-sta">{goals.player}</td>
+                          <td id="text-value-center-sta">{goals.team}</td>
                           <td id="text-goals">{goals.value}</td>
                         </tr>
                       ))}

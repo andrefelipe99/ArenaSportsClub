@@ -11,18 +11,23 @@
 }
 
 #position-search {
+  z-index: 1;
   background-color: #aecdbc;
   border-radius: 0.5rem;
   position: absolute;
-  width: 300px;
-  max-height: 300px;
+  width: 306px;
+  max-height: 320px;
   overflow-y: auto;
   overflow-x: hidden;
 
   /*This is relative to the navbar now*/
-  left: 67.7vw;
-  right: 0;
-  top: 88px;
+  left: 68.4vw;
+  top: 70px;
+  transform: translate(-1vw, -0%);
+}
+
+.expanded-search {
+  top: 199px !important;
 }
 
 .search-header {
@@ -41,6 +46,12 @@ a.link-header {
   border-bottom: 3px solid #aecdbc;
 }
 
+a.brand-header {
+  padding: 0.1rem 0;
+  color: rgb(0, 0, 0, 0.9);
+  text-decoration: none;
+}
+
 a.match-header,
 a.championship-header {
   text-decoration: none;
@@ -54,4 +65,28 @@ a.link-header:hover,
 a.match-header:hover,
 a.championship-header:hover {
   color: rgb(0, 0, 0, 0.9);
+}
+
+@media only screen and (max-width: 991px) {
+  .search-header {
+    margin-top: 8px;
+  }
+
+  #position-search {
+    /*This is relative to the navbar now*/
+    left: 50%;
+    transform: translate(-50%, -0%);
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  #position-search {
+    width: 296px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  #position-search {
+    width: 200px;
+  }
 }

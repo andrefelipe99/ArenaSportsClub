@@ -15,28 +15,28 @@ app.use(express.json());
 app.use("/api/v1/football", football);
 //app.use("*", (req, res) => res.status(404).json({ error: "not found" }));
 
-const matchs = await matchsCrawler.getMatchs();
-const championships = await championshipsCrawler.getChampionships();
-const news = await newsCrawler.getNews();
+// const matchs = await matchsCrawler.getMatchs();
+// const championships = await championshipsCrawler.getChampionships();
+// const news = await newsCrawler.getNews();
 
-setInterval(async () => {
-  const post = await matchsController.apiPostMatch();
-  const clear = await matchsCrawler.clearMatchs();
-  console.log(post);
-}, 40000);
+// setInterval(async () => {
+//   const post = await matchsController.apiPostMatch();
+//   const clear = await matchsCrawler.clearMatchs();
+//   console.log(post);
+// }, 40000);
 
-setInterval(async () => {
-  const championships = await matchsController.apiGetAllChampionships();
-  const champs = await championshipsCrawler.getUrls(championships);
-  const post = await championshipsController.apiPostChampionships();
-  const clear = await championshipsCrawler.clearChampionships();
-  console.log(post);
-}, 600000);
+// setInterval(async () => {
+//   const championships = await matchsController.apiGetAllChampionships();
+//   const champs = await championshipsCrawler.getUrls(championships);
+//   const post = await championshipsController.apiPostChampionships();
+//   const clear = await championshipsCrawler.clearChampionships();
+//   console.log(post);
+// }, 600000);
 
-setInterval(async () => {
-  const post = await newsController.apiPostNews();
-  console.log(post);
-}, 600000);
+// setInterval(async () => {
+//   const post = await newsController.apiPostNews();
+//   console.log(post);
+// }, 600000);
 
 // setTimeout(async () => {
 //   const updateYesterday = await matchsController.apiUpdateYesterdayMatchs();

@@ -140,7 +140,10 @@ export default class matchsCrawler {
                         "#livescore > div:nth-child(1) > div:nth-child(1) > div > div.row.match-card-second-row.justify-content-md-center > div:nth-child(1) > a"
                       )
                       .attr("href");
-                    teamHomeHref = teamHomeHref.replace(".html", "");
+                    if (teamHomeHref !== "" && teamHomeHref)
+                      teamHomeHref = teamHomeHref.replace(".html", "");
+                    else teamHomeHref = "";
+
                     var teamAwayHref = $(this)
                       .find(
                         "#livescore > div:nth-child(1) > div:nth-child(1) > div > div.row.match-card-second-row.justify-content-md-center > div:nth-child(3) > a"

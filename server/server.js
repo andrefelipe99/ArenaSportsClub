@@ -42,7 +42,7 @@ setInterval(async () => {
   const post = await teamsController.apiPostTeams();
   const clear = await teamsCrawler.clearTeams();
   console.log(post);
-}, 120000);
+}, 300000);
 
 setInterval(async () => {
   const post = await newsController.apiPostNews();

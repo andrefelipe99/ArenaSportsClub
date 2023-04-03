@@ -1,6 +1,5 @@
 import request from "request";
 import { load } from "cheerio";
-import championshipsDAO from "../dao/championshipsDAO.js";
 
 const url = "https://www.placardefutebol.com.br";
 const urlToday = "/jogos-de-hoje";
@@ -136,6 +135,18 @@ export default class matchsCrawler {
                         "#livescore > div:nth-child(1) > div:nth-child(1) > div > div.row.match-card-first-row.justify-content-md-center > div:nth-child(3) > img"
                       )
                       .attr("src");
+                    var teamHomeHref = $(this)
+                      .find(
+                        "#livescore > div:nth-child(1) > div:nth-child(1) > div > div.row.match-card-second-row.justify-content-md-center > div:nth-child(1) > a"
+                      )
+                      .attr("href");
+                    teamHomeHref = teamHomeHref.replace(".html", "");
+                    var teamAwayHref = $(this)
+                      .find(
+                        "#livescore > div:nth-child(1) > div:nth-child(1) > div > div.row.match-card-second-row.justify-content-md-center > div:nth-child(3) > a"
+                      )
+                      .attr("href");
+                    teamAwayHref = teamAwayHref.replace(".html", "");
                     var dateTime = $(this)
                       .find(
                         "#livescore > div:nth-child(1) > div.match-details > p:nth-child(1)"
@@ -716,9 +727,11 @@ export default class matchsCrawler {
                           homeId: "",
                           homeName: teamHome,
                           homeImg: teamHomeImg,
+                          teamHomeHref: teamHomeHref,
                           awayId: "",
                           awayName: teamAway,
                           awayImg: teamAwayImg,
+                          teamAwayHref: teamAwayHref,
                         },
                         events: eventsAux,
                         statistics: statisticsAux,

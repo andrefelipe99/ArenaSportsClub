@@ -1,6 +1,45 @@
+import teamsCrawler from "../crawler/teams.js";
 import teamsDAO from "../dao/teamsDAO.js";
 
 export default class teamsController {
+  static async apiPostTeams() {
+    try {
+      const teams = await teamsCrawler.getTeams();
+      let teamFound;
+      let maxId;
+
+      for (let index = 0; index < teams.length; index++) {
+        if (teams[index].url !== undefined) {
+          teamFound = await teamsDAO.getTeamByUrl(teams[index].url);
+
+          if (teamFound === 0) {
+            maxId = await teamsDAO.getTeamMaxID();
+            maxId = parseInt(maxId) + 1;
+            const teamResponse = await teamsDAO.addTeam(
+              teams[index],
+              maxId.toString()
+            );
+
+            var { error } = teamResponse;
+            if (error) {
+              return { error };
+            }
+          } else {
+            const teamResponse = await teamsDAO.updateTeam(teams[index]);
+
+            var { error } = teamResponse;
+            if (error) {
+              return { error };
+            }
+          }
+        }
+      }
+      return { status: "success teams" };
+    } catch (error) {
+      return { error: error.message };
+    }
+  }
+
   static async apiGetTeamById(req, res, next) {
     try {
       let id = req.params.id || {};

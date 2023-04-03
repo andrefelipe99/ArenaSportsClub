@@ -1,5 +1,6 @@
 import matchsCrawler from "../crawler/matchs.js";
 import championshipsDAO from "../dao/championshipsDAO.js";
+import teamsDAO from "../dao/teamsDAO.js";
 import matchsDAO from "../dao/matchsDAO.js";
 
 export default class matchsController {
@@ -9,6 +10,8 @@ export default class matchsController {
       let matchTitle;
       let maxId;
       let championshipId = "";
+      let teamHomeId = "";
+      let teamAwayId = "";
 
       for (let index = 0; index < matchs.length; index++) {
         matchTitle = await matchsDAO.getMatchByTitle(matchs[index].idTitle);
@@ -45,9 +48,22 @@ export default class matchsController {
             championshipId = championshipId[0]?.idChampionship;
             if (championshipId === undefined) championshipId = "";
           }
+          teamHomeId = await teamsDAO.getTeamByTeamUrl(
+            matchs[index].teams.teamHomeHref
+          );
+          teamHomeId = teamHomeId[0]?.idTeam;
+          if (teamHomeId === undefined) teamHomeId = "";
+          teamAwayId = await teamsDAO.getTeamByTeamUrl(
+            matchs[index].teams.teamAwayHref
+          );
+          teamAwayId = teamAwayId[0]?.idTeam;
+          if (teamAwayId === undefined) teamAwayId = "";
+
           const MatchResponse = await matchsDAO.updateMatch(
             matchs[index],
-            championshipId
+            championshipId,
+            teamHomeId,
+            teamAwayId
           );
 
           var { error } = MatchResponse;
@@ -205,6 +221,30 @@ export default class matchsController {
           element._id.championshipUrl !== null
         )
           array.push(element._id.championshipUrl);
+      });
+      return array;
+    } catch (e) {
+      console.log(`api, ${e}`);
+      return { error: e.message };
+    }
+  }
+
+  static async apiGetAllTeams(req, res, next) {
+    try {
+      const teams = await matchsDAO.getAllHomeTeams();
+      const teams2 = await matchsDAO.getAllAwayTeams();
+      var { error } = teams;
+      if (error) {
+        return { error };
+      }
+      let array = [];
+      teams.forEach((element) => {
+        if (element._id.teamHref !== "" && element._id.teamHref !== null)
+          array.push(element._id.teamHref);
+      });
+      teams2.forEach((element) => {
+        if (element._id.teamHref !== "" && element._id.teamHref !== null)
+          array.push(element._id.teamHref);
       });
       return array;
     } catch (e) {

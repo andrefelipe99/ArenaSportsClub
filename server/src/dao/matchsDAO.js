@@ -61,7 +61,7 @@ export default class matchsDAO {
     }
   }
 
-  static async updateMatch(match, idChampionship) {
+  static async updateMatch(match, idChampionship, homeId, awayId) {
     try {
       const updateResponse = await matchs.updateOne(
         { idTitle: match.idTitle },
@@ -75,7 +75,16 @@ export default class matchsDAO {
             schedule: match.schedule,
             scoreHome: match.scoreHome,
             scoreAway: match.scoreAway,
-            teams: match.teams,
+            teams: {
+              homeId: homeId,
+              homeName: match.teams.homeName,
+              homeImg: match.teams.homeImg,
+              teamHomeHref: match.teams.teamHomeHref,
+              awayId: awayId,
+              awayName: match.teams.awayName,
+              awayImg: match.teams.awayImg,
+              teamAwayHref: match.teams.teamAwayHref,
+            },
             events: match.events,
             statistics: match.statistics,
             lineups: match.lineups,
@@ -426,8 +435,6 @@ export default class matchsDAO {
         {
           $group: {
             _id: {
-              // idMatch: "$idMatch",
-              // idChampionship: "$idChampionship",
               championshipUrl: "$championshipUrl",
             },
             count: { $count: {} },
@@ -443,6 +450,56 @@ export default class matchsDAO {
       return await matchs.aggregate(pipeline).toArray();
     } catch (e) {
       console.error(`Something went wrong in getAllChampionships: ${e}`);
+      throw e;
+    }
+  }
+
+  static async getAllHomeTeams() {
+    try {
+      const pipeline = [
+        {
+          $group: {
+            _id: {
+              teamHref: "$teams.teamHomeHref",
+            },
+            count: { $count: {} },
+          },
+        },
+        {
+          $sort: {
+            count: -1,
+          },
+        },
+      ];
+
+      return await matchs.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getAllHomeTeams: ${e}`);
+      throw e;
+    }
+  }
+
+  static async getAllAwayTeams() {
+    try {
+      const pipeline = [
+        {
+          $group: {
+            _id: {
+              teamHref: "$teams.teamAwayHref",
+            },
+            count: { $count: {} },
+          },
+        },
+        {
+          $sort: {
+            count: -1,
+          },
+        },
+      ];
+
+      return await matchs.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getAllAwayTeams: ${e}`);
       throw e;
     }
   }

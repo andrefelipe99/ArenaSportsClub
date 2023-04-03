@@ -35,7 +35,7 @@ export default class teamsDAO {
     try {
       const pipeline = [
         {
-          $match: { id: id },
+          $match: { idTeam: id },
         },
       ];
       return await teams.aggregate(pipeline).toArray();
@@ -77,6 +77,85 @@ export default class teamsDAO {
         `Unable to convert cursor to array or problem counting documents, ${e}`
       );
       return { teamsList: [], totalNumTeams: 0 };
+    }
+  }
+
+  static async addTeam(team, id) {
+    try {
+      const teamDoc = {
+        idTeam: id,
+        name: team.name,
+        img: team.img,
+        url: team.url,
+        infos: team.infos,
+        titles: team.titles,
+      };
+
+      return await teams.insertOne(teamDoc);
+    } catch (e) {
+      console.error(`Unable to post team: ${e}`);
+      return { error: e };
+    }
+  }
+
+  static async updateTeam(team) {
+    try {
+      const updateResponse = await teams.updateOne(
+        { url: team.url },
+        {
+          $set: {
+            infos: team.infos,
+            titles: team.titles,
+          },
+        }
+      );
+
+      return updateResponse;
+    } catch (e) {
+      console.error(`Unable to update team: ${e}`);
+      return { error: e };
+    }
+  }
+
+  static async getTeamMaxID() {
+    let maxId;
+    try {
+      maxId = await teams.find().sort({ idTeam: -1 }).limit(1);
+      const teamsList = await maxId.toArray();
+      const idMaxTeam = teamsList[0].idTeam;
+      return await idMaxTeam;
+    } catch (e) {
+      console.error(`Something went wrong in getTeamMaxID: ${e}`);
+      throw e;
+    }
+  }
+
+  static async getTeamByTeamUrl(url) {
+    try {
+      const pipeline = [
+        {
+          $match: { url: url },
+        },
+      ];
+      return await teams.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getTeamByTeamUrl: ${e}`);
+      throw e;
+    }
+  }
+
+  static async getTeamByUrl(url) {
+    try {
+      const pipeline = [
+        {
+          $match: { url: url },
+        },
+      ];
+      let founded = await teams.aggregate(pipeline).toArray();
+      return await founded.length;
+    } catch (e) {
+      console.error(`Something went wrong in getTeamByUrl: ${e}`);
+      throw e;
     }
   }
 }

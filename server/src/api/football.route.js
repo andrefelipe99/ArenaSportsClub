@@ -11,6 +11,7 @@ router.route("/championships").get(championshipsCtrl.apiGetChampionships);
 router.route("/news").get(newsCtrl.apiGetAllNews);
 
 router.route("/matchs/id/:id").get(matchsCtrl.apiGetMatchById);
+router.route("/team/id/:id").get(teamsCtrl.apiGetTeamById);
 
 router
   .route("/matchs/date/:date/:favorites")
@@ -32,7 +33,7 @@ router
   .route("/championships/priority")
   .get(championshipsCtrl.apiGetChampionshipPriority);
 
-// router.route("/matchs").get(matchsCtrl.apiGetAllChampionships);
+// router.route("/matchs").get(matchsCtrl.apiGetAllTeams);
 // router.route("/putid").get(matchsCtrl.apiDelete);
 // router.route("/putid").get(matchsCtrl.apiGetAllMatchs);
 

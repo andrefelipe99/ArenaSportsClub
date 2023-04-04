@@ -273,6 +273,7 @@ export default class matchsDAO {
             },
             matchs: {
               $addToSet: {
+                date: "$date",
                 idMatch: "$idMatch",
                 status: "$status",
                 time: "$time",
@@ -299,7 +300,7 @@ export default class matchsDAO {
         },
         {
           $sort: {
-            "_id.day": -1,
+            "matchs.date": -1,
           },
         },
       ];
@@ -391,6 +392,174 @@ export default class matchsDAO {
       return await matchs.aggregate(pipeline).toArray();
     } catch (e) {
       console.error(`Something went wrong in getMatchsByChampionship: ${e}`);
+      throw e;
+    }
+  }
+
+  static async getPastMatchsByTeam(id, today) {
+    try {
+      const pipeline = [
+        {
+          $match: {
+            $or: [{ "teams.homeId": id }, { "teams.awayId": id }],
+            status: { $eq: "ENCERRADO" },
+          },
+        },
+        {
+          $sort: {
+            schedule: 1,
+            idTitle: 1,
+          },
+        },
+        {
+          $lookup: {
+            from: "championships",
+            let: {
+              id: "$idChampionship",
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $eq: ["$idChampionship", "$$id"],
+                  },
+                },
+              },
+            ],
+            as: "championshipObj",
+          },
+        },
+        {
+          $addFields: {
+            championshipObj: "$championshipObj",
+          },
+        },
+        {
+          $group: {
+            _id: {
+              day: "$day",
+            },
+            matchs: {
+              $addToSet: {
+                date: "$date",
+                idMatch: "$idMatch",
+                status: "$status",
+                time: "$time",
+                schedule: "$schedule",
+                scoreHome: "$scoreHome",
+                scoreAway: "$scoreAway",
+                teams: "$teams",
+                events: "$events",
+              },
+            },
+          },
+        },
+        { $unwind: "$matchs" },
+        { $sort: { "matchs.schedule": 1, "matchs.idMatch": 1 } },
+        {
+          // this $group stage is needed, because we did
+          // $unwind before
+          $group: {
+            _id: "$_id",
+            matchs: {
+              $push: "$matchs",
+            },
+          },
+        },
+        {
+          $sort: {
+            "matchs.date": -1,
+          },
+        },
+      ];
+
+      return await matchs.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getPastMatchsByTeam: ${e}`);
+      throw e;
+    }
+  }
+
+  static async getFutureMatchsByTeam(id, today) {
+    try {
+      const pipeline = [
+        {
+          $match: {
+            $or: [{ "teams.homeId": id }, { "teams.awayId": id }],
+            date: { $gte: today },
+            status: { $ne: "ENCERRADO" },
+          },
+        },
+        {
+          $sort: {
+            schedule: 1,
+            idTitle: 1,
+          },
+        },
+        {
+          $lookup: {
+            from: "championships",
+            let: {
+              id: "$idChampionship",
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $eq: ["$idChampionship", "$$id"],
+                  },
+                },
+              },
+            ],
+            as: "championshipObj",
+          },
+        },
+        {
+          $addFields: {
+            championshipObj: "$championshipObj",
+          },
+        },
+        {
+          $group: {
+            _id: {
+              day: "$day",
+            },
+            matchs: {
+              $addToSet: {
+                idMatch: "$idMatch",
+                status: "$status",
+                time: "$time",
+                schedule: "$schedule",
+                scoreHome: "$scoreHome",
+                scoreAway: "$scoreAway",
+                teams: "$teams",
+                events: "$events",
+              },
+            },
+          },
+        },
+        { $unwind: "$matchs" },
+        { $sort: { "matchs.schedule": 1, "matchs.idMatch": 1 } },
+        {
+          // this $group stage is needed, because we did
+          // $unwind before
+          $group: {
+            _id: "$_id",
+            matchs: {
+              $push: "$matchs",
+            },
+          },
+        },
+        {
+          $sort: {
+            "_id.day": 1,
+          },
+        },
+      ];
+
+      return await matchs.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getFutureMatchsByTeam: ${e}`);
       throw e;
     }
   }
@@ -512,6 +681,40 @@ export default class matchsDAO {
   //   } catch (e) {
   //     console.error(`Unable to delete news: ${e}`);
   //     return { error: e };
+  //   }
+  // }
+
+  // static async updateTeamsId(name, id) {
+  //   try {
+  //     const updateResponse = await matchs.updateMany(
+  //       { "teams.homeName": name },
+  //       {
+  //         $set: {
+  //           "teams.homeId": id,
+  //         },
+  //       }
+  //     );
+  //     return updateResponse;
+  //   } catch (e) {
+  //     console.error(`Something went wrong in updateTeamsId: ${e}`);
+  //     throw e;
+  //   }
+  // }
+
+  // static async updateTeamsId2(name, id) {
+  //   try {
+  //     const updateResponse = await matchs.updateMany(
+  //       { "teams.awayName": name },
+  //       {
+  //         $set: {
+  //           "teams.awayId": id,
+  //         },
+  //       }
+  //     );
+  //     return updateResponse;
+  //   } catch (e) {
+  //     console.error(`Something went wrong in updateTeamsId2: ${e}`);
+  //     throw e;
   //   }
   // }
 }

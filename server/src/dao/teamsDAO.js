@@ -158,4 +158,18 @@ export default class teamsDAO {
       throw e;
     }
   }
+
+  static async getAllTeams() {
+    try {
+      const pipeline = [
+        {
+          $match: {},
+        },
+      ];
+      return await teams.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getAllTeams: ${e}`);
+      throw e;
+    }
+  }
 }

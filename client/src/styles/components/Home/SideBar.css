@@ -14,7 +14,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: Barrio;
+  font-family: Lato;
+  font-weight: bold;
   font-size: larger;
   color: antiquewhite;
   padding-top: 4px;
@@ -27,7 +28,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: Barrio;
+  font-weight: bold;
+  font-family: Lato;
   font-size: 1rem;
   color: antiquewhite;
   padding-top: 4px;
@@ -79,7 +81,8 @@ div.spinner-sidebar {
 #list-group-sidebar {
   border-radius: 0ch;
   background-color: #4a8464;
-  font-family: Barrio;
+  font-weight: bold;
+  font-family: Lato;
   font-size: medium;
   border: none;
 }

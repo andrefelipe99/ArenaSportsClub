@@ -26,6 +26,12 @@ router
   .get(matchsCtrl.apiGetPastMatchsByChampionship);
 
 router
+  .route("/matchs/team/future/:id")
+  .get(matchsCtrl.apiGetFutureMatchsByTeam);
+
+router.route("/matchs/team/past/:id").get(matchsCtrl.apiGetPastMatchsByTeam);
+
+router
   .route("/championship/id/:id")
   .get(championshipsCtrl.apiGetChampionshipById);
 
@@ -33,7 +39,7 @@ router
   .route("/championships/priority")
   .get(championshipsCtrl.apiGetChampionshipPriority);
 
-// router.route("/matchs").get(matchsCtrl.apiGetAllTeams);
+// router.route("/matchs").get(matchsCtrl.apiGetAllHref);
 // router.route("/putid").get(matchsCtrl.apiDelete);
 // router.route("/putid").get(matchsCtrl.apiGetAllMatchs);
 

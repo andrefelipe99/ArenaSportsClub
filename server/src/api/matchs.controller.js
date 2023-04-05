@@ -1,5 +1,6 @@
 import matchsCrawler from "../crawler/matchs.js";
 import championshipsDAO from "../dao/championshipsDAO.js";
+import teamsDAO from "../dao/teamsDAO.js";
 import matchsDAO from "../dao/matchsDAO.js";
 
 export default class matchsController {
@@ -9,6 +10,8 @@ export default class matchsController {
       let matchTitle;
       let maxId;
       let championshipId = "";
+      let teamHomeId = "";
+      let teamAwayId = "";
 
       for (let index = 0; index < matchs.length; index++) {
         matchTitle = await matchsDAO.getMatchByTitle(matchs[index].idTitle);
@@ -45,9 +48,22 @@ export default class matchsController {
             championshipId = championshipId[0]?.idChampionship;
             if (championshipId === undefined) championshipId = "";
           }
+          teamHomeId = await teamsDAO.getTeamByTeamUrl(
+            matchs[index].teams.teamHomeHref
+          );
+          teamHomeId = teamHomeId[0]?.idTeam;
+          if (teamHomeId === undefined) teamHomeId = "";
+          teamAwayId = await teamsDAO.getTeamByTeamUrl(
+            matchs[index].teams.teamAwayHref
+          );
+          teamAwayId = teamAwayId[0]?.idTeam;
+          if (teamAwayId === undefined) teamAwayId = "";
+
           const MatchResponse = await matchsDAO.updateMatch(
             matchs[index],
-            championshipId
+            championshipId,
+            teamHomeId,
+            teamAwayId
           );
 
           var { error } = MatchResponse;
@@ -105,7 +121,6 @@ export default class matchsController {
   static async apiGetFutureMatchsByChampionship(req, res, next) {
     try {
       let id = req.params.id || {};
-      // let championship = "Copa do Nordeste - 2022/2023";
       let today = new Date();
       let day = today.getDate();
       let month = today.getMonth();
@@ -126,13 +141,52 @@ export default class matchsController {
   static async apiGetPastMatchsByChampionship(req, res, next) {
     try {
       let id = req.params.id || {};
-      // let championship = "Copa do Nordeste - 2022/2023";
       let today = new Date();
       let day = today.getDate();
       let month = today.getMonth();
       let year = today.getFullYear();
       let date = new Date(year, month, day);
       let matchs = await matchsDAO.getPastMatchsByChampionship(id, date);
+      if (!matchs) {
+        res.status(404).json({ error: "Not found" });
+        return;
+      }
+      res.json(matchs);
+    } catch (e) {
+      console.log(`api, ${e}`);
+      res.status(500).json({ error: e });
+    }
+  }
+
+  static async apiGetFutureMatchsByTeam(req, res, next) {
+    try {
+      let id = req.params.id || {};
+      let today = new Date();
+      let day = today.getDate();
+      let month = today.getMonth();
+      let year = today.getFullYear();
+      let date = new Date(year, month, day);
+      let matchs = await matchsDAO.getFutureMatchsByTeam(id, date);
+      if (!matchs) {
+        res.status(404).json({ error: "Not found" });
+        return;
+      }
+      res.json(matchs);
+    } catch (e) {
+      console.log(`api, ${e}`);
+      res.status(500).json({ error: e });
+    }
+  }
+
+  static async apiGetPastMatchsByTeam(req, res, next) {
+    try {
+      let id = req.params.id || {};
+      let today = new Date();
+      let day = today.getDate();
+      let month = today.getMonth();
+      let year = today.getFullYear();
+      let date = new Date(year, month, day);
+      let matchs = await matchsDAO.getPastMatchsByTeam(id, date);
       if (!matchs) {
         res.status(404).json({ error: "Not found" });
         return;
@@ -217,6 +271,57 @@ export default class matchsController {
   //   try {
   //     const result = await matchsDAO.getDelete();
   //     res.json(result);
+  //   } catch (e) {
+  //     console.log(`api, ${e}`);
+  //     res.status(500).json({ error: e });
+  //   }
+  // }
+
+  static async apiGetAllTeams(req, res, next) {
+    try {
+      const teams = await matchsDAO.getAllHomeTeams();
+      const teams2 = await matchsDAO.getAllAwayTeams();
+      var { error } = teams;
+      if (error) {
+        return { error };
+      }
+      let array = [];
+      teams.forEach((element) => {
+        if (element._id.teamHref !== "" && element._id.teamHref !== null)
+          array.push(element._id.teamHref);
+      });
+      teams2.forEach((element) => {
+        if (element._id.teamHref !== "" && element._id.teamHref !== null)
+          array.push(element._id.teamHref);
+      });
+      return array;
+    } catch (e) {
+      console.log(`api, ${e}`);
+      return { error: e.message };
+    }
+  }
+
+  // static async apiGetAllHref(req, res, next) {
+  //   try {
+  //     const teams = await teamsDAO.getAllTeams();
+
+  //     for (let index = 0; index < teams.length; index++) {
+  //       console.log(teams[index].name + " " + teams[index].idTeam);
+  //       const MatchResponse = await matchsDAO.updateTeamsId(
+  //         teams[index].name,
+  //         teams[index].idTeam
+  //       );
+  //       const MatchResponse2 = await matchsDAO.updateTeamsId2(
+  //         teams[index].name,
+  //         teams[index].idTeam
+  //       );
+  //       var { error } = MatchResponse;
+  //       if (error) {
+  //         return { error };
+  //       }
+  //     }
+
+  //     res.json(teams.length);
   //   } catch (e) {
   //     console.log(`api, ${e}`);
   //     res.status(500).json({ error: e });

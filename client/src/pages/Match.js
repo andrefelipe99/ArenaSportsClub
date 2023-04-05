@@ -97,17 +97,39 @@ export function Match() {
                     />
                   </Col>
                   <Col md={4} sm={4} xs={4} className="col-content-match">
-                    <span className="teams-name">
-                      {listMatch.teams.homeName}
-                    </span>
+                    {listMatch.teams.homeId !== "" ? (
+                      <Link
+                        to={`/equipe/${listMatch.teams.homeId}`}
+                        className="link-team-match"
+                      >
+                        <span className="teams-name">
+                          {listMatch.teams.homeName}
+                        </span>
+                      </Link>
+                    ) : (
+                      <span className="teams-name">
+                        {listMatch.teams.homeName}
+                      </span>
+                    )}
                   </Col>
                   <Col md={4} sm={4} xs={4} className="col-top-match">
                     <span className="time-match">{listMatch.time}</span>
                   </Col>
                   <Col md={4} sm={4} xs={4} className="col-content-match">
-                    <span className="teams-name">
-                      {listMatch.teams.awayName}
-                    </span>
+                    {listMatch.teams.awayId !== "" ? (
+                      <Link
+                        to={`/equipe/${listMatch.teams.awayId}`}
+                        className="link-team-match"
+                      >
+                        <span className="teams-name">
+                          {listMatch.teams.awayName}
+                        </span>
+                      </Link>
+                    ) : (
+                      <span className="teams-name">
+                        {listMatch.teams.awayName}
+                      </span>
+                    )}
                   </Col>
 
                   <span className="time-match">

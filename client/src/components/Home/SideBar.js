@@ -126,22 +126,21 @@ export function SideBar({
 
   const addFavoriteTeams = (team, i) => {
     if (team !== undefined) {
-      let { id, name, logo, locality } = team;
-      setFavoritesTeams((favorite) => [
-        ...favorite,
-        { id, name, logo, locality },
-      ]);
+      let { idTeam, name, img } = team;
+      setFavoritesTeams((favorite) => [...favorite, { idTeam, name, img }]);
     }
   };
 
   const removeFavoriteTeams = (team) => {
     window.localStorage.removeItem("favorites-teams");
     if (listTeams !== undefined)
-      setFavoritesTeams(favoritesTeams.filter((tea) => tea.id !== team.id));
+      setFavoritesTeams(
+        favoritesTeams.filter((tea) => tea.idTeam !== team.idTeam)
+      );
   };
 
   const isFavoriteTeams = (team) =>
-    favoritesTeams?.some((tea) => tea.id === team.id);
+    favoritesTeams?.some((tea) => tea.idTeam === team.idTeam);
 
   const changeExpand = () => {
     if (buttonExpand) setButtonExpand(false);
@@ -319,7 +318,7 @@ export function SideBar({
             favoritesTeams.map((favorito, i) => (
               <Link
                 key={i}
-                // to="/equipe"
+                to={`/equipe/${favorito.idTeam}`}
                 id="side-bar-link"
               >
                 <ListGroup>
@@ -328,8 +327,8 @@ export function SideBar({
                       <Col md={2} sm={2} xs={2} className="col-sidebar-center">
                         <img
                           className="pais-margin"
-                          src={favorito.logo}
-                          alt={`${favorito.logo}`}
+                          src={favorito.img}
+                          alt={`${favorito.img}`}
                           title={`${favorito.name}`}
                         />
                       </Col>

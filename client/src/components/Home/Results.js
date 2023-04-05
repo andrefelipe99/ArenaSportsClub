@@ -168,7 +168,11 @@ export function Results({ favoritesChamp, favoritesTeams }) {
       time = match?.time?.replace("SUSPENSO", "SUSP");
     else if (match?.time === "ADIADO")
       time = match?.time?.replace("ADIADO", "CANC");
-    else time = time = match?.time?.replace(" MIN", "'");
+    else if (match?.time === "ATRASADO")
+      time = match?.time?.replace("ATRASADO", "ATRA");
+    else if (match?.time === "PENALTIS")
+      time = match?.time?.replace("PENALTIS", "PEN");
+    else time = match?.time?.replace(" MIN", "'");
 
     return time;
   };

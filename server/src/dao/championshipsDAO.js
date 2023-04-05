@@ -78,7 +78,9 @@ export default class championshipsDAO {
       ];
       return await championships.aggregate(pipeline).toArray();
     } catch (e) {
-      console.error(`Something went wrong in getChampionshipByUrl: ${e}`);
+      console.error(
+        `Something went wrong in getChampionshipByChampionshipUrl: ${e}`
+      );
       throw e;
     }
   }

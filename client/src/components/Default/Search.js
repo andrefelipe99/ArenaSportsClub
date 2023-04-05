@@ -19,22 +19,21 @@ export function Search(props) {
 
   const addFavoriteTeams = (team, i) => {
     if (team !== "undefined") {
-      let { id, name, logo, locality } = team;
-      setFavoritesTeams((favorite) => [
-        ...favorite,
-        { id, name, logo, locality },
-      ]);
+      let { idTeam, name, img } = team;
+      setFavoritesTeams((favorite) => [...favorite, { idTeam, name, img }]);
     }
   };
 
   const removeFavoriteTeams = (team) => {
     window.localStorage.removeItem("favorites-teams");
     if (favoritesTeams !== "undefined")
-      setFavoritesTeams(favoritesTeams.filter((tea) => tea.id !== team.id));
+      setFavoritesTeams(
+        favoritesTeams.filter((tea) => tea.idTeam !== team.idTeam)
+      );
   };
 
   const isFavoriteTeams = (team) =>
-    favoritesTeams?.some((tea) => tea.id === team.id);
+    favoritesTeams?.some((tea) => tea.idTeam === team.idTeam);
 
   const deleteSearch = () => {
     setSearchField("");
@@ -52,17 +51,17 @@ export function Search(props) {
         <>
           {listTeams?.map((team, i) => (
             <Link
-              // to="/equipe"
+              to={`/equipe/${team.idTeam}`}
               key={i}
               id="list-group-navbar-search"
               onClick={() => deleteSearch()}
             >
               <Row className="justify-content-center-search">
-                <Col md={2} sm={2} xs={2} className="col-search">
+                <Col md={2} sm={2} xs={2} className="col-logo-search">
                   <img
                     className="pais-margin"
-                    src={team.logo}
-                    alt={`${team.logo}`}
+                    src={team.img}
+                    alt={`${team.img}`}
                   />
                 </Col>
                 <Col md={10} sm={10} xs={10} className="col-search">
@@ -84,7 +83,7 @@ export function Search(props) {
               onClick={() => deleteSearch()}
             >
               <Row className="justify-content-center-search">
-                <Col md={2} sm={2} xs={2} className="col-search">
+                <Col md={2} sm={2} xs={2} className="col-logo-search">
                   <img
                     className="pais-margin"
                     src={
@@ -115,8 +114,8 @@ export function Search(props) {
               <Col md={2} sm={2} xs={2} className="col-logo-search">
                 <img
                   className="pais-margin"
-                  src={team.logo}
-                  alt={`${team.logo}`}
+                  src={team.img}
+                  alt={`${team.img}`}
                 />
               </Col>
               <Col md={9} sm={9} xs={9} className="col-search">

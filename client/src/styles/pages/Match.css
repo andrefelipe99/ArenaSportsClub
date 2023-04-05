@@ -21,6 +21,15 @@
   color: antiquewhite;
 }
 
+.link-team-match {
+  color: black;
+  text-decoration: none;
+}
+
+.link-team-match:hover {
+  color: black;
+}
+
 .content-match {
   background-color: #e8faf0;
   border: 0;

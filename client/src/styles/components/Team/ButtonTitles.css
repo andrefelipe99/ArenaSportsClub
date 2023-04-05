@@ -1,0 +1,23 @@
+.title-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-right: 30px;
+  margin: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+td.text-center-year {
+  text-align: center;
+  width: 600px;
+}
+
+td.text-center-title {
+  text-align: left;
+}
+
+.img-titles {
+  max-height: 16px;
+  margin-right: 10px;
+}

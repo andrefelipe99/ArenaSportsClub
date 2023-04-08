@@ -53,12 +53,13 @@ export function Results({ favoritesChamp, favoritesTeams }) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
+      console.log("atualiza");
       MatchDataService.getMatchsByDate(dateFilter, favoritesChamp).then(
         (response) => {
           setMatchsData(response.data);
         }
       );
-    }, 15000);
+    }, 30000);
     return () => clearTimeout(timer);
   });
 
@@ -170,8 +171,8 @@ export function Results({ favoritesChamp, favoritesTeams }) {
       time = match?.time?.replace("ADIADO", "CANC");
     else if (match?.time === "ATRASADO")
       time = match?.time?.replace("ATRASADO", "ATRA");
-    else if (match?.time === "PENALTIS")
-      time = match?.time?.replace("PENALTIS", "PEN");
+    else if (match?.time === "PÊNALTIS")
+      time = match?.time?.replace("PÊNALTIS", "PEN");
     else time = match?.time?.replace(" MIN", "'");
 
     return time;

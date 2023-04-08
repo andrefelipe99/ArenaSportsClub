@@ -26,7 +26,7 @@ setInterval(async () => {
   const post = await matchsController.apiPostMatch();
   const clear = await matchsCrawler.clearMatchs();
   console.log(post);
-}, 60000);
+}, 90000);
 
 setInterval(async () => {
   const championships = await matchsController.apiGetAllChampionships();
@@ -34,7 +34,7 @@ setInterval(async () => {
   const post = await championshipsController.apiPostChampionships();
   const clear = await championshipsCrawler.clearChampionships();
   console.log(post);
-}, 600000);
+}, 300000);
 
 setInterval(async () => {
   const teams = await matchsController.apiGetAllTeams();
@@ -49,10 +49,10 @@ setInterval(async () => {
   console.log(post);
 }, 600000);
 
-setTimeout(async () => {
-  const updateYesterday = await matchsController.apiUpdateYesterdayMatchs();
-  console.log(updateYesterday);
-}, 10000);
+// setTimeout(async () => {
+//   const updateYesterday = await matchsController.apiUpdateYesterdayMatchs();
+//   console.log(updateYesterday);
+// }, 10000);
 
 //API testes
 // app.get("/test", (req, res) => {

@@ -5,6 +5,7 @@ import teamsDAO from "./src/dao/teamsDAO.js";
 import matchsDAO from "./src/dao/matchsDAO.js";
 import championshipsDAO from "./src/dao/championshipsDAO.js";
 import newsDAO from "./src/dao/newsDAO.js";
+import usersDAO from "./src/dao/usersDAO.js";
 
 dotenv.config();
 const MongoClient = mongodb.MongoClient;
@@ -22,6 +23,7 @@ MongoClient.connect(process.env.RESTREVIEWS_DB_URI, {
     await matchsDAO.injectDB(client);
     await newsDAO.injectDB(client);
     await championshipsDAO.injectDB(client);
+    await usersDAO.injectDB(client);
     app.listen(port, () => {
       console.log(`listening on port ${port}`);
     });

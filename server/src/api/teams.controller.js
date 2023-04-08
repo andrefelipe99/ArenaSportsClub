@@ -9,7 +9,7 @@ export default class teamsController {
       let maxId;
 
       for (let index = 0; index < teams.length; index++) {
-        if (teams[index].url !== undefined) {
+        if (teams[index]?.url !== undefined) {
           teamFound = await teamsDAO.getTeamByUrl(teams[index].url);
 
           if (teamFound === 0) {
@@ -24,7 +24,7 @@ export default class teamsController {
             if (error) {
               return { error };
             }
-          } else {
+          } else if (teams[index].url !== undefined) {
             const teamResponse = await teamsDAO.updateTeam(teams[index]);
 
             var { error } = teamResponse;

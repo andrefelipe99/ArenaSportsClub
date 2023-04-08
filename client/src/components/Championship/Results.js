@@ -55,8 +55,8 @@ function ResultsChampionship({ matchsData, buttonExpand, setButtonExpand }) {
       time = match?.time?.replace("ADIADO", "CANC");
     else if (match?.time === "ATRASADO")
       time = match?.time?.replace("ATRASADO", "ATRAS");
-    else if (match?.time === "PENALTIS")
-      time = match?.time?.replace("PENALTIS", "PEN");
+    else if (match?.time === "PÊNALTIS")
+      time = match?.time?.replace("PÊNALTIS", "PEN");
     else time = match?.time?.replace(" MIN", "'");
 
     return time;

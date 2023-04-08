@@ -49,7 +49,6 @@ export function Header() {
   };
 
   const changeExpanded = () => {
-    console.log("oi");
     if (expanded) setExpanded(false);
     else setExpanded(true);
   };

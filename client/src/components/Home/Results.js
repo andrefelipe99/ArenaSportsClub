@@ -53,7 +53,6 @@ export function Results({ favoritesChamp, favoritesTeams }) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log("atualiza");
       MatchDataService.getMatchsByDate(dateFilter, favoritesChamp).then(
         (response) => {
           setMatchsData(response.data);

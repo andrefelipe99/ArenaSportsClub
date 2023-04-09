@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Container, Nav, Navbar, Form } from "react-bootstrap";
+import { Container, Nav, Navbar, Form, NavDropdown } from "react-bootstrap";
 import logo from "../../assets/images/logo1.jpg";
 import { useLocation, Link } from "react-router-dom";
 import TeamDataService from "../../services/team";
 import ChampionshipDataService from "../../services/championship";
 import Search from "./Search";
 import "../../styles/components/Default/Header.css";
+import { FaRegUserCircle } from "react-icons/fa";
+import { Login } from "./Login";
+import { CreateUser } from "./CreateUser";
 
 export function Header() {
   const [searchField, setSearchField] = useState("");
@@ -14,6 +17,8 @@ export function Header() {
   const location = useLocation();
   const [width, setWidth] = useState(window.innerWidth);
   const [expanded, setExpanded] = useState(false);
+  const [show, setShow] = useState(false);
+  const [showCreate, setShowCreate] = useState(false);
 
   useEffect(() => {
     const updateWindowDimensions = () => {
@@ -28,6 +33,18 @@ export function Header() {
   const handleSearch = (event) => {
     const { value } = event.target;
     setSearchField(value);
+  };
+
+  const dropDownIcon = () => {
+    return <FaRegUserCircle className="icon-header" />;
+  };
+
+  const login = () => {
+    if (!show) setShow(true);
+  };
+
+  const create = () => {
+    if (!showCreate) setShowCreate(true);
   };
 
   useEffect(() => {
@@ -121,9 +138,31 @@ export function Header() {
                 onChange={handleSearch}
               />
             </Form>
+            <NavDropdown title={dropDownIcon()} id="nav-dropdown">
+              <NavDropdown.Item
+                eventKey="4.1"
+                onClick={() => {
+                  login();
+                }}
+              >
+                Login
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                eventKey="4.2"
+                onClick={() => {
+                  create();
+                }}
+              >
+                Cadastrar
+              </NavDropdown.Item>
+            </NavDropdown>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {show && <Login show={show} setShow={setShow} />}
+      {showCreate && (
+        <CreateUser showCreate={showCreate} setShowCreate={setShowCreate} />
+      )}
       <div id="position-search" className={expanded ? "expanded-search" : ""}>
         {listTeams?.length > 0 || listChamps?.length > 0 ? (
           <Search

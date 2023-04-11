@@ -17,37 +17,37 @@ app.use(express.json());
 app.use("/api/v1/football", football);
 //app.use("*", (req, res) => res.status(404).json({ error: "not found" }));
 
-// const matchs = await matchsCrawler.getMatchs();
-// const championships = await championshipsCrawler.getChampionships();
-// const news = await newsCrawler.getNews();
-// const teams = await teamsCrawler.getTeams();
+const matchs = await matchsCrawler.getMatchs();
+const championships = await championshipsCrawler.getChampionships();
+const news = await newsCrawler.getNews();
+const teams = await teamsCrawler.getTeams();
 
-// setInterval(async () => {
-//   const post = await matchsController.apiPostMatch();
-//   const clear = await matchsCrawler.clearMatchs();
-//   console.log(post);
-// }, 90000);
+setInterval(async () => {
+  const post = await matchsController.apiPostMatch();
+  const clear = await matchsCrawler.clearMatchs();
+  console.log(post);
+}, 90000);
 
-// setInterval(async () => {
-//   const championships = await matchsController.apiGetAllChampionships();
-//   const champs = await championshipsCrawler.getUrls(championships);
-//   const post = await championshipsController.apiPostChampionships();
-//   const clear = await championshipsCrawler.clearChampionships();
-//   console.log(post);
-// }, 300000);
+setInterval(async () => {
+  const championships = await matchsController.apiGetAllChampionships();
+  const champs = await championshipsCrawler.getUrls(championships);
+  const post = await championshipsController.apiPostChampionships();
+  const clear = await championshipsCrawler.clearChampionships();
+  console.log(post);
+}, 300000);
 
-// setInterval(async () => {
-//   const teams = await matchsController.apiGetAllTeams();
-//   const urls = await teamsCrawler.getUrls(teams);
-//   const post = await teamsController.apiPostTeams();
-//   const clear = await teamsCrawler.clearTeams();
-//   console.log(post);
-// }, 300000);
+setInterval(async () => {
+  const teams = await matchsController.apiGetAllTeams();
+  const urls = await teamsCrawler.getUrls(teams);
+  const post = await teamsController.apiPostTeams();
+  const clear = await teamsCrawler.clearTeams();
+  console.log(post);
+}, 300000);
 
-// setInterval(async () => {
-//   const post = await newsController.apiPostNews();
-//   console.log(post);
-// }, 600000);
+setInterval(async () => {
+  const post = await newsController.apiPostNews();
+  console.log(post);
+}, 600000);
 
 // setTimeout(async () => {
 //   const updateYesterday = await matchsController.apiUpdateYesterdayMatchs();
@@ -56,7 +56,7 @@ app.use("/api/v1/football", football);
 
 //API testes
 // app.get("/test", (req, res) => {
-//   res.json({ teams });
+//   res.json({ championships });
 // });
 
 export default app;

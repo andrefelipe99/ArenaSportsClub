@@ -34,14 +34,13 @@ export default class usersDAO {
     }
   }
 
-  static async addUser(name, email, password, token) {
+  static async addUser(name, email, password) {
     try {
       const userDoc = {
         name: name,
         email: email,
         password: password,
-        token,
-        token,
+        favorites: { teams: [], championships: [] },
       };
 
       return await users.insertOne(userDoc);
@@ -51,11 +50,11 @@ export default class usersDAO {
     }
   }
 
-  static async getUser(email, password) {
+  static async getUser(email) {
     try {
       const pipeline = [
         {
-          $match: { email: email, password: password },
+          $match: { email: email },
         },
       ];
       return await users.aggregate(pipeline).toArray();

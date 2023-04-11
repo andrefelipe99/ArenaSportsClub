@@ -16,8 +16,29 @@
   height: 1.75rem;
 }
 
+div.toast-header {
+  margin-bottom: 10px;
+}
+
+.toast-text-header {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buttons-header {
+  display: flex;
+  align-items: center;
+}
+
 #nav-dropdown {
   margin-left: 8px;
+  margin-right: 0;
+}
+
+div.dropdown-menu[data-bs-popper] {
+  top: 120%;
+  left: -340%;
 }
 
 a.dropdown-toggle::after {
@@ -91,6 +112,11 @@ a.championship-header:hover {
 @media only screen and (max-width: 991px) {
   .search-header {
     margin-top: 8px;
+  }
+
+  #nav-dropdown {
+    margin-left: 0;
+    margin-right: 8px;
   }
 
   #position-search {

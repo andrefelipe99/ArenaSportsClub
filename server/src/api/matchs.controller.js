@@ -294,6 +294,9 @@ export default class matchsController {
         if (element._id.teamHref !== "" && element._id.teamHref !== null)
           array.push(element._id.teamHref);
       });
+      array = array.filter((element, index) => {
+        return array.indexOf(element) === index;
+      });
       return array;
     } catch (e) {
       console.log(`api, ${e}`);

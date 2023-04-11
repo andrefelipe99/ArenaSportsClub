@@ -7,7 +7,7 @@ function ButtonTitles({ actived, team }) {
   return (
     actived && (
       <Container className="container-bt-info">
-        {team?.titles.length > 0 ? (
+        {team?.titles?.length > 0 ? (
           <>
             <div className="title-header">
               <div> ANO </div>
@@ -20,7 +20,7 @@ function ButtonTitles({ actived, team }) {
                   {typeof team?.titles === "undefined" ? (
                     <p>Loading...</p>
                   ) : (
-                    team.titles?.map((title, i) => (
+                    team?.titles?.map((title, i) => (
                       <tr className="td-titles" key={i}>
                         <td className="text-center-year">{title.year}</td>
                         <td className="text-center-title">

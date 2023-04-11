@@ -5,33 +5,43 @@ import { Form } from "react-bootstrap";
 import "../../styles/components/Default/CreateUser.css";
 import UserDataService from "../../services/user.js";
 
-export function CreateUser({ showCreate, setShowCreate }) {
+export function CreateUser({
+  showCreate,
+  setShowCreate,
+  setShowToast,
+  setToastMessage,
+}) {
   const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    UserDataService.getPost(name, email, password).then((response) => {
-      console.log(response.data);
-    });
-    console.log(`Nome: ${name}, Email: ${email}, Senha: ${password}`);
+
+    if (name === "" || email === "" || password === "")
+      setError("Preencha todos os campos!");
+    else {
+      setError("");
+      UserDataService.getPost(name, email, password)
+        .then((response) => {
+          setShowToast(true);
+          setToastMessage(`Usuário criado com sucesso!`);
+          handleClose();
+        })
+        .catch((response) => setError(response.response.data.error));
+    }
   };
   const handleClose = () => setShowCreate(false);
 
   return (
-    <Modal
-      show={showCreate}
-      onHide={handleClose}
-      backdrop="static"
-      keyboard={false}
-    >
+    <Modal show={showCreate} onHide={handleClose} keyboard={false}>
       <Modal.Header>
         <Modal.Title>Cadastro</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>Nome</Form.Label>
             <Form.Control
               type="name"
@@ -60,12 +70,12 @@ export function CreateUser({ showCreate, setShowCreate }) {
               placeholder="Digite sua senha"
             />
           </Form.Group>
-
+          <Form.Label className="error-login">{error}</Form.Label>
           <div className="button-create">
             <Button variant="secondary" onClick={handleClose}>
               Fechar
             </Button>
-            <Button variant="primary" type="submit">
+            <Button variant="success" type="submit">
               Cadastrar
             </Button>
           </div>

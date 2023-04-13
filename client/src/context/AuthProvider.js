@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import UserDataService from "../services/user";
 
 const Context = createContext();
 
@@ -7,9 +8,16 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const id = localStorage.getItem("idUser");
 
     if (token) {
-      setAuthenticated(true);
+      UserDataService.haveFavorites(JSON.parse(id))
+        .then((response) => {
+          if (response.status === 200) setAuthenticated(true);
+        })
+        .catch((response) => {
+          if (response.response.status === 401) handleLogout();
+        });
     }
   }, []);
 

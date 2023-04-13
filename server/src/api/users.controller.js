@@ -98,4 +98,100 @@ export default class usersController {
       return;
     }
   }
+
+  static async apiHaveFavorites(req, res, next) {
+    try {
+      let id = req.params.id || {};
+
+      let userFound = await usersDAO.getUserWithId(id);
+
+      if (userFound.length === 0) {
+        res.status(401).json({ error: "Usuário não encontrado!" });
+        return;
+      }
+
+      if (
+        userFound[0].favorites.teams.length === 0 &&
+        userFound[0].favorites.championships.length === 0
+      )
+        res.status(200).json({ message: "Não Tem" });
+      else res.status(200).json({ message: "Tem" });
+
+      return;
+    } catch (e) {
+      console.log(`api, ${e}`);
+      res.status(401).json({ error: e });
+      return;
+    }
+  }
+
+  static async apiGetFavorites(req, res, next) {
+    try {
+      let id = req.params.id || {};
+
+      let userFound = await usersDAO.getUserWithId(id);
+
+      if (!userFound.length === 0) {
+        res.status(401).json({ error: "Usuário não encontrado!" });
+        return;
+      }
+
+      res.status(200).json({
+        teams: userFound[0].favorites.teams,
+        championships: userFound[0].favorites.championships,
+      });
+      return;
+    } catch (e) {
+      console.log(`api, ${e}`);
+      res.status(500).json({ error: e });
+      return;
+    }
+  }
+
+  static async apiSetFavorites(req, res, next) {
+    try {
+      let id = req.params.id || {};
+      let teamss = req.params.teams || {};
+      let championshipss = req.params.championships || {};
+      teamss = teamss.replaceAll("@", "/");
+      championshipss = championshipss.replaceAll("@", "/");
+      teamss = teamss.split("$");
+      championshipss = championshipss.split("$");
+      for (let index = 0; index < teamss.length; index++) {
+        let object = teamss[index].split("*");
+        teamss[index] = { idTeam: object[0], img: object[1], name: object[2] };
+      }
+      for (let index = 0; index < championshipss.length; index++) {
+        let object = championshipss[index].split("*");
+        championshipss[index] = {
+          idChampionship: object[0],
+          img: object[1],
+          imgChampionship: object[2],
+          name: object[3],
+        };
+      }
+
+      if (teamss[0].idTeam === "0") teamss = [];
+      if (championshipss[0].idChampionship === "0") championshipss = [];
+
+      let updateResponse = await usersDAO.setFavorites(
+        id,
+        teamss,
+        championshipss
+      );
+
+      var { error } = updateResponse;
+      if (error) {
+        res.status(404).json({ error });
+        return;
+      }
+
+      res.status(200).json({ message: "Alterado com sucesso." });
+      return;
+    } catch (e) {
+      console.log(`api, ${e}`);
+      res.status(500).json({ error: e });
+      return;
+    }
+  }
 }

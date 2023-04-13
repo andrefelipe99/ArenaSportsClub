@@ -63,4 +63,38 @@ export default class usersDAO {
       throw e;
     }
   }
+
+  static async getUserWithId(id) {
+    try {
+      const pipeline = [
+        {
+          $match: { _id: ObjectId(id) },
+        },
+      ];
+      return await users.aggregate(pipeline).toArray();
+    } catch (e) {
+      console.error(`Something went wrong in getUserWithId: ${e}`);
+      throw e;
+    }
+  }
+
+  static async setFavorites(id, teams, championships) {
+    try {
+      const updateResponse = await users.updateOne(
+        { _id: ObjectId(id) },
+        {
+          $set: {
+            favorites: {
+              teams: teams,
+              championships: championships,
+            },
+          },
+        }
+      );
+      return await updateResponse;
+    } catch (e) {
+      console.error(`Something went wrong in setFavorites: ${e}`);
+      throw e;
+    }
+  }
 }

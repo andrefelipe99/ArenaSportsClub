@@ -80,7 +80,6 @@ export default class championshipsCrawler {
   static async clearChampionships() {
     try {
       championships.splice(0, Infinity);
-      const champsUpdated = await this.getChampionships();
       return;
     } catch (error) {
       console.error(`Unable to clear championships: ${error}`);
@@ -113,25 +112,25 @@ export default class championshipsCrawler {
 
           var name = "";
           var img = "";
-          $("div.jumbotron > div").each(function (i, e) {
+          $("body > section > div.content__title").each(function (i, e) {
             name = $(this).find("h1").text().trim();
-            img = $(this).find("h1 > img").attr("src");
+            img = $(this).find("img").attr("src");
           });
 
-          $("#livescore > div:nth-child(3) > div").each(function (i, e) {
-            var phase = $(this).find("p.text-center.match-stage").text().trim();
+          $("#standings").each(function (i, e) {
+            var phase = $(this).find("p.standings__stage-name").text().trim();
             var length = 0;
             $(this)
-              .find("table")
+              .find(".tableV2")
               .each(function (i, e) {
                 length++;
               });
             $(this)
-              .find("table")
+              .find(".tableV2")
               .each(function (id, e) {
                 var tr = [];
                 var group = "";
-                if (phase !== "" && length > 1) {
+                if (length > 1) {
                   group = "Grupo " + id;
 
                   group = group.replace("0", "A");
@@ -148,26 +147,23 @@ export default class championshipsCrawler {
                   group = group.replace("11", "L");
                 }
                 $(this)
-                  .find("tbody > tr")
+                  .find("div.divTableBody > div.divTableRow")
                   .each(function (idx, e) {
-                    var num = $(this).find("th").text().trim();
+                    var num = $(this).find("div:nth-child(1)").text().trim();
                     var team = $(this)
-                      .find("td:nth-child(2) > a")
+                      .find("div:nth-child(2) > a")
                       .text()
                       .trim();
-                    var points = $(this)
-                      .find("td:nth-child(3) > b > i")
-                      .text()
-                      .trim();
-                    var games = $(this).find("td:nth-child(4)").text().trim();
+                    var points = $(this).find("div:nth-child(3)").text().trim();
+                    var games = $(this).find("div:nth-child(4)").text().trim();
                     var victorys = $(this)
-                      .find("td:nth-child(5)")
+                      .find("div:nth-child(5)")
                       .text()
                       .trim();
-                    var draws = $(this).find("td:nth-child(6)").text().trim();
-                    var loses = $(this).find("td:nth-child(7)").text().trim();
+                    var draws = $(this).find("div:nth-child(6)").text().trim();
+                    var loses = $(this).find("div:nth-child(7)").text().trim();
                     var goaldiference = $(this)
-                      .find("td:nth-child(8)")
+                      .find("div:nth-child(8)")
                       .text()
                       .trim();
 
@@ -197,22 +193,19 @@ export default class championshipsCrawler {
               });
           });
 
-          $(".match-info table").each(function (i, e) {
+          $("#topscorers > div.tableV2").each(function (i, e) {
             var name = "";
             if (i === 0) name = "Artilheiros";
             else name = "Assistências";
 
             var tr = [];
             $(this)
-              .find("tbody tr")
+              .find("div.divTableBody > div.divTableRow")
               .each(function (idx, e) {
-                var num = $(this).find("th").text().trim();
-                var player = $(this).find("td:nth-child(2)").text().trim();
-                var team = $(this).find("td:nth-child(3) > a").text().trim();
-                var value = $(this)
-                  .find("td:nth-child(4) > b > i")
-                  .text()
-                  .trim();
+                var num = $(this).find("div:nth-child(1)").text().trim();
+                var player = $(this).find("div:nth-child(2)").text().trim();
+                var team = $(this).find("div:nth-child(3) > a").text().trim();
+                var value = $(this).find("div:nth-child(4)").text().trim();
 
                 if (num != "" && num) {
                   tr.push({

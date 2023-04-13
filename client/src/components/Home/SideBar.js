@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { Context } from "../../context/AuthProvider";
 import {
   Container,
   ListGroup,
@@ -20,6 +21,7 @@ import { MdGroups } from "react-icons/md";
 import Search from "../Default/Search";
 import TeamDataService from "../../services/team";
 import ChampionshipDataService from "../../services/championship";
+import UserDataService from "../../services/user";
 import "../../styles/components/Home/SideBar.css";
 
 export function SideBar({
@@ -36,6 +38,7 @@ export function SideBar({
   const [listTeams, setListTeams] = useState([]);
   const [buttonExpand, setButtonExpand] = useState(true);
   const [width, setWidth] = useState(window.innerWidth);
+  const { authenticated } = useContext(Context);
 
   useEffect(() => {
     const updateWindowDimensions = () => {
@@ -90,6 +93,13 @@ export function SideBar({
       "favorites-champ",
       JSON.stringify(favoritesChamp)
     );
+    if (authenticated)
+      UserDataService.setFavorites(
+        JSON.parse(localStorage.getItem("idUser")),
+        favoritesTeams,
+        favoritesChamp
+      );
+    // eslint-disable-next-line
   }, [favoritesChamp]);
 
   useEffect(() => {
@@ -97,6 +107,13 @@ export function SideBar({
       "favorites-teams",
       JSON.stringify(favoritesTeams)
     );
+    if (authenticated)
+      UserDataService.setFavorites(
+        JSON.parse(localStorage.getItem("idUser")),
+        favoritesTeams,
+        favoritesChamp
+      );
+    // eslint-disable-next-line
   }, [favoritesTeams]);
 
   const addFavoriteChamp = (championship, i) => {

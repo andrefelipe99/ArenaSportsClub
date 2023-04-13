@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../context/AuthProvider";
 import { Container, Button, Spinner } from "react-bootstrap";
 import ButtonResume from "../components/Championship/ButtonResume";
 import ButtonMatchs from "../components/Championship/ButtonMatchs";
 import ButtonTable from "../components/Championship/ButtonTable";
 import ButtonStatistic from "../components/Championship/ButtonStatistic";
 import ChampionshipDataService from "../services/championship";
+import UserDataService from "../services/user";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import "../styles/pages/Championship.css";
 
 export function Championship() {
   let { id } = useParams();
+  const { authenticated } = useContext(Context);
   const [loading, setLoading] = useState(true);
   const [championship, setChampionship] = useState([]);
   const [buttonChange, setButtonChange] = useState({
@@ -40,10 +43,34 @@ export function Championship() {
   });
 
   useEffect(() => {
+    if (authenticated)
+      UserDataService.getFavorites(
+        JSON.parse(localStorage.getItem("idUser"))
+      ).then((response) => {
+        if (response.data.championships.length > 0)
+          setFavoritesChamp(response.data.championships);
+        else setFavoritesChamp([]);
+        if (response.data.teams.length > 0)
+          localStorage.setItem(
+            "favorites-teams",
+            JSON.stringify(response.data.teams)
+          );
+        else localStorage.setItem("favorites-teams", JSON.stringify([]));
+      });
+  }, [authenticated]);
+
+  useEffect(() => {
     window.localStorage.setItem(
       "favorites-champ",
       JSON.stringify(favoritesChamp)
     );
+    if (authenticated)
+      UserDataService.setFavorites(
+        JSON.parse(localStorage.getItem("idUser")),
+        JSON.parse(window.localStorage.getItem("favorites-teams")),
+        favoritesChamp
+      );
+    // eslint-disable-next-line
   }, [favoritesChamp]);
 
   const addFavoriteChamp = () => {

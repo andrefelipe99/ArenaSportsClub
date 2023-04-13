@@ -26,7 +26,7 @@ export default class championshipsController {
             if (error) {
               return { error };
             }
-          } else {
+          } else if (championships[index]?.url !== undefined) {
             const ChampionshipResponse =
               await championshipsDAO.updateChampionship(championships[index]);
 
@@ -39,7 +39,7 @@ export default class championshipsController {
       }
       return { status: "success championship" };
     } catch (error) {
-      return { error: error.message };
+      return { errorapiPostChampionships: error.message };
     }
   }
 

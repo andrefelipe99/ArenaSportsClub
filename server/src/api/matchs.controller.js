@@ -34,7 +34,7 @@ export default class matchsController {
           if (error) {
             return { error };
           }
-        } else {
+        } else if (matchs[index]?.idTitle !== undefined) {
           if (
             matchs[index].idChampionship !== "" &&
             matchs[index].idChampionship !== null
@@ -74,7 +74,7 @@ export default class matchsController {
       }
       return { status: "success" };
     } catch (error) {
-      return { error: error.message };
+      return { errorapiPostMatch: error.message };
     }
   }
 
@@ -194,7 +194,7 @@ export default class matchsController {
       res.json(matchs);
     } catch (e) {
       console.log(`api, ${e}`);
-      res.status(500).json({ error: e });
+      res.status(500).json({ errorapiGetPastMatchsByTeam: e });
     }
   }
 
@@ -263,7 +263,7 @@ export default class matchsController {
       return array;
     } catch (e) {
       console.log(`api, ${e}`);
-      return { error: e.message };
+      return { errorapiGetAllChampionships: e.message };
     }
   }
 
@@ -293,6 +293,9 @@ export default class matchsController {
       teams2.forEach((element) => {
         if (element._id.teamHref !== "" && element._id.teamHref !== null)
           array.push(element._id.teamHref);
+      });
+      array = array.filter((element, index) => {
+        return array.indexOf(element) === index;
       });
       return array;
     } catch (e) {

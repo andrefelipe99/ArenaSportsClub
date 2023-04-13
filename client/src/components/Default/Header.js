@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Container, Nav, Navbar, Form } from "react-bootstrap";
+import {
+  Container,
+  Nav,
+  Navbar,
+  Form,
+  Toast,
+  ToastContainer,
+} from "react-bootstrap";
 import logo from "../../assets/images/logo1.jpg";
 import { useLocation, Link } from "react-router-dom";
 import TeamDataService from "../../services/team";
 import ChampionshipDataService from "../../services/championship";
 import Search from "./Search";
+import { Login } from "./Login";
+import { CreateUser } from "./CreateUser";
+import { DropdownButton } from "./DropdownButton";
 import "../../styles/components/Default/Header.css";
 
 export function Header() {
@@ -14,6 +24,10 @@ export function Header() {
   const location = useLocation();
   const [width, setWidth] = useState(window.innerWidth);
   const [expanded, setExpanded] = useState(false);
+  const [show, setShow] = useState(false);
+  const [showCreate, setShowCreate] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
 
   useEffect(() => {
     const updateWindowDimensions = () => {
@@ -49,7 +63,6 @@ export function Header() {
   };
 
   const changeExpanded = () => {
-    console.log("oi");
     if (expanded) setExpanded(false);
     else setExpanded(true);
   };
@@ -64,14 +77,25 @@ export function Header() {
               {width > 380 ? <>Arena Sport Club</> : <>Arena SC</>}
             </Navbar.Brand>
           </Link>
-
-          <Navbar.Toggle
-            aria-controls="basic-navbar-nav"
-            onClick={(e) => {
-              e.preventDefault();
-              changeExpanded();
-            }}
-          />
+          <div className="buttons-header">
+            {width < 992 ? (
+              <DropdownButton
+                show={show}
+                setShow={setShow}
+                showCreate={showCreate}
+                setShowCreate={setShowCreate}
+              />
+            ) : (
+              <></>
+            )}
+            <Navbar.Toggle
+              aria-controls="basic-navbar-nav"
+              onClick={(e) => {
+                e.preventDefault();
+                changeExpanded();
+              }}
+            />
+          </div>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="m-auto">
               <Link
@@ -122,9 +146,52 @@ export function Header() {
                 onChange={handleSearch}
               />
             </Form>
+            {width > 991 ? (
+              <DropdownButton
+                show={show}
+                setShow={setShow}
+                showCreate={showCreate}
+                setShowCreate={setShowCreate}
+              />
+            ) : (
+              <></>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {show && (
+        <Login
+          show={show}
+          setShow={setShow}
+          setShowToast={setShowToast}
+          setToastMessage={setToastMessage}
+        />
+      )}
+      {showCreate && (
+        <CreateUser
+          showCreate={showCreate}
+          setShowCreate={setShowCreate}
+          setShowToast={setShowToast}
+          setToastMessage={setToastMessage}
+        />
+      )}
+      {showToast && (
+        <ToastContainer position="bottom-center">
+          <Toast
+            bg="success"
+            onClose={() => setShowToast(false)}
+            show={showToast}
+            delay={5000}
+            autohide
+          >
+            <Toast.Header>
+              <strong className="me-auto toast-text-header">
+                {toastMessage}
+              </strong>
+            </Toast.Header>
+          </Toast>
+        </ToastContainer>
+      )}
       <div id="position-search" className={expanded ? "expanded-search" : ""}>
         {listTeams?.length > 0 || listChamps?.length > 0 ? (
           <Search

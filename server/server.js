@@ -26,7 +26,7 @@ app.use("/api/v1/football", football);
 //   const post = await matchsController.apiPostMatch();
 //   const clear = await matchsCrawler.clearMatchs();
 //   console.log(post);
-// }, 60000);
+// }, 90000);
 
 // setInterval(async () => {
 //   const championships = await matchsController.apiGetAllChampionships();
@@ -34,7 +34,7 @@ app.use("/api/v1/football", football);
 //   const post = await championshipsController.apiPostChampionships();
 //   const clear = await championshipsCrawler.clearChampionships();
 //   console.log(post);
-// }, 600000);
+// }, 300000);
 
 // setInterval(async () => {
 //   const teams = await matchsController.apiGetAllTeams();
@@ -56,7 +56,7 @@ app.use("/api/v1/football", football);
 
 //API testes
 // app.get("/test", (req, res) => {
-//   res.json({ teams });
+//   res.json({ championships });
 // });
 
 export default app;

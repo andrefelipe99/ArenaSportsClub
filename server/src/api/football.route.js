@@ -3,12 +3,21 @@ import matchsCtrl from "./matchs.controller.js";
 import teamsCtrl from "./teams.controller.js";
 import championshipsCtrl from "./championships.controller.js";
 import newsCtrl from "./news.controller.js";
+import usersCtrl from "./users.controller.js";
 
 const router = express.Router();
 
 router.route("/teams").get(teamsCtrl.apiGetTeams);
 router.route("/championships").get(championshipsCtrl.apiGetChampionships);
 router.route("/news").get(newsCtrl.apiGetAllNews);
+
+router.route("/haveFavorites/:id").get(usersCtrl.apiHaveFavorites);
+router.route("/getFavorites/:id").get(usersCtrl.apiGetFavorites);
+router
+  .route("/setFavorites/:id/:teams/:championships")
+  .get(usersCtrl.apiSetFavorites);
+router.route("/postUser/:name/:email/:password").get(usersCtrl.apiPostUser);
+router.route("/getUser/:email/:password").get(usersCtrl.apiGetUser);
 
 router.route("/matchs/id/:id").get(matchsCtrl.apiGetMatchById);
 router.route("/team/id/:id").get(teamsCtrl.apiGetTeamById);

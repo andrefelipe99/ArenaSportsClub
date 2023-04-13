@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../context/AuthProvider";
 import { Container, Button, Spinner } from "react-bootstrap";
 import ButtonInfos from "../components/Team/ButtonInfos";
 import ButtonTitles from "../components/Team/ButtonTitles";
@@ -6,11 +7,13 @@ import ButtonResume from "../components/Team/ButtonResume";
 import ButtonMatchs from "../components/Team/ButtonMatchs";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import TeamDataService from "../services/team.js";
+import UserDataService from "../services/user";
 import { useParams } from "react-router-dom";
 import "../styles/pages/Team.css";
 
 export function Team() {
   let { id } = useParams();
+  const { authenticated } = useContext(Context);
   const [team, setTeam] = useState([]);
   const [loading, setLoading] = useState(true);
   const [buttonChange, setButtonChange] = useState({
@@ -40,10 +43,34 @@ export function Team() {
   });
 
   useEffect(() => {
+    if (authenticated)
+      UserDataService.getFavorites(
+        JSON.parse(localStorage.getItem("idUser"))
+      ).then((response) => {
+        if (response.data.championships.length > 0)
+          localStorage.setItem(
+            "favorites-champ",
+            JSON.stringify(response.data.championships)
+          );
+        else localStorage.setItem("favorites-champ", JSON.stringify([]));
+        if (response.data.teams.length > 0)
+          setFavoritesTeams(response.data.teams);
+        else setFavoritesTeams([]);
+      });
+  }, [authenticated]);
+
+  useEffect(() => {
     window.localStorage.setItem(
       "favorites-teams",
       JSON.stringify(favoritesTeams)
     );
+    if (authenticated)
+      UserDataService.setFavorites(
+        JSON.parse(localStorage.getItem("idUser")),
+        favoritesTeams,
+        JSON.parse(window.localStorage.getItem("favorites-champ"))
+      );
+    // eslint-disable-next-line
   }, [favoritesTeams]);
 
   const addFavoriteTeam = () => {

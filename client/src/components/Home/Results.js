@@ -58,7 +58,7 @@ export function Results({ favoritesChamp, favoritesTeams }) {
           setMatchsData(response.data);
         }
       );
-    }, 15000);
+    }, 30000);
     return () => clearTimeout(timer);
   });
 
@@ -170,8 +170,10 @@ export function Results({ favoritesChamp, favoritesTeams }) {
       time = match?.time?.replace("ADIADO", "CANC");
     else if (match?.time === "ATRASADO")
       time = match?.time?.replace("ATRASADO", "ATRA");
-    else if (match?.time === "PENALTIS")
-      time = match?.time?.replace("PENALTIS", "PEN");
+    else if (match?.time === "INTERROMPIDO")
+      time = match?.time?.replace("INTERROMPIDO", "SUSP");
+    else if (match?.time === "PÊNALTIS")
+      time = match?.time?.replace("PÊNALTIS", "PEN");
     else time = match?.time?.replace(" MIN", "'");
 
     return time;

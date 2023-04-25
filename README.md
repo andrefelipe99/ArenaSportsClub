@@ -10,7 +10,16 @@ Projeto realizado no per√≠odo 2022.1 na disciplina de Desenvolvimento de Aplica√
 - Ricardo Alves
 - Thiago Luiz
 
+## **Tecnologias utilizadas:**
+
+- Node.js (Backend)
+- ReactJS (Frontend)
+- Bootstrap
+- MongoDB
+
 Professor: Vanilson Buregio
+
+## [Link do projeto na Vercel](https://arena-sports-club-andrefelipe99.vercel.app/)
 
 ## [Notion do projeto](https://mini-earl-2a4.notion.site/Arena-Sports-Club-a3b396bb8fc346d38674615e2ac0fee1)
 

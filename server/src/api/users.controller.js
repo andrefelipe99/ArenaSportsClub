@@ -5,9 +5,8 @@ import jwt from "jsonwebtoken";
 export default class usersController {
   static async apiPostUser(req, res, next) {
     try {
-      let name = req.params.name || {};
-      let email = req.params.email || {};
-      let password = req.params.password || {};
+      let body = req.body;
+      let { name, email, password } = body;
       let emailFound;
 
       if (!/^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email)) {
@@ -53,8 +52,8 @@ export default class usersController {
 
   static async apiGetUser(req, res, next) {
     try {
-      let email = req.params.email || {};
-      let pass = req.params.password || {};
+      let body = req.body;
+      let { email, password } = body;
       let user = [];
 
       let emailFound = await usersDAO.getFoundEmail(email);
@@ -69,7 +68,7 @@ export default class usersController {
       let idUser = user[0]._id;
       let nameUser = user[0].name;
 
-      const checkPassword = await bcrypt.compare(pass, user[0].password);
+      const checkPassword = await bcrypt.compare(password, user[0].password);
 
       if (user?.length === 0 || !checkPassword) {
         res.status(404).json({ error: "Senha incorreta!" });
@@ -150,34 +149,13 @@ export default class usersController {
 
   static async apiSetFavorites(req, res, next) {
     try {
-      let id = req.params.id || {};
-      let teamss = req.params.teams || {};
-      let championshipss = req.params.championships || {};
-      teamss = teamss.replaceAll("@", "/");
-      championshipss = championshipss.replaceAll("@", "/");
-      teamss = teamss.split("$");
-      championshipss = championshipss.split("$");
-      for (let index = 0; index < teamss.length; index++) {
-        let object = teamss[index].split("*");
-        teamss[index] = { idTeam: object[0], img: object[1], name: object[2] };
-      }
-      for (let index = 0; index < championshipss.length; index++) {
-        let object = championshipss[index].split("*");
-        championshipss[index] = {
-          idChampionship: object[0],
-          img: object[1],
-          imgChampionship: object[2],
-          name: object[3],
-        };
-      }
-
-      if (teamss[0].idTeam === "0") teamss = [];
-      if (championshipss[0].idChampionship === "0") championshipss = [];
+      let body = req.body;
+      let { id, teams, championships } = body;
 
       let updateResponse = await usersDAO.setFavorites(
         id,
-        teamss,
-        championshipss
+        teams,
+        championships
       );
 
       var { error } = updateResponse;

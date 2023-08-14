@@ -88,6 +88,7 @@ export default class usersController {
         token,
         idUser,
         nameUser,
+        email,
       });
 
       return;

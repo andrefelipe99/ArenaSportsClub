@@ -4,8 +4,11 @@ import teamsCtrl from "./teams.controller.js";
 import championshipsCtrl from "./championships.controller.js";
 import newsCtrl from "./news.controller.js";
 import usersCtrl from "./users.controller.js";
+import { getLocalizationResponse } from "../gpt/config.js";
 
 const router = express.Router();
+
+router.route("/gptLocalization").post(getLocalizationResponse);
 
 router.route("/teams").get(teamsCtrl.apiGetTeams);
 router.route("/championships").get(championshipsCtrl.apiGetChampionships);
